@@ -13,7 +13,8 @@
  *   image-left / image-full / comparison / table / takeaway / summary / end /
  *   timeline / timeline-h / steps / columns / spec / faq /
  *   matrix / gallery / stat / profile / quote / code / checklist / team /
- *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos
+ *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos /
+ *   gantt / org
  */
 
 @import 'default';
@@ -1449,6 +1450,149 @@ section.logos > p:not(:has(> img)) {
   font-size: 0.8em;
   letter-spacing: 0.1em;
   margin: 0.3em 0 0;
+}
+
+/* ---------- gantt: 簡易ガントチャート ----------
+   構造: h1 + テーブル(1列目: タスク名、以降の列: 期間)。
+   バーを引きたい期間のセルに任意の1文字(例: x)を入れ、引かない期間は空にする。
+   セルの文字は透明化され、塗りつぶしバーとして表示される。 */
+
+section.gantt table {
+  width: 100%;
+  table-layout: fixed;
+  font-size: 0.82em;
+  margin: 0.9em 0 0.4em;
+}
+
+section.gantt table th {
+  text-align: center;
+  font-family: var(--sf-numeral-font);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid var(--sf-accent-strong);
+  padding: 0.4em 0.4em;
+}
+
+section.gantt table th:first-child {
+  width: 26%;
+  text-align: left;
+  font-family: var(--sf-body-font);
+}
+
+section.gantt table td {
+  height: 2em;
+  padding: 0.45em 0.4em;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+section.gantt table td:not(:first-child),
+section.gantt table th:not(:first-child) {
+  border-left: 1px solid var(--sf-line);
+}
+
+section.gantt table td:not(:first-child) {
+  /* バーのセル: 中身の文字は見せない */
+  color: transparent;
+}
+
+section.gantt table td:not(:first-child):not(:empty) {
+  background: var(--sf-accent);
+}
+
+section.gantt > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  margin-top: 0.8em;
+}
+
+/* ---------- org: 体制図・組織図(トップ+配下の2階層) ----------
+   構造: h1 + h2(トップ) + ul(各 li が「**部門・役割** 説明」、2〜4個)。 */
+
+section.org h2 {
+  display: table;
+  margin: 0.7em auto 0;
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+  padding: 0.45em 1.6em;
+  font-size: 0.95em;
+  letter-spacing: 0.14em;
+}
+
+section.org ul {
+  list-style: none;
+  padding: 0;
+  margin: 46px 0 0;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 44px;
+  position: relative;
+}
+
+section.org ul::before {
+  /* トップから母線への縦線 */
+  content: '';
+  position: absolute;
+  top: -46px;
+  left: calc(50% - 0.5px);
+  width: 1px;
+  height: 23px;
+  background: var(--sf-line);
+}
+
+section.org ul > li::marker {
+  content: none;
+}
+
+section.org ul > li {
+  position: relative;
+  background: var(--sf-panel);
+  padding: 0.8em 1em;
+  margin: 0;
+  text-align: center;
+  font-size: 0.78em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.org ul > li::after {
+  /* 母線(各 li が自分の区間を描き、両端は中央まで) */
+  content: '';
+  position: absolute;
+  top: -23px;
+  left: calc(-44px / 2);
+  right: calc(-44px / 2);
+  height: 1px;
+  background: var(--sf-line);
+}
+
+section.org ul > li:first-child::after {
+  left: 50%;
+}
+
+section.org ul > li:last-child::after {
+  right: 50%;
+}
+
+section.org ul > li::before {
+  /* 母線から各ボックスへの縦線 */
+  content: '';
+  position: absolute;
+  top: -23px;
+  left: calc(50% - 0.5px);
+  width: 1px;
+  height: 23px;
+  background: var(--sf-line);
+}
+
+section.org ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.1em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3em;
 }
 
 /* ---------- end: 終了スライド ---------- */

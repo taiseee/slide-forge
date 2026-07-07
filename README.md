@@ -49,11 +49,11 @@ npx marp --theme-set theme/ --html --allow-local-files --images png examples/dem
 npx marp --theme-set theme/ --html --server examples/
 ```
 
-## レイアウトカタログ(40種)
+## レイアウトカタログ(42種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `agenda` `agenda-grid` `divider` `content` `two-column` `image-right` `image-left` `image-full` `comparison` `table` `takeaway` `lead` `summary` `end` `timeline` `timeline-h` `steps` `flow` `funnel` `columns` `spec` `faq` `matrix` `venn` `pyramid` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` |
+| コア | `title` `agenda` `agenda-grid` `divider` `content` `two-column` `image-right` `image-left` `image-full` `comparison` `table` `takeaway` `lead` `summary` `end` `timeline` `timeline-h` `steps` `flow` `funnel` `gantt` `columns` `spec` `faq` `matrix` `venn` `pyramid` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` |
 | research | `experiment` `math` `references` |
 | business | `kpi` `plans` |
 
