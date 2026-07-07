@@ -29,6 +29,7 @@ examples/
   demo-business.md    # ビジネススキンのカタログ兼検証デッキ
 docs/
   ROADMAP.md          # 目指す姿・現状・TODO
+  DESIGN.md           # デザイン基盤(トークン・書式ルール)
 ```
 
 ## クイックスタート
@@ -49,15 +50,16 @@ npx marp --theme-set theme/ --html --allow-local-files --images png examples/dem
 npx marp --theme-set theme/ --html --server examples/
 ```
 
-## レイアウトカタログ(49種)
+## レイアウトカタログ(54種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-full` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `columns` `spec` `faq` `matrix` `venn` `pyramid` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` |
+| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-top` `image-bottom` `image-full` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `roadmap` `columns` `spec` `faq` `matrix` `venn` `pyramid` `layers` `ranking` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` |
 | research | `experiment` `math` `references` |
 | business | `kpi` `plans` |
 
-各レイアウトの使い方とサンプルは [skill/references/layouts.md](skill/references/layouts.md) を参照。
+各レイアウトの使い方とサンプルは [skill/references/layouts.md](skill/references/layouts.md) を、
+色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) を参照。
 
 ## エージェントから使う
 

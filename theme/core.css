@@ -15,7 +15,8 @@
  *   matrix / gallery / stat / profile / quote / code / checklist / team /
  *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos /
  *   gantt / org / title-visual / exec-summary / comparison-3 / pros-cons /
- *   content-lead / steps-v / cycle
+ *   content-lead / steps-v / cycle / image-top / image-bottom / ranking /
+ *   roadmap / layers
  */
 
 @import 'default';
@@ -67,9 +68,35 @@ section::after {
   letter-spacing: 0.1em;
 }
 
+/* ヘッダー・フッター(機密区分・所属・コピーライト等)
+   フロントマターの header: / footer:、スライド単位の _header / _footer で指定。
+   ページ番号(右下)と重ならないよう、footer は左寄せにしている。 */
 header,
 footer {
-  display: none;
+  position: absolute;
+  left: 84px;
+  right: 84px;
+  margin: 0;
+  color: var(--sf-muted);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+header {
+  top: 26px;
+  text-align: right;
+}
+
+footer {
+  bottom: 28px;
+  text-align: left;
+}
+
+/* 濃色面のスライドでは薄い文字色にする */
+section.takeaway header,
+section.takeaway footer {
+  color: rgba(246, 244, 240, 0.5);
 }
 
 h1 {
@@ -1925,4 +1952,191 @@ section.end p {
   font-size: 0.82em;
   letter-spacing: 0.12em;
   margin: 0.3em 0;
+}
+
+/* ---------- image-top / image-bottom: 上下分割(テキストと画像) ----------
+   構造: h1 + 本文 + 画像1枚(単独の段落)。画像段落が残り高さを使う。
+   image-top は h1 の直後に画像段落、image-bottom は本文の後に画像段落を置く。 */
+
+section.image-top p:has(> img),
+section.image-bottom p:has(> img) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.3em 0;
+}
+
+section.image-top p:has(> img) img,
+section.image-bottom p:has(> img) img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* ---------- ranking: ランキング(大きな順位数字+項目) ----------
+   構造: h1 + ol(各 li が「**項目名** 補足」、3〜5位まで)。1位が強調される。 */
+
+section.ranking ol {
+  counter-reset: rank;
+  list-style: none;
+  padding-left: 0.2em;
+  margin-top: 0.5em;
+}
+
+section.ranking ol > li::marker {
+  content: none;
+}
+
+section.ranking ol > li {
+  counter-increment: rank;
+  display: flex;
+  gap: 1.2em;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.5em 0.3em;
+  margin: 0;
+  font-size: 0.92em;
+  color: var(--sf-muted);
+}
+
+section.ranking ol > li::before {
+  content: counter(rank, decimal-leading-zero);
+  font-family: var(--sf-numeral-font);
+  font-weight: 300;
+  font-size: 1.7em;
+  line-height: 1.1;
+  letter-spacing: 0.04em;
+  color: var(--sf-muted);
+  min-width: 1.5em;
+}
+
+section.ranking ol > li strong {
+  color: var(--sf-text);
+  letter-spacing: 0.06em;
+  margin-right: 0.8em;
+}
+
+section.ranking ol > li:first-child {
+  font-size: 1.02em;
+}
+
+section.ranking ol > li:first-child::before {
+  color: var(--sf-accent-strong);
+  font-weight: 400;
+}
+
+/* ---------- roadmap: ロードマップ・フェーズ分割(2〜4フェーズ) ----------
+   構造: h1 + (h2(フェーズ名) + p(期間) + ul(項目))× 2〜4。
+   h2 の上に PHASE 番号が自動付与される。 */
+
+section.roadmap {
+  display: block;
+  columns: 3;
+  column-gap: 48px;
+  column-fill: auto;
+  counter-reset: roadmap;
+}
+
+section.roadmap:not(:has(h2:nth-of-type(3))) {
+  columns: 2;
+  column-gap: 64px;
+}
+
+section.roadmap:has(h2:nth-of-type(4)) {
+  columns: 4;
+  column-gap: 36px;
+}
+
+section.roadmap h1 {
+  column-span: all;
+}
+
+section.roadmap h2 {
+  break-after: avoid;
+  counter-increment: roadmap;
+  border-top: 2px solid var(--sf-accent-strong);
+  padding-top: 0.6em;
+  margin: 0.5em 0 0.1em;
+  font-size: 0.95em;
+  letter-spacing: 0.1em;
+  color: var(--sf-text);
+}
+
+section.roadmap h2::before {
+  content: 'PHASE ' counter(roadmap, decimal-leading-zero);
+  display: block;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.66em;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--sf-accent);
+  margin-bottom: 0.4em;
+}
+
+section.roadmap h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.roadmap h2 + p {
+  color: var(--sf-muted);
+  font-size: 0.74em;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.5em;
+}
+
+section.roadmap ul {
+  font-size: 0.82em;
+  padding-left: 1.1em;
+  margin-top: 0.2em;
+}
+
+section.roadmap ul > li {
+  margin: 0.38em 0;
+}
+
+/* ---------- layers: レイヤー構造(全幅の帯を積む) ----------
+   構造: h1 + ol(各 li が「**レイヤー名** 説明」、3〜5段。上位レイヤーから書く)。
+   最上段(1つ目)が強調される。アーキテクチャの層・成熟度モデルに。 */
+
+section.layers ol {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+section.layers ol > li::marker {
+  content: none;
+}
+
+section.layers ol > li {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 1.5em;
+  align-items: baseline;
+  background: var(--sf-panel);
+  border-left: 3px solid var(--sf-line);
+  padding: 0.55em 1.2em;
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--sf-muted);
+}
+
+section.layers ol > li strong {
+  color: var(--sf-text);
+  letter-spacing: 0.08em;
+}
+
+section.layers ol > li:first-child {
+  background: var(--sf-ink);
+  border-left-color: var(--sf-accent-strong);
+  color: rgba(246, 244, 240, 0.72);
+}
+
+section.layers ol > li:first-child strong {
+  color: var(--sf-ink-text);
 }
