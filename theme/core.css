@@ -16,7 +16,8 @@
  *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos /
  *   gantt / org / title-visual / exec-summary / comparison-3 / pros-cons /
  *   content-lead / steps-v / cycle / image-top / image-bottom / ranking /
- *   roadmap / layers
+ *   roadmap / layers / annotated / matrix-3
+ * デッキ単位のオプション: 進捗バー(--sf-progress、末尾の progress 節を参照)
  */
 
 @import 'default';
@@ -57,6 +58,31 @@ section {
   /* Marp 内部スタイルに勝つため !important が必要(上寄せ既定) */
   justify-content: flex-start !important;
   align-items: stretch;
+  /* 進捗バー等、絶対配置の装飾の基準にする */
+  position: relative;
+}
+
+/* 進捗インジケーター(上端の細いバー)。デフォルト非表示。
+   デッキ単位で frontmatter に
+     style: |
+       section { --sf-progress: block; }
+   を書くとページ送りに応じて伸びる。
+   (_class はグローバル class を置換するため、クラスではなく変数で切り替える)
+   型付き attr() 対応ブラウザ(Chrome 133+ / Marp CLI 同梱 Chrome)向け。
+   _paginate: false のスライドでは属性が付かないため表示されない。 */
+section::before {
+  content: '';
+  /* default テーマの clearfix(display: table)に勝つため display を必ず明示する */
+  display: var(--sf-progress, none);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--sf-accent);
+  width: calc(
+    100% * attr(data-marpit-pagination type(<number>), 0) /
+      attr(data-marpit-pagination-total type(<number>), 1)
+  );
 }
 
 section::after {
@@ -1486,6 +1512,9 @@ section.logos > p:not(:has(> img)) {
    セルの文字は透明化され、塗りつぶしバーとして表示される。 */
 
 section.gantt table {
+  /* default テーマは table を display: block にするため、
+     width/table-layout を効かせるには display: table の明示が必要 */
+  display: table;
   width: 100%;
   table-layout: fixed;
   font-size: 0.82em;
@@ -2139,4 +2168,125 @@ section.layers ol > li:first-child {
 
 section.layers ol > li:first-child strong {
   color: var(--sf-ink-text);
+}
+
+/* ---------- annotated: 注釈付き画像(画像+丸数字の注釈) ----------
+   構造: h1 + 画像1枚(単独の段落) + ol(各 li が「**箇所名** 説明」、2〜5個)。
+   画像内の対応箇所には作図時に ①② の番号を入れておく。 */
+
+section.annotated > *:not(h1):not(p:has(> img)) {
+  margin-left: 700px;
+}
+
+section.annotated p:has(> img) {
+  position: absolute;
+  top: 190px;
+  bottom: 84px;
+  left: 84px;
+  width: 640px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.annotated p:has(> img) img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+section.annotated ol {
+  counter-reset: annot;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.4em;
+}
+
+section.annotated ol > li::marker {
+  content: none;
+}
+
+section.annotated ol > li {
+  counter-increment: annot;
+  position: relative;
+  padding-left: 2.1em;
+  margin: 0.75em 0;
+  font-size: 0.78em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.annotated ol > li::before {
+  content: counter(annot);
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  width: 1.45em;
+  height: 1.45em;
+  border: 1px solid var(--sf-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--sf-accent-strong);
+}
+
+section.annotated ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  letter-spacing: 0.06em;
+}
+
+/* ---------- matrix-3: 3×3マトリクス(表ベース) ----------
+   構造: h1 + table(1行目=列軸ラベル(左上セルは空)、1列目=行軸ラベル、本体9セル)。
+   リスク評価(影響×発生確率)・優先度整理に。2×2の整理は matrix を使う。 */
+
+section.matrix-3 table {
+  /* default テーマの display: block を戻さないと width/table-layout が効かない */
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 5px;
+  margin: 0.7em 0 0;
+  font-size: 0.78em;
+}
+
+section.matrix-3 table th,
+section.matrix-3 table td {
+  border: none;
+  padding: 0.7em 0.8em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+section.matrix-3 table th {
+  /* 列軸ラベル */
+  background: transparent;
+  color: var(--sf-muted);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+section.matrix-3 table td:first-child {
+  /* 行軸ラベル */
+  background: transparent;
+  color: var(--sf-muted);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+section.matrix-3 table td:not(:first-child) {
+  background: var(--sf-panel);
+  color: var(--sf-text);
+  line-height: 1.55;
+  height: 4.6em;
+}
+
+section.matrix-3 table td:not(:first-child) strong {
+  color: var(--sf-accent-strong);
 }
