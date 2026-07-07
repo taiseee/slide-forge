@@ -14,7 +14,8 @@
  *   timeline / timeline-h / steps / columns / spec / faq /
  *   matrix / gallery / stat / profile / quote / code / checklist / team /
  *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos /
- *   gantt / org
+ *   gantt / org / title-visual / exec-summary / comparison-3 / pros-cons /
+ *   content-lead / steps-v / cycle
  */
 
 @import 'default';
@@ -1593,6 +1594,302 @@ section.org ul > li strong {
   font-weight: 600;
   letter-spacing: 0.08em;
   margin-bottom: 0.3em;
+}
+
+/* ---------- title-visual: 写真・キービジュアル入り表紙 ----------
+   構造: title と同じ+同スライドに ![bg right:45%](画像) を書く。
+   左寄せ・左半分にテキストが収まる設計。 */
+
+section.title-visual {
+  justify-content: center !important;
+  align-items: flex-start;
+  text-align: left;
+  padding: 80px 90px;
+}
+
+section.title-visual h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+section.title-visual h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 76px;
+  height: 2px;
+  background: var(--sf-accent-strong);
+  margin: 0.8em 0 0;
+}
+
+section.title-visual p {
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.12em;
+  margin: 0.3em 0;
+}
+
+section.title-visual p:first-of-type {
+  color: var(--sf-text);
+  font-size: 0.95em;
+  letter-spacing: 0.16em;
+  margin: 1em 0 1.4em;
+}
+
+/* ---------- exec-summary: エグゼクティブサマリー(結論+要点) ----------
+   構造: h1 + blockquote(結論を1〜2文) + ul(根拠・要点)。 */
+
+section.exec-summary blockquote {
+  background: var(--sf-panel);
+  border-left: 4px solid var(--sf-accent-strong);
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  padding: 0.75em 1.1em;
+  margin: 0.2em 0 0.9em;
+}
+
+section.exec-summary ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+section.exec-summary > ul > li::marker {
+  content: none;
+}
+
+section.exec-summary > ul > li {
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.55em 0.2em;
+  margin: 0;
+  font-size: 0.95em;
+}
+
+section.exec-summary > ul > li strong {
+  margin-right: 0.6em;
+}
+
+/* ---------- comparison-3: 対比3列(h2 が各列の見出し) ---------- */
+
+section.comparison-3 {
+  display: block;
+  columns: 3;
+  column-gap: 44px;
+  column-fill: auto;
+}
+
+section.comparison-3 h1 {
+  column-span: all;
+}
+
+section.comparison-3 h2 {
+  break-after: avoid;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.35em 0.7em;
+  margin: 0 0 0.55em;
+  font-size: 0.92em;
+  letter-spacing: 0.1em;
+}
+
+section.comparison-3 h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.comparison-3 ul,
+section.comparison-3 p {
+  font-size: 0.85em;
+}
+
+/* ---------- pros-cons: メリット・デメリット ----------
+   構造: comparison と同じ(h2×2+各リスト)。
+   1つ目のリストに ○、2つ目のリストに × が自動付与される。 */
+
+section.pros-cons {
+  display: block;
+  columns: 2;
+  column-gap: 56px;
+  column-fill: auto;
+}
+
+section.pros-cons h1 {
+  column-span: all;
+}
+
+section.pros-cons h2 {
+  break-after: avoid;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.4em 0.8em;
+  margin: 0 0 0.55em;
+  font-size: 0.95em;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+section.pros-cons h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.pros-cons ul {
+  list-style: none;
+  padding-left: 0.2em;
+}
+
+section.pros-cons ul > li {
+  display: flex;
+  gap: 0.8em;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.5em 0.2em;
+  margin: 0;
+  font-size: 0.92em;
+}
+
+section.pros-cons ul:nth-of-type(1) > li::before {
+  content: '○';
+  color: var(--sf-accent);
+  font-weight: 600;
+}
+
+section.pros-cons ul:nth-of-type(2) > li::before {
+  content: '×';
+  color: var(--sf-muted);
+  font-weight: 600;
+}
+
+/* ---------- content-lead: タイトル+リード文+本文 ----------
+   構造: h1 + リード文(最初の段落が強調される) + 本文。 */
+
+section.content-lead > p:first-of-type {
+  font-size: 1.02em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sf-text);
+  border-left: 4px solid var(--sf-accent);
+  padding: 0.15em 0 0.15em 0.8em;
+  margin: 0 0 0.9em;
+}
+
+/* ---------- steps-v: 縦方向ステップ(番号付き手順) ----------
+   構造: h1 + ol(各 li が「**手順名** 説明」)。番号は自動付与。 */
+
+section.steps-v ol {
+  counter-reset: stepsv;
+  list-style: none;
+  padding-left: 0.2em;
+  margin-top: 0.4em;
+}
+
+section.steps-v ol > li::marker {
+  content: none;
+}
+
+section.steps-v ol > li {
+  counter-increment: stepsv;
+  display: flex;
+  gap: 1.1em;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.6em 0.2em;
+  margin: 0;
+}
+
+section.steps-v ol > li::before {
+  content: counter(stepsv, decimal-leading-zero);
+  font-family: var(--sf-numeral-font);
+  font-weight: 500;
+  font-size: 1.05em;
+  letter-spacing: 0.06em;
+  color: var(--sf-accent);
+}
+
+section.steps-v ol > li strong {
+  margin-right: 0.7em;
+}
+
+/* ---------- cycle: 循環プロセス(3〜4項目の円環) ----------
+   構造: h1 + ul(各 li が「**要素名** 一言」、3〜4個)。
+   点線の円環上に 上→右→下→左 の順で配置される(3個は 上→右→左)。 */
+
+section.cycle ul {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0.4em 0 0;
+}
+
+section.cycle ul::before {
+  /* 円環 */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 330px;
+  height: 330px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--sf-muted);
+}
+
+section.cycle ul::after {
+  /* 循環の向き */
+  content: '↻';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.2em;
+  color: var(--sf-line);
+}
+
+section.cycle ul > li::marker {
+  content: none;
+}
+
+section.cycle ul > li {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  background: var(--sf-bg);
+  padding: 0.35em 0.6em;
+  margin: 0;
+  text-align: center;
+  font-size: 0.76em;
+  line-height: 1.55;
+  color: var(--sf-muted);
+}
+
+section.cycle ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.2em;
+}
+
+section.cycle ul > li:nth-child(1) { left: 50%; top: calc(50% - 165px); }
+section.cycle ul > li:nth-child(2) { left: calc(50% + 165px); top: 50%; }
+section.cycle ul > li:nth-child(3) { left: 50%; top: calc(50% + 165px); }
+section.cycle ul > li:nth-child(4) { left: calc(50% - 165px); top: 50%; }
+
+/* 3項目のときは正三角形(12時・4時・8時)に配置 */
+section.cycle ul > li:nth-child(2):nth-last-child(2) {
+  left: calc(50% + 143px);
+  top: calc(50% + 83px);
+}
+
+section.cycle ul > li:nth-child(3):last-child {
+  left: calc(50% - 143px);
+  top: calc(50% + 83px);
 }
 
 /* ---------- end: 終了スライド ---------- */

@@ -12,7 +12,8 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 ## 現状(2026-07 v2)
 
 - [x] テーマ基盤: `core.css`(構造)+ スキンの分離構成
-- [x] コアレイアウト37種 + research 3種 + business 2種(全42種、両デモデッキで検証済み)
+- [x] コアレイアウト44種 + research 3種 + business 2種(全49種、両デモデッキで検証済み)
+- [x] グラフ・分岐フロー・複雑な構成図は「作図した画像を貼る」を標準手順としてスキルに明文化
 - [x] v2: business スキン(`kpi`、`examples/demo-business.md` で検証済み)
 - [x] 品質検証ループ: `check-overflow.mjs`(Puppeteer機械チェック)+ PNG目視
 - [x] エージェントスキル(`skill/SKILL.md` + `references/layouts.md`)
