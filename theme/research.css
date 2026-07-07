@@ -1,0 +1,95 @@
+/* @theme research */
+/*
+ * slide-forge research skin — 研究発表(ゼミ・学会・進捗報告)向け。
+ * 構造は core が持ち、ここでは配色・フォントの変数と研究特有クラスのみ定義する。
+ *
+ * 追加レイアウトクラス: experiment / math / references
+ */
+
+@import 'slide-forge-core';
+
+:root {
+  --sf-accent: #1e5aa8;
+  --sf-accent-strong: #12345f;
+  --sf-accent-weak: #e9f1fa;
+  --sf-bg: #ffffff;
+  --sf-text: #1f2937;
+  --sf-muted: #64748b;
+  --sf-line: #dde5ee;
+  --sf-card: #f7fafc;
+  --sf-code-bg: #f1f5f9;
+}
+
+/* ---------- experiment: 実験結果(表が主役+条件注記) ---------- */
+
+section.experiment table {
+  font-size: 0.9em;
+  margin: 0.7em auto 0.4em;
+}
+
+section.experiment th,
+section.experiment td {
+  padding: 0.5em 1.1em;
+}
+
+section.experiment td {
+  text-align: right;
+}
+
+section.experiment td:first-child,
+section.experiment th:first-child {
+  text-align: left;
+}
+
+section.experiment blockquote {
+  /* 実験条件・注記(blockquote で書く) */
+  font-size: 0.78em;
+  color: var(--sf-muted);
+  background: var(--sf-code-bg);
+  border-left-color: var(--sf-muted);
+  margin-top: 0.6em;
+}
+
+section.experiment > p {
+  font-size: 0.9em;
+}
+
+/* ---------- math: 数式中心(katex ディスプレイ数式を大きく) ---------- */
+
+section.math .katex-display {
+  margin: 0.6em 0;
+  font-size: 1.25em;
+}
+
+section.math .katex-display > .katex {
+  white-space: normal;
+}
+
+section.math > p:not(:has(.katex-display)) {
+  font-size: 0.95em;
+}
+
+section.math ul {
+  font-size: 0.9em;
+  color: var(--sf-text);
+}
+
+/* ---------- references: 参考文献 ---------- */
+
+section.references ol,
+section.references ul {
+  font-size: 0.72em;
+  line-height: 1.5;
+  padding-left: 2em;
+  margin-top: 0.4em;
+}
+
+section.references li {
+  margin: 0.5em 0;
+  color: var(--sf-text);
+}
+
+section.references li::marker {
+  color: var(--sf-muted);
+  font-weight: 700;
+}

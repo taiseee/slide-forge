@@ -1,0 +1,552 @@
+/* @theme slide-forge-core */
+/*
+ * slide-forge core theme — 構造(レイアウト)のみを定義する。
+ * 色・フォントは CSS 変数を参照し、スキン(research.css 等)が上書きする。
+ *
+ * レイアウトクラス一覧(<!-- _class: ... --> で選択):
+ *   title / agenda / divider / content / two-column / image-right /
+ *   image-left / image-full / comparison / table / takeaway / summary / end
+ */
+
+@import 'default';
+
+:root {
+  /* スキンが上書きする変数(ここではニュートラルな既定値) */
+  --sf-accent: #2563eb;
+  --sf-accent-strong: #1e3a8a;
+  --sf-accent-weak: #eff4fd;
+  --sf-bg: #ffffff;
+  --sf-text: #1e293b;
+  --sf-muted: #64748b;
+  --sf-line: #e2e8f0;
+  --sf-card: #f8fafc;
+  --sf-code-bg: #f1f5f9;
+  --sf-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --sf-heading-font: 'Avenir Next', 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --sf-body-font: 'Avenir Next', 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+}
+
+/* ---------- 基本スライド(全クラス共通の土台) ---------- */
+
+section {
+  width: 1280px;
+  height: 720px;
+  padding: 58px 76px 64px;
+  overflow: hidden;
+  background: var(--sf-bg);
+  color: var(--sf-text);
+  font-family: var(--sf-body-font);
+  font-size: 26px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  display: flex;
+  flex-direction: column;
+  /* Marp 内部スタイルに勝つため !important が必要(上寄せ既定) */
+  justify-content: flex-start !important;
+  align-items: stretch;
+}
+
+section::after {
+  /* ページ番号 */
+  color: var(--sf-muted);
+  font-size: 0.52em;
+  font-weight: 500;
+}
+
+header,
+footer {
+  display: none;
+}
+
+h1 {
+  font-family: var(--sf-heading-font);
+  font-size: 1.5em;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+  color: var(--sf-text);
+  margin: 0 0 0.75em;
+  line-height: 1.3;
+}
+
+h1::before {
+  /* 全幅下線の代わりに短いアクセントバー */
+  content: '';
+  display: block;
+  width: 52px;
+  height: 7px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--sf-accent), var(--sf-accent-strong));
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-family: var(--sf-heading-font);
+  font-size: 1.05em;
+  font-weight: 700;
+  color: var(--sf-accent-strong);
+  margin: 0.55em 0 0.4em;
+}
+
+h3 {
+  font-family: var(--sf-heading-font);
+  font-size: 1em;
+  font-weight: 700;
+  margin: 0.4em 0 0.3em;
+}
+
+p {
+  margin: 0.35em 0;
+}
+
+ul,
+ol {
+  margin: 0.3em 0;
+  padding-left: 1.25em;
+}
+
+li {
+  margin: 0.32em 0;
+}
+
+li::marker {
+  color: var(--sf-accent);
+}
+
+li > ul,
+li > ol {
+  font-size: 0.92em;
+}
+
+li > ul li::marker {
+  color: var(--sf-muted);
+}
+
+strong {
+  color: var(--sf-accent-strong);
+  font-weight: 700;
+}
+
+a {
+  color: var(--sf-accent);
+  text-decoration-color: var(--sf-line);
+  text-underline-offset: 4px;
+}
+
+blockquote {
+  border: 1px solid var(--sf-line);
+  border-left: 5px solid var(--sf-accent);
+  border-radius: 0 12px 12px 0;
+  background: var(--sf-accent-weak);
+  margin: 0.65em 0;
+  padding: 0.55em 1em;
+  color: var(--sf-text);
+  font-size: 0.92em;
+  box-shadow: var(--sf-shadow);
+}
+
+code {
+  background: var(--sf-code-bg);
+  padding: 0.12em 0.4em;
+  border-radius: 6px;
+  font-size: 0.85em;
+}
+
+pre {
+  background: var(--sf-code-bg);
+  border: 1px solid var(--sf-line);
+  border-radius: 12px;
+  padding: 0.75em 1em;
+  margin: 0.5em 0;
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* 表: 縦罫線なし・水平罫線のみのモダンスタイル */
+table {
+  border-collapse: collapse;
+  margin: 0.6em auto;
+  font-size: 0.85em;
+}
+
+th,
+td {
+  border: none;
+  padding: 0.5em 1.1em;
+  text-align: left;
+}
+
+th {
+  color: var(--sf-accent-strong);
+  font-weight: 700;
+  border-bottom: 3px solid var(--sf-accent);
+  background: none;
+}
+
+td {
+  border-bottom: 1px solid var(--sf-line);
+}
+
+tbody tr:nth-child(even) td {
+  background: var(--sf-card);
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* ---------- title: 表紙 ---------- */
+
+section.title {
+  justify-content: center !important;
+  align-items: flex-start;
+  background:
+    radial-gradient(720px 480px at 92% -12%, var(--sf-accent-weak) 0%, transparent 70%),
+    radial-gradient(560px 420px at -6% 108%, var(--sf-accent-weak) 0%, transparent 65%),
+    var(--sf-bg);
+  padding: 72px 100px;
+  position: relative;
+}
+
+section.title::before {
+  content: '';
+  /* default テーマの section::before { display: table }(clearfix)を打ち消す */
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background: linear-gradient(90deg, var(--sf-accent-strong), var(--sf-accent) 55%, var(--sf-accent-weak));
+}
+
+section.title h1 {
+  font-size: 2.1em;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.45em;
+}
+
+section.title h1::before {
+  width: 68px;
+  height: 8px;
+  margin-bottom: 0.6em;
+}
+
+section.title p {
+  color: var(--sf-muted);
+  font-size: 0.92em;
+  margin: 0.18em 0;
+}
+
+section.title p:first-of-type {
+  /* サブタイトル(タイトル直後の段落) */
+  color: var(--sf-text);
+  font-size: 1.12em;
+  margin-bottom: 0.9em;
+}
+
+/* ---------- agenda: 目次 ---------- */
+
+section.agenda ol {
+  counter-reset: agenda;
+  list-style: none;
+  padding-left: 0.2em;
+  margin-top: 0.3em;
+}
+
+section.agenda ol > li {
+  counter-increment: agenda;
+  display: flex;
+  align-items: baseline;
+  gap: 0.9em;
+  margin: 0;
+  padding: 0.6em 0.3em;
+  font-size: 1.08em;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+section.agenda ol > li::before {
+  content: counter(agenda, decimal-leading-zero);
+  font-family: var(--sf-heading-font);
+  font-weight: 800;
+  font-size: 1.1em;
+  color: var(--sf-accent);
+  letter-spacing: 0.04em;
+}
+
+/* ---------- divider: セクション区切り ---------- */
+
+section.divider {
+  justify-content: center !important;
+  align-items: flex-start;
+  background: linear-gradient(135deg, var(--sf-accent-strong) 0%, var(--sf-accent) 100%);
+  color: #ffffff;
+  padding: 72px 100px;
+}
+
+section.divider h1 {
+  color: #ffffff;
+  font-size: 1.85em;
+  font-weight: 800;
+  margin: 0;
+}
+
+section.divider h1::before {
+  background: rgba(255, 255, 255, 0.85);
+  width: 60px;
+}
+
+section.divider p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95em;
+  margin-top: 0.7em;
+}
+
+section.divider::after {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ---------- content: 標準(h1 + 本文) ----------
+   追加スタイル不要。土台そのまま。 */
+
+/* ---------- two-column: 本文を2段組(h1 は全幅) ---------- */
+
+section.two-column {
+  display: block;
+  columns: 2;
+  column-gap: 60px;
+  column-fill: auto;
+}
+
+section.two-column h1 {
+  column-span: all;
+}
+
+section.two-column h2 {
+  break-after: avoid;
+}
+
+/* ---------- image-right / image-left: 本文+画像 ----------
+   画像(img を含む段落)を固定領域に配置し、本文は反対側に流す。 */
+
+section.image-right,
+section.image-left {
+  position: relative;
+}
+
+section.image-right > *:not(h1):not(p:has(> img)) {
+  margin-right: 540px;
+}
+
+section.image-left > *:not(h1):not(p:has(> img)) {
+  margin-left: 540px;
+}
+
+section.image-right p:has(> img),
+section.image-left p:has(> img) {
+  position: absolute;
+  top: 185px;
+  bottom: 80px;
+  width: 486px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.image-right p:has(> img) {
+  right: 76px;
+}
+
+section.image-left p:has(> img) {
+  left: 76px;
+}
+
+section.image-right p:has(> img) img,
+section.image-left p:has(> img) img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* ---------- image-full: 図が主役(h1 + 全面画像 + 任意の注釈1行) ---------- */
+
+section.image-full p:has(> img) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.2em 0;
+}
+
+section.image-full p:has(> img) img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+section.image-full > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.85em;
+  margin: 0.25em 0 0;
+}
+
+/* ---------- comparison: 対比2列(h2 が各列の見出し) ---------- */
+
+section.comparison {
+  display: block;
+  columns: 2;
+  column-gap: 52px;
+  column-fill: auto;
+}
+
+section.comparison h1 {
+  column-span: all;
+}
+
+section.comparison h2 {
+  break-after: avoid;
+  background: var(--sf-accent-weak);
+  color: var(--sf-accent-strong);
+  border-radius: 10px;
+  padding: 0.35em 0.75em;
+  margin: 0 0 0.55em;
+  font-size: 1em;
+}
+
+section.comparison h2:not(:first-of-type) {
+  break-before: column;
+}
+
+/* ---------- table: 表が主役 ---------- */
+
+section.table table {
+  font-size: 0.95em;
+  margin: 1em auto;
+}
+
+section.table th,
+section.table td {
+  padding: 0.6em 1.3em;
+}
+
+section.table > p {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.85em;
+}
+
+/* ---------- takeaway: メッセージ強調(1枚1メッセージ) ---------- */
+
+section.takeaway {
+  justify-content: center !important;
+  align-items: center;
+  background: linear-gradient(135deg, var(--sf-accent-strong) 0%, var(--sf-accent) 100%);
+  text-align: center;
+  padding: 72px 120px;
+}
+
+section.takeaway h1 {
+  color: #ffffff;
+  font-size: 1.7em;
+  font-weight: 800;
+  line-height: 1.5;
+  margin: 0;
+}
+
+section.takeaway h1::before {
+  background: rgba(255, 255, 255, 0.85);
+  margin: 0 auto 0.7em;
+}
+
+section.takeaway p {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95em;
+  margin-top: 1.1em;
+}
+
+section.takeaway::after {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ---------- summary: まとめ(要点カード) ---------- */
+
+section.summary ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.3em;
+}
+
+section.summary > ul > li {
+  background: var(--sf-card);
+  border: 1px solid var(--sf-line);
+  border-left: 6px solid var(--sf-accent);
+  border-radius: 12px;
+  padding: 0.55em 1em;
+  margin: 0.6em 0;
+  box-shadow: var(--sf-shadow);
+}
+
+section.summary > ul > li > ul {
+  list-style: disc;
+  padding-left: 1.3em;
+  background: none;
+}
+
+section.summary > ul > li > ul > li {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0.1em 0;
+  margin: 0.15em 0;
+  font-size: 0.92em;
+}
+
+/* ---------- end: 終了スライド ---------- */
+
+section.end {
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+  background:
+    radial-gradient(720px 480px at 92% -12%, var(--sf-accent-weak) 0%, transparent 70%),
+    radial-gradient(560px 420px at -6% 108%, var(--sf-accent-weak) 0%, transparent 65%),
+    var(--sf-bg);
+  position: relative;
+}
+
+section.end::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 10px;
+  background: linear-gradient(90deg, var(--sf-accent-strong), var(--sf-accent) 55%, var(--sf-accent-weak));
+}
+
+section.end h1 {
+  font-size: 1.6em;
+  font-weight: 800;
+  margin: 0 0 0.5em;
+}
+
+section.end h1::before {
+  margin: 0 auto 0.6em;
+}
+
+section.end p {
+  color: var(--sf-muted);
+  font-size: 0.9em;
+  margin: 0.2em 0;
+}

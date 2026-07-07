@@ -1,0 +1,16 @@
+{
+  "name": "slide-forge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-agent-first Marp slide creation toolkit: curated layout classes, quality verification loop, bundled agent skill",
+  "scripts": {
+    "build": "marp --theme-set theme/ --html",
+    "check": "node scripts/check-overflow.mjs",
+    "preview": "marp --theme-set theme/ --html --server ."
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.2.3",
+    "puppeteer": "^24.10.0"
+  }
+}
