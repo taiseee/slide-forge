@@ -1,29 +1,38 @@
 /* @theme slide-forge-core */
 /*
  * slide-forge core theme — 構造(レイアウト)のみを定義する。
- * 色・フォントは CSS 変数を参照し、スキン(research.css 等)が上書きする。
+ * 色・フォントは CSS 変数を参照し、スキン(research.css / business.css)が上書きする。
+ *
+ * デザイン言語: エディトリアル・ミニマル(Canva のモノトーン系ビジネステンプレートを参考)
+ *   - フラットな配色(グラデーション・影・強い角丸を使わない)
+ *   - 細めのウェイト+広い字間、ヘアライン(細い罫線)で区切る
+ *   - 数字は大きく・軽く、余白をたっぷり取る
  *
  * レイアウトクラス一覧(<!-- _class: ... --> で選択):
  *   title / agenda / divider / content / two-column / image-right /
- *   image-left / image-full / comparison / table / takeaway / summary / end
+ *   image-left / image-full / comparison / table / takeaway / summary / end /
+ *   timeline / timeline-h / steps / columns / spec / faq /
+ *   matrix / gallery / stat / profile / quote / code / checklist / team /
+ *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos
  */
 
 @import 'default';
 
 :root {
   /* スキンが上書きする変数(ここではニュートラルな既定値) */
-  --sf-accent: #2563eb;
-  --sf-accent-strong: #1e3a8a;
-  --sf-accent-weak: #eff4fd;
-  --sf-bg: #ffffff;
-  --sf-text: #1e293b;
-  --sf-muted: #64748b;
-  --sf-line: #e2e8f0;
-  --sf-card: #f8fafc;
-  --sf-code-bg: #f1f5f9;
-  --sf-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
-  --sf-heading-font: 'Avenir Next', 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-  --sf-body-font: 'Avenir Next', 'Helvetica Neue', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  --sf-bg: #ffffff;          /* スライド背景 */
+  --sf-text: #35322e;        /* 本文 */
+  --sf-muted: #8b857c;       /* 補足・ページ番号 */
+  --sf-line: #e4dfd7;        /* ヘアライン(細罫線) */
+  --sf-panel: #f2eee8;       /* 薄い帯・パネル背景 */
+  --sf-accent: #6f6355;      /* アクセント(控えめな濃色) */
+  --sf-accent-strong: #453e34;
+  --sf-ink: #3a352e;         /* 濃色面(takeaway 等) */
+  --sf-ink-text: #f6f4f0;    /* 濃色面上の文字 */
+  --sf-code-bg: #f4f2ee;
+  --sf-heading-font: 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+  --sf-body-font: 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', 'Noto Sans JP', sans-serif;
+  --sf-numeral-font: 'Avenir Next', 'Helvetica Neue', sans-serif; /* 大きな数字用 */
 }
 
 /* ---------- 基本スライド(全クラス共通の土台) ---------- */
@@ -31,14 +40,15 @@
 section {
   width: 1280px;
   height: 720px;
-  padding: 58px 76px 64px;
+  padding: 60px 84px 66px;
   overflow: hidden;
   background: var(--sf-bg);
   color: var(--sf-text);
   font-family: var(--sf-body-font);
-  font-size: 26px;
-  line-height: 1.6;
-  letter-spacing: 0.01em;
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
   display: flex;
   flex-direction: column;
   /* Marp 内部スタイルに勝つため !important が必要(上寄せ既定) */
@@ -49,8 +59,10 @@ section {
 section::after {
   /* ページ番号 */
   color: var(--sf-muted);
-  font-size: 0.52em;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.5em;
   font-weight: 500;
+  letter-spacing: 0.1em;
 }
 
 header,
@@ -60,70 +72,80 @@ footer {
 
 h1 {
   font-family: var(--sf-heading-font);
-  font-size: 1.5em;
-  font-weight: 700;
-  letter-spacing: 0.015em;
+  font-size: 1.3em;
+  font-weight: 600;
+  letter-spacing: 0.09em;
   color: var(--sf-text);
-  margin: 0 0 0.75em;
-  line-height: 1.3;
+  border-bottom: 1px solid var(--sf-line);
+  padding-bottom: 0.6em;
+  margin: 0 0 0.9em;
+  line-height: 1.4;
+  position: relative;
 }
 
-h1::before {
-  /* 全幅下線の代わりに短いアクセントバー */
+h1::after {
+  /* ヘアラインの左端だけ濃くする短いアクセント罫線 */
   content: '';
-  display: block;
-  width: 52px;
-  height: 7px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--sf-accent), var(--sf-accent-strong));
-  margin-bottom: 0.5em;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 64px;
+  height: 2px;
+  background: var(--sf-accent);
 }
 
 h2 {
   font-family: var(--sf-heading-font);
-  font-size: 1.05em;
-  font-weight: 700;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   color: var(--sf-accent-strong);
-  margin: 0.55em 0 0.4em;
+  margin: 0.6em 0 0.4em;
 }
 
 h3 {
   font-family: var(--sf-heading-font);
-  font-size: 1em;
-  font-weight: 700;
-  margin: 0.4em 0 0.3em;
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0.5em 0 0.3em;
 }
 
 p {
-  margin: 0.35em 0;
+  margin: 0.4em 0;
 }
 
 ul,
 ol {
   margin: 0.3em 0;
-  padding-left: 1.25em;
+  padding-left: 1.15em;
 }
 
 li {
-  margin: 0.32em 0;
+  margin: 0.42em 0;
 }
 
-li::marker {
-  color: var(--sf-accent);
+ul > li::marker {
+  color: var(--sf-muted);
+  content: '– ';
+}
+
+ol > li::marker {
+  color: var(--sf-muted);
 }
 
 li > ul,
 li > ol {
-  font-size: 0.92em;
+  font-size: 0.9em;
 }
 
-li > ul li::marker {
-  color: var(--sf-muted);
+li > ul > li::marker {
+  content: '· ';
 }
 
 strong {
   color: var(--sf-accent-strong);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 a {
@@ -133,28 +155,24 @@ a {
 }
 
 blockquote {
-  border: 1px solid var(--sf-line);
-  border-left: 5px solid var(--sf-accent);
-  border-radius: 0 12px 12px 0;
-  background: var(--sf-accent-weak);
-  margin: 0.65em 0;
-  padding: 0.55em 1em;
+  border-left: 2px solid var(--sf-accent-strong);
+  background: var(--sf-panel);
+  margin: 0.7em 0;
+  padding: 0.6em 1.1em;
   color: var(--sf-text);
-  font-size: 0.92em;
-  box-shadow: var(--sf-shadow);
+  font-size: 0.9em;
 }
 
 code {
   background: var(--sf-code-bg);
   padding: 0.12em 0.4em;
-  border-radius: 6px;
+  border-radius: 3px;
   font-size: 0.85em;
 }
 
 pre {
   background: var(--sf-code-bg);
   border: 1px solid var(--sf-line);
-  border-radius: 12px;
   padding: 0.75em 1em;
   margin: 0.5em 0;
   line-height: 1.5;
@@ -165,33 +183,38 @@ pre code {
   padding: 0;
 }
 
-/* 表: 縦罫線なし・水平罫線のみのモダンスタイル */
+/* 表: 縦罫線なし・ヘアラインのみ */
 table {
   border-collapse: collapse;
-  margin: 0.6em auto;
+  margin: 0.7em auto;
   font-size: 0.85em;
 }
 
+/* default テーマの白背景・ゼブラ縞を無効化(背景色に馴染ませる) */
+table tr,
+table tr:nth-child(2n),
 th,
 td {
+  background: transparent;
+}
+
+/* default テーマ(table th 指定)に勝つよう table 付きセレクタで上書きする */
+table th,
+table td {
   border: none;
-  padding: 0.5em 1.1em;
+  padding: 0.55em 1.2em;
   text-align: left;
 }
 
-th {
-  color: var(--sf-accent-strong);
-  font-weight: 700;
-  border-bottom: 3px solid var(--sf-accent);
-  background: none;
+table th {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-bottom: 2px solid var(--sf-accent-strong);
 }
 
-td {
+table td {
   border-bottom: 1px solid var(--sf-line);
-}
-
-tbody tr:nth-child(even) td {
-  background: var(--sf-card);
 }
 
 img {
@@ -199,116 +222,114 @@ img {
   max-height: 100%;
 }
 
-/* ---------- title: 表紙 ---------- */
+/* ---------- title: 表紙(中央寄せ・細い罫線) ---------- */
 
 section.title {
   justify-content: center !important;
-  align-items: flex-start;
-  background:
-    radial-gradient(720px 480px at 92% -12%, var(--sf-accent-weak) 0%, transparent 70%),
-    radial-gradient(560px 420px at -6% 108%, var(--sf-accent-weak) 0%, transparent 65%),
-    var(--sf-bg);
-  padding: 72px 100px;
-  position: relative;
-}
-
-section.title::before {
-  content: '';
-  /* default テーマの section::before { display: table }(clearfix)を打ち消す */
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  background: linear-gradient(90deg, var(--sf-accent-strong), var(--sf-accent) 55%, var(--sf-accent-weak));
+  align-items: center;
+  text-align: center;
+  background: var(--sf-bg);
+  padding: 80px 120px;
 }
 
 section.title h1 {
-  font-size: 2.1em;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin: 0 0 0.45em;
+  font-size: 1.95em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
 }
 
-section.title h1::before {
-  width: 68px;
-  height: 8px;
-  margin-bottom: 0.6em;
+section.title h1::after {
+  /* タイトル下の細い中央罫線 */
+  content: '';
+  position: static;
+  display: block;
+  width: 220px;
+  height: 1px;
+  background: var(--sf-accent-strong);
+  margin: 0.9em auto 0;
 }
 
 section.title p {
   color: var(--sf-muted);
-  font-size: 0.92em;
-  margin: 0.18em 0;
+  font-size: 0.82em;
+  letter-spacing: 0.14em;
+  margin: 0.3em 0;
 }
 
 section.title p:first-of-type {
   /* サブタイトル(タイトル直後の段落) */
   color: var(--sf-text);
-  font-size: 1.12em;
-  margin-bottom: 0.9em;
+  font-size: 0.95em;
+  letter-spacing: 0.18em;
+  margin: 1.1em 0 1.6em;
 }
 
-/* ---------- agenda: 目次 ---------- */
+/* ---------- agenda: 目次(番号+ダッシュ+ヘアライン) ---------- */
 
 section.agenda ol {
   counter-reset: agenda;
   list-style: none;
   padding-left: 0.2em;
-  margin-top: 0.3em;
+  margin-top: 0.4em;
 }
 
 section.agenda ol > li {
   counter-increment: agenda;
   display: flex;
   align-items: baseline;
-  gap: 0.9em;
+  gap: 1em;
   margin: 0;
-  padding: 0.6em 0.3em;
-  font-size: 1.08em;
+  padding: 0.62em 0.3em;
+  font-size: 1em;
+  letter-spacing: 0.08em;
   border-bottom: 1px solid var(--sf-line);
 }
 
 section.agenda ol > li::before {
-  content: counter(agenda, decimal-leading-zero);
-  font-family: var(--sf-heading-font);
-  font-weight: 800;
-  font-size: 1.1em;
-  color: var(--sf-accent);
-  letter-spacing: 0.04em;
+  content: counter(agenda, decimal-leading-zero) ' —';
+  font-family: var(--sf-numeral-font);
+  font-weight: 500;
+  font-size: 0.9em;
+  letter-spacing: 0.12em;
+  color: var(--sf-muted);
 }
 
-/* ---------- divider: セクション区切り ---------- */
+/* ---------- divider: セクション区切り(薄い帯・フラット) ---------- */
 
 section.divider {
   justify-content: center !important;
   align-items: flex-start;
-  background: linear-gradient(135deg, var(--sf-accent-strong) 0%, var(--sf-accent) 100%);
-  color: #ffffff;
-  padding: 72px 100px;
+  background: var(--sf-panel);
+  padding: 80px 110px;
 }
 
 section.divider h1 {
-  color: #ffffff;
-  font-size: 1.85em;
-  font-weight: 800;
+  font-size: 1.65em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  border-bottom: none;
+  padding-bottom: 0;
   margin: 0;
 }
 
-section.divider h1::before {
-  background: rgba(255, 255, 255, 0.85);
-  width: 60px;
-}
-
-section.divider p {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.95em;
+section.divider h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 88px;
+  height: 2px;
+  background: var(--sf-accent-strong);
   margin-top: 0.7em;
 }
 
-section.divider::after {
-  color: rgba(255, 255, 255, 0.65);
+section.divider p {
+  color: var(--sf-muted);
+  font-size: 0.88em;
+  letter-spacing: 0.1em;
+  margin-top: 0.9em;
 }
 
 /* ---------- content: 標準(h1 + 本文) ----------
@@ -319,7 +340,7 @@ section.divider::after {
 section.two-column {
   display: block;
   columns: 2;
-  column-gap: 60px;
+  column-gap: 64px;
   column-fill: auto;
 }
 
@@ -350,9 +371,9 @@ section.image-left > *:not(h1):not(p:has(> img)) {
 section.image-right p:has(> img),
 section.image-left p:has(> img) {
   position: absolute;
-  top: 185px;
-  bottom: 80px;
-  width: 486px;
+  top: 190px;
+  bottom: 84px;
+  width: 478px;
   margin: 0;
   display: flex;
   align-items: center;
@@ -360,11 +381,11 @@ section.image-left p:has(> img) {
 }
 
 section.image-right p:has(> img) {
-  right: 76px;
+  right: 84px;
 }
 
 section.image-left p:has(> img) {
-  left: 76px;
+  left: 84px;
 }
 
 section.image-right p:has(> img) img,
@@ -372,7 +393,6 @@ section.image-left p:has(> img) img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 12px;
 }
 
 /* ---------- image-full: 図が主役(h1 + 全面画像 + 任意の注釈1行) ---------- */
@@ -390,14 +410,14 @@ section.image-full p:has(> img) img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  border-radius: 12px;
 }
 
 section.image-full > p:not(:has(> img)) {
   text-align: center;
   color: var(--sf-muted);
-  font-size: 0.85em;
-  margin: 0.25em 0 0;
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.3em 0 0;
 }
 
 /* ---------- comparison: 対比2列(h2 が各列の見出し) ---------- */
@@ -405,7 +425,7 @@ section.image-full > p:not(:has(> img)) {
 section.comparison {
   display: block;
   columns: 2;
-  column-gap: 52px;
+  column-gap: 56px;
   column-fill: auto;
 }
 
@@ -415,12 +435,12 @@ section.comparison h1 {
 
 section.comparison h2 {
   break-after: avoid;
-  background: var(--sf-accent-weak);
+  background: var(--sf-panel);
   color: var(--sf-accent-strong);
-  border-radius: 10px;
-  padding: 0.35em 0.75em;
-  margin: 0 0 0.55em;
-  font-size: 1em;
+  padding: 0.4em 0.8em;
+  margin: 0 0 0.6em;
+  font-size: 0.95em;
+  letter-spacing: 0.1em;
 }
 
 section.comparison h2:not(:first-of-type) {
@@ -430,55 +450,66 @@ section.comparison h2:not(:first-of-type) {
 /* ---------- table: 表が主役 ---------- */
 
 section.table table {
-  font-size: 0.95em;
-  margin: 1em auto;
+  font-size: 0.92em;
+  margin: 1.1em auto;
 }
 
 section.table th,
 section.table td {
-  padding: 0.6em 1.3em;
+  padding: 0.65em 1.4em;
 }
 
 section.table > p {
   text-align: center;
   color: var(--sf-muted);
-  font-size: 0.85em;
+  font-size: 0.82em;
+  letter-spacing: 0.06em;
 }
 
-/* ---------- takeaway: メッセージ強調(1枚1メッセージ) ---------- */
+/* ---------- takeaway: メッセージ強調(濃色フラット面) ---------- */
 
 section.takeaway {
   justify-content: center !important;
   align-items: center;
-  background: linear-gradient(135deg, var(--sf-accent-strong) 0%, var(--sf-accent) 100%);
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
   text-align: center;
-  padding: 72px 120px;
+  padding: 80px 130px;
 }
 
 section.takeaway h1 {
-  color: #ffffff;
-  font-size: 1.7em;
-  font-weight: 800;
-  line-height: 1.5;
+  color: var(--sf-ink-text);
+  font-size: 1.5em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.85;
+  border-bottom: none;
+  padding-bottom: 0;
   margin: 0;
 }
 
-section.takeaway h1::before {
-  background: rgba(255, 255, 255, 0.85);
-  margin: 0 auto 0.7em;
+section.takeaway h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 88px;
+  height: 1px;
+  background: rgba(246, 244, 240, 0.55);
+  margin: 1.1em auto 0;
 }
 
 section.takeaway p {
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 0.95em;
-  margin-top: 1.1em;
+  color: rgba(246, 244, 240, 0.72);
+  font-size: 0.85em;
+  letter-spacing: 0.12em;
+  margin-top: 1.2em;
 }
 
 section.takeaway::after {
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(246, 244, 240, 0.55);
 }
 
-/* ---------- summary: まとめ(要点カード) ---------- */
+/* ---------- summary: まとめ(ヘアライン区切りの要点) ---------- */
 
 section.summary ul {
   list-style: none;
@@ -486,29 +517,938 @@ section.summary ul {
   margin-top: 0.3em;
 }
 
+section.summary > ul > li::marker {
+  content: none;
+}
+
 section.summary > ul > li {
-  background: var(--sf-card);
-  border: 1px solid var(--sf-line);
-  border-left: 6px solid var(--sf-accent);
-  border-radius: 12px;
-  padding: 0.55em 1em;
-  margin: 0.6em 0;
-  box-shadow: var(--sf-shadow);
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.7em 0.2em;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
 section.summary > ul > li > ul {
-  list-style: disc;
-  padding-left: 1.3em;
-  background: none;
+  padding-left: 1.2em;
+  margin-top: 0.3em;
 }
 
 section.summary > ul > li > ul > li {
-  background: none;
   border: none;
-  box-shadow: none;
-  padding: 0.1em 0;
-  margin: 0.15em 0;
+  padding: 0.05em 0;
+  margin: 0.2em 0;
+  font-weight: 400;
+  font-size: 0.88em;
+  color: var(--sf-muted);
+}
+
+section.summary > ul > li > ul > li::marker {
+  content: '· ';
+}
+
+/* ---------- timeline: 縦タイムライン(時系列・マイルストーン) ----------
+   構造: h1 + ol(各 li が「**時期** 内容」)。 */
+
+section.timeline ol {
+  list-style: none;
+  padding-left: 0.4em;
+  margin-top: 0.6em;
+}
+
+section.timeline ol > li::marker {
+  content: none;
+}
+
+section.timeline ol > li {
+  position: relative;
+  padding: 0 0 1.3em 1.9em;
+  margin: 0;
+  border-left: 1px solid var(--sf-line);
+  font-size: 0.95em;
+}
+
+section.timeline ol > li:last-child {
+  border-left-color: transparent;
+  padding-bottom: 0;
+}
+
+section.timeline ol > li::before {
+  content: '';
+  position: absolute;
+  /* 罫線(幅1px、x=0〜1)の中心 x=0.5 にドット中心(left+5)を合わせる */
+  box-sizing: border-box;
+  left: -4.5px;
+  top: 0.5em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sf-bg);
+  border: 2px solid var(--sf-accent-strong);
+}
+
+section.timeline ol > li strong {
+  display: inline-block;
+  font-family: var(--sf-numeral-font);
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-right: 0.9em;
+}
+
+/* ---------- timeline-h: 横タイムライン ----------
+   構造: h1 + ol(各 li が「**時期** 内容」、2〜5項目)。 */
+
+section.timeline-h ol {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.5em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 40px;
+}
+
+section.timeline-h ol > li::marker {
+  content: none;
+}
+
+section.timeline-h ol > li {
+  position: relative;
+  padding: 1.5em 0.4em 0 0;
+  margin: 0;
+  font-size: 0.82em;
+  line-height: 1.6;
+}
+
+section.timeline-h ol > li::before {
+  /* 横罫線(項目ごとに自分の区間を描く) */
+  content: '';
+  position: absolute;
+  top: 4.5px;
+  left: 0;
+  right: -40px;
+  height: 1px;
+  background: var(--sf-line);
+}
+
+section.timeline-h ol > li:last-child::before {
+  right: 0;
+}
+
+section.timeline-h ol > li::after {
+  /* ドット */
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sf-bg);
+  border: 2px solid var(--sf-accent-strong);
+}
+
+section.timeline-h ol > li strong {
+  display: block;
+  font-family: var(--sf-numeral-font);
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 1.05em;
+  margin-bottom: 0.4em;
+}
+
+/* ---------- steps: 横並びプロセス(手順・フロー) ----------
+   構造: h1 + ol(各 li が「**手順名** 説明」、2〜4項目)。番号は自動付与。 */
+
+section.steps ol {
+  counter-reset: steps;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 48px;
+}
+
+section.steps ol > li::marker {
+  content: none;
+}
+
+section.steps ol > li {
+  counter-increment: steps;
+  margin: 0;
+  padding: 0 0.2em;
+  font-size: 0.82em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.steps ol > li::before {
+  content: counter(steps, decimal-leading-zero);
+  display: block;
+  font-family: var(--sf-numeral-font);
+  font-size: 2.4em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  color: var(--sf-accent);
+  border-bottom: 1px solid var(--sf-line);
+  padding-bottom: 0.25em;
+  margin-bottom: 0.6em;
+}
+
+section.steps ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 1.1em;
+  margin-bottom: 0.35em;
+}
+
+/* ---------- columns: 特徴の列並び(テキスト2〜4列) ----------
+   構造: h1 + ul(各 li が「**見出し** 説明」)+ 任意の p(注記)。 */
+
+section.columns ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 48px;
+}
+
+section.columns ul > li::marker {
+  content: none;
+}
+
+section.columns ul > li {
+  border-top: 1px solid var(--sf-line);
+  padding: 0.8em 0.2em 0;
+  margin: 0;
+  font-size: 0.82em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.columns ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 1.1em;
+  margin-bottom: 0.4em;
+}
+
+section.columns > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  margin-top: 1.2em;
+}
+
+/* ---------- spec: ラベル+値の一覧(会社概要・仕様など) ----------
+   構造: h1 + ul(各 li が「**ラベル** 値」)。 */
+
+section.spec ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.4em;
+}
+
+section.spec ul > li::marker {
+  content: none;
+}
+
+section.spec ul > li {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.2em;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.55em 0.3em;
+  margin: 0;
   font-size: 0.92em;
+}
+
+section.spec ul > li strong {
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--sf-accent-strong);
+}
+
+/* ---------- faq: Q&A(h2 が質問、直後の段落が回答) ---------- */
+
+section.faq h2 {
+  margin: 1em 0 0.3em;
+  padding-bottom: 0.35em;
+  border-bottom: 1px solid var(--sf-line);
+  font-size: 0.98em;
+}
+
+section.faq h2:first-of-type {
+  margin-top: 0.2em;
+}
+
+section.faq h2::before {
+  content: 'Q — ';
+  font-family: var(--sf-numeral-font);
+  color: var(--sf-muted);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+section.faq h2 + p {
+  font-size: 0.9em;
+  color: var(--sf-text);
+  padding-left: 2.1em;
+  position: relative;
+}
+
+section.faq h2 + p::before {
+  content: 'A —';
+  position: absolute;
+  left: 0.2em;
+  font-family: var(--sf-numeral-font);
+  color: var(--sf-accent);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- matrix: 2×2マトリクス(SWOT・ポジショニング) ----------
+   構造: h1 + (h2 + 内容)× 4。象限の順序は 左上 → 左下 → 右上 → 右下。 */
+
+section.matrix {
+  display: block;
+  columns: 2;
+  column-gap: 56px;
+  column-fill: auto;
+}
+
+section.matrix h1 {
+  column-span: all;
+}
+
+section.matrix h2 {
+  break-after: avoid;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.35em 0.8em;
+  margin: 0 0 0.5em;
+  font-size: 0.92em;
+  letter-spacing: 0.1em;
+}
+
+section.matrix h2:not(:first-of-type) {
+  margin-top: 1.1em;
+}
+
+section.matrix h2:nth-of-type(3) {
+  break-before: column;
+  margin-top: 0;
+}
+
+section.matrix ul,
+section.matrix p {
+  font-size: 0.85em;
+}
+
+/* ---------- gallery: 画像の横並び比較(2〜3枚) ----------
+   構造: h1 + 画像を1つの段落に並べる + 任意の注釈1行。 */
+
+section.gallery p:has(> img) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  margin: 0.3em 0;
+}
+
+section.gallery p:has(> img) img {
+  flex: 1 1 0;
+  min-width: 0;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+section.gallery > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.3em 0 0;
+}
+
+/* ---------- stat: 数字1つを全面に(インパクト用) ----------
+   構造: h1(数字+単位) + p(何の数字か) + 任意の p(補足)。 */
+
+section.stat {
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+}
+
+section.stat h1 {
+  font-family: var(--sf-numeral-font);
+  font-size: 4.4em;
+  font-weight: 200;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+section.stat h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 88px;
+  height: 1px;
+  background: var(--sf-accent-strong);
+  margin: 0.25em auto 0;
+}
+
+section.stat p {
+  color: var(--sf-text);
+  font-size: 0.95em;
+  letter-spacing: 0.16em;
+  margin: 1em 0 0;
+}
+
+section.stat p ~ p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
+  margin-top: 0.6em;
+}
+
+/* ---------- profile: 人物紹介(円形写真+経歴) ----------
+   構造: h1 + 写真1枚(単独の段落) + 本文(名前は h2 か **強調**)。 */
+
+section.profile {
+  position: relative;
+}
+
+section.profile > *:not(h1):not(p:has(> img)) {
+  margin-left: 420px;
+}
+
+section.profile p:has(> img) {
+  position: absolute;
+  left: 84px;
+  top: 210px;
+  width: 300px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+section.profile p:has(> img) img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--sf-line);
+}
+
+section.profile h2 {
+  margin-top: 0.2em;
+}
+
+section.profile ul {
+  font-size: 0.9em;
+}
+
+/* ---------- quote: 引用(顧客の声・先行研究の一文) ----------
+   構造: h1(省略可) + blockquote(本文) + p(出典・話者)。 */
+
+section.quote {
+  justify-content: center !important;
+}
+
+section.quote blockquote {
+  border: none;
+  background: none;
+  margin: 0.3em 0;
+  padding: 0 0 0 1.2em;
+  border-left: 2px solid var(--sf-accent-strong);
+  font-size: 1.25em;
+  line-height: 2;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sf-text);
+}
+
+section.quote > p {
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.1em;
+  margin: 1.1em 0 0 1.6em;
+}
+
+/* ---------- code: コード中心(コードブロック+注釈) ----------
+   構造: h1 + コードブロック + 任意の p(注釈)。 */
+
+section.code pre {
+  /* 自然な高さで表示し、収まらない場合のみ縮む */
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  font-size: 0.75em;
+  line-height: 1.65;
+  margin: 0.4em 0;
+  padding: 1em 1.2em;
+}
+
+section.code > p {
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.06em;
+  margin: 0.4em 0 0;
+}
+
+/* ---------- checklist: チェックリスト(要件・達成項目) ----------
+   構造: h1 + ul(トップレベルの各項目に ✓ が付く)。 */
+
+section.checklist ul {
+  list-style: none;
+  padding-left: 0.2em;
+  margin-top: 0.4em;
+}
+
+section.checklist > ul > li::marker {
+  content: none;
+}
+
+section.checklist > ul > li {
+  display: flex;
+  gap: 0.9em;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.6em 0.3em;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+section.checklist > ul > li::before {
+  content: '✓';
+  color: var(--sf-accent);
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+/* ---------- team: 複数人の紹介(円形写真の列並び) ----------
+   構造: h1 + ul(各 li が「![](写真) **名前** 役割・説明」、2〜4人)。 */
+
+section.team ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.2em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 44px;
+}
+
+section.team ul > li::marker {
+  content: none;
+}
+
+section.team ul > li {
+  margin: 0;
+  text-align: center;
+  font-size: 0.78em;
+  color: var(--sf-muted);
+  line-height: 1.6;
+}
+
+section.team ul > li img {
+  display: block;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--sf-line);
+  margin: 0 auto 0.9em;
+}
+
+section.team ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35em;
+}
+
+/* ---------- lead: 導入メッセージ(明るい面・左寄せの大きめテキスト) ----------
+   構造: h1(メッセージ) + 任意の p(補足)。takeaway の明るい版。 */
+
+section.lead {
+  justify-content: center !important;
+  padding: 80px 110px;
+}
+
+section.lead h1 {
+  font-size: 1.55em;
+  font-weight: 500;
+  line-height: 1.9;
+  letter-spacing: 0.09em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+section.lead h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 64px;
+  height: 2px;
+  background: var(--sf-accent-strong);
+  margin-top: 0.9em;
+}
+
+section.lead p {
+  color: var(--sf-muted);
+  font-size: 0.88em;
+  letter-spacing: 0.08em;
+  margin-top: 1em;
+}
+
+/* ---------- funnel: 絞り込みの段階(上から狭まる) ----------
+   構造: h1 + ol(各 li が「**段階名** 補足」、3〜5段。最終段が強調される)。 */
+
+section.funnel ol {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.8em;
+}
+
+section.funnel ol > li::marker {
+  content: none;
+}
+
+section.funnel ol > li {
+  background: var(--sf-panel);
+  margin: 0 auto 0.45em;
+  padding: 0.5em 1em;
+  text-align: center;
+  font-size: 0.88em;
+  letter-spacing: 0.05em;
+  color: var(--sf-muted);
+}
+
+section.funnel ol > li strong {
+  color: var(--sf-text);
+  margin-right: 0.8em;
+}
+
+section.funnel ol > li:nth-child(1) { width: 100%; }
+section.funnel ol > li:nth-child(2) { width: 84%; }
+section.funnel ol > li:nth-child(3) { width: 68%; }
+section.funnel ol > li:nth-child(4) { width: 52%; }
+section.funnel ol > li:nth-child(5) { width: 38%; }
+
+section.funnel ol > li:last-child {
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+}
+
+section.funnel ol > li:last-child strong {
+  color: var(--sf-ink-text);
+}
+
+/* ---------- flow: 矢印つき横フロー(プロセス・構成) ----------
+   構造: h1 + ol(各 li が「**要素名** 説明」、2〜4項目)。項目間に → が入る。 */
+
+section.flow ol {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.2em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 56px;
+}
+
+section.flow ol > li::marker {
+  content: none;
+}
+
+section.flow ol > li {
+  position: relative;
+  background: var(--sf-panel);
+  padding: 0.9em 1em;
+  margin: 0;
+  text-align: center;
+  font-size: 0.8em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.flow ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.12em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35em;
+}
+
+section.flow ol > li:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -44px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 1.25em;
+}
+
+/* ---------- agenda-grid: 目次の2列版(項目が7個以上のとき) ---------- */
+
+section.agenda-grid ol {
+  counter-reset: agenda-grid;
+  list-style: none;
+  padding-left: 0.2em;
+  margin-top: 0.4em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 72px;
+}
+
+section.agenda-grid ol > li::marker {
+  content: none;
+}
+
+section.agenda-grid ol > li {
+  counter-increment: agenda-grid;
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  margin: 0;
+  padding: 0.6em 0.3em;
+  font-size: 0.95em;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--sf-line);
+}
+
+section.agenda-grid ol > li::before {
+  content: counter(agenda-grid, decimal-leading-zero) ' —';
+  font-family: var(--sf-numeral-font);
+  font-weight: 500;
+  font-size: 0.9em;
+  letter-spacing: 0.12em;
+  color: var(--sf-muted);
+}
+
+/* ---------- pyramid: 階層構造(頂点が強調される) ----------
+   構造: h1 + ol(各 li が「**階層名** 説明」、3〜4段。上から下へ広がる)。 */
+
+section.pyramid ol {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.8em;
+}
+
+section.pyramid ol > li::marker {
+  content: none;
+}
+
+section.pyramid ol > li {
+  background: var(--sf-panel);
+  margin: 0 auto 0.45em;
+  padding: 0.5em 1em;
+  text-align: center;
+  font-size: 0.88em;
+  letter-spacing: 0.05em;
+  color: var(--sf-muted);
+}
+
+section.pyramid ol > li strong {
+  color: var(--sf-text);
+  margin-right: 0.8em;
+}
+
+section.pyramid ol > li:nth-child(1) { width: 40%; }
+section.pyramid ol > li:nth-child(2) { width: 60%; }
+section.pyramid ol > li:nth-child(3) { width: 80%; }
+section.pyramid ol > li:nth-child(4) { width: 100%; }
+
+section.pyramid ol > li:first-child {
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+}
+
+section.pyramid ol > li:first-child strong {
+  color: var(--sf-ink-text);
+}
+
+/* ---------- venn: 2円ベン図(重なりで関係を示す) ----------
+   構造: h1 + ul(li が3つ:「**左** 説明」「**右** 説明」「**共通** 一言」)。
+   共通(3つ目)のテキストは短く保つこと。 */
+
+section.venn ul {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0.4em 0 0;
+}
+
+section.venn ul::before,
+section.venn ul::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sf-accent);
+}
+
+section.venn ul::before {
+  left: calc(50% - 320px);
+}
+
+section.venn ul::after {
+  left: calc(50% - 60px);
+  border-color: var(--sf-muted);
+}
+
+section.venn ul > li::marker {
+  content: none;
+}
+
+section.venn ul > li {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  text-align: center;
+  font-size: 0.78em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.venn ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.15em;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3em;
+}
+
+section.venn ul > li:nth-child(1) {
+  left: calc(50% - 295px);
+  width: 200px;
+}
+
+section.venn ul > li:nth-child(2) {
+  left: calc(50% + 95px);
+  width: 200px;
+}
+
+section.venn ul > li:nth-child(3) {
+  left: calc(50% - 60px);
+  width: 120px;
+  font-size: 0.7em;
+}
+
+section.venn ul > li:nth-child(3) strong {
+  color: var(--sf-accent-strong);
+}
+
+/* ---------- before-after: ラベル付き画像比較(2枚) ----------
+   構造: h1 + (h2(ラベル) + 画像)× 2。 */
+
+section.before-after {
+  display: block;
+  columns: 2;
+  column-gap: 48px;
+  column-fill: auto;
+}
+
+section.before-after h1 {
+  column-span: all;
+}
+
+section.before-after h2 {
+  break-after: avoid;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.35em 0.8em;
+  margin: 0 0 0.6em;
+  font-size: 0.92em;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+section.before-after h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.before-after p:has(> img) {
+  margin: 0.2em 0;
+  text-align: center;
+}
+
+section.before-after p:has(> img) img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+}
+
+section.before-after > p:not(:has(> img)) {
+  font-size: 0.8em;
+  color: var(--sf-muted);
+  text-align: center;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- logos: ロゴ・実績の並び(グレースケール) ----------
+   構造: h1 + ロゴ画像を1つの段落にまとめて並べる + 任意の p(注記)。 */
+
+section.logos p:has(> img) {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 64px;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin: 0;
+}
+
+section.logos p:has(> img) img {
+  height: 64px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.72;
+}
+
+section.logos > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.1em;
+  margin: 0.3em 0 0;
 }
 
 /* ---------- end: 終了スライド ---------- */
@@ -517,36 +1457,31 @@ section.end {
   justify-content: center !important;
   align-items: center;
   text-align: center;
-  background:
-    radial-gradient(720px 480px at 92% -12%, var(--sf-accent-weak) 0%, transparent 70%),
-    radial-gradient(560px 420px at -6% 108%, var(--sf-accent-weak) 0%, transparent 65%),
-    var(--sf-bg);
-  position: relative;
-}
-
-section.end::before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 10px;
-  background: linear-gradient(90deg, var(--sf-accent-strong), var(--sf-accent) 55%, var(--sf-accent-weak));
+  background: var(--sf-bg);
 }
 
 section.end h1 {
-  font-size: 1.6em;
-  font-weight: 800;
-  margin: 0 0 0.5em;
+  font-size: 1.5em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0 0 0.6em;
 }
 
-section.end h1::before {
-  margin: 0 auto 0.6em;
+section.end h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 160px;
+  height: 1px;
+  background: var(--sf-accent-strong);
+  margin: 0.9em auto 0;
 }
 
 section.end p {
   color: var(--sf-muted);
-  font-size: 0.9em;
-  margin: 0.2em 0;
+  font-size: 0.82em;
+  letter-spacing: 0.12em;
+  margin: 0.3em 0;
 }

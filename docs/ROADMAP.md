@@ -9,22 +9,18 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 - 対象順序: 1. 研究発表(ゼミ・学会・進捗報告) → 2. ビジネス(提案・報告)
 - 品質の定義: はみ出しゼロ(機械検証)+目視で崩れ・違和感なし+デザインの一貫性
 
-## 現状(2026-07 v1)
+## 現状(2026-07 v2)
 
-- [x] テーマ基盤: `core.css`(構造)+ `research.css`(スキン)の分離構成
-- [x] レイアウト16種(コア13 + research 3)。全て `examples/demo-research.md` で検証済み
+- [x] テーマ基盤: `core.css`(構造)+ スキンの分離構成
+- [x] コアレイアウト35種 + research 3種 + business 2種(全40種、両デモデッキで検証済み)
+- [x] v2: business スキン(`kpi`、`examples/demo-business.md` で検証済み)
 - [x] 品質検証ループ: `check-overflow.mjs`(Puppeteer機械チェック)+ PNG目視
 - [x] エージェントスキル(`skill/SKILL.md` + `references/layouts.md`)
-- [x] デザイン方針: モダン・スタイリッシュ(短いアクセントバー、水平罫線のみの表、
-      グラデーション divider/takeaway、カード風 summary)
+- [x] デザイン方針: エディトリアル・ミニマル(Canva のモノトーン系ビジネステンプレートを参考)。
+      フラット配色・ヘアライン罫線・細めウェイト+広い字間・軽い大きな数字。
+      グラデーション/影/カードUIは使わない。research=グレー/墨色系、business=グレージュ/ブラウン系
 
 ## TODO
-
-### v2: business スキン
-
-- [ ] `theme/business.css`(配色・フォント変数 + ビジネス特有クラス)
-- [ ] ビジネス特有レイアウトの実需洗い出し(候補: `kpi`(数値ハイライト) / `roadmap`(タイムライン) / `team` など)
-- [ ] `examples/demo-business.md` で全クラス検証
 
 ### v3: 人間向け編集UI(必要と判明した場合のみ)
 

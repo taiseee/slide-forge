@@ -1,7 +1,7 @@
 /* @theme research */
 /*
  * slide-forge research skin — 研究発表(ゼミ・学会・進捗報告)向け。
- * 構造は core が持ち、ここでは配色・フォントの変数と研究特有クラスのみ定義する。
+ * 配色: グレー/墨色系のモノトーン・ミニマル。
  *
  * 追加レイアウトクラス: experiment / math / references
  */
@@ -9,45 +9,50 @@
 @import 'slide-forge-core';
 
 :root {
-  --sf-accent: #1e5aa8;
-  --sf-accent-strong: #12345f;
-  --sf-accent-weak: #e9f1fa;
   --sf-bg: #ffffff;
-  --sf-text: #1f2937;
-  --sf-muted: #64748b;
-  --sf-line: #dde5ee;
-  --sf-card: #f7fafc;
-  --sf-code-bg: #f1f5f9;
+  --sf-text: #2f3237;
+  --sf-muted: #878d96;
+  --sf-line: #e3e5e9;
+  --sf-panel: #eef0f3;
+  --sf-accent: #566173;
+  --sf-accent-strong: #343c48;
+  --sf-ink: #343a44;
+  --sf-ink-text: #f5f6f8;
+  --sf-code-bg: #f2f3f5;
 }
 
 /* ---------- experiment: 実験結果(表が主役+条件注記) ---------- */
 
 section.experiment table {
-  font-size: 0.9em;
-  margin: 0.7em auto 0.4em;
+  font-size: 0.88em;
+  margin: 0.8em auto 0.5em;
 }
 
 section.experiment th,
 section.experiment td {
-  padding: 0.5em 1.1em;
+  padding: 0.55em 1.2em;
 }
 
 section.experiment td {
   text-align: right;
+  font-family: var(--sf-numeral-font);
+  font-weight: 400;
 }
 
 section.experiment td:first-child,
 section.experiment th:first-child {
   text-align: left;
+  font-family: var(--sf-body-font);
 }
 
 section.experiment blockquote {
   /* 実験条件・注記(blockquote で書く) */
-  font-size: 0.78em;
+  font-size: 0.74em;
   color: var(--sf-muted);
-  background: var(--sf-code-bg);
-  border-left-color: var(--sf-muted);
-  margin-top: 0.6em;
+  background: none;
+  border-left: 2px solid var(--sf-line);
+  padding: 0.3em 1em;
+  margin-top: 0.9em;
 }
 
 section.experiment > p {
@@ -57,8 +62,8 @@ section.experiment > p {
 /* ---------- math: 数式中心(katex ディスプレイ数式を大きく) ---------- */
 
 section.math .katex-display {
-  margin: 0.6em 0;
-  font-size: 1.25em;
+  margin: 0.7em 0;
+  font-size: 1.2em;
 }
 
 section.math .katex-display > .katex {
@@ -70,26 +75,25 @@ section.math > p:not(:has(.katex-display)) {
 }
 
 section.math ul {
-  font-size: 0.9em;
-  color: var(--sf-text);
+  font-size: 0.88em;
 }
 
 /* ---------- references: 参考文献 ---------- */
 
 section.references ol,
 section.references ul {
-  font-size: 0.72em;
-  line-height: 1.5;
+  font-size: 0.7em;
+  line-height: 1.6;
   padding-left: 2em;
-  margin-top: 0.4em;
+  margin-top: 0.5em;
 }
 
 section.references li {
-  margin: 0.5em 0;
+  margin: 0.55em 0;
   color: var(--sf-text);
 }
 
 section.references li::marker {
   color: var(--sf-muted);
-  font-weight: 700;
+  font-family: var(--sf-numeral-font);
 }

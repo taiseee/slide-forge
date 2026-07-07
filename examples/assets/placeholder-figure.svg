@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#eef2f7" stroke="#c9d4e0" stroke-width="4"/>
-  <rect x="120" y="90" width="240" height="120" rx="10" fill="#d6eaf8" stroke="#1a3f6b" stroke-width="3"/>
-  <rect x="440" y="90" width="240" height="120" rx="10" fill="#d6eaf8" stroke="#1a3f6b" stroke-width="3"/>
-  <rect x="280" y="330" width="240" height="120" rx="10" fill="#1a3f6b"/>
-  <line x1="240" y1="210" x2="360" y2="330" stroke="#1a3f6b" stroke-width="4"/>
-  <line x1="560" y1="210" x2="440" y2="330" stroke="#1a3f6b" stroke-width="4"/>
-  <text x="240" y="158" font-family="Helvetica, sans-serif" font-size="30" fill="#122f52" text-anchor="middle">Encoder</text>
-  <text x="560" y="158" font-family="Helvetica, sans-serif" font-size="30" fill="#122f52" text-anchor="middle">Decoder</text>
+  <rect width="800" height="600" fill="#f2f0ec" stroke="#d9d5cd" stroke-width="4"/>
+  <rect x="120" y="90" width="240" height="120" rx="10" fill="#e9e6e0" stroke="#4b463e" stroke-width="3"/>
+  <rect x="440" y="90" width="240" height="120" rx="10" fill="#e9e6e0" stroke="#4b463e" stroke-width="3"/>
+  <rect x="280" y="330" width="240" height="120" rx="10" fill="#4b463e"/>
+  <line x1="240" y1="210" x2="360" y2="330" stroke="#4b463e" stroke-width="4"/>
+  <line x1="560" y1="210" x2="440" y2="330" stroke="#4b463e" stroke-width="4"/>
+  <text x="240" y="158" font-family="Helvetica, sans-serif" font-size="30" fill="#38342d" text-anchor="middle">Encoder</text>
+  <text x="560" y="158" font-family="Helvetica, sans-serif" font-size="30" fill="#38342d" text-anchor="middle">Decoder</text>
   <text x="400" y="398" font-family="Helvetica, sans-serif" font-size="30" fill="#ffffff" text-anchor="middle">Fusion</text>
-  <text x="400" y="540" font-family="Helvetica, sans-serif" font-size="24" fill="#666666" text-anchor="middle">placeholder: architecture figure</text>
+  <text x="400" y="540" font-family="Helvetica, sans-serif" font-size="24" fill="#8b857c" text-anchor="middle">placeholder: architecture figure</text>
 </svg>

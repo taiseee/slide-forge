@@ -1,14 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520">
-  <rect width="1000" height="520" fill="#ffffff" stroke="#c9d4e0" stroke-width="4"/>
-  <line x1="100" y1="420" x2="920" y2="420" stroke="#666666" stroke-width="3"/>
-  <line x1="100" y1="60" x2="100" y2="420" stroke="#666666" stroke-width="3"/>
-  <rect x="180" y="300" width="90" height="120" fill="#c9d4e0"/>
-  <rect x="360" y="240" width="90" height="180" fill="#8fb3d9"/>
-  <rect x="540" y="170" width="90" height="250" fill="#4a76a8"/>
-  <rect x="720" y="110" width="90" height="310" fill="#1a3f6b"/>
-  <text x="225" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#666666" text-anchor="middle">Base</text>
-  <text x="405" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#666666" text-anchor="middle">+A</text>
-  <text x="585" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#666666" text-anchor="middle">+A+B</text>
-  <text x="765" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#666666" text-anchor="middle">Ours</text>
-  <text x="500" y="40" font-family="Helvetica, sans-serif" font-size="24" fill="#666666" text-anchor="middle">placeholder: result chart</text>
+  <rect width="1000" height="520" fill="#ffffff" stroke="#d9d5cd" stroke-width="4"/>
+  <line x1="100" y1="420" x2="920" y2="420" stroke="#8b857c" stroke-width="3"/>
+  <line x1="100" y1="60" x2="100" y2="420" stroke="#8b857c" stroke-width="3"/>
+  <rect x="180" y="300" width="90" height="120" fill="#d9d5cd"/>
+  <rect x="360" y="240" width="90" height="180" fill="#b5afa3"/>
+  <rect x="540" y="170" width="90" height="250" fill="#7a7264"/>
+  <rect x="720" y="110" width="90" height="310" fill="#4b463e"/>
+  <text x="225" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#8b857c" text-anchor="middle">Base</text>
+  <text x="405" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#8b857c" text-anchor="middle">+A</text>
+  <text x="585" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#8b857c" text-anchor="middle">+A+B</text>
+  <text x="765" y="460" font-family="Helvetica, sans-serif" font-size="26" fill="#8b857c" text-anchor="middle">Ours</text>
+  <text x="500" y="40" font-family="Helvetica, sans-serif" font-size="24" fill="#8b857c" text-anchor="middle">placeholder: result chart</text>
 </svg>

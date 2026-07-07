@@ -1,0 +1,131 @@
+/* @theme business */
+/*
+ * slide-forge business skin — ビジネス発表(提案・報告・事業説明)向け。
+ * 配色: 温かみのあるグレージュ/ブラウン系のエディトリアル・ミニマル。
+ *
+ * 追加レイアウトクラス: kpi / plans
+ */
+
+@import 'slide-forge-core';
+
+:root {
+  --sf-bg: #fbfaf7;
+  --sf-text: #38332c;
+  --sf-muted: #98907f;
+  --sf-line: #e6e0d4;
+  --sf-panel: #f1ece2;
+  --sf-accent: #8a7a63;
+  --sf-accent-strong: #55483a;
+  --sf-ink: #3d372e;
+  --sf-ink-text: #f7f5f0;
+  --sf-code-bg: #f3f0e9;
+}
+
+/* ---------- kpi: 数値ハイライト(細罫線+大きく軽い数字) ----------
+   構造: h1 + ul(各 li が「**数値** ラベル」)。li は最大4つ。 */
+
+section.kpi ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.1em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 56px;
+}
+
+section.kpi ul > li::marker {
+  content: none;
+}
+
+section.kpi ul > li {
+  border-top: 1px solid var(--sf-accent-strong);
+  padding: 0.9em 0.2em 0;
+  margin: 0;
+  font-size: 0.78em;
+  letter-spacing: 0.1em;
+  color: var(--sf-muted);
+  line-height: 1.5;
+}
+
+section.kpi ul > li strong {
+  display: block;
+  font-family: var(--sf-numeral-font);
+  font-size: 2.9em;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--sf-text);
+  line-height: 1.25;
+  margin-bottom: 0.3em;
+}
+
+section.kpi > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.08em;
+  margin-top: 1.4em;
+}
+
+/* quote レイアウトは core に移動(研究でも先行研究の引用に使うため) */
+
+/* ---------- plans: 料金プラン・パッケージ比較(2〜3列) ----------
+   構造: h1 + (h2(プラン名) + p(**価格**) + ul(内容))× 2〜3。 */
+
+section.plans {
+  display: block;
+  columns: 3;
+  column-gap: 44px;
+  column-fill: auto;
+}
+
+section.plans h1 {
+  column-span: all;
+}
+
+section.plans h2 {
+  break-after: avoid;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.4em 0.8em;
+  margin: 0 0 0.4em;
+  font-size: 0.92em;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+section.plans h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.plans h2 + p {
+  text-align: center;
+  margin: 0.3em 0 0.5em;
+  font-size: 0.8em;
+  color: var(--sf-muted);
+  letter-spacing: 0.08em;
+}
+
+section.plans h2 + p strong {
+  display: block;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.9em;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--sf-text);
+}
+
+section.plans ul {
+  font-size: 0.8em;
+  list-style: none;
+  padding: 0 0.2em;
+}
+
+section.plans ul > li::marker {
+  content: none;
+}
+
+section.plans ul > li {
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.5em 0.2em;
+  margin: 0;
+}

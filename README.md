@@ -18,13 +18,15 @@ AIエージェントファーストの Marp → HTML スライド作成基盤。
 theme/
   core.css        # 全レイアウトクラス(構造のみ、色はCSS変数)
   research.css    # 研究発表スキン(配色 + experiment/math/references)
+  business.css    # ビジネススキン(配色 + kpi/plans)
 scripts/
   check-overflow.mjs  # スライドのはみ出しを機械検出
 skill/
   SKILL.md            # エージェントスキル(ワークフロー+カタログ索引)
   references/layouts.md  # レイアウト別の完全サンプル
 examples/
-  demo-research.md    # 全16レイアウトのカタログ兼検証デッキ
+  demo-research.md    # 研究スキンのカタログ兼検証デッキ(16レイアウト)
+  demo-business.md    # ビジネススキンのカタログ兼検証デッキ
 docs/
   ROADMAP.md          # 目指す姿・現状・TODO
 ```
@@ -47,12 +49,13 @@ npx marp --theme-set theme/ --html --allow-local-files --images png examples/dem
 npx marp --theme-set theme/ --html --server examples/
 ```
 
-## レイアウトカタログ(v1: 16種)
+## レイアウトカタログ(40種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `agenda` `divider` `content` `two-column` `image-right` `image-left` `image-full` `comparison` `table` `takeaway` `summary` `end` |
+| コア | `title` `agenda` `agenda-grid` `divider` `content` `two-column` `image-right` `image-left` `image-full` `comparison` `table` `takeaway` `lead` `summary` `end` `timeline` `timeline-h` `steps` `flow` `funnel` `columns` `spec` `faq` `matrix` `venn` `pyramid` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` |
 | research | `experiment` `math` `references` |
+| business | `kpi` `plans` |
 
 各レイアウトの使い方とサンプルは [skill/references/layouts.md](skill/references/layouts.md) を参照。
 

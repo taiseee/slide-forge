@@ -38,6 +38,14 @@ math: katex
 
 ---
 
+<!-- _class: lead -->
+
+# 生成画像の「良さ」を、人手に頼らず測れるか。
+
+本研究が取り組む問い
+
+---
+
 <!-- _class: content -->
 
 # 研究背景
@@ -113,6 +121,57 @@ math: katex
 
 ---
 
+<!-- _class: venn -->
+
+# 提案の位置づけ
+
+- **既存の自動評価** 大域特徴・テキスト整合性・追加学習なし
+- **人手評価** 細部の品質・高コスト・再現性に課題
+- **提案手法** 両者の橋渡し
+
+---
+
+<!-- _class: before-after -->
+
+# 評価の改善例
+
+## ベースライン
+
+![](assets/placeholder-figure.svg)
+
+## 提案手法
+
+![](assets/placeholder-chart.svg)
+
+同一プロンプトに対するスコアの説明性が向上
+
+---
+
+<!-- _class: gallery -->
+
+# 生成結果の比較
+
+![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg)
+
+左: ベースライン、右: 提案手法(細部の破綻が減少)
+
+---
+
+<!-- _class: profile -->
+
+# 発表者紹介
+
+## 発表 太郎
+
+- **所属** ◯◯大学大学院 △△研究室(M2)
+- **研究テーマ** 画像生成の自動評価
+- **経歴** ◯◯大学 工学部卒(2025)
+- **連絡先** contact@example.com
+
+![](assets/placeholder-portrait.svg)
+
+---
+
 <!-- _class: comparison -->
 
 # 既存手法との比較
@@ -175,11 +234,47 @@ $$
 
 ---
 
+<!-- _class: code -->
+
+# スコア計算の実装
+
+```python
+def slide_forge_score(image, text, patches, lam=0.6):
+    local = sum(w * sim(f(p), g(text)) for p, w in patches) / len(patches)
+    global_ = sim(f(image), g(text))
+    return lam * local + (1 - lam) * global_
+```
+
+CLIP埋め込み f, g は既存モデルを再利用し、追加学習は統合係数のみ
+
+---
+
+<!-- _class: quote -->
+
+# 先行研究の指摘
+
+> 既存の自動評価指標は大域的な整合性に偏っており、局所的な品質劣化を捉えられていない。
+
+Hessel et al., EMNLP 2021(意訳)
+
+---
+
 <!-- _class: takeaway -->
 
 # 局所特徴の導入だけで、人手評価との相関は 0.54 → 0.69 に向上する
 
 追加学習は統合層のみ、推論コストは1.2倍に収まる
+
+---
+
+<!-- _class: timeline -->
+
+# 今後の予定
+
+1. **7月** 劣化タイプ別の分析を追加
+2. **8月** 動画生成への拡張実験
+3. **9月** 国内研究会で発表
+4. **12月** 国際会議へ投稿
 
 ---
 
