@@ -62,4 +62,6 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 4. 検証ループ(ビルド → check-overflow → PNG目視)を回してから commit
 5. `skill/SKILL.md` のカタログ表と `skill/references/layouts.md` にエントリを追加
 6. スキルを再登録する(スキルはコピー方式のため)
+7. WebUI のピッカーにも反映する: `webui/lib/samples.mjs` にプレビュー用サンプル、
+   `webui/src/layout-groups.js` の該当グループにクラス名を追加(漏れると「その他」タブに出る)
 

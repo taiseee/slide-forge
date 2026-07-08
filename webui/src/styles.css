@@ -227,6 +227,103 @@ select {
   color: var(--text);
 }
 
+.toolbar-label {
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+/* ---------- レイアウトピッカー(タブ+プレビューグリッド) ---------- */
+
+.picker {
+  position: relative;
+}
+
+.picker-button {
+  font-family: var(--mono);
+  min-width: 170px;
+  text-align: left;
+}
+
+.picker-panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  width: 720px;
+  max-width: calc(100vw - 320px);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 28px rgba(56, 51, 44, 0.14);
+}
+
+.picker-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+}
+
+.picker-tab {
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 9px 14px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.picker-tab.active {
+  color: var(--accent-strong);
+  border-bottom-color: var(--accent);
+}
+
+.picker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 14px;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.picker-card {
+  border: 1px solid var(--line);
+  padding: 0 0 4px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.picker-card:hover {
+  border-color: var(--accent);
+}
+
+.picker-card.active {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.picker-thumb {
+  pointer-events: none;
+  width: 100%;
+}
+
+.picker-thumb-empty {
+  aspect-ratio: 16 / 9;
+  background: var(--panel);
+}
+
+.picker-name {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--text);
+  text-align: center;
+}
+
+.picker-name em {
+  font-style: normal;
+  color: var(--muted);
+}
+
 .hint {
   color: var(--muted);
   font-size: 11px;

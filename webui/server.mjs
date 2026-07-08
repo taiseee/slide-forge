@@ -20,6 +20,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Marp } from '@marp-team/marp-core';
 import { parseDeck, serializeDeck, slideClass } from './lib/deck.mjs';
+import { buildSampleDeck } from './lib/samples.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -138,20 +139,57 @@ app.post('/api/asset', express.raw({ type: 'image/*', limit: '50mb' }), async (r
   }
 });
 
+async function readLayoutCatalog() {
+  const skill = await readFile(path.join(ROOT, 'skill', 'SKILL.md'), 'utf8');
+  const layouts = [];
+  for (const line of skill.split('\n')) {
+    const m = line.match(/^\|\s*`([\w-]+)`\s*\|\s*(.+?)\s*\|\s*$/);
+    if (!m) continue;
+    const skin = m[2].match(/※(\w+)/);
+    layouts.push({ cls: m[1], desc: m[2].replace(/※\w+/, '').trim(), skin: skin ? skin[1] : null });
+  }
+  return layouts;
+}
+
 app.get('/api/layouts', async (_req, res) => {
   try {
-    const skill = await readFile(path.join(ROOT, 'skill', 'SKILL.md'), 'utf8');
-    const layouts = [];
-    for (const line of skill.split('\n')) {
-      const m = line.match(/^\|\s*`([\w-]+)`\s*\|\s*(.+?)\s*\|\s*$/);
-      if (!m) continue;
-      const skin = m[2].match(/※(\w+)/);
-      layouts.push({ cls: m[1], desc: m[2].replace(/※\w+/, '').trim(), skin: skin ? skin[1] : null });
-    }
-    res.json(layouts);
+    res.json(await readLayoutCatalog());
   } catch (e) {
     res.status(500).json({ error: String(e.message || e) });
   }
+});
+
+// レイアウトピッカー用: 全レイアウトのサンプルスライドをテーマ付きでレンダリング
+const previewCache = new Map(); // theme → { css, items }
+app.get('/api/layout-previews', async (req, res) => {
+  try {
+    const theme = /^[\w-]+$/.test(String(req.query.theme)) ? String(req.query.theme) : 'research';
+    if (!previewCache.has(theme)) {
+      const layouts = await readLayoutCatalog();
+      const classes = layouts.map((l) => l.cls);
+      const marp = await marpPromise;
+      const { html, css } = marp.render(buildSampleDeck(theme, classes), { htmlAsArray: true });
+      previewCache.set(theme, {
+        css,
+        items: classes.map((cls, i) => ({ cls, html: html[i] ?? '' })),
+      });
+    }
+    res.json(previewCache.get(theme));
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+// サンプル用の画像プレースホルダ
+app.get('/__ph.svg', (_req, res) => {
+  res.type('image/svg+xml').send(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280">
+      <rect width="400" height="280" fill="#eceae5"/>
+      <rect x="24" y="24" width="352" height="232" fill="none" stroke="#c9c4ba" stroke-width="2" stroke-dasharray="8 6"/>
+      <circle cx="140" cy="120" r="34" fill="#c9c4ba"/>
+      <path d="M60 220 L150 150 L210 195 L280 130 L340 220 Z" fill="#d8d4cc"/>
+    </svg>`,
+  );
 });
 
 // ---------- 静的配信 ----------

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SlideCanvas from './SlideCanvas.jsx';
+import LayoutPicker from './LayoutPicker.jsx';
 import { serializeDeck } from '../lib/deck.mjs';
 import { inlineMarkdown, locate, patchLines, patchTableCell, patchImagePath } from './patch.js';
 import { extractNotes, setNotes } from './notes.js';
@@ -44,6 +45,7 @@ export default function App() {
   const [layouts, setLayouts] = useState([]);
   const [sel, setSel] = useState(0);
   const [rendered, setRendered] = useState({ css: '', slides: [] });
+  const [previews, setPreviews] = useState(null);
   const [issues, setIssues] = useState([]);
   const [status, setStatus] = useState('loading');
   const [error, setError] = useState('');
@@ -133,6 +135,21 @@ export default function App() {
       clearTimeout(t);
     };
   }, [fullText]);
+
+  // レイアウトピッカーのプレビュー(テーマごとにサーバ側キャッシュあり)
+  const theme = useMemo(() => frontmatter.match(/^theme:\s*(\S+)/m)?.[1] ?? 'research', [frontmatter]);
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`/api/layout-previews?theme=${encodeURIComponent(theme)}`)
+      .then((r) => r.json())
+      .then((p) => {
+        if (!cancelled && p.items) setPreviews(p);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [theme]);
 
   // レンダリング反映後にクライアント側で overflow 検出
   useEffect(() => {
@@ -621,18 +638,8 @@ export default function App() {
 
         <section className="stage">
           <div className="stage-toolbar">
-            <label>
-              レイアウト
-              <select value={curCls} onChange={(e) => changeCls(e.target.value)}>
-                <option value="">(なし)</option>
-                {layouts.map((l) => (
-                  <option key={l.cls} value={l.cls}>
-                    {l.cls}
-                    {l.skin ? ` ※${l.skin}` : ''}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <span className="toolbar-label">レイアウト</span>
+            <LayoutPicker layouts={layouts} previews={previews} current={curCls} onSelect={changeCls} />
             <span className="hint">
               {layouts.find((l) => l.cls === curCls)?.desc || 'テキストをクリックすると直接編集できます'}
             </span>
