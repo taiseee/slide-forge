@@ -226,6 +226,8 @@ section.tam-sam-som ul > li::marker {
 }
 
 section.tam-sam-som ul > li {
+  /* width % に padding を含める(既定の content-box だと 100% が右にはみ出す) */
+  box-sizing: border-box;
   display: flex;
   align-items: baseline;
   gap: 1em;
@@ -292,6 +294,8 @@ section.tam-sam-som-circle ul > li::marker {
 }
 
 section.tam-sam-som-circle ul > li {
+  /* padding を width/height に含めて真円を保つ(content-box だと縦に伸びて楕円になる) */
+  box-sizing: border-box;
   position: absolute;
   left: 50%;
   bottom: 4px;
@@ -327,7 +331,11 @@ section.tam-sam-som-circle ul > li:nth-child(3) {
   width: 145px;
   height: 145px;
   z-index: 3;
-  padding-top: 1.1em;
+  /* 最内円は全体が見えるためテキストを上下中央に */
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background: var(--sf-ink);
   color: var(--sf-ink-text);
   font-size: 0.72em;
