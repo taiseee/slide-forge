@@ -7,10 +7,18 @@
   "scripts": {
     "build": "marp --theme-set theme/ --html",
     "check": "node scripts/check-overflow.mjs",
-    "preview": "marp --theme-set theme/ --html --server ."
+    "preview": "marp --theme-set theme/ --html --server .",
+    "webui": "vite build --config webui/vite.config.mjs && node webui/server.mjs"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^4.2.3",
-    "puppeteer": "^24.10.0"
+    "@marp-team/marp-core": "^4.3.1",
+    "@vitejs/plugin-react": "^4.5.0",
+    "express": "^4.21.2",
+    "puppeteer": "^24.10.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "turndown": "^7.2.4",
+    "vite": "^6.3.5"
   }
 }

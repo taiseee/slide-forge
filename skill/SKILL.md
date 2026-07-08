@@ -170,6 +170,8 @@ npx --prefix "$FORGE" marp --theme-set "$FORGE/theme/" --html --allow-local-file
 
 ### 4. 人間の確認用
 
+- 編集WebUI(Canva風。スライド上のテキストを直接編集できる):
+  `npm --prefix "$FORGE" run webui -- <file.md>` → http://127.0.0.1:5757
 - ライブプレビュー: `npx --prefix "$FORGE" marp --theme-set "$FORGE/theme/" --html --server <ディレクトリ>`
 - PDF が欲しい場合: `--pdf --allow-local-files`(ローカル画像には `--allow-local-files` 必須)
 

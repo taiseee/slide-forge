@@ -1,0 +1,337 @@
+/* slide-forge editor — DESIGN.md のエディトリアル・ミニマルに合わせる */
+
+:root {
+  --bg: #fbfaf7;
+  --text: #38332c;
+  --muted: #98907f;
+  --line: #e6e0d4;
+  --panel: #f1ece2;
+  --accent: #8a7a63;
+  --accent-strong: #55483a;
+  --bad: #9c5450;
+  --mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+}
+
+.loading {
+  padding: 3em;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2em;
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--accent-strong);
+}
+
+.filename {
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+
+.status {
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.status-saving {
+  color: var(--accent);
+}
+
+.status-error {
+  color: var(--bad);
+}
+
+.errmsg {
+  color: var(--bad);
+  font-size: 11px;
+}
+
+button {
+  font: inherit;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--accent);
+}
+
+button.active {
+  background: var(--panel);
+  border-color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ---------- layout ---------- */
+
+.main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* ---------- sidebar(サムネイル) ---------- */
+
+.sidebar {
+  width: 224px;
+  flex: none;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.sidebar-actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.thumbs {
+  list-style: none;
+  margin: 0;
+  padding: 12px;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thumb {
+  position: relative;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: grab;
+}
+
+.thumb.selected {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.thumb.bad {
+  border-color: var(--bad);
+}
+
+.thumb-canvas {
+  pointer-events: none; /* サムネイル内のクリックはカード選択として扱う */
+}
+
+.thumb-empty {
+  aspect-ratio: 16 / 9;
+  background: var(--panel);
+}
+
+.thumb .num {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--bg);
+  background: rgba(56, 51, 44, 0.72);
+  padding: 1px 5px;
+}
+
+.thumb.bad .num {
+  background: var(--bad);
+}
+
+.thumb .badge {
+  position: absolute;
+  bottom: 4px;
+  right: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--accent-strong);
+  background: rgba(241, 236, 226, 0.9);
+  padding: 1px 5px;
+}
+
+/* ---------- stage(中央) ---------- */
+
+.stage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.stage-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.stage-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+select {
+  font: inherit;
+  font-family: var(--mono);
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.stage-body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 22px;
+  background: var(--panel);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.stage-canvas {
+  width: min(100%, calc((100vh - 220px) * 16 / 9));
+  box-shadow: 0 1px 0 var(--line);
+  background: #fff;
+}
+
+.stage-empty {
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  padding: 3em;
+}
+
+/* ---------- issues ---------- */
+
+.issues {
+  border-top: 1px solid var(--bad);
+  padding: 8px 14px;
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+.issues-title {
+  color: var(--bad);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+
+.issue {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 4px 0;
+  color: var(--text);
+  font-size: 12px;
+}
+
+/* ---------- Markdown パネル(右・トグル) ---------- */
+
+.mdpanel {
+  width: 380px;
+  flex: none;
+  border-left: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.mdpanel-title {
+  padding: 10px 14px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--line);
+}
+
+textarea {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  border: none;
+  outline: none;
+  resize: none;
+  padding: 14px;
+}
+
+.slide-text {
+  flex: 1;
+  min-height: 0;
+}
+
+.frontmatter {
+  border-top: 1px solid var(--line);
+}
+
+.frontmatter summary {
+  padding: 8px 14px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+}
+
+.frontmatter textarea {
+  width: 100%;
+  height: 140px;
+  border-top: 1px solid var(--line);
+}

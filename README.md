@@ -24,6 +24,9 @@ scripts/
 skill/
   SKILL.md            # エージェントスキル(ワークフロー+カタログ索引)
   references/layouts.md  # レイアウト別の完全サンプル
+webui/
+  server.mjs          # 編集WebUIのローカルサーバ(marp-coreレンダリング+保存API)
+  src/                # Canva風エディタ(Vite + React)
 examples/
   demo-research.md    # 研究スキンのカタログ兼検証デッキ(16レイアウト)
   demo-business.md    # ビジネススキンのカタログ兼検証デッキ
@@ -65,6 +68,21 @@ npx marp --theme-set theme/ --html --server examples/
 
 `skill/SKILL.md` を Claude Code 等のスキルとして登録すると、
 「スライド作成」系の依頼で自動的にこのワークフロー(レイアウト選択→生成→検証ループ)が適用される。
+
+## 編集WebUI(人間向け)
+
+Canva 風のローカルエディタ。スライド上のテキストをクリックするとその場で書き換えられ、
+入力はリアルタイムに Markdown へ逆変換されて自動保存される。
+
+```bash
+npm run webui -- examples/demo-research.md
+# → http://127.0.0.1:5757
+```
+
+- 左: 実スライドの縮小サムネイル(クリック選択・ドラッグ並び替え・追加/複製/削除)
+- 中央: スライド直接編集(太字等の記法は保持)+ レイアウト切替ドロップダウン
+- 右(トグル): Markdown パネル(コード・数式・画像などインライン編集対象外の編集用)
+- はみ出し検出は編集のたびにブラウザ内で即時実行される
 
 ## License
 
