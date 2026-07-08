@@ -3,7 +3,7 @@
  * slide-forge research skin — 研究発表(ゼミ・学会・進捗報告)向け。
  * 配色: グレー/墨色系のモノトーン・ミニマル。
  *
- * 追加レイアウトクラス: experiment / math / references
+ * 追加レイアウトクラス: experiment / math / references / definition
  */
 
 @import 'slide-forge-core';
@@ -96,4 +96,37 @@ section.references li {
 section.references li::marker {
   color: var(--sf-muted);
   font-family: var(--sf-numeral-font);
+}
+
+/* ---------- definition: 定義・定理(用語+枠付き定義) ----------
+   構造: h1(用語) + blockquote(定義本文) + 任意の p/ul(例・補足)。 */
+
+section.definition blockquote {
+  background: var(--sf-panel);
+  border: none;
+  border-left: 4px solid var(--sf-accent-strong);
+  padding: 0.8em 1.1em;
+  margin: 0.3em 0 0.8em;
+  font-size: 0.95em;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+  color: var(--sf-text);
+}
+
+section.definition blockquote > p:first-of-type::before {
+  content: 'Definition — ';
+  font-family: var(--sf-numeral-font);
+  font-weight: 600;
+  color: var(--sf-accent-strong);
+}
+
+section.definition > p {
+  color: var(--sf-muted);
+  font-size: 0.85em;
+  margin-top: 0.6em;
+}
+
+section.definition ul {
+  font-size: 0.85em;
 }

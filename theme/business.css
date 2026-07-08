@@ -3,7 +3,7 @@
  * slide-forge business skin — ビジネス発表(提案・報告・事業説明)向け。
  * 配色: 温かみのあるグレージュ/ブラウン系のエディトリアル・ミニマル。
  *
- * 追加レイアウトクラス: kpi / plans
+ * 追加レイアウトクラス: kpi / plans / persona / tam-sam-som / case-study / journey
  */
 
 @import 'slide-forge-core';
@@ -140,4 +140,268 @@ section.plans ul > li {
   border-bottom: 1px solid var(--sf-line);
   padding: 0.5em 0.2em;
   margin: 0;
+}
+
+/* ---------- persona: ペルソナ(顔写真+属性のラベル一覧) ----------
+   構造: h1 + 写真1枚(単独の段落) + h2(名前・属性を1行) +
+   ul(各 li が「**ラベル** 内容」、ゴール・課題・利用シーン等)。 */
+
+section.persona {
+  position: relative;
+}
+
+section.persona > *:not(h1):not(p:has(> img)) {
+  margin-left: 380px;
+}
+
+section.persona p:has(> img) {
+  position: absolute;
+  left: 84px;
+  top: 190px;
+  width: 260px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+section.persona p:has(> img) img {
+  width: 260px;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid var(--sf-line);
+}
+
+section.persona h2 {
+  margin: 0.1em 0 0.6em;
+}
+
+section.persona ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.85em;
+}
+
+section.persona ul > li::marker {
+  content: none;
+}
+
+section.persona ul > li {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1em;
+  align-items: baseline;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.5em 0.2em;
+  margin: 0;
+}
+
+section.persona ul > li strong {
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- tam-sam-som: 市場規模(同心円3層) ----------
+   構造: h1 + ul(li 3つ、外側から: TAM・SAM・SOM。「**金額** ラベル」)。 */
+
+section.tam-sam-som ul {
+  flex: 1;
+  min-height: 0;
+  /* li の絶対配置はこの ul(ヘッダーと注釈の間の可変領域)基準にする */
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0.4em 0 0;
+}
+
+section.tam-sam-som ul > li::marker {
+  content: none;
+}
+
+section.tam-sam-som ul > li {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  margin: 0;
+  text-align: center;
+  line-height: 1.2;
+}
+
+section.tam-sam-som ul > li:nth-child(1) {
+  width: 430px;
+  height: 430px;
+  z-index: 1;
+  padding-top: 0.4em;
+  background: var(--sf-panel);
+  color: var(--sf-muted);
+  font-size: 0.72em;
+}
+
+section.tam-sam-som ul > li:nth-child(2) {
+  width: 280px;
+  height: 280px;
+  z-index: 2;
+  padding-top: 0.4em;
+  background: var(--sf-bg);
+  border: 1px solid var(--sf-line);
+  color: var(--sf-muted);
+  font-size: 0.75em;
+}
+
+section.tam-sam-som ul > li:nth-child(3) {
+  width: 140px;
+  height: 140px;
+  z-index: 3;
+  padding-top: 0.95em;
+  background: var(--sf-accent-strong);
+  color: var(--sf-ink-text);
+  font-size: 0.72em;
+}
+
+section.tam-sam-som ul > li strong {
+  display: block;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.5em;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.15em;
+}
+
+section.tam-sam-som > p {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.75em;
+  letter-spacing: 0.04em;
+  margin: 0.4em 0 0;
+}
+
+/* ---------- case-study: 導入事例(課題→効果+顧客の声) ----------
+   構造: h1(会社名等) + p(業種等タグ、任意) +
+   ul(li 2つ「**導入前の課題**」「**導入後の効果**」) + blockquote(顧客の声) + 任意の p(話者)。 */
+
+section.case-study > p:first-of-type {
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.14em;
+  margin: 0.1em 0 0.9em;
+}
+
+section.case-study ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 0.8em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 48px;
+}
+
+section.case-study ul > li::marker {
+  content: none;
+}
+
+section.case-study ul > li {
+  border-top: 1px solid var(--sf-line);
+  padding: 0.7em 0.2em 0;
+  margin: 0;
+  font-size: 0.8em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.case-study ul > li strong {
+  display: block;
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3em;
+}
+
+section.case-study blockquote {
+  border: none;
+  background: var(--sf-panel);
+  border-left: 3px solid var(--sf-accent-strong);
+  padding: 0.6em 1em;
+  margin: 0.4em 0 0;
+  font-size: 0.85em;
+  line-height: 1.7;
+  color: var(--sf-text);
+}
+
+section.case-study blockquote + p {
+  color: var(--sf-muted);
+  font-size: 0.75em;
+  letter-spacing: 0.08em;
+  margin: 0.4em 0 0 1.2em;
+}
+
+/* ---------- journey: カスタマージャーニー(ステージ×タッチポイント/感情) ----------
+   構造: h1 + ol(各 li が「**ステージ名** タッチポイント *感情ラベル*」、3〜5段)。 */
+
+section.journey ol {
+  counter-reset: journey;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.2em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 36px;
+}
+
+section.journey ol > li::marker {
+  content: none;
+}
+
+section.journey ol > li {
+  counter-increment: journey;
+  position: relative;
+  border-top: 2px solid var(--sf-accent);
+  padding: 0.9em 0.15em 0;
+  margin: 0;
+  font-size: 0.72em;
+  line-height: 1.55;
+  color: var(--sf-muted);
+}
+
+section.journey ol > li::before {
+  content: counter(journey);
+  position: absolute;
+  top: -0.58em;
+  left: 0.15em;
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: 50%;
+  background: var(--sf-bg);
+  border: 1px solid var(--sf-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.7em;
+  font-weight: 500;
+  color: var(--sf-accent-strong);
+}
+
+section.journey ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 1.15em;
+  margin: 0.2em 0 0.3em;
+}
+
+section.journey ol > li em {
+  display: block;
+  font-style: normal;
+  color: var(--sf-accent-strong);
+  font-size: 0.92em;
+  letter-spacing: 0.06em;
+  margin-top: 0.5em;
+  padding-top: 0.4em;
+  border-top: 1px solid var(--sf-line);
 }

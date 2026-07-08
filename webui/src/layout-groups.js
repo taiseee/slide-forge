@@ -10,23 +10,23 @@ export const LAYOUT_GROUPS = [
   },
   {
     name: '本文',
-    classes: ['content', 'content-lead', 'two-column', 'columns', 'spec', 'faq', 'checklist', 'quote', 'code', 'math'],
+    classes: ['content', 'content-lead', 'two-column', 'columns', 'cards', 'spec', 'faq', 'checklist', 'quote', 'code', 'math', 'definition'],
   },
   {
     name: '画像',
-    classes: ['image-right', 'image-left', 'image-top', 'image-bottom', 'image-full', 'annotated', 'gallery', 'before-after', 'logos', 'profile', 'team'],
+    classes: ['image-right', 'image-left', 'image-top', 'image-bottom', 'image-full', 'annotated', 'gallery', 'before-after', 'logos', 'profile', 'team', 'persona'],
   },
   {
     name: '比較・分類',
-    classes: ['comparison', 'comparison-3', 'pros-cons', 'table', 'matrix', 'matrix-3', 'venn', 'ranking', 'plans'],
+    classes: ['comparison', 'comparison-3', 'pros-cons', 'transition', 'table', 'matrix', 'matrix-3', 'venn', 'ranking', 'plans', 'scorecard'],
   },
   {
     name: 'プロセス・構造',
-    classes: ['steps', 'steps-v', 'flow', 'cycle', 'timeline', 'timeline-h', 'gantt', 'roadmap', 'funnel', 'pyramid', 'layers', 'org'],
+    classes: ['steps', 'steps-v', 'flow', 'cycle', 'timeline', 'timeline-h', 'gantt', 'roadmap', 'funnel', 'pyramid', 'layers', 'org', 'journey', 'changelog'],
   },
   {
     name: '数値・結果',
-    classes: ['stat', 'kpi', 'experiment'],
+    classes: ['stat', 'kpi', 'experiment', 'tam-sam-som', 'case-study', 'contact'],
   },
 ];
 

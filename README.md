@@ -53,13 +53,13 @@ npx marp --theme-set theme/ --html --allow-local-files --images png examples/dem
 npx marp --theme-set theme/ --html --server examples/
 ```
 
-## レイアウトカタログ(56種)
+## レイアウトカタログ(66種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `roadmap` `columns` `spec` `faq` `matrix` `matrix-3` `venn` `pyramid` `layers` `ranking` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` |
-| research | `experiment` `math` `references` |
-| business | `kpi` `plans` |
+| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `roadmap` `columns` `spec` `faq` `matrix` `matrix-3` `venn` `pyramid` `layers` `ranking` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` `cards` `scorecard` `transition` `changelog` `contact` |
+| research | `experiment` `math` `references` `definition` |
+| business | `kpi` `plans` `persona` `tam-sam-som` `case-study` `journey` |
 
 各レイアウトの使い方とサンプルは [skill/references/layouts.md](skill/references/layouts.md) を、
 色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) を参照。

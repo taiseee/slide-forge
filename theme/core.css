@@ -16,7 +16,8 @@
  *   lead / funnel / flow / agenda-grid / pyramid / venn / before-after / logos /
  *   gantt / org / title-visual / exec-summary / comparison-3 / pros-cons /
  *   content-lead / steps-v / cycle / image-top / image-bottom / ranking /
- *   roadmap / layers / annotated / matrix-3
+ *   roadmap / layers / annotated / matrix-3 / cards / scorecard / transition /
+ *   changelog / contact
  * デッキ単位のオプション: 進捗バー(--sf-progress、末尾の progress 節を参照)
  */
 
@@ -2289,4 +2290,242 @@ section.matrix-3 table td:not(:first-child) {
 
 section.matrix-3 table td:not(:first-child) strong {
   color: var(--sf-accent-strong);
+}
+
+/* ---------- cards: カード配置(アイコン一覧・機能一覧、4〜8項目) ----------
+   構造: h1 + ul(各 li が「**見出し** 説明」、4〜8項目)。columns と異なり
+   複数行に折り返すグリッド(枠・影は使わずヘアラインのみ)。 */
+
+section.cards ul {
+  counter-reset: cards;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 32px;
+  align-content: start;
+}
+
+section.cards ul > li::marker {
+  content: none;
+}
+
+section.cards ul > li {
+  counter-increment: cards;
+  position: relative;
+  border-top: 1px solid var(--sf-line);
+  padding: 1.3em 0.15em 0;
+  margin: 0;
+  font-size: 0.72em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.cards ul > li::before {
+  content: counter(cards);
+  position: absolute;
+  top: -0.62em;
+  left: 0.15em;
+  width: 1.15em;
+  height: 1.15em;
+  background: var(--sf-bg);
+  border: 1px solid var(--sf-accent);
+  font-family: var(--sf-numeral-font);
+  font-size: 0.7em;
+  font-weight: 500;
+  color: var(--sf-accent-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.cards ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: 1.15em;
+  margin-bottom: 0.35em;
+}
+
+/* ---------- scorecard: スコアカード(評価基準ごとの数値評価) ----------
+   構造: h1 + ul(各 li が「**基準名** 説明 *スコア*」)。em がスコア(右寄せ大きめ数字)。 */
+
+section.scorecard ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.6em;
+}
+
+section.scorecard ul > li::marker {
+  content: none;
+}
+
+section.scorecard ul > li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5em;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.65em 0.3em;
+  margin: 0;
+  font-size: 0.85em;
+  color: var(--sf-muted);
+}
+
+section.scorecard ul > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin-right: 0.6em;
+}
+
+section.scorecard ul > li em {
+  flex: none;
+  font-style: normal;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.7em;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--sf-accent-strong);
+}
+
+/* ---------- transition: Before・After / As-Is・To-Be(文章版) ----------
+   構造: h1 + h2(前) + ul + h2(後) + ul。中央に方向を示す矢印を1つ表示する。
+   画像で比較したい場合は before-after を使う。 */
+
+section.transition {
+  display: block;
+  columns: 2;
+  column-gap: 64px;
+  column-fill: auto;
+  position: relative;
+}
+
+section.transition h1 {
+  column-span: all;
+}
+
+section.transition h2 {
+  break-after: avoid;
+  color: var(--sf-muted);
+  font-size: 0.92em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.5em;
+}
+
+section.transition h2:nth-of-type(2) {
+  break-before: column;
+  margin-top: 0;
+}
+
+section.transition ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.85em;
+}
+
+section.transition ul > li {
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.5em 0.2em;
+  margin: 0;
+  color: var(--sf-text);
+}
+
+/* 矢印は section::after(ページ番号が使用)を避け、2つ目の h2 に付ける。
+   本文の行数に関わらずヘッダー行の高さに固定するため top は px 指定。 */
+section.transition h2:nth-of-type(2)::before {
+  content: '→';
+  position: absolute;
+  left: 50%;
+  top: 168px;
+  transform: translate(-50%, -50%);
+  background: var(--sf-bg);
+  padding: 0 0.2em;
+  font-family: var(--sf-numeral-font);
+  font-size: 2.2em;
+  font-weight: 300;
+  color: var(--sf-accent);
+}
+
+/* ---------- changelog: 変更履歴・更新履歴(バージョン+変更点) ----------
+   構造: h1 + (h2(バージョン+日付) + ul(変更点))× 2〜4。新しい版から書く。 */
+
+section.changelog h2 {
+  margin: 1.1em 0 0.4em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--sf-line);
+  font-family: var(--sf-numeral-font);
+  font-size: 0.85em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sf-accent-strong);
+}
+
+section.changelog h2:first-of-type {
+  margin-top: 0.2em;
+}
+
+section.changelog ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0 0 0.3em;
+}
+
+section.changelog ul > li {
+  position: relative;
+  padding: 0.15em 0 0.15em 1.1em;
+  margin: 0;
+  font-size: 0.8em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.changelog ul > li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--sf-accent);
+}
+
+/* ---------- contact: 連絡先(終了スライドの発展形) ----------
+   構造: h1 + ul(各 li が「**ラベル** 値」)。中央寄せ。 */
+
+section.contact {
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+}
+
+section.contact h1 {
+  font-size: 1.3em;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0 0 0.3em;
+}
+
+section.contact ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1em;
+  display: inline-block;
+  text-align: left;
+}
+
+section.contact ul > li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1em;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.45em 0.2em;
+  margin: 0;
+  font-size: 0.85em;
+}
+
+section.contact ul > li strong {
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
