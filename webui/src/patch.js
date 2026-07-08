@@ -69,6 +69,23 @@ export function patchLines(raw, start, count, newInline) {
 }
 
 /**
+ * ブロック内 imgIdx 番目の画像記法 ![alt](path) の path だけを差し替える。
+ * alt や bg 指定(![bg right:45%](...))はそのまま保持される。
+ */
+export function patchImagePath(raw, start, count, imgIdx, newPath) {
+  const lines = raw.split('\n');
+  const seg = lines.slice(start, start + count).join('\n');
+  let i = -1;
+  const out = seg.replace(/(!\[[^\]]*\]\()([^)]*)(\))/g, (m, open, _p, close) => {
+    i += 1;
+    return i === imgIdx ? open + newPath + close : m;
+  });
+  if (i < imgIdx) return raw; // 見つからなければ何もしない
+  lines.splice(start, count, ...out.split('\n'));
+  return lines.join('\n');
+}
+
+/**
  * 表セル(th/td)の置換: 行はテーブルの1行("| a | b | c |")なので、
  * セル位置 cellIdx の中身だけを差し替える。
  */

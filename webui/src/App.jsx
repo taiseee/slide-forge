@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SlideCanvas from './SlideCanvas.jsx';
 import { serializeDeck } from '../lib/deck.mjs';
-import { inlineMarkdown, locate, patchLines, patchTableCell } from './patch.js';
+import { inlineMarkdown, locate, patchLines, patchTableCell, patchImagePath } from './patch.js';
+import { extractNotes, setNotes } from './notes.js';
 import { checkRoots } from './overflow.js';
 
 const CLASS_RE = /<!--\s*_class:\s*([^>]*?)\s*-->/;
@@ -150,37 +151,43 @@ export default function App() {
 
   // ---------- インライン編集 ----------
 
-  const commitEdit = useCallback(() => {
-    const ed = editingRef.current;
-    if (!ed || ed.cancelled) return;
-    const text = inlineMarkdown(ed.el);
-    setSlides((prev) =>
-      prev.map((s, i) => {
-        if (i !== ed.slideIdx) return s;
-        if (ed.cellIdx != null) return { ...s, raw: patchTableCell(s.raw, ed.start, ed.cellIdx, text) };
-        const { raw, count } = patchLines(s.raw, ed.start, ed.count, text);
-        ed.count = count;
-        return { ...s, raw };
-      }),
-    );
-    markDirty();
-  }, [markDirty]);
+  const commitEdit = useCallback(
+    (ed) => {
+      if (!ed || ed.cancelled) return;
+      const text = inlineMarkdown(ed.el);
+      setSlides((prev) =>
+        prev.map((s, i) => {
+          if (i !== ed.slideIdx) return s;
+          if (ed.cellIdx != null) return { ...s, raw: patchTableCell(s.raw, ed.start, ed.cellIdx, text) };
+          const { raw, count } = patchLines(s.raw, ed.start, ed.count, text);
+          ed.count = count;
+          return { ...s, raw };
+        }),
+      );
+      markDirty();
+    },
+    [markDirty],
+  );
 
-  const finishEdit = useCallback(() => {
-    const ed = editingRef.current;
-    if (!ed) return;
-    clearTimeout(editTimer.current);
-    if (!ed.cancelled) commitEdit();
-    ed.el.removeAttribute('contenteditable');
-    editingRef.current = null;
-    setEditing(false); // 凍結解除 → 次のレンダリングで表示を正規化
-  }, [commitEdit]);
+  // 編集セッションを閉じる。unfreeze=false は「別ブロックへ移る」用(凍結を保つ)
+  const cleanupEdit = useCallback(
+    (ed, unfreeze) => {
+      clearTimeout(editTimer.current);
+      ed.el.removeEventListener('input', ed.onInput);
+      ed.el.removeEventListener('keydown', ed.onKey);
+      ed.el.removeEventListener('blur', ed.onBlur);
+      if (!ed.cancelled) commitEdit(ed);
+      ed.el.removeAttribute('contenteditable');
+      if (editingRef.current === ed) editingRef.current = null;
+      if (unfreeze) setEditing(false); // 凍結解除 → 次のレンダリングで表示を正規化
+    },
+    [commitEdit],
+  );
 
   const startEdit = useCallback(
-    (el, lineAttr, ev) => {
+    (el, lineAttr) => {
       const { slides: s, frontmatter: fm } = stateRef.current;
-      const [g0] = lineAttr.split('-').map(Number);
-      const g1 = Number(lineAttr.split('-')[1]);
+      const [g0, g1] = lineAttr.split('-').map(Number);
       const loc = locate(fm, s.map((x) => x.raw), g0);
       if (!loc) return;
       let cellIdx = null;
@@ -197,27 +204,12 @@ export default function App() {
         snapshotHtml: el.innerHTML,
         cancelled: false,
       };
-      editingRef.current = ed;
-      setEditing(true);
-      el.setAttribute('contenteditable', 'true');
-      el.focus();
-      // クリック位置にカーソルを置く
-      try {
-        const range = document.caretRangeFromPoint(ev.clientX, ev.clientY);
-        if (range) {
-          const selArea = (el.getRootNode().getSelection?.() ?? window.getSelection());
-          selArea.removeAllRanges();
-          selArea.addRange(range);
-        }
-      } catch {
-        /* 位置指定に失敗したら先頭カーソルのまま */
-      }
-      const onInput = () => {
+      ed.onInput = () => {
         setStatus('dirty');
         clearTimeout(editTimer.current);
-        editTimer.current = setTimeout(commitEdit, 500);
+        editTimer.current = setTimeout(() => commitEdit(ed), 500);
       };
-      const onKey = (e) => {
+      ed.onKey = (e) => {
         if (e.key === 'Escape') {
           ed.cancelled = true;
           clearTimeout(editTimer.current);
@@ -230,35 +222,124 @@ export default function App() {
           el.blur();
         }
       };
-      const onBlur = () => {
-        el.removeEventListener('input', onInput);
-        el.removeEventListener('keydown', onKey);
-        finishEdit();
-      };
-      el.addEventListener('input', onInput);
-      el.addEventListener('keydown', onKey);
-      el.addEventListener('blur', onBlur, { once: true });
+      ed.onBlur = () => cleanupEdit(ed, true);
+      editingRef.current = ed;
+      setEditing(true);
+      // mousedown 中に編集可能へ切り替える → ブラウザが1クリック目でクリック位置にカーソルを置く
+      el.setAttribute('contenteditable', 'true');
+      el.addEventListener('input', ed.onInput);
+      el.addEventListener('keydown', ed.onKey);
+      el.addEventListener('blur', ed.onBlur);
+      // 万一フォーカスが移らなかった場合の保険(通常はクリックの既定動作で移る)
+      requestAnimationFrame(() => {
+        const root = el.getRootNode();
+        if (root.activeElement !== el) el.focus();
+      });
     },
-    [commitEdit, finishEdit, markDirty],
+    [commitEdit, cleanupEdit, markDirty],
   );
 
-  const onCanvasClick = useCallback(
+  // ---------- 画像差し替え(クリック→ファイル選択 / ドラッグ&ドロップ) ----------
+
+  const fileRef = useRef(null);
+  const pendingImageRef = useRef(null);
+
+  // クリック(ドロップ)された img を「どのスライドの何番目の画像か」に解決する
+  const resolveImageTarget = useCallback((img) => {
+    const block = img.closest('[data-source-line]');
+    if (!block || block.tagName === 'SECTION') return null;
+    const { slides: s, frontmatter: fm } = stateRef.current;
+    const [g0, g1] = block.getAttribute('data-source-line').split('-').map(Number);
+    const loc = locate(fm, s.map((x) => x.raw), g0);
+    if (!loc) return null;
+    return {
+      slideIdx: loc.slideIdx,
+      start: loc.localLine,
+      count: Math.max(1, g1 - g0),
+      imgIdx: [...block.querySelectorAll('img')].indexOf(img),
+    };
+  }, []);
+
+  const uploadAndReplace = useCallback(
+    async (file, target) => {
+      if (!file || !file.type.startsWith('image/') || !target) return;
+      setStatus('saving');
+      try {
+        const res = await fetch(`/api/asset?name=${encodeURIComponent(file.name)}`, {
+          method: 'POST',
+          headers: { 'content-type': file.type },
+          body: file,
+        }).then((r) => r.json());
+        if (!res.path) throw new Error(res.error || 'upload failed');
+        update((prev) =>
+          prev.map((s, i) =>
+            i === target.slideIdx
+              ? { ...s, raw: patchImagePath(s.raw, target.start, target.count, target.imgIdx, res.path) }
+              : s,
+          ),
+        );
+      } catch (e) {
+        setStatus('error');
+        setError(String(e.message || e));
+      }
+    },
+    [update],
+  );
+
+  const onFilePicked = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    uploadAndReplace(file, pendingImageRef.current);
+    pendingImageRef.current = null;
+  };
+
+  const onCanvasDrop = useCallback(
     (e) => {
-      if (editingRef.current) return; // 編集中の再クリックはブラウザに任せる
+      e.preventDefault();
+      const file = e.dataTransfer?.files?.[0];
+      if (!file || !file.type.startsWith('image/')) return;
+      // img の上に落とせばその画像、そうでなければスライド内の唯一の画像を対象にする
+      let img = e.nativeEvent.composedPath().find((n) => n.tagName === 'IMG');
+      if (!img) {
+        const host = e.currentTarget;
+        const imgs = host.shadowRoot?.querySelectorAll('section img') ?? [];
+        if (imgs.length === 1) img = imgs[0];
+      }
+      if (!img) return;
+      uploadAndReplace(file, resolveImageTarget(img));
+    },
+    [uploadAndReplace, resolveImageTarget],
+  );
+
+  const onCanvasMouseDown = useCallback(
+    (e) => {
       const target = e.nativeEvent.composedPath()[0];
       let el = target.nodeType === 3 ? target.parentElement : target;
       if (!(el instanceof Element)) return;
+      if (el.tagName === 'IMG') {
+        // 画像クリック → ファイル選択で差し替え
+        e.preventDefault();
+        const t = resolveImageTarget(el);
+        if (t) {
+          pendingImageRef.current = t;
+          fileRef.current?.click();
+        }
+        return;
+      }
       el = el.closest('h1, h2, h3, h4, h5, h6, p, li, th, td, figcaption');
-      if (!el) return;
+      const cur = editingRef.current;
+      if (el && cur && cur.el === el) return; // 編集中ブロック内のカーソル移動はブラウザに任せる
+      if (!el) return; // ブロック外 → 編集中なら blur がセッションを閉じる
       if (el.closest('pre') || el.closest('.katex') || hasBlockChildren(el)) {
         setMdPanel(true); // インライン編集の対象外 → Markdownパネルで編集
         return;
       }
       const lineEl = el.hasAttribute('data-source-line') ? el : el.closest('[data-source-line]');
       if (!lineEl || lineEl.tagName === 'SECTION') return;
-      startEdit(el, lineEl.getAttribute('data-source-line'), e);
+      if (cur) cleanupEdit(cur, false); // 凍結を保ったまま別ブロックの編集へ移る
+      startEdit(el, lineEl.getAttribute('data-source-line'));
     },
-    [startEdit],
+    [startEdit, cleanupEdit],
   );
 
   // ---------- スライド操作(追加・複製・削除・並び替え) ----------
@@ -392,11 +473,26 @@ export default function App() {
                 css={rendered.css}
                 frozen={editing}
                 className="stage-canvas"
-                onClick={onCanvasClick}
+                onMouseDown={onCanvasMouseDown}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={onCanvasDrop}
               />
             ) : (
               <div className="stage-empty">レンダリング中…</div>
             )}
+            <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={onFilePicked} />
+          </div>
+          <div className="notes">
+            <span className="notes-label">ノート</span>
+            <textarea
+              className="notes-text"
+              placeholder="発表者ノートを追加(スライドには表示されず、Markdown のコメントとして保存されます)"
+              value={extractNotes(cur.raw)}
+              onChange={(e) =>
+                update((prev) => prev.map((s, i) => (i === sel ? { ...s, raw: setNotes(s.raw, e.target.value) } : s)))
+              }
+              spellCheck={false}
+            />
           </div>
           {issues.length > 0 && (
             <div className="issues">

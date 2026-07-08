@@ -9,12 +9,13 @@
  * - PUT  /api/deck     デッキを保存(書き込みのみ。検証はクライアント側で行う)
  * - POST /api/render   Markdown全文 → marp-core でスライド別HTML+CSS
  *                      (各ブロック要素に data-source-line="開始-終了" を注入)
+ * - POST /api/asset    画像を md と同じディレクトリの assets/ に保存(?name=元ファイル名)
  * - GET  /api/layouts  レイアウトカタログ(skill/SKILL.md の表をパース)
  * - /                  webui/dist と md のあるディレクトリ(相対パス画像用)を配信
  */
 
 import express from 'express';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Marp } from '@marp-team/marp-core';
@@ -104,6 +105,34 @@ app.post('/api/render', async (req, res) => {
     const marp = await marpPromise;
     const { html, css } = marp.render(markdown, { htmlAsArray: true });
     res.json({ css, slides: html });
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+app.post('/api/asset', express.raw({ type: 'image/*', limit: '50mb' }), async (req, res) => {
+  try {
+    if (!Buffer.isBuffer(req.body) || req.body.length === 0) throw new Error('画像データが空です');
+    // ファイル名はベース名だけを使い、記号を落とす(パストラバーサル防止)
+    const original = path.basename(String(req.query.name || 'image.png'));
+    const ext = (path.extname(original) || '.png').toLowerCase();
+    const stem = original.slice(0, original.length - path.extname(original).length)
+      .replace(/[^\w.-]+/g, '_')
+      .slice(0, 60) || 'image';
+    const dir = path.join(MD_DIR, 'assets');
+    await mkdir(dir, { recursive: true });
+    // 既存ファイルは上書きせず連番を振る
+    let name = `${stem}${ext}`;
+    for (let i = 1; ; i += 1) {
+      try {
+        await access(path.join(dir, name));
+        name = `${stem}-${i}${ext}`;
+      } catch {
+        break;
+      }
+    }
+    await writeFile(path.join(dir, name), req.body);
+    res.json({ path: `assets/${name}` });
   } catch (e) {
     res.status(500).json({ error: String(e.message || e) });
   }

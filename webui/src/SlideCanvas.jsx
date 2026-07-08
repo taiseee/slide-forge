@@ -6,7 +6,12 @@ const INNER_CSS = `
 .marpit { margin: 0; }
 .marpit svg[data-marpit-svg] { display: block; width: 100%; height: auto; }
 section [data-source-line]:not(section) { cursor: text; }
-section img, section pre, section .katex { cursor: default; }
+section pre, section .katex { cursor: default; }
+section img { cursor: pointer; }
+section img:hover {
+  outline: 2px dashed rgba(138, 122, 99, 0.6);
+  outline-offset: 3px;
+}
 [contenteditable="true"] {
   outline: 2px solid rgba(138, 122, 99, 0.55);
   outline-offset: 2px;
@@ -18,7 +23,17 @@ section img, section pre, section .katex { cursor: default; }
  * marp-core が返した1スライド分の HTML+CSS を shadow DOM に描画する。
  * frozen=true の間は描画を更新しない(インライン編集中のカーソル保持用)。
  */
-export default function SlideCanvas({ html, css, frozen = false, onRoot, className, onClick }) {
+export default function SlideCanvas({
+  html,
+  css,
+  frozen = false,
+  onRoot,
+  className,
+  onClick,
+  onMouseDown,
+  onDragOver,
+  onDrop,
+}) {
   const hostRef = useRef(null);
   const frozenRef = useRef(frozen);
   frozenRef.current = frozen;
@@ -32,5 +47,14 @@ export default function SlideCanvas({ html, css, frozen = false, onRoot, classNa
     onRoot?.(root);
   }, [html, css, frozen]);
 
-  return <div ref={hostRef} className={className} onClick={onClick} />;
+  return (
+    <div
+      ref={hostRef}
+      className={className}
+      onClick={onClick}
+      onMouseDown={onMouseDown}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+    />
+  );
 }
