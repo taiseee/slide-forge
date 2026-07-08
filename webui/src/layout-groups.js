@@ -26,7 +26,7 @@ export const LAYOUT_GROUPS = [
   },
   {
     name: '数値・結果',
-    classes: ['stat', 'kpi', 'experiment', 'tam-sam-som', 'case-study', 'contact'],
+    classes: ['stat', 'kpi', 'experiment', 'tam-sam-som', 'tam-sam-som-circle', 'case-study', 'contact'],
   },
 ];
 

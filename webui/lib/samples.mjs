@@ -89,6 +89,7 @@ export const SAMPLES = {
     '# 用語名\n\n> ここに用語の定義文を書く。\n\n補足や例をここに',
   persona: `# ペルソナ: 氏名\n\n![](${PH})\n\n## 氏名 — 属性\n\n- **ゴール** 一言\n- **課題** 一言`,
   'tam-sam-som': '# 見出し\n\n- **¥1,200億** TAM\n- **¥300億** SAM\n- **¥40億** SOM',
+  'tam-sam-som-circle': '# 見出し\n\n- **¥1,200億** TAM\n- **¥300億** SAM\n- **¥40億** SOM',
   'case-study':
     '# 導入事例: A社\n\n- **導入前の課題** 一言\n- **導入後の効果** 一言\n\n> 顧客の声をここに。',
   journey:

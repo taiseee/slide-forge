@@ -98,33 +98,43 @@ section.references li::marker {
   font-family: var(--sf-numeral-font);
 }
 
-/* ---------- definition: 定義・定理(用語+枠付き定義) ----------
-   構造: h1(用語) + blockquote(定義本文) + 任意の p/ul(例・補足)。 */
+/* ---------- definition: 定義・定理(用語+論文調のヘアライン枠) ----------
+   構造: h1(用語) + blockquote(定義本文) + 任意の p/ul(例・補足)。
+   パネル塗りではなくヘアライン枠+ボーダー上のラベルで学術文書の体裁に寄せる。 */
 
 section.definition blockquote {
-  background: var(--sf-panel);
-  border: none;
-  border-left: 4px solid var(--sf-accent-strong);
-  padding: 0.8em 1.1em;
-  margin: 0.3em 0 0.8em;
-  font-size: 0.95em;
+  position: relative;
+  background: none;
+  border: 1px solid var(--sf-line);
+  border-left: 3px solid var(--sf-accent-strong);
+  padding: 1.1em 1.3em 1em;
+  margin: 1.2em 0 0.8em;
+  font-size: 1em;
   font-weight: 400;
-  line-height: 1.8;
-  letter-spacing: 0.03em;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
   color: var(--sf-text);
 }
 
-section.definition blockquote > p:first-of-type::before {
-  content: 'Definition — ';
+section.definition blockquote::before {
+  content: 'DEFINITION';
+  position: absolute;
+  top: -0.8em;
+  left: 1em;
+  background: var(--sf-bg);
+  padding: 0 0.6em;
   font-family: var(--sf-numeral-font);
+  font-size: 0.55em;
   font-weight: 600;
+  letter-spacing: 0.26em;
   color: var(--sf-accent-strong);
 }
 
 section.definition > p {
   color: var(--sf-muted);
-  font-size: 0.85em;
+  font-size: 0.82em;
   margin-top: 0.6em;
+  padding-left: 0.2em;
 }
 
 section.definition ul {

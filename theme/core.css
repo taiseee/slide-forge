@@ -2294,16 +2294,16 @@ section.matrix-3 table td:not(:first-child) strong {
 
 /* ---------- cards: カード配置(アイコン一覧・機能一覧、4〜8項目) ----------
    構造: h1 + ul(各 li が「**見出し** 説明」、4〜8項目)。columns と異なり
-   複数行に折り返すグリッド(枠・影は使わずヘアラインのみ)。 */
+   複数行に折り返す3列グリッド。項目は順序を持たないため番号は付けず、
+   アクセントダッシュで区切る。 */
 
 section.cards ul {
-  counter-reset: cards;
   list-style: none;
   padding-left: 0;
-  margin-top: 1em;
+  margin-top: 1.2em;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 60px;
   align-content: start;
 }
 
@@ -2312,50 +2312,39 @@ section.cards ul > li::marker {
 }
 
 section.cards ul > li {
-  counter-increment: cards;
-  position: relative;
-  border-top: 1px solid var(--sf-line);
-  padding: 1.3em 0.15em 0;
   margin: 0;
-  font-size: 0.72em;
-  line-height: 1.6;
+  padding: 0;
+  font-size: 0.78em;
+  line-height: 1.65;
   color: var(--sf-muted);
 }
 
 section.cards ul > li::before {
-  content: counter(cards);
-  position: absolute;
-  top: -0.62em;
-  left: 0.15em;
-  width: 1.15em;
-  height: 1.15em;
-  background: var(--sf-bg);
-  border: 1px solid var(--sf-accent);
-  font-family: var(--sf-numeral-font);
-  font-size: 0.7em;
-  font-weight: 500;
-  color: var(--sf-accent-strong);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  content: '';
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: var(--sf-accent);
+  margin-bottom: 0.9em;
 }
 
 section.cards ul > li strong {
   display: block;
   color: var(--sf-text);
   font-weight: 600;
-  letter-spacing: 0.06em;
-  font-size: 1.15em;
+  letter-spacing: 0.08em;
+  font-size: 1.12em;
   margin-bottom: 0.35em;
 }
 
 /* ---------- scorecard: スコアカード(評価基準ごとの数値評価) ----------
-   構造: h1 + ul(各 li が「**基準名** 説明 *スコア*」)。em がスコア(右寄せ大きめ数字)。 */
+   構造: h1 + ul(各 li が「**基準名** 説明 *スコア*」)。
+   em がスコアで、行の左端に大きく置かれる(kpi の行版)。 */
 
 section.scorecard ul {
   list-style: none;
   padding-left: 0;
-  margin-top: 0.6em;
+  margin-top: 0.7em;
 }
 
 section.scorecard ul > li::marker {
@@ -2365,13 +2354,25 @@ section.scorecard ul > li::marker {
 section.scorecard ul > li {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1.5em;
+  gap: 1.4em;
   border-bottom: 1px solid var(--sf-line);
-  padding: 0.65em 0.3em;
+  padding: 0.5em 0.2em;
   margin: 0;
   font-size: 0.85em;
   color: var(--sf-muted);
+}
+
+section.scorecard ul > li em {
+  order: -1;
+  flex: none;
+  width: 140px;
+  font-style: normal;
+  font-family: var(--sf-numeral-font);
+  font-size: 2.1em;
+  font-weight: 200;
+  letter-spacing: 0.02em;
+  color: var(--sf-accent-strong);
+  line-height: 1.2;
 }
 
 section.scorecard ul > li strong {
@@ -2381,26 +2382,16 @@ section.scorecard ul > li strong {
   margin-right: 0.6em;
 }
 
-section.scorecard ul > li em {
-  flex: none;
-  font-style: normal;
-  font-family: var(--sf-numeral-font);
-  font-size: 1.7em;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--sf-accent-strong);
-}
-
 /* ---------- transition: Before・After / As-Is・To-Be(文章版) ----------
-   構造: h1 + h2(前) + ul + h2(後) + ul。中央に方向を示す矢印を1つ表示する。
+   構造: h1 + h2(前) + ul + h2(後) + ul。矢印は After 見出しの接頭辞として
+   表示し(絶対配置は使わない)、After 側の項目を薄い帯で「到達点」として強調する。
    画像で比較したい場合は before-after を使う。 */
 
 section.transition {
   display: block;
   columns: 2;
-  column-gap: 64px;
+  column-gap: 56px;
   column-fill: auto;
-  position: relative;
 }
 
 section.transition h1 {
@@ -2413,12 +2404,21 @@ section.transition h2 {
   font-size: 0.92em;
   font-weight: 500;
   letter-spacing: 0.14em;
-  margin: 0 0 0.5em;
+  margin: 0 0 0.7em;
 }
 
 section.transition h2:nth-of-type(2) {
   break-before: column;
   margin-top: 0;
+  color: var(--sf-accent-strong);
+}
+
+section.transition h2:nth-of-type(2)::before {
+  content: '→';
+  font-family: var(--sf-numeral-font);
+  font-weight: 300;
+  color: var(--sf-accent);
+  margin-right: 0.5em;
 }
 
 section.transition ul {
@@ -2431,47 +2431,65 @@ section.transition ul > li {
   border-bottom: 1px solid var(--sf-line);
   padding: 0.5em 0.2em;
   margin: 0;
+  color: var(--sf-muted);
+}
+
+section.transition h2:nth-of-type(2) ~ ul > li {
+  background: var(--sf-panel);
+  border-bottom: none;
+  margin-bottom: 6px;
+  padding: 0.5em 0.9em;
   color: var(--sf-text);
 }
 
-/* 矢印は section::after(ページ番号が使用)を避け、2つ目の h2 に付ける。
-   本文の行数に関わらずヘッダー行の高さに固定するため top は px 指定。 */
-section.transition h2:nth-of-type(2)::before {
-  content: '→';
-  position: absolute;
-  left: 50%;
-  top: 168px;
-  transform: translate(-50%, -50%);
-  background: var(--sf-bg);
-  padding: 0 0.2em;
-  font-family: var(--sf-numeral-font);
-  font-size: 2.2em;
-  font-weight: 300;
-  color: var(--sf-accent);
+section.transition h2:nth-of-type(2) ~ ul > li::marker {
+  content: none;
 }
 
-/* ---------- changelog: 変更履歴・更新履歴(バージョン+変更点) ----------
-   構造: h1 + (h2(バージョン+日付) + ul(変更点))× 2〜4。新しい版から書く。 */
+/* ---------- changelog: 変更履歴・更新履歴(縦レール+ノード) ----------
+   構造: h1 + (h2(バージョン+日付) + ul(変更点))× 2〜4。新しい版から書く。
+   timeline と同じ縦レールの系譜。h2 と ul の両方に border-left を張り、
+   マージンを 0 にしてレールを連続させる。 */
+
+section.changelog h2,
+section.changelog ul {
+  border-left: 1px solid var(--sf-line);
+  margin: 0 0 0 8px;
+  padding-left: 2em;
+}
 
 section.changelog h2 {
-  margin: 1.1em 0 0.4em;
-  padding-bottom: 0.3em;
-  border-bottom: 1px solid var(--sf-line);
+  position: relative;
+  padding-top: 1em;
+  padding-bottom: 0.1em;
   font-family: var(--sf-numeral-font);
-  font-size: 0.85em;
+  font-size: 0.9em;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--sf-accent-strong);
 }
 
-section.changelog h2:first-of-type {
-  margin-top: 0.2em;
+section.changelog h2::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 1.35em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sf-bg);
+  border: 2px solid var(--sf-accent-strong);
 }
 
 section.changelog ul {
   list-style: none;
-  padding-left: 0;
-  margin: 0 0 0.3em;
+  padding-top: 0.3em;
+  padding-bottom: 0.6em;
+}
+
+section.changelog ul > li::marker {
+  /* default テーマの ::marker(–)を打ち消す(list-style: none だけでは残る) */
+  content: none;
 }
 
 section.changelog ul > li {
@@ -2490,42 +2508,66 @@ section.changelog ul > li::before {
   color: var(--sf-accent);
 }
 
-/* ---------- contact: 連絡先(終了スライドの発展形) ----------
-   構造: h1 + ul(各 li が「**ラベル** 値」)。中央寄せ。 */
+/* ---------- contact: 連絡先(締めの1枚・濃色面) ----------
+   構造: h1 + ul(各 li が「**ラベル** 値」)。takeaway の系譜の濃色面・左寄せ。 */
 
 section.contact {
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
   justify-content: center !important;
-  align-items: center;
-  text-align: center;
+  padding: 80px 110px;
 }
 
 section.contact h1 {
-  font-size: 1.3em;
+  color: var(--sf-ink-text);
   border-bottom: none;
   padding-bottom: 0;
-  margin: 0 0 0.3em;
+  font-size: 1.35em;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+section.contact h1::after {
+  content: '';
+  position: static;
+  display: block;
+  width: 64px;
+  height: 2px;
+  background: var(--sf-ink-text);
+  opacity: 0.55;
+  margin-top: 0.9em;
 }
 
 section.contact ul {
   list-style: none;
   padding: 0;
-  margin-top: 1em;
-  display: inline-block;
-  text-align: left;
+  margin-top: 1.6em;
+  max-width: 680px;
+}
+
+section.contact ul > li::marker {
+  content: none;
 }
 
 section.contact ul > li {
   display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 1em;
-  border-bottom: 1px solid var(--sf-line);
-  padding: 0.45em 0.2em;
+  grid-template-columns: 150px 1fr;
+  gap: 1.2em;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(247, 245, 240, 0.22);
+  padding: 0.55em 0.2em;
   margin: 0;
-  font-size: 0.85em;
+  font-size: 0.9em;
 }
 
 section.contact ul > li strong {
-  color: var(--sf-accent-strong);
-  font-weight: 600;
-  letter-spacing: 0.1em;
+  color: var(--sf-ink-text);
+  opacity: 0.72;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+}
+
+section.contact a {
+  color: var(--sf-ink-text);
+  border-bottom: 1px solid rgba(247, 245, 240, 0.4);
 }
