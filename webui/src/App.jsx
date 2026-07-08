@@ -176,6 +176,7 @@ export default function App() {
       ed.el.removeEventListener('input', ed.onInput);
       ed.el.removeEventListener('keydown', ed.onKey);
       ed.el.removeEventListener('blur', ed.onBlur);
+      ed.el.removeEventListener('click', ed.onClickFix);
       if (!ed.cancelled) commitEdit(ed);
       ed.el.removeAttribute('contenteditable');
       if (editingRef.current === ed) editingRef.current = null;
@@ -223,6 +224,24 @@ export default function App() {
         }
       };
       ed.onBlur = () => cleanupEdit(ed, true);
+      // テキスト末尾より後ろ(右・下の余白)をクリックしたときはカーソルを末尾へ補正する。
+      // テキスト上のクリックはブラウザ既定のとおりクリック位置に置かれる
+      ed.onClickFix = (e2) => {
+        const r = document.createRange();
+        r.selectNodeContents(el);
+        const rects = [...r.getClientRects()];
+        if (rects.length === 0) return;
+        const last = rects[rects.length - 1];
+        const beyondEnd =
+          e2.clientY > last.bottom || (e2.clientY >= last.top && e2.clientX > last.right);
+        if (!beyondEnd) return;
+        const selection = el.getRootNode().getSelection?.() ?? window.getSelection();
+        const end = document.createRange();
+        end.selectNodeContents(el);
+        end.collapse(false);
+        selection.removeAllRanges();
+        selection.addRange(end);
+      };
       editingRef.current = ed;
       setEditing(true);
       // mousedown 中に編集可能へ切り替える → ブラウザが1クリック目でクリック位置にカーソルを置く
@@ -230,6 +249,7 @@ export default function App() {
       el.addEventListener('input', ed.onInput);
       el.addEventListener('keydown', ed.onKey);
       el.addEventListener('blur', ed.onBlur);
+      el.addEventListener('click', ed.onClickFix);
       // 万一フォーカスが移らなかった場合の保険(通常はクリックの既定動作で移る)
       requestAnimationFrame(() => {
         const root = el.getRootNode();
@@ -344,6 +364,16 @@ export default function App() {
 
   // ---------- スライド操作(追加・複製・削除・並び替え) ----------
 
+  // スライドを切り替えるときは進行中のインライン編集を確定して閉じる
+  const selectSlide = useCallback(
+    (i) => {
+      const cur = editingRef.current;
+      if (cur) cleanupEdit(cur, true);
+      setSel(i);
+    },
+    [cleanupEdit],
+  );
+
   const addSlide = () =>
     update((prev) => {
       const next = [...prev];
@@ -426,7 +456,7 @@ export default function App() {
                   onDragStart={() => (dragFrom.current = i)}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={() => onDrop(i)}
-                  onClick={() => setSel(i)}
+                  onClick={() => selectSlide(i)}
                 >
                   {html ? (
                     <SlideCanvas
@@ -498,7 +528,7 @@ export default function App() {
             <div className="issues">
               <div className="issues-title">はみ出し検出: {issues.length} 枚</div>
               {issues.map((it) => (
-                <button key={it.slide} className="issue" onClick={() => setSel(it.slide - 1)}>
+                <button key={it.slide} className="issue" onClick={() => selectSlide(it.slide - 1)}>
                   slide {it.slide} [{it.class}] — {it.problems.join(', ')}
                 </button>
               ))}
