@@ -582,6 +582,18 @@ export default function App() {
       return next;
     });
 
+  // レイアウトを選んで追加: そのレイアウトのサンプル(ピッカーのプレビューと同じ)を
+  // 雛形として挿入する。プレースホルダをクリックしてそのまま書き換える想定
+  const addSlideWithLayout = (cls) => {
+    const body = previews?.items?.find((it) => it.cls === cls)?.raw ?? '# 新しいスライド\n\n- 内容';
+    update((prev) => {
+      const next = [...prev];
+      next.splice(sel + 1, 0, ...withKeys([`\n<!-- _class: ${cls} -->\n\n${body}\n`]));
+      setSel(sel + 1);
+      return next;
+    });
+  };
+
   const duplicateSlide = () =>
     update((prev) => {
       const next = [...prev];
@@ -762,6 +774,12 @@ export default function App() {
             <button onClick={addSlide}>＋ 追加</button>
             <button onClick={duplicateSlide} title="複製 (⌘D)">複製</button>
             <button onClick={deleteSlide} disabled={slides.length <= 1} title="削除 (Delete)">削除</button>
+            <LayoutPicker
+              layouts={layouts}
+              previews={previews}
+              label="＋ レイアウトを選んで追加"
+              onSelect={addSlideWithLayout}
+            />
           </div>
           <ol className="thumbs">
             {slides.map((s, i) => {

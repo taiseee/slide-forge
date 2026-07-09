@@ -4,9 +4,11 @@ import { groupLayouts } from './layout-groups.js';
 
 /**
  * レイアウトピッカー: グループタブ+実レンダリングした縮小プレビューのグリッド。
- * previews は /api/layout-previews の { css, items: [{cls, html}] }。
+ * previews は /api/layout-previews の { css, items: [{cls, html, raw}] }。
+ * label を渡すとボタンの表示がその文字列になる(レイアウト選択追加などの挿入モード用。
+ * current は無しでよい)。
  */
-export default function LayoutPicker({ layouts, previews, current, onSelect }) {
+export default function LayoutPicker({ layouts, previews, current, onSelect, label }) {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState(0);
   const panelRef = useRef(null);
@@ -41,7 +43,7 @@ export default function LayoutPicker({ layouts, previews, current, onSelect }) {
   return (
     <div className="picker" ref={panelRef}>
       <button className="picker-button" onClick={() => (open ? setOpen(false) : openPicker())}>
-        {current || '(レイアウトなし)'} ▾
+        {label ?? (current || '(レイアウトなし)')} ▾
       </button>
       {open && (
         <div className="picker-panel">

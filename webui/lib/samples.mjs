@@ -104,11 +104,13 @@ export const SAMPLES = {
     '# よくある誤解\n\n- **誤解** ありがちな思い込みをここに\n- **事実** 実際はこうであるという説明',
 };
 
+/** クラスのサンプル本文(プレビューと、レイアウト選択追加の雛形に使う) */
+export function sampleBody(cls) {
+  return SAMPLES[cls] ?? `# ${cls}\n\n- サンプル`;
+}
+
 /** 全レイアウトのプレビュー用デッキ(Markdown)を組み立てる */
 export function buildSampleDeck(theme, classes) {
-  const slides = classes.map((cls) => {
-    const body = SAMPLES[cls] ?? `# ${cls}\n\n- サンプル`;
-    return `<!-- _class: ${cls} -->\n\n${body}`;
-  });
+  const slides = classes.map((cls) => `<!-- _class: ${cls} -->\n\n${sampleBody(cls)}`);
   return `---\nmarp: true\ntheme: ${theme}\npaginate: false\nmath: katex\n---\n\n${slides.join('\n\n---\n\n')}\n`;
 }

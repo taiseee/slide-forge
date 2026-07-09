@@ -125,9 +125,21 @@ button:disabled {
 
 .sidebar-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 6px;
   padding: 10px 12px;
   border-bottom: 1px solid var(--line);
+}
+
+/* サイドバー内のレイアウト選択追加(ピッカーの挿入モード)は全幅の2行目に置く */
+.sidebar-actions .picker {
+  width: 100%;
+}
+
+.sidebar-actions .picker-button {
+  width: 100%;
+  min-width: 0;
+  font-family: inherit;
 }
 
 .thumbs {

@@ -24,7 +24,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Marp } from '@marp-team/marp-core';
 import { parseDeck, serializeDeck, slideClass } from './lib/deck.mjs';
-import { buildSampleDeck } from './lib/samples.mjs';
+import { buildSampleDeck, sampleBody } from './lib/samples.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -176,7 +176,8 @@ app.get('/api/layout-previews', async (req, res) => {
       const { html, css } = marp.render(buildSampleDeck(theme, classes), { htmlAsArray: true });
       previewCache.set(theme, {
         css,
-        items: classes.map((cls, i) => ({ cls, html: html[i] ?? '' })),
+        // raw はレイアウト選択追加(新規スライドの雛形)に使うサンプル本文
+        items: classes.map((cls, i) => ({ cls, html: html[i] ?? '', raw: sampleBody(cls) })),
       });
     }
     res.json(previewCache.get(theme));
