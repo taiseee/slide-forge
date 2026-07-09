@@ -11,11 +11,15 @@
  *                      (各ブロック要素に data-source-line="開始-終了" を注入)
  * - POST /api/asset    画像を md と同じディレクトリの assets/ に保存(?name=元ファイル名)
  * - GET  /api/layouts  レイアウトカタログ(skill/SKILL.md の表をパース)
+ * - GET  /api/themes   利用可能なスキン名の一覧(theme/*.css の @theme をパース)
+ * - POST /api/export   marp CLI で PDF / 発表用HTML を書き出す({format: 'pdf'|'html'})
  * - /                  webui/dist と md のあるディレクトリ(相対パス画像用)を配信
  */
 
 import express from 'express';
-import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, access, readdir } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Marp } from '@marp-team/marp-core';
@@ -52,7 +56,8 @@ function sourceLinePlugin(md) {
 
 async function createMarp() {
   const marp = new Marp({ html: true, math: 'katex' });
-  for (const f of ['core.css', 'research.css', 'business.css']) {
+  // theme/ 配下の全スキンを登録する(コアは各スキンが @import で解決)
+  for (const f of (await readdir(path.join(ROOT, 'theme'))).filter((x) => x.endsWith('.css'))) {
     marp.themeSet.add(await readFile(path.join(ROOT, 'theme', f), 'utf8'));
   }
   marp.use(sourceLinePlugin);
@@ -175,6 +180,47 @@ app.get('/api/layout-previews', async (req, res) => {
       });
     }
     res.json(previewCache.get(theme));
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+// 利用可能なスキン名の一覧(コアテーマは除く)
+app.get('/api/themes', async (_req, res) => {
+  try {
+    const names = [];
+    for (const f of (await readdir(path.join(ROOT, 'theme'))).filter((x) => x.endsWith('.css'))) {
+      const m = (await readFile(path.join(ROOT, 'theme', f), 'utf8')).match(/@theme\s+([\w-]+)/);
+      if (m && m[1] !== 'slide-forge-core') names.push(m[1]);
+    }
+    res.json(names.sort());
+  } catch (e) {
+    res.status(500).json({ error: String(e.message || e) });
+  }
+});
+
+// marp CLI で PDF / 発表用HTML を書き出す。
+// HTML は相対パスの画像を参照するため、md と同じディレクトリに
+// <名前>.export.<拡張子> として出力する(元の md や成果物とは衝突しない)。
+const execFileP = promisify(execFile);
+app.post('/api/export', async (req, res) => {
+  try {
+    const format = String(req.body?.format);
+    if (!['pdf', 'html'].includes(format)) throw new Error('format must be pdf or html');
+    const stem = path.basename(MD, path.extname(MD));
+    const name = `${stem}.export.${format}`;
+    const marpBin = path.join(ROOT, 'node_modules', '.bin', 'marp');
+    const cliArgs = [
+      '--theme-set', path.join(ROOT, 'theme'),
+      '--html', '--allow-local-files',
+      MD, '-o', path.join(MD_DIR, name),
+    ];
+    if (format === 'pdf') cliArgs.unshift('--pdf');
+    // marp CLI は stdin がパイプだと EOF を待ち続けるため、すぐ閉じる
+    const running = execFileP(marpBin, cliArgs, { cwd: MD_DIR, timeout: 120_000 });
+    running.child.stdin?.end();
+    await running;
+    res.json({ path: `/${name}` });
   } catch (e) {
     res.status(500).json({ error: String(e.message || e) });
   }

@@ -2,7 +2,16 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import SlideCanvas from './SlideCanvas.jsx';
 import LayoutPicker from './LayoutPicker.jsx';
 import { serializeDeck } from '../lib/deck.mjs';
-import { inlineMarkdown, locate, patchLines, patchTableCell, patchImagePath } from './patch.js';
+import {
+  inlineMarkdown,
+  locate,
+  patchLines,
+  patchTableCell,
+  patchImagePath,
+  splitListLine,
+  removeLines,
+  slideLineOffsets,
+} from './patch.js';
 import { extractNotes, setNotes } from './notes.js';
 import { checkRoots } from './overflow.js';
 
@@ -51,6 +60,8 @@ export default function App() {
   const [error, setError] = useState('');
   const [mdPanel, setMdPanel] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [themes, setThemes] = useState([]);
+  const [exporting, setExporting] = useState(null);
 
   const stateRef = useRef({});
   stateRef.current = { slides, frontmatter };
@@ -60,6 +71,9 @@ export default function App() {
   const editTimer = useRef(null);
   const editingRef = useRef(null);
   const thumbRoots = useRef([]);
+  const stageRootRef = useRef(null);
+  // 項目の分割・削除後、再レンダリングされた要素へ編集フォーカスを移すための予約
+  const pendingFocusRef = useRef(null);
 
   // ---------- Undo / Redo 履歴 ----------
   // 連続入力(同じ coalesce キーで 1.2 秒以内)は1エントリにまとめる
@@ -107,6 +121,7 @@ export default function App() {
       setFile(deck.file);
       setStatus('saved');
       setLayouts(await fetch('/api/layouts').then((r) => r.json()));
+      setThemes(await fetch('/api/themes').then((r) => r.json()));
     })().catch((e) => {
       setStatus('error');
       setError(String(e));
@@ -238,6 +253,61 @@ export default function App() {
     [commitEdit],
   );
 
+  // Enter でリスト項目をカーソル位置で分割する(末尾なら空の新項目を追加)
+  const splitItem = useCallback(
+    (ed) => {
+      const root = ed.el.getRootNode();
+      const selection = root.getSelection?.() ?? window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
+      const caret = selection.getRangeAt(0);
+      const half = (setEdge) => {
+        const r = document.createRange();
+        r.selectNodeContents(ed.el);
+        setEdge(r);
+        const div = document.createElement('div');
+        div.appendChild(r.cloneContents());
+        div.querySelectorAll('ul, ol').forEach((n) => n.remove());
+        return inlineMarkdown(div);
+      };
+      const beforeText = half((r) => r.setEnd(caret.startContainer, caret.startOffset));
+      const afterText = half((r) => r.setStart(caret.endContainer, caret.endOffset));
+      // ネストリストを持つ li は、子リストの後ろに兄弟項目として挿入する
+      const insertPos = ed.nested.length > 0 ? ed.start + ed.blockLen : ed.start + 1;
+      clearTimeout(editTimer.current);
+      ed.cancelled = true; // ここで確定するので blur 時の再コミットは行わない
+      const { slides: s } = stateRef.current;
+      const { raw, line } = splitListLine(s[ed.slideIdx].raw, ed.start, ed.count, insertPos, beforeText, afterText);
+      pushHistory();
+      setSlides((prev) => prev.map((x, i) => (i === ed.slideIdx ? { ...x, raw } : x)));
+      markDirty();
+      pendingFocusRef.current = { slideIdx: ed.slideIdx, localLine: line, at: 'start' };
+      cleanupEdit(ed, true);
+    },
+    [cleanupEdit, markDirty, pushHistory],
+  );
+
+  // 空になったリスト項目を Backspace で削除する
+  const removeItem = useCallback(
+    (ed) => {
+      clearTimeout(editTimer.current);
+      ed.cancelled = true;
+      const { slides: s } = stateRef.current;
+      const before = s[ed.slideIdx].raw;
+      pushHistory();
+      setSlides((prev) =>
+        prev.map((x, i) => (i === ed.slideIdx ? { ...x, raw: removeLines(x.raw, ed.start, ed.count) } : x)),
+      );
+      markDirty();
+      // 直前の行がリスト項目なら、その末尾へカーソルを移す
+      const prevLine = before.split('\n')[ed.start - 1] ?? '';
+      if (/^\s*(?:[-*+]|\d+[.)])\s/.test(prevLine)) {
+        pendingFocusRef.current = { slideIdx: ed.slideIdx, localLine: ed.start - 1, at: 'end' };
+      }
+      cleanupEdit(ed, true);
+    },
+    [cleanupEdit, markDirty, pushHistory],
+  );
+
   const startEdit = useCallback(
     (el, lineAttr) => {
       const { slides: s, frontmatter: fm } = stateRef.current;
@@ -255,6 +325,7 @@ export default function App() {
         start: loc.localLine,
         // ネストリストを持つ li は自身のテキスト行(先頭行)だけを編集対象にする
         count: nested.length > 0 ? 1 : Math.max(1, g1 - g0),
+        blockLen: Math.max(1, g1 - g0), // 子リストを含むブロック全体の行数(分割時の挿入位置用)
         cellIdx,
         nested,
         snapshotRaw: s[loc.slideIdx].raw,
@@ -278,7 +349,18 @@ export default function App() {
           el.blur();
         } else if (e.key === 'Enter' && !e.shiftKey) {
           e.preventDefault();
-          el.blur();
+          // リスト項目なら分割(=項目追加)、それ以外は編集を確定して終了
+          if (ed.el.tagName === 'LI' && ed.cellIdx == null) splitItem(ed);
+          else el.blur();
+        } else if (
+          e.key === 'Backspace' &&
+          ed.el.tagName === 'LI' &&
+          ed.cellIdx == null &&
+          ed.nested.length === 0 &&
+          ed.el.textContent.trim() === ''
+        ) {
+          e.preventDefault();
+          removeItem(ed);
         }
       };
       ed.onBlur = () => cleanupEdit(ed, true);
@@ -314,8 +396,36 @@ export default function App() {
         if (root.activeElement !== el) el.focus();
       });
     },
-    [commitEdit, cleanupEdit, markDirty],
+    [commitEdit, cleanupEdit, markDirty, splitItem, removeItem],
   );
+
+  // 分割・削除の再レンダリング後、予約された要素の編集を自動で開始する
+  useEffect(() => {
+    const pending = pendingFocusRef.current;
+    if (!pending || !stageRootRef.current) return;
+    pendingFocusRef.current = null;
+    const { slides: s, frontmatter: fm } = stateRef.current;
+    if (!s || pending.slideIdx !== selRef.current) return;
+    const offsets = slideLineOffsets(fm, s.map((x) => x.raw));
+    const g = offsets[pending.slideIdx] + pending.localLine;
+    requestAnimationFrame(() => {
+      const root = stageRootRef.current;
+      const el =
+        root?.querySelector(`li[data-source-line^="${g}-"]`) ??
+        root?.querySelector(`[data-source-line^="${g}-"]:not(section):not(ul):not(ol)`);
+      if (!el) return;
+      startEdit(el, el.getAttribute('data-source-line'));
+      requestAnimationFrame(() => {
+        const selection = el.getRootNode().getSelection?.() ?? window.getSelection();
+        if (!selection) return;
+        const r = document.createRange();
+        r.selectNodeContents(el);
+        r.collapse(pending.at === 'start');
+        selection.removeAllRanges();
+        selection.addRange(r);
+      });
+    });
+  }, [rendered, startEdit]);
 
   // ---------- 画像差し替え(クリック→ファイル選択 / ドラッグ&ドロップ) ----------
 
@@ -505,6 +615,35 @@ export default function App() {
   const changeCls = (cls) =>
     update((prev) => prev.map((s, i) => (i === sel ? { ...s, raw: setSlideCls(s.raw, cls) } : s)));
 
+  // ---------- テーマ切替・エクスポート ----------
+
+  const changeTheme = (t) => {
+    pushHistory();
+    setFrontmatter((fm) =>
+      /^theme:/m.test(fm) ? fm.replace(/^theme:.*$/m, `theme: ${t}`) : `${fm}\ntheme: ${t}`,
+    );
+    markDirty();
+  };
+
+  const doExport = async (format) => {
+    setExporting(format);
+    try {
+      await save(); // 保存済みの内容を書き出す
+      const res = await fetch('/api/export', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ format }),
+      }).then((r) => r.json());
+      if (!res.path) throw new Error(res.error || 'export failed');
+      window.open(res.path, '_blank');
+    } catch (e) {
+      setStatus('error');
+      setError(String(e.message || e));
+    } finally {
+      setExporting(null);
+    }
+  };
+
   // ---------- キーボードショートカット ----------
 
   const keyActions = useRef({});
@@ -526,6 +665,8 @@ export default function App() {
       return !!ae && (ae.tagName === 'TEXTAREA' || ae.tagName === 'INPUT' || ae.tagName === 'SELECT');
     };
     const onKey = (e) => {
+      // インライン編集側(項目の分割・削除など)が処理済みのキーは無視する
+      if (e.defaultPrevented) return;
       const a = keyActions.current;
       const mod = e.metaKey || e.ctrlKey;
       const k = e.key.toLowerCase();
@@ -588,6 +729,26 @@ export default function App() {
         <span className="filename">{file}</span>
         <span className={`status status-${status}`}>{statusLabel}</span>
         {status === 'error' && <span className="errmsg">{error}</span>}
+        <select
+          className="theme-select"
+          value={theme}
+          onChange={(e) => changeTheme(e.target.value)}
+          title="スキン(テーマ)を切り替え"
+        >
+          {(themes.length ? themes : [theme]).map((t) => (
+            <option key={t} value={t}>{t}</option>
+          ))}
+        </select>
+        <button onClick={() => doExport('pdf')} disabled={!!exporting} title="PDFを書き出して開く">
+          {exporting === 'pdf' ? '書き出し中…' : 'PDF'}
+        </button>
+        <button
+          onClick={() => doExport('html')}
+          disabled={!!exporting}
+          title="発表用HTMLを書き出して開く(Pキーで発表者ビュー)"
+        >
+          {exporting === 'html' ? '書き出し中…' : '発表'}
+        </button>
         <button onClick={undo} title="元に戻す (⌘Z)">↩</button>
         <button onClick={redo} title="やり直す (⇧⌘Z)">↪</button>
         <button className={mdPanel ? 'active' : ''} onClick={() => setMdPanel((v) => !v)}>
@@ -651,6 +812,9 @@ export default function App() {
                 css={rendered.css}
                 frozen={editing}
                 className="stage-canvas"
+                onRoot={(r) => {
+                  stageRootRef.current = r;
+                }}
                 onMouseDown={onCanvasMouseDown}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={onCanvasDrop}

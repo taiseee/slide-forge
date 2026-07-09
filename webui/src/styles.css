@@ -227,6 +227,10 @@ select {
   color: var(--text);
 }
 
+.theme-select {
+  padding: 4px 8px;
+}
+
 .toolbar-label {
   letter-spacing: 0.08em;
   color: var(--muted);

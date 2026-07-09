@@ -17,8 +17,9 @@ AIエージェントファーストの Marp → HTML スライド作成基盤。
 ```
 theme/
   core.css        # 全レイアウトクラス(構造のみ、色はCSS変数)
-  research.css    # 研究発表スキン(配色 + experiment/math/references)
-  business.css    # ビジネススキン(配色 + kpi/plans)
+  research.css    # 研究発表スキン(配色 + experiment/math)
+  business.css    # ビジネススキン(配色 + kpi/plans 等)
+  lecture.css     # 輪講・勉強会スキン(配色 + objectives/quiz 等)
 scripts/
   check-overflow.mjs  # スライドのはみ出しを機械検出
 skill/
@@ -28,8 +29,9 @@ webui/
   server.mjs          # 編集WebUIのローカルサーバ(marp-coreレンダリング+保存API)
   src/                # Canva風エディタ(Vite + React)
 examples/
-  demo-research.md    # 研究スキンのカタログ兼検証デッキ(16レイアウト)
+  demo-research.md    # 研究スキンのカタログ兼検証デッキ
   demo-business.md    # ビジネススキンのカタログ兼検証デッキ
+  demo-lecture.md     # 輪講・勉強会スキンのデモ(Git内部構造の勉強会デッキ)
 docs/
   ROADMAP.md          # 目指す姿・現状・TODO
   DESIGN.md           # デザイン基盤(トークン・書式ルール)
@@ -53,13 +55,14 @@ npx marp --theme-set theme/ --html --allow-local-files --images png examples/dem
 npx marp --theme-set theme/ --html --server examples/
 ```
 
-## レイアウトカタログ(67種)
+## レイアウトカタログ(72種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `roadmap` `columns` `spec` `faq` `matrix` `matrix-3` `venn` `pyramid` `layers` `ranking` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` `cards` `scorecard` `transition` `changelog` `contact` |
-| research | `experiment` `math` `references` `definition` |
+| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `roadmap` `columns` `spec` `faq` `matrix` `matrix-3` `venn` `pyramid` `layers` `ranking` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` `cards` `scorecard` `transition` `changelog` `contact` `definition` `references` |
+| research | `experiment` `math` |
 | business | `kpi` `plans` `persona` `tam-sam-som` `tam-sam-som-circle` `case-study` `journey` |
+| lecture | `objectives` `quiz` `answer` `code-focus` `misconception` |
 
 各レイアウトの使い方とサンプルは [skill/references/layouts.md](skill/references/layouts.md) を、
 色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) を参照。
@@ -88,6 +91,9 @@ npm run webui -- examples/demo-research.md
 - 右(トグル): Markdown パネル(コード・数式などインライン編集対象外の編集用)
 - はみ出し検出は編集のたびにブラウザ内で即時実行される
 - ネスト付きリストも編集可: 親項目クリックで親の行だけ、子項目クリックで子の行だけ
+- スキン切替: ツールバーのドロップダウンでデッキ全体のテーマを変更(Undo可)
+- 書き出し: `PDF` / `発表`(単一HTML)ボタン。md と同じディレクトリに
+  `<名前>.export.pdf` / `<名前>.export.html` を出力して新しいタブで開く
 
 キーボードショートカット:
 
@@ -99,6 +105,8 @@ npm run webui -- examples/demo-research.md
 | `↑` `↓`(`←` `→`) | スライド選択の移動 |
 | `⌘S` | 即時保存(通常は自動保存) |
 | `Esc` | インライン編集をキャンセル |
+| `Enter`(箇条書き編集中) | カーソル位置で項目を分割して次の項目を追加 |
+| `Backspace`(空の項目で) | その項目を削除して前の項目末尾へ |
 
 ## License
 

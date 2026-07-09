@@ -69,6 +69,31 @@ export function patchLines(raw, start, count, newInline) {
 }
 
 /**
+ * リスト項目の分割: start 行(範囲 count 行)を beforeInline に置き換え、
+ * insertPos 行目に同じ接頭辞の新しい項目行(afterInline)を挿入する。
+ * 番号付きリストの場合、新しい行の番号はインクリメントする。
+ * insertPos は「元 raw における挿入位置」(通常 start+1、ネスト持ちはブロック末尾の次)。
+ * 戻り値: { raw, line }(line = 挿入された行の行番号、フォーカス移動用)
+ */
+export function splitListLine(raw, start, count, insertPos, beforeInline, afterInline) {
+  const prefix = (raw.split('\n')[start] ?? '').match(PREFIX_RE)[1];
+  const m = prefix.match(/^(\s*)(\d+)([.)]\s+)$/);
+  const newPrefix = m ? `${m[1]}${Number(m[2]) + 1}${m[3]}` : prefix;
+  const { raw: patched, count: newCount } = patchLines(raw, start, count, beforeInline);
+  const lines = patched.split('\n');
+  const pos = insertPos + (newCount - count);
+  lines.splice(pos, 0, newPrefix + afterInline);
+  return { raw: lines.join('\n'), line: pos };
+}
+
+/** [start, start+count) 行を削除する(空になったリスト項目の削除用) */
+export function removeLines(raw, start, count) {
+  const lines = raw.split('\n');
+  lines.splice(start, count);
+  return lines.join('\n');
+}
+
+/**
  * ブロック内 imgIdx 番目の画像記法 ![alt](path) の path だけを差し替える。
  * alt や bg 指定(![bg right:45%](...))はそのまま保持される。
  */
