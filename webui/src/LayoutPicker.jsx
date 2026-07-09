@@ -5,10 +5,11 @@ import { groupLayouts } from './layout-groups.js';
 /**
  * レイアウトピッカー: グループタブ+実レンダリングした縮小プレビューのグリッド。
  * previews は /api/layout-previews の { css, items: [{cls, html, raw}] }。
- * label を渡すとボタンの表示がその文字列になる(レイアウト選択追加などの挿入モード用。
- * current は無しでよい)。
+ * label を渡すとボタンの表示がその文字列になる(current は無しでよい)。
+ * splitAction を渡すと分割ボタンになる: 「＋追加」本体クリックで splitAction を実行、
+ * 「▾」クリックでピッカーを開く(スライド追加: 左=デフォルト追加、右=レイアウト選択)。
  */
-export default function LayoutPicker({ layouts, previews, current, onSelect, label }) {
+export default function LayoutPicker({ layouts, previews, current, onSelect, label, splitAction }) {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState(0);
   const panelRef = useRef(null);
@@ -42,9 +43,24 @@ export default function LayoutPicker({ layouts, previews, current, onSelect, lab
 
   return (
     <div className="picker" ref={panelRef}>
-      <button className="picker-button" onClick={() => (open ? setOpen(false) : openPicker())}>
-        {label ?? (current || '(レイアウトなし)')} ▾
-      </button>
+      {splitAction ? (
+        <div className="picker-split">
+          <button className="picker-split-main" onClick={splitAction} title="デフォルトレイアウトでスライドを追加">
+            {label ?? '＋ 追加'}
+          </button>
+          <button
+            className="picker-split-toggle"
+            onClick={() => (open ? setOpen(false) : openPicker())}
+            title="レイアウトを選んで追加"
+          >
+            ▾
+          </button>
+        </div>
+      ) : (
+        <button className="picker-button" onClick={() => (open ? setOpen(false) : openPicker())}>
+          {label ?? (current || '(レイアウトなし)')} ▾
+        </button>
+      )}
       {open && (
         <div className="picker-panel">
           <div className="picker-tabs">

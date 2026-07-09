@@ -131,15 +131,17 @@ button:disabled {
   border-bottom: 1px solid var(--line);
 }
 
-/* サイドバー内のレイアウト選択追加(ピッカーの挿入モード)は全幅の2行目に置く */
-.sidebar-actions .picker {
-  width: 100%;
+/* 分割ボタン(＋追加 ▾): 左＝デフォルト追加、右＝レイアウトを選んで追加 */
+.picker-split {
+  display: flex;
 }
 
-.sidebar-actions .picker-button {
-  width: 100%;
-  min-width: 0;
-  font-family: inherit;
+.picker-split-main {
+  border-right: none;
+}
+
+.picker-split-toggle {
+  padding: 4px 6px;
 }
 
 .thumbs {

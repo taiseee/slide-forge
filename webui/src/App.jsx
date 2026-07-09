@@ -771,15 +771,15 @@ export default function App() {
       <div className="main">
         <aside className="sidebar">
           <div className="sidebar-actions">
-            <button onClick={addSlide}>＋ 追加</button>
-            <button onClick={duplicateSlide} title="複製 (⌘D)">複製</button>
-            <button onClick={deleteSlide} disabled={slides.length <= 1} title="削除 (Delete)">削除</button>
             <LayoutPicker
               layouts={layouts}
               previews={previews}
-              label="＋ レイアウトを選んで追加"
+              label="＋ 追加"
+              splitAction={addSlide}
               onSelect={addSlideWithLayout}
             />
+            <button onClick={duplicateSlide} title="複製 (⌘D)">複製</button>
+            <button onClick={deleteSlide} disabled={slides.length <= 1} title="削除 (Delete)">削除</button>
           </div>
           <ol className="thumbs">
             {slides.map((s, i) => {
