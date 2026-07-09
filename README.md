@@ -1,58 +1,62 @@
 # slide-forge
 
-<p>
-  <img src="examples/assets/screenshots/swiss-editorial-readme-banner.png" width="900" alt="slide-forge のイメージバナー。ヘアライン枠の4枚のカードがそれぞれ違うアクセントカラーの見出しバーを持ち、レイアウトクラスとスキンの多様さを抽象的に表す">
-</p>
+**AIエージェントファーストのスライド作成基盤。**
+「スライド作って」と頼むだけで、エージェント(Claude Code 等)がレイアウトを選び、はみ出しがないか検証までしてから仕上げる。人が直接手を入れたいときのための編集WebUIも同梱している。
 
-**Markdown を書くだけで、統一感のあるスライドに仕上がる。**
-配置・余白・配色を毎回悩まなくていいように、レイアウトとデザインをあらかじめ作り込んだ Marp スライド作成基盤です。AIエージェント(Claude Code 等)からも、ブラウザの編集画面からも使えます。
+<table>
+<tr>
+<td valign="top" width="60%">
 
-<p>
-  <img src="examples/assets/screenshots/webui-editor.png" width="900" alt="slide-forge 編集WebUIのスクリーンショット。左にスライド一覧のサムネイル、中央に選択中のスライド(輪講スキンの「よくある誤解」レイアウト)、下に発表者ノート欄が並ぶ">
-</p>
+- **エージェントに任せると**: `skill/SKILL.md` をスキルとして登録するだけで、「スライド作って」の一言から レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認 が自動で回る
+- **エージェントが書くのは内容とレイアウト選択だけ**。`<!-- _class: title -->` のように1行加えるだけで、余白・配色・タイポグラフィは全部テーマ側が決める。毎回バラバラなデザインになったり、生HTMLで無理な組み方をしたりしない
+- **72種のレイアウトクラス**と**3つの配色スキン**(研究発表・ビジネス・輪講/勉強会)を最初から同梱。エージェントはその中から選ぶだけでいい
+- **崩れたスライドのまま出さない**。要素のはみ出しを機械チェックし、PNG化して目視確認するところまでが標準のワークフロー
+- **人が直接触りたいときは**、同じMarkdownをブラウザの編集WebUIでそのまま開ける。スライド上のテキストをクリックしてその場で書き換えられる
 
-## これは何をしてくれるのか
+</td>
+<td valign="top" width="40%" align="center">
+<img src="examples/assets/screenshots/agent-first-glance.png" width="260" alt="slide-forgeの仕組みを表す図。上から順に、Markdown/コードの断片を表す抽象的な線のカード、下向きの矢印、検証済みを示す緑の丸いチェックマーク、見出しバーと本文行を持つ完成したスライドのカードが縦に並ぶ">
+</td>
+</tr>
+</table>
 
-- **書くのは内容とレイアウト選択だけ**。`<!-- _class: title -->` のように1行加えるだけで、あとの余白・配色・タイポグラフィは全部テーマ側が決める
-- **72種のレイアウトクラス**(表紙・比較・プロセス・数値ハイライト・引用…)と、**3つの配色スキン**(研究発表・ビジネス・輪講/勉強会)を最初から同梱
-- **ブラウザで直接編集できるWebUI**。スライド上のテキストをクリックしてそのまま書き換えられ、裏側では常にMarkdownとして保存される(Canva を触ったことがあれば迷わない)
-- **崩れたスライドを出さない検証ループ**。要素のはみ出しを機械チェックし、PNG化して目視確認する手順が最初から組み込まれている
-- **Claude Code のスキルとして登録可能**。「スライド作って」と頼むだけで、レイアウト選択→生成→検証の一連の流れが自動で回る
-
-## 触ってみる
+## エージェントから使う
 
 ```bash
 git clone https://github.com/taiseee/slide-forge.git
 cd slide-forge
 npm install
+```
 
+`skill/SKILL.md` を Claude Code 等のエージェントにスキルとして登録すると、「スライド作成」系の依頼で
+自動的にこのワークフロー(レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認)が適用される。
+エージェントが書き出したMarkdownは、そのまま下記のCLIやWebUIでも検証・編集できる。
+
+```bash
+# ビルド
+npx marp --theme-set theme/ --html --allow-local-files examples/demo-research.md -o build/demo.html
+
+# はみ出しチェック
+node scripts/check-overflow.mjs build/demo.html
+
+# PNG化(目視確認用)
+npx marp --theme-set theme/ --html --allow-local-files --images png examples/demo-research.md -o build/png/demo.png
+```
+
+## 人が直接編集する: WebUI
+
+`npm run webui -- <file.md>` で立ち上がるローカルエディタは、パワポやCanvaのような感覚でMarpスライドを編集できる。エージェントが下書きしたデッキを人が仕上げる、という使い方にも向いている。
+
+```bash
+cd slide-forge
+npm install
 npm run webui -- examples/demo-research.md
 # → http://127.0.0.1:5757 が開く
 ```
 
-サンプルデッキは3本同梱しているので、どれで試してもOKです。
-
-| デッキ | 内容 |
-|---|---|
-| `examples/demo-research.md` | ゼミ・学会発表向け(研究スキン) |
-| `examples/demo-business.md` | 提案・報告向け(ビジネススキン) |
-| `examples/demo-lecture.md` | 輪講・社内勉強会向け(輪講スキン) |
-
-## 3つのデザインスキン
-
-同じレイアウト構造のまま、配色だけを差し替えられます。用途に応じて `theme: research` / `business` / `lecture` を切り替えるだけです。
-
-<table>
-<tr>
-<td width="33%"><img src="examples/assets/screenshots/gallery-research.png" width="100%" alt="研究スキンのサンプルスライド(実験結果の表)"><br><sub><b>research</b> — グレー/墨色系。ゼミ・学会発表向け</sub></td>
-<td width="33%"><img src="examples/assets/screenshots/gallery-business.png" width="100%" alt="ビジネススキンのサンプルスライド(市場規模の同心円)"><br><sub><b>business</b> — グレージュ/ブラウン系。提案・報告向け</sub></td>
-<td width="33%"><img src="examples/assets/screenshots/gallery-lecture.png" width="100%" alt="輪講スキンのサンプルスライド(演習問題)"><br><sub><b>lecture</b> — モスグリーン系。輪講・勉強会向け</sub></td>
-</tr>
-</table>
-
-## 編集WebUI: スライドをそのままクリックして編集する
-
-`npm run webui -- <file.md>` で立ち上がるローカルエディタは、パワポやCanvaのような感覚でMarpスライドを編集できます。
+<p>
+  <img src="examples/assets/screenshots/webui-editor.png" width="900" alt="slide-forge 編集WebUIのスクリーンショット。左にスライド一覧のサムネイル、中央に選択中のスライド(輪講スキンの「よくある誤解」レイアウト)、下に発表者ノート欄が並ぶ">
+</p>
 
 - **直接編集**: スライド上のテキストをクリックすればその場で書き換えられる。太字などの記法は保持される
 - **箇条書きの追加・削除**: 編集中に Enter で項目を分割・追加、空の項目で Backspace で削除
@@ -62,7 +66,25 @@ npm run webui -- examples/demo-research.md
 - **崩れをその場で検知**: 要素がスライドからはみ出すと即座に一覧に表示される
 - **Undo/Redo**、サムネイル並び替え、発表者ノート欄、サイドバー幅のリサイズも標準搭載
 
-キーボードショートカット一覧やインライン編集の詳しい挙動は下記ドキュメントを参照してください。
+サンプルデッキは3本同梱しているので、どれで試してもOK。キーボードショートカット一覧は下記を参照。
+
+| デッキ | 内容 |
+|---|---|
+| `examples/demo-research.md` | ゼミ・学会発表向け(研究スキン) |
+| `examples/demo-business.md` | 提案・報告向け(ビジネススキン) |
+| `examples/demo-lecture.md` | 輪講・社内勉強会向け(輪講スキン) |
+
+## 3つのデザインスキン
+
+同じレイアウト構造のまま、配色だけを差し替えられる。用途に応じて `theme: research` / `business` / `lecture` を切り替えるだけ。
+
+<table>
+<tr>
+<td width="33%"><img src="examples/assets/screenshots/gallery-research.png" width="100%" alt="研究スキンのサンプルスライド(実験結果の表)"><br><sub><b>research</b> — グレー/墨色系。ゼミ・学会発表向け</sub></td>
+<td width="33%"><img src="examples/assets/screenshots/gallery-business.png" width="100%" alt="ビジネススキンのサンプルスライド(市場規模の同心円)"><br><sub><b>business</b> — グレージュ/ブラウン系。提案・報告向け</sub></td>
+<td width="33%"><img src="examples/assets/screenshots/gallery-lecture.png" width="100%" alt="輪講スキンのサンプルスライド(演習問題)"><br><sub><b>lecture</b> — モスグリーン系。輪講・勉強会向け</sub></td>
+</tr>
+</table>
 
 ## レイアウトカタログ(72種)
 
@@ -74,15 +96,11 @@ npm run webui -- examples/demo-research.md
 | lecture | `objectives` `quiz` `answer` `code-focus` `misconception` |
 
 各レイアウトの詳しい使い方とMarkdownサンプルは [skill/references/layouts.md](skill/references/layouts.md)、
-色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) にまとまっています。
-
-## AIエージェントから使う
-
-`skill/SKILL.md` を Claude Code 等のエージェントにスキルとして登録すると、「スライド作成」系の依頼で
-自動的にこのワークフロー(レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認)が適用されます。
+色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) にまとまっている。
 
 ## 設計思想
 
+- **エージェントファースト**: 人が毎回レイアウトや配色を判断しなくてもいいように、エージェントが選ぶのは内容とレイアウトクラスだけにする。判断の余地を減らすほど、エージェントの出力は安定する
 - **Marp Markdown が唯一のソース**。HTML/PDF は常にビルド成果物であり、直接編集しない
 - **内容と装飾の分離**: 書くのは内容とレイアウト選択だけ。配置・余白・色は全てテーマCSSが決める
 - **レイアウトクラスのみ**: ユーティリティクラスや生HTMLでの組み立ては提供しない。表現が足りなければテーマにクラスを追加して育てる
@@ -111,19 +129,6 @@ examples/
 docs/
   ROADMAP.md          # 目指す姿・現状・TODO
   DESIGN.md           # デザイン基盤(トークン・書式ルール)
-```
-
-CLIから直接ビルド・検証したい場合:
-
-```bash
-# ビルド
-npx marp --theme-set theme/ --html --allow-local-files examples/demo-research.md -o build/demo.html
-
-# はみ出しチェック
-node scripts/check-overflow.mjs build/demo.html
-
-# PNG化(目視確認用)
-npx marp --theme-set theme/ --html --allow-local-files --images png examples/demo-research.md -o build/png/demo.png
 ```
 
 ## キーボードショートカット(編集WebUI)
