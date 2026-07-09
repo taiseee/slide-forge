@@ -1,5 +1,9 @@
 # slide-forge
 
+<p>
+  <img src="examples/assets/screenshots/swiss-editorial-readme-banner.png" width="900" alt="slide-forge のイメージバナー。ヘアライン枠の4枚のカードがそれぞれ違うアクセントカラーの見出しバーを持ち、レイアウトクラスとスキンの多様さを抽象的に表す">
+</p>
+
 **Markdown を書くだけで、統一感のあるスライドに仕上がる。**
 配置・余白・配色を毎回悩まなくていいように、レイアウトとデザインをあらかじめ作り込んだ Marp スライド作成基盤です。AIエージェント(Claude Code 等)からも、ブラウザの編集画面からも使えます。
 
