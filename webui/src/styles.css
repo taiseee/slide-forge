@@ -120,7 +120,6 @@ button:disabled {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden;
 }
 
 /* サイドバーとステージの間のドラッグリサイズハンドル */
