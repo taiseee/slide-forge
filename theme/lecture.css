@@ -1,0 +1,312 @@
+/* @theme lecture */
+/*
+ * slide-forge lecture skin — エンジニアの輪講・社内勉強会・チュートリアル向け。
+ * 配色: モスグリーン/セージ系のエディトリアル・ミニマル。
+ *
+ * 追加レイアウトクラス: objectives / quiz / answer / code-focus / misconception
+ */
+
+@import 'slide-forge-core';
+
+:root {
+  --sf-bg: #fbfcfa;
+  --sf-text: #2f342f;
+  --sf-muted: #8a9088;
+  --sf-line: #e1e5df;
+  --sf-panel: #edf1ea;
+  --sf-accent: #5c7360;
+  --sf-accent-strong: #3b4c40;
+  --sf-ink: #37423a;
+  --sf-ink-text: #f4f6f2;
+  --sf-code-bg: #f0f3ee;
+}
+
+/* ---------- objectives: 学習目標(本日のゴール) ----------
+   構造: h1 + ul(各 li が「**キーワード** 説明」、2〜4項目) + 任意の p(注記)。 */
+
+section.objectives ul {
+  counter-reset: obj;
+  list-style: none;
+  padding: 0;
+  margin-top: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+section.objectives ul > li::marker {
+  content: none;
+}
+
+section.objectives ul > li {
+  counter-increment: obj;
+  position: relative;
+  box-sizing: border-box;
+  background: var(--sf-panel);
+  padding: 0.8em 1.2em 0.8em 4em;
+  margin: 0;
+  font-size: 0.92em;
+  color: var(--sf-muted);
+}
+
+section.objectives ul > li::before {
+  content: counter(obj, decimal-leading-zero);
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sf-numeral-font);
+  font-size: 1.4em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--sf-accent);
+}
+
+section.objectives ul > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-right: 0.7em;
+}
+
+section.objectives > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- quiz: 演習・クイズ ----------
+   構造: h1 + blockquote(問題文) + ol(選択肢、2〜4個)。解答は次の answer スライドに。 */
+
+section.quiz blockquote {
+  position: relative;
+  background: var(--sf-panel);
+  border: none;
+  border-left: 4px solid var(--sf-accent-strong);
+  padding: 0.9em 1.2em 0.9em 3.4em;
+  margin: 0.4em 0 1em;
+  font-size: 1.02em;
+  font-weight: 500;
+  line-height: 1.85;
+  letter-spacing: 0.04em;
+  color: var(--sf-text);
+}
+
+section.quiz blockquote::before {
+  content: 'Q';
+  position: absolute;
+  left: 0.55em;
+  top: 0.28em;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.7em;
+  font-weight: 500;
+  color: var(--sf-accent);
+}
+
+section.quiz ol {
+  counter-reset: quiz;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section.quiz ol > li::marker {
+  content: none;
+}
+
+section.quiz ol > li {
+  counter-increment: quiz;
+  position: relative;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.55em 0.3em 0.55em 2.6em;
+  margin: 0;
+  font-size: 0.92em;
+}
+
+section.quiz ol > li::before {
+  content: counter(quiz, upper-alpha);
+  position: absolute;
+  left: 0.2em;
+  top: 0.62em;
+  width: 1.5em;
+  height: 1.5em;
+  box-sizing: border-box;
+  border: 1px solid var(--sf-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.78em;
+  font-weight: 500;
+  color: var(--sf-accent-strong);
+}
+
+/* ---------- answer: 解答・解説(quiz とペアで使う) ----------
+   構造: h1 + p(答え。**強調**推奨) + 任意の ul/p(解説)。 */
+
+section.answer > p:first-of-type {
+  position: relative;
+  padding: 0.2em 0 0.2em 3.2em;
+  margin: 0.5em 0 0.6em;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: var(--sf-text);
+}
+
+section.answer > p:first-of-type::before {
+  content: 'A';
+  position: absolute;
+  left: 0.35em;
+  top: -0.05em;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.7em;
+  font-weight: 500;
+  color: var(--sf-accent);
+}
+
+section.answer > p:first-of-type strong {
+  color: var(--sf-accent-strong);
+}
+
+section.answer ul {
+  font-size: 0.9em;
+  margin-top: 0.4em;
+}
+
+/* ---------- code-focus: コードの注目点(コード左+丸数字注釈右) ----------
+   構造: h1 + コードブロック + ol(各 li が「**箇所名** 説明」、2〜5個)。
+   コード内の対応行にはコメントで ①② を入れておく(annotated のコード版)。 */
+
+section.code-focus > *:not(h1):not(pre) {
+  margin-left: 700px;
+}
+
+section.code-focus pre {
+  position: absolute;
+  top: 190px;
+  bottom: 84px;
+  left: 84px;
+  width: 640px;
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.62em;
+  line-height: 1.7;
+  padding: 1.2em 1.4em;
+}
+
+section.code-focus ol {
+  counter-reset: cf;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.4em;
+}
+
+section.code-focus ol > li::marker {
+  content: none;
+}
+
+section.code-focus ol > li {
+  counter-increment: cf;
+  position: relative;
+  padding-left: 2.1em;
+  margin: 0.75em 0;
+  font-size: 0.78em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.code-focus ol > li::before {
+  content: counter(cf);
+  position: absolute;
+  left: 0;
+  top: 0.08em;
+  width: 1.45em;
+  height: 1.45em;
+  border: 1px solid var(--sf-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--sf-accent-strong);
+}
+
+section.code-focus ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  letter-spacing: 0.06em;
+}
+
+/* ---------- misconception: よくある誤解(✗誤解 → ○事実) ----------
+   構造: h1 + ul(li は偶数個: 奇数番目=誤解、偶数番目=事実。「**ラベル** 本文」)。
+   記号色(✗/○)は DESIGN.md の状態色に従う。 */
+
+section.misconception ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+section.misconception ul > li::marker {
+  content: none;
+}
+
+section.misconception ul > li {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0.75em 1.1em 0.75em 3em;
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.75;
+}
+
+section.misconception ul > li::before {
+  position: absolute;
+  left: 1em;
+  top: 0.72em;
+  font-weight: 600;
+  font-size: 1.05em;
+}
+
+section.misconception ul > li:nth-child(odd) {
+  background: var(--sf-panel);
+  color: var(--sf-muted);
+}
+
+section.misconception ul > li:nth-child(odd)::before {
+  content: '✗';
+  color: #9c5450;
+}
+
+section.misconception ul > li:nth-child(even) {
+  border: 1px solid var(--sf-line);
+  border-left: 3px solid #5e7a5e;
+  color: var(--sf-text);
+  margin-bottom: 0.6em;
+}
+
+section.misconception ul > li:nth-child(even)::before {
+  content: '○';
+  color: #5e7a5e;
+}
+
+section.misconception ul > li strong {
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-right: 0.6em;
+}
+
+section.misconception ul > li:nth-child(odd) strong {
+  color: var(--sf-text);
+}
+
+section.misconception ul > li:nth-child(even) strong {
+  color: var(--sf-accent-strong);
+}

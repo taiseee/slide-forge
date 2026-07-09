@@ -34,19 +34,19 @@ slide-forge のデザイントークンと書式ルール。実装の正は `the
 
 構造(core.css)は色を持たず、以下の変数をスキンが上書きする。
 
-| 変数 | 役割 | research | business |
-|---|---|---|---|
-| `--sf-bg` | 背景 | #ffffff | #fbfaf7 |
-| `--sf-text` | 本文 | #2f3237 | #38332c |
-| `--sf-muted` | 補足・番号 | #878d96 | #98907f |
-| `--sf-line` | ヘアライン | #e3e5e9 | #e6e0d4 |
-| `--sf-panel` | 薄い帯 | #eef0f3 | #f1ece2 |
-| `--sf-accent` | アクセント | #566173 | #8a7a63 |
-| `--sf-accent-strong` | 強アクセント | #343c48 | #55483a |
-| `--sf-ink` | 濃色面 | #343a44 | #3d372e |
-| `--sf-ink-text` | 濃色面上の文字 | #f5f6f8 | #f7f5f0 |
+| 変数 | 役割 | research | business | lecture |
+|---|---|---|---|---|
+| `--sf-bg` | 背景 | #ffffff | #fbfaf7 | #fbfcfa |
+| `--sf-text` | 本文 | #2f3237 | #38332c | #2f342f |
+| `--sf-muted` | 補足・番号 | #878d96 | #98907f | #8a9088 |
+| `--sf-line` | ヘアライン | #e3e5e9 | #e6e0d4 | #e1e5df |
+| `--sf-panel` | 薄い帯 | #eef0f3 | #f1ece2 | #edf1ea |
+| `--sf-accent` | アクセント | #566173 | #8a7a63 | #5c7360 |
+| `--sf-accent-strong` | 強アクセント | #343c48 | #55483a | #3b4c40 |
+| `--sf-ink` | 濃色面 | #343a44 | #3d372e | #37423a |
+| `--sf-ink-text` | 濃色面上の文字 | #f5f6f8 | #f7f5f0 | #f4f6f2 |
 
-(実値は `theme/research.css` / `theme/business.css` が正。ずれていたら CSS に合わせる)
+(実値は `theme/research.css` / `theme/business.css` / `theme/lecture.css` が正。ずれていたら CSS に合わせる)
 
 ## グラフ用カラーパレット(作図時に使う)
 
@@ -54,6 +54,7 @@ slide-forge のデザイントークンと書式ルール。実装の正は `the
 
 - **research**: 主系列 `#566173` / 強調 `#343c48` / 補助 `#9aa3af` `#c7ccd4` / 対比 `#a8927a`
 - **business**: 主系列 `#8a7a63` / 強調 `#55483a` / 補助 `#b5a88f` `#d9d2c3` / 対比 `#6e7b8a`
+- **lecture**: 主系列 `#5c7360` / 強調 `#3b4c40` / 補助 `#9aab9c` `#ccd6cc` / 対比 `#7a6e8a`
 - 状態を示す記号色(表の ○×△、注意書き等に最小限): 成功 `#5e7a5e` / 警告 `#a8863c` / エラー `#9c5450` / 情報 `#566173`
 - 背景はスキンの `--sf-bg` に合わせ、彩度の高い色・虹色の多色使いはしない
 

@@ -28,6 +28,10 @@ export const LAYOUT_GROUPS = [
     name: '数値・結果',
     classes: ['stat', 'kpi', 'experiment', 'tam-sam-som', 'tam-sam-som-circle', 'case-study', 'contact'],
   },
+  {
+    name: '教育',
+    classes: ['objectives', 'quiz', 'answer', 'code-focus', 'misconception'],
+  },
 ];
 
 /** カタログ(cls配列)をグループに割り付ける。未分類は「その他」へ */
