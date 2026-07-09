@@ -417,9 +417,9 @@ style: |
 
 # 推進体制
 
-- ![](assets/ChatGPT_Image_2026_6_12_12_49_06_1_.png) **山田** プロジェクトリード。全体統括と経営層への報告
+- ![](assets/placeholder-portrait.svg) **山田** プロジェクトリード。全体統括と経営層への報告
 - ![](assets/placeholder-portrait.svg) **佐藤** テンプレート設計。全社レイアウトの整備
-- ![](assets/IMG_3117.jpg) **鈴木** 導入支援。パイロット部門の研修とサポート
+- ![](assets/placeholder-portrait.svg) **鈴木** 導入支援。パイロット部門の研修とサポート
 
 ---
 
