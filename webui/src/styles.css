@@ -115,12 +115,25 @@ button:disabled {
 /* ---------- sidebar(サムネイル) ---------- */
 
 .sidebar {
-  width: 224px;
   flex: none;
   border-right: 1px solid var(--line);
   display: flex;
   flex-direction: column;
   min-height: 0;
+  overflow: hidden;
+}
+
+/* サイドバーとステージの間のドラッグリサイズハンドル */
+.sidebar-resize-handle {
+  flex: none;
+  width: 6px;
+  margin-left: -3px;
+  cursor: col-resize;
+  z-index: 2;
+}
+
+.sidebar-resize-handle:hover {
+  background: var(--line);
 }
 
 .sidebar-actions {

@@ -37,6 +37,11 @@ const setSlideCls = (raw, cls) => {
 
 const NEW_SLIDE = '\n<!-- _class: content -->\n\n# 新しいスライド\n\n- 内容\n';
 
+const SIDEBAR_WIDTH_KEY = 'sf-sidebar-width';
+const SIDEBAR_MIN = 160;
+const SIDEBAR_MAX = 480;
+const SIDEBAR_DEFAULT = 224;
+
 let keySeq = 0;
 const withKeys = (raws) => raws.map((raw) => ({ key: `k${keySeq++}`, raw }));
 
@@ -62,6 +67,12 @@ export default function App() {
   const [editing, setEditing] = useState(false);
   const [themes, setThemes] = useState([]);
   const [exporting, setExporting] = useState(null);
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    const saved = Number(localStorage.getItem(SIDEBAR_WIDTH_KEY));
+    return saved >= SIDEBAR_MIN && saved <= SIDEBAR_MAX ? saved : SIDEBAR_DEFAULT;
+  });
+  const sidebarWidthRef = useRef(sidebarWidth);
+  sidebarWidthRef.current = sidebarWidth;
 
   const stateRef = useRef({});
   stateRef.current = { slides, frontmatter };
@@ -530,6 +541,30 @@ export default function App() {
     [startEdit, cleanupEdit],
   );
 
+  // ---------- サイドバー幅のドラッグリサイズ ----------
+
+  const onSidebarResizeStart = useCallback((e) => {
+    e.preventDefault();
+    const startX = e.clientX;
+    const startWidth = sidebarWidthRef.current;
+    let latest = startWidth;
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    const onMove = (e2) => {
+      latest = Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, startWidth + (e2.clientX - startX)));
+      setSidebarWidth(latest);
+    };
+    const onUp = () => {
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      localStorage.setItem(SIDEBAR_WIDTH_KEY, String(latest));
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+  }, []);
+
   // ---------- スライド操作(追加・複製・削除・並び替え) ----------
 
   // スライドを切り替えるときは進行中のインライン編集を確定して閉じる
@@ -769,7 +804,7 @@ export default function App() {
       </header>
 
       <div className="main">
-        <aside className="sidebar">
+        <aside className="sidebar" style={{ width: sidebarWidth }}>
           <div className="sidebar-actions">
             <LayoutPicker
               layouts={layouts}
@@ -814,6 +849,8 @@ export default function App() {
             })}
           </ol>
         </aside>
+
+        <div className="sidebar-resize-handle" onMouseDown={onSidebarResizeStart} />
 
         <section className="stage">
           <div className="stage-toolbar">
