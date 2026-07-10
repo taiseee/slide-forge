@@ -15,14 +15,23 @@
 
 ## エージェントから使う
 
+[skills](https://skills.sh/) 経由でスキルとして登録するのが最も簡単。
+
+```bash
+npx skills add taiseee/slide-forge
+```
+
+これで `skill/SKILL.md` が Claude Code 等のエージェントに登録され、「スライド作って」の一言から
+レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認が自動で回るようになる。
+
+CLI や WebUI での検証・編集も行いたい場合はリポジトリ本体を clone する。
+
 ```bash
 git clone https://github.com/taiseee/slide-forge.git
 cd slide-forge
 npm install
 ```
 
-`skill/SKILL.md` を Claude Code 等のエージェントにスキルとして登録すると、「スライド作成」系の依頼で
-自動的にこのワークフロー(レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認)が適用される。
 エージェントが書き出したMarkdownは、そのまま下記のCLIやWebUIでも検証・編集できる。
 
 ```bash
