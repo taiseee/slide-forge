@@ -5,7 +5,7 @@
 
 - **エージェントに任せると**: `skill/SKILL.md` をスキルとして登録するだけで、「スライド作って」の一言から レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認 が自動で回る
 - **エージェントが書くのは内容とレイアウト選択だけ**。`<!-- _class: title -->` のように1行加えるだけで、余白・配色・タイポグラフィは全部テーマ側が決める。毎回バラバラなデザインになったり、生HTMLで無理な組み方をしたりしない
-- **72種のレイアウトクラス**と**3つの配色スキン**(研究発表・ビジネス・輪講/勉強会)を最初から同梱。エージェントはその中から選ぶだけでいい
+- **88種のレイアウトクラス**と**3つの配色スキン**(研究発表・ビジネス・輪講/勉強会)を最初から同梱。エージェントはその中から選ぶだけでいい
 - **崩れたスライドのまま出さない**。要素のはみ出しを機械チェックし、PNG化して目視確認するところまでが標準のワークフロー
 - **人が直接触りたいときは**、同じMarkdownをブラウザの編集WebUIでそのまま開ける。スライド上のテキストをクリックしてその場で書き換えられる
 
@@ -79,14 +79,14 @@ npm run webui -- examples/demo-research.md
 </tr>
 </table>
 
-## レイアウトカタログ(72種)
+## レイアウトカタログ(88種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `title-visual` `agenda` `agenda-grid` `divider` `content` `content-lead` `two-column` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `comparison` `comparison-3` `pros-cons` `table` `takeaway` `lead` `exec-summary` `summary` `end` `timeline` `timeline-h` `steps` `steps-v` `flow` `cycle` `funnel` `gantt` `roadmap` `columns` `spec` `faq` `matrix` `matrix-3` `venn` `pyramid` `layers` `ranking` `gallery` `before-after` `logos` `stat` `profile` `quote` `code` `checklist` `team` `org` `cards` `scorecard` `transition` `changelog` `contact` `definition` `references` |
-| research | `experiment` `math` |
-| business | `kpi` `plans` `persona` `tam-sam-som` `tam-sam-som-circle` `case-study` `journey` |
-| lecture | `objectives` `quiz` `answer` `code-focus` `misconception` |
+| コア | `title` `title-visual` `agenda` `agenda-grid` `objectives` `divider` `content` `content-lead` `two-column` `sidebar` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `gallery` `photo-grid` `image-cards` `before-after` `logos` `profile` `team` `comparison` `comparison-3` `pros-cons` `transition` `table` `benchmark` `matrix` `matrix-3` `venn` `venn-3` `positioning` `ranking` `scorecard` `steps` `steps-v` `flow` `cycle` `timeline` `timeline-h` `gantt` `roadmap` `funnel` `pyramid` `layers` `org` `tree` `radial` `changelog` `stat` `status` `columns` `cards` `spec` `faq` `checklist` `quote` `callout` `code` `lead` `exec-summary` `takeaway` `summary` `contact` `definition` `references` `end` |
+| research | `experiment` `math` `hypothesis` |
+| business | `kpi` `plans` `persona` `tam-sam-som` `tam-sam-som-circle` `case-study` `journey` `forces` `bmc` `impact` `okr` |
+| lecture | `quiz` `answer` `code-focus` `misconception` `cheatsheet` |
 
 各レイアウトの詳しい使い方とMarkdownサンプルは [skill/references/layouts.md](skill/references/layouts.md)、
 色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) にまとまっている。
@@ -104,9 +104,9 @@ npm run webui -- examples/demo-research.md
 ```
 theme/
   core.css        # 全レイアウトクラス(構造のみ、色はCSS変数)
-  research.css    # 研究発表スキン(配色 + experiment/math)
-  business.css    # ビジネススキン(配色 + kpi/plans 等)
-  lecture.css     # 輪講・勉強会スキン(配色 + objectives/quiz 等)
+  research.css    # 研究発表スキン(配色 + experiment/math/hypothesis)
+  business.css    # ビジネススキン(配色 + kpi/plans/forces 等)
+  lecture.css     # 輪講・勉強会スキン(配色 + quiz/answer/cheatsheet 等)
 scripts/
   check-overflow.mjs  # スライドのはみ出しを機械検出
 skill/

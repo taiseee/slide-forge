@@ -119,12 +119,43 @@ $ git cat-file -p 5d6e7f8a      # ③
 
 ---
 
+<!-- _class: tree -->
+
+# .git ディレクトリの構造
+
+- **objects/** すべての実体が入る
+  - `aa/bcdef...` zlib圧縮されたオブジェクト
+  - `pack/` パックファイル(圧縮済みの集合)
+- **refs/** 動く参照
+  - `heads/` ブランチ(SHAを1つ書いたファイル)
+  - `tags/` タグ
+- **HEAD** 現在チェックアウト中の参照を指す
+- **index** ステージング領域のバイナリ
+
+`git init` 直後でもこの骨格はすべて作られる
+
+---
+
 <!-- _class: misconception -->
 
 # よくある誤解: ブランチ
 
 - **誤解** ブランチはコードのコピーなので、たくさん作るとリポジトリが重くなる
 - **事実** ブランチはコミットの SHA を1つ書いた41バイトのファイル(refs/heads/名前)。何百作ってもコストはほぼゼロ
+
+---
+
+<!-- _class: callout warning -->
+
+# 注意: force push
+
+`git push --force` は共有ブランチの履歴を書き換える。
+
+> 共有ブランチでは `--force` を使わず、`--force-with-lease` を使う。
+> リモートが想定外に進んでいる場合は push が拒否されるため、
+> 他人のコミットを誤って消すことがない。
+
+チーム開発では main / develop への force push をサーバ側で禁止しておくのが安全
 
 ---
 
@@ -150,6 +181,23 @@ $ git cat-file -p 5d6e7f8a      # ③
 - ブランチ作成はファイル1つの書き込みなので一瞬で終わる
 - コミットの実体(オブジェクト)は一切コピーされない
 - `git switch` はこの参照を HEAD が指すよう切り替えているだけ
+
+---
+
+<!-- _class: cheatsheet -->
+
+# コマンド早見表
+
+- `git cat-file -p <sha>` オブジェクトの中身を表示
+- `git cat-file -t <sha>` オブジェクトの型を確認
+- `git rev-parse HEAD` HEAD の SHA を解決
+- `git log --oneline` 履歴を1行ずつ表示
+- `git branch <name>` 参照ファイルを作る
+- `git switch <name>` HEAD の指す先を切替
+- `git reflog` HEAD の移動履歴を表示
+- `git push --force-with-lease` 安全な強制 push
+
+すべて手元のリポジトリで試して安全なコマンドのみ
 
 ---
 

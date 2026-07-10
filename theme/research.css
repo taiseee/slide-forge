@@ -3,7 +3,7 @@
  * slide-forge research skin — 研究発表(ゼミ・学会・進捗報告)向け。
  * 配色: グレー/墨色系のモノトーン・ミニマル。
  *
- * 追加レイアウトクラス: experiment / math
+ * 追加レイアウトクラス: experiment / math / hypothesis
  * (definition / references は汎用のため core に定義)
  */
 
@@ -80,3 +80,59 @@ section.math ul {
 }
 
 /* definition / references は core.css に定義(全スキン共通) */
+
+/* ---------- hypothesis: 仮説の列挙(H1・H2…チップ付きの帯) ----------
+   構造: h1 + ol(各 li が「**キーワード** 仮説文」または仮説文のみ、2〜4個)
+   + 任意の p(検証方法などの注記)。 */
+
+section.hypothesis ol {
+  counter-reset: hyp;
+  list-style: none;
+  padding: 0;
+  margin-top: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+section.hypothesis ol > li::marker {
+  content: none;
+}
+
+section.hypothesis ol > li {
+  counter-increment: hyp;
+  position: relative;
+  box-sizing: border-box;
+  background: var(--sf-panel);
+  padding: 0.85em 1.2em 0.85em 4.4em;
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.75;
+  color: var(--sf-text);
+}
+
+section.hypothesis ol > li::before {
+  content: 'H' counter(hyp);
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sf-numeral-font);
+  font-size: 1.35em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--sf-accent);
+}
+
+section.hypothesis ol > li strong {
+  color: var(--sf-accent-strong);
+  letter-spacing: 0.08em;
+  margin-right: 0.6em;
+}
+
+section.hypothesis > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}

@@ -17,7 +17,9 @@
  *   gantt / org / title-visual / exec-summary / comparison-3 / pros-cons /
  *   content-lead / steps-v / cycle / image-top / image-bottom / ranking /
  *   roadmap / layers / annotated / matrix-3 / cards / scorecard / transition /
- *   changelog / contact / definition / references
+ *   changelog / contact / definition / references / venn-3 / sidebar /
+ *   callout(+ success / warning / error) / photo-grid / benchmark /
+ *   tree / radial / positioning / objectives / image-cards / status
  * デッキ単位のオプション: 進捗バー(--sf-progress、末尾の progress 節を参照)
  */
 
@@ -38,6 +40,11 @@
   --sf-heading-font: 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', 'Noto Sans JP', sans-serif;
   --sf-body-font: 'Hiragino Kaku Gothic ProN', 'Helvetica Neue', 'Noto Sans JP', sans-serif;
   --sf-numeral-font: 'Avenir Next', 'Helvetica Neue', sans-serif; /* 大きな数字用 */
+  /* 状態色(callout 等)。スキンに依らない意味色(DESIGN.md の状態記号色と揃える) */
+  --sf-state-info: #566173;
+  --sf-state-success: #5e7a5e;
+  --sf-state-warning: #a8863c;
+  --sf-state-error: #9c5450;
 }
 
 /* ---------- 基本スライド(全クラス共通の土台) ---------- */
@@ -351,6 +358,16 @@ section.agenda ol > li::before {
   font-size: 0.9em;
   letter-spacing: 0.12em;
   color: var(--sf-muted);
+}
+
+/* 目次の「今ここ」: 項目を **太字** にすると進行中セクションとして強調される */
+section.agenda ol > li:has(> strong) {
+  background: var(--sf-panel);
+  border-bottom-color: var(--sf-accent);
+}
+
+section.agenda ol > li:has(> strong)::before {
+  color: var(--sf-accent-strong);
 }
 
 /* ---------- divider: セクション区切り(薄い帯・フラット) ---------- */
@@ -1307,6 +1324,16 @@ section.agenda-grid ol > li::before {
   font-size: 0.9em;
   letter-spacing: 0.12em;
   color: var(--sf-muted);
+}
+
+/* agenda-grid は基本規則より後で「今ここ」を上書きする */
+section.agenda-grid ol > li:has(> strong) {
+  background: var(--sf-panel);
+  border-bottom-color: var(--sf-accent);
+}
+
+section.agenda-grid ol > li:has(> strong)::before {
+  color: var(--sf-accent-strong);
 }
 
 /* ---------- pyramid: 階層構造(頂点が強調される) ----------
@@ -2634,4 +2661,688 @@ section.references li {
 section.references li::marker {
   color: var(--sf-muted);
   font-family: var(--sf-numeral-font);
+}
+
+/* ---------- venn-3: 3円ベン図(3集合の関係・3C分析) ----------
+   構造: h1 + ul(li が4つ:「**左上** 説明」「**右上** 説明」「**下** 説明」「**共通** 一言」)。
+   4つ目(共通)は省略可。共通のテキストは短く保つこと。 */
+
+section.venn-3 ul {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0.2em 0 0;
+}
+
+/* 3つの円は ::before / ::after + 1つ目の li の ::before で描く */
+section.venn-3 ul::before,
+section.venn-3 ul::after,
+section.venn-3 ul > li:nth-child(1)::before {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sf-accent);
+}
+
+section.venn-3 ul::before {
+  /* 左上の円 */
+  left: calc(50% - 270px);
+  top: 10px;
+}
+
+section.venn-3 ul::after {
+  /* 右上の円 */
+  left: calc(50% - 30px);
+  top: 10px;
+  border-color: var(--sf-muted);
+}
+
+section.venn-3 ul > li:nth-child(1)::before {
+  /* 下の円(基準は絶対配置された li 自身。ul 基準で 50%-150px, 150px になる値) */
+  left: 350px;
+  top: 40px;
+  border-color: var(--sf-accent-strong);
+}
+
+section.venn-3 ul > li::marker {
+  content: none;
+}
+
+section.venn-3 ul > li {
+  position: absolute;
+  margin: 0;
+  text-align: center;
+  font-size: 0.72em;
+  line-height: 1.55;
+  color: var(--sf-muted);
+}
+
+section.venn-3 ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.15em;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25em;
+}
+
+section.venn-3 ul > li:nth-child(1) {
+  /* 左上円のラベル(円の左外側) */
+  left: calc(50% - 500px);
+  top: 110px;
+  width: 220px;
+  text-align: right;
+}
+
+section.venn-3 ul > li:nth-child(2) {
+  /* 右上円のラベル(円の右外側) */
+  left: calc(50% + 280px);
+  top: 110px;
+  width: 220px;
+  text-align: left;
+}
+
+section.venn-3 ul > li:nth-child(3) {
+  /* 下円のラベル(円の下・内側寄り) */
+  left: calc(50% - 110px);
+  top: 340px;
+  width: 220px;
+}
+
+section.venn-3 ul > li:nth-child(4) {
+  /* 中央(共通)のラベル */
+  left: calc(50% - 65px);
+  top: 165px;
+  width: 130px;
+  font-size: 0.62em;
+}
+
+section.venn-3 ul > li:nth-child(4) strong {
+  color: var(--sf-accent-strong);
+}
+
+/* ---------- sidebar: 本文+補足サイドバー ----------
+   構造: h1 + 本文(p / ul) + blockquote(補足・注記。最後に置く)。
+   blockquote が右の縦パネルになる(見出し+補足情報、本文+脚注的な使い方)。 */
+
+section.sidebar {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  column-gap: 56px;
+  grid-auto-rows: min-content;
+  align-content: start;
+}
+
+section.sidebar > h1 {
+  grid-column: 1 / -1;
+}
+
+section.sidebar > blockquote {
+  grid-column: 2;
+  grid-row: 2 / span 30;
+  align-self: start;
+  border-left: none;
+  border-top: 2px solid var(--sf-accent-strong);
+  background: var(--sf-panel);
+  margin: 0.35em 0 0;
+  padding: 1em 1.2em 1.1em;
+  font-size: 0.78em;
+  line-height: 1.75;
+  color: var(--sf-text);
+}
+
+section.sidebar > blockquote strong {
+  display: block;
+  font-size: 0.9em;
+  letter-spacing: 0.14em;
+  color: var(--sf-accent-strong);
+  margin-bottom: 0.5em;
+}
+
+section.sidebar > p,
+section.sidebar > ul,
+section.sidebar > ol {
+  grid-column: 1;
+}
+
+/* ---------- callout: 状態付きメッセージボックス ----------
+   構造: h1 + 任意の p(リード) + blockquote(ボックス本文) + 任意の p / ul(補足)。
+   修飾クラスで状態を切り替える: `callout`(NOTE) / `callout success` /
+   `callout warning` / `callout error`。注意点・Tip・結論・成功/失敗の報告に。 */
+
+section.callout {
+  --sf-callout-color: var(--sf-state-info);
+  --sf-callout-label: 'NOTE';
+}
+
+section.callout.success {
+  --sf-callout-color: var(--sf-state-success);
+  --sf-callout-label: 'SUCCESS';
+}
+
+section.callout.warning {
+  --sf-callout-color: var(--sf-state-warning);
+  --sf-callout-label: 'WARNING';
+}
+
+section.callout.error {
+  --sf-callout-color: var(--sf-state-error);
+  --sf-callout-label: 'ERROR';
+}
+
+section.callout blockquote {
+  border-left: 3px solid var(--sf-callout-color);
+  background: var(--sf-panel);
+  margin: 0.6em 0;
+  padding: 1.1em 1.4em 1.05em;
+  font-size: 1em;
+  line-height: 1.8;
+}
+
+section.callout blockquote::before {
+  content: var(--sf-callout-label);
+  display: block;
+  font-family: var(--sf-numeral-font);
+  font-size: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--sf-callout-color);
+  margin-bottom: 0.5em;
+}
+
+section.callout > p:last-child,
+section.callout > ul:last-child {
+  color: var(--sf-muted);
+  font-size: 0.85em;
+}
+
+/* ---------- photo-grid: 写真のグリッド(2×2、3〜4枚) ----------
+   構造: h1 + 画像3〜4枚を1つの段落に並べる + 任意の注釈1行。
+   gallery(横1列・contain)に対し、こちらは格子に敷き詰める(cover)。 */
+
+section.photo-grid p:has(> img) {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 18px;
+  margin: 0.3em 0;
+}
+
+section.photo-grid p:has(> img) img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: cover;
+  border: 1px solid var(--sf-line);
+}
+
+section.photo-grid > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.4em 0 0;
+}
+
+/* ---------- benchmark: 競合比較・ベンチマーク表(2列目を強調) ----------
+   構造: h1 + table(1列目=項目、2列目=自社・提案手法、3列目以降=比較対象)
+   + 任意の p(注記)。2列目が薄い帯+強調色で「自社・提案」の列になる。 */
+
+section.benchmark table {
+  font-size: 0.9em;
+  margin: 1em auto;
+}
+
+section.benchmark th,
+section.benchmark td {
+  padding: 0.6em 1.3em;
+}
+
+section.benchmark th:nth-child(2),
+section.benchmark td:nth-child(2) {
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+}
+
+section.benchmark td:nth-child(2) {
+  font-weight: 600;
+}
+
+section.benchmark > p {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- tree: ツリー(階層分類・モジュール構成・ディレクトリ構造) ----------
+   構造: h1 + ul(ネスト2段まで可。1段目=大項目、2段目以降=子・孫)。
+   接続線つきのファイルツリー風に表示される。大項目が3つ以上あると2列に流れる。 */
+
+section.tree > ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.8em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+  gap: 0.5em 56px;
+  align-content: start;
+  font-size: 0.92em;
+}
+
+section.tree ul li::marker {
+  content: none;
+}
+
+section.tree > ul > li {
+  margin: 0;
+  color: var(--sf-text);
+}
+
+section.tree > ul > li > strong {
+  font-weight: 600;
+  font-size: 1.05em;
+  letter-spacing: 0.08em;
+}
+
+section.tree ul ul {
+  list-style: none;
+  position: relative;
+  padding-left: 1.9em;
+  margin: 0.2em 0 0.5em;
+}
+
+section.tree ul ul::before {
+  /* 縦のレール */
+  content: '';
+  position: absolute;
+  left: 0.45em;
+  top: -0.15em;
+  bottom: 0.75em;
+  border-left: 1.5px solid var(--sf-line);
+}
+
+section.tree ul ul > li {
+  position: relative;
+  margin: 0.3em 0;
+  font-weight: 400;
+  font-size: 0.92em;
+  line-height: 1.55;
+  color: var(--sf-text);
+}
+
+section.tree ul ul > li::before {
+  /* 横の接続線 */
+  content: '';
+  position: absolute;
+  left: -1.45em;
+  top: 0.72em;
+  width: 1.1em;
+  border-top: 1.5px solid var(--sf-line);
+}
+
+section.tree ul ul > li:last-child::after {
+  /* 最後の子の接続点より下のレールを背景色で消す */
+  content: '';
+  position: absolute;
+  left: calc(-1.45em - 1px);
+  top: 0.8em;
+  bottom: -0.3em;
+  width: 4px;
+  background: var(--sf-bg);
+}
+
+section.tree ul ul > li strong {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+section.tree > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 0.8em;
+}
+
+/* ---------- radial: 中心+放射(マインドマップ・ステークホルダーマップ) ----------
+   構造: h1 + p(中心テーマを短く) + ul(li 3〜6つ:「**ラベル** 一言」)。
+   中心の濃色ノードの周りに、楕円軌道上へ項目が配置される。
+   枝の数は 3・4・6 が最も整う(5 は片側が空く)。座標は固定スロット。 */
+
+section.radial {
+  position: relative;
+}
+
+section.radial > p {
+  /* 中心ノード */
+  position: absolute;
+  left: 50%;
+  top: 400px;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  margin: 0;
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+  padding: 0.65em 1.5em;
+  border-radius: 999px;
+  font-size: 0.95em;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-align: center;
+  max-width: 320px;
+}
+
+section.radial ul {
+  /* li と軌道は section 基準で絶対配置する(ul 自体は座標基準にしない) */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section.radial ul::before {
+  /* 楕円の軌道 */
+  content: '';
+  position: absolute;
+  left: 360px;
+  top: 250px;
+  width: 560px;
+  height: 300px;
+  border-radius: 50%;
+  border: 1.5px solid var(--sf-line);
+}
+
+section.radial ul > li::marker {
+  content: none;
+}
+
+section.radial ul > li {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  box-sizing: border-box;
+  margin: 0;
+  background: var(--sf-panel);
+  padding: 0.55em 0.9em;
+  text-align: center;
+  font-size: 0.7em;
+  line-height: 1.5;
+  color: var(--sf-muted);
+}
+
+section.radial ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.1em;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.15em;
+}
+
+/* 既定(6スロット): 上から時計回り */
+section.radial ul > li:nth-child(1) { left: 640px; top: 250px; }
+section.radial ul > li:nth-child(2) { left: 882px; top: 325px; }
+section.radial ul > li:nth-child(3) { left: 882px; top: 475px; }
+section.radial ul > li:nth-child(4) { left: 640px; top: 550px; }
+section.radial ul > li:nth-child(5) { left: 398px; top: 475px; }
+section.radial ul > li:nth-child(6) { left: 398px; top: 325px; }
+
+/* 4項目のとき: 上・右・下・左 */
+section.radial ul > li:first-child:nth-last-child(4) { left: 640px; top: 250px; }
+section.radial ul > li:first-child:nth-last-child(4) ~ li:nth-child(2) { left: 925px; top: 400px; }
+section.radial ul > li:first-child:nth-last-child(4) ~ li:nth-child(3) { left: 640px; top: 550px; }
+section.radial ul > li:first-child:nth-last-child(4) ~ li:nth-child(4) { left: 355px; top: 400px; }
+
+/* 3項目のとき: 上・右下・左下 */
+section.radial ul > li:first-child:nth-last-child(3) { left: 640px; top: 250px; }
+section.radial ul > li:first-child:nth-last-child(3) ~ li:nth-child(2) { left: 882px; top: 490px; }
+section.radial ul > li:first-child:nth-last-child(3) ~ li:nth-child(3) { left: 398px; top: 490px; }
+
+/* ---------- positioning: 2軸ポジショニングマップ(4象限) ----------
+   構造: h1 + ul(li 4つ、順序: 左上 → 右上 → 左下 → 右下。
+   各 li は「**プレイヤー・案** 一言」)+ p(軸の説明:「横軸: … / 縦軸: …」)。
+   中央に十字の軸が引かれ、各項目は象限の外側の角に寄る。
+   実データの散布図・正確な座標が必要な場合は作図した画像を貼る。 */
+
+section.positioning ul {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0.4em 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+section.positioning ul::before {
+  /* 縦軸 */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  border-left: 1.5px solid var(--sf-accent);
+}
+
+section.positioning ul::after {
+  /* 横軸 */
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  border-top: 1.5px solid var(--sf-accent);
+}
+
+section.positioning ul > li::marker {
+  content: none;
+}
+
+section.positioning ul > li {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1em 1.6em;
+  font-size: 0.78em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.positioning ul > li strong {
+  display: block;
+  color: var(--sf-accent-strong);
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.2em;
+}
+
+/* 各象限の外側の角に寄せる(軸まわりを空ける) */
+section.positioning ul > li:nth-child(1) {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+section.positioning ul > li:nth-child(2) {
+  justify-content: flex-start;
+  align-items: flex-end;
+  text-align: right;
+}
+
+section.positioning ul > li:nth-child(3) {
+  justify-content: flex-end;
+  align-items: flex-start;
+  text-align: left;
+}
+
+section.positioning ul > li:nth-child(4) {
+  justify-content: flex-end;
+  align-items: flex-end;
+  text-align: right;
+}
+
+section.positioning > p {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.75em;
+  letter-spacing: 0.08em;
+  margin: 0.7em 0 0;
+}
+
+/* ---------- objectives: 発表目的・本日のゴール(番号付きの帯) ----------
+   構造: h1 + ul(各 li が「**キーワード** 説明」、2〜4項目) + 任意の p(注記)。
+   もとは lecture スキン専用だったが、発表目的・ゴール提示は汎用のため core に定義。 */
+
+section.objectives ul {
+  counter-reset: obj;
+  list-style: none;
+  padding: 0;
+  margin-top: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+section.objectives ul > li::marker {
+  content: none;
+}
+
+section.objectives ul > li {
+  counter-increment: obj;
+  position: relative;
+  box-sizing: border-box;
+  background: var(--sf-panel);
+  padding: 0.8em 1.2em 0.8em 4em;
+  margin: 0;
+  font-size: 0.92em;
+  color: var(--sf-muted);
+}
+
+section.objectives ul > li::before {
+  content: counter(obj, decimal-leading-zero);
+  position: absolute;
+  left: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sf-numeral-font);
+  font-size: 1.4em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--sf-accent);
+}
+
+section.objectives ul > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-right: 0.7em;
+}
+
+section.objectives > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- image-cards: 画像カード(画像+タイトル+説明、2〜4枚) ----------
+   構造: h1 + ul(各 li が「![](画像) **タイトル** 説明」、2〜4項目)。
+   製品紹介・ポートフォリオ・事例の並びに。人物は team(円形)、
+   キャプション1行の比較なら gallery を使う。 */
+
+section.image-cards ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.9em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 40px;
+}
+
+section.image-cards ul > li::marker {
+  content: none;
+}
+
+section.image-cards ul > li {
+  min-width: 0;
+  margin: 0;
+  font-size: 0.78em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.image-cards ul > li img {
+  display: block;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border: 1px solid var(--sf-line);
+  margin-bottom: 0.9em;
+}
+
+section.image-cards ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3em;
+}
+
+/* ---------- status: 項目+状態チップの一覧(進捗・対応状況) ----------
+   構造: h1 + ul(各 li が「**項目** 説明 *状態*」)+ 任意の p(注記)。
+   末尾の em(完了・対応中・未着手 等)が右端のチップになる。
+   完了だけを列挙するなら checklist、数値評価なら scorecard。 */
+
+section.status ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5em;
+}
+
+section.status ul > li::marker {
+  content: none;
+}
+
+section.status ul > li {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.7em 0.2em;
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.status ul > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+section.status ul > li em {
+  font-style: normal;
+  flex-shrink: 0;
+  margin-left: auto;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.12em 0.95em;
+  font-size: 0.76em;
+  letter-spacing: 0.16em;
+}
+
+section.status > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
 }

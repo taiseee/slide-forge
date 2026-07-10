@@ -3,7 +3,8 @@
  * slide-forge lecture skin — エンジニアの輪講・社内勉強会・チュートリアル向け。
  * 配色: モスグリーン/セージ系のエディトリアル・ミニマル。
  *
- * 追加レイアウトクラス: objectives / quiz / answer / code-focus / misconception
+ * 追加レイアウトクラス: quiz / answer / code-focus / misconception / cheatsheet
+ * (objectives は汎用のため core に定義)
  */
 
 @import 'slide-forge-core';
@@ -21,60 +22,7 @@
   --sf-code-bg: #f0f3ee;
 }
 
-/* ---------- objectives: 学習目標(本日のゴール) ----------
-   構造: h1 + ul(各 li が「**キーワード** 説明」、2〜4項目) + 任意の p(注記)。 */
-
-section.objectives ul {
-  counter-reset: obj;
-  list-style: none;
-  padding: 0;
-  margin-top: 1.1em;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-section.objectives ul > li::marker {
-  content: none;
-}
-
-section.objectives ul > li {
-  counter-increment: obj;
-  position: relative;
-  box-sizing: border-box;
-  background: var(--sf-panel);
-  padding: 0.8em 1.2em 0.8em 4em;
-  margin: 0;
-  font-size: 0.92em;
-  color: var(--sf-muted);
-}
-
-section.objectives ul > li::before {
-  content: counter(obj, decimal-leading-zero);
-  position: absolute;
-  left: 1em;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: var(--sf-numeral-font);
-  font-size: 1.4em;
-  font-weight: 300;
-  letter-spacing: 0.04em;
-  color: var(--sf-accent);
-}
-
-section.objectives ul > li strong {
-  color: var(--sf-text);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  margin-right: 0.7em;
-}
-
-section.objectives > p {
-  color: var(--sf-muted);
-  font-size: 0.8em;
-  letter-spacing: 0.06em;
-  margin-top: 1em;
-}
+/* objectives(学習目標・本日のゴール)は汎用のため core に移動 */
 
 /* ---------- quiz: 演習・クイズ ----------
    構造: h1 + blockquote(問題文) + ol(選択肢、2〜4個)。解答は次の answer スライドに。 */
@@ -309,4 +257,47 @@ section.misconception ul > li:nth-child(odd) strong {
 
 section.misconception ul > li:nth-child(even) strong {
   color: var(--sf-accent-strong);
+}
+
+/* ---------- cheatsheet: チートシート(コード+説明の密な2列) ----------
+   構造: h1 + ul(各 li が「`コマンド` 説明」、6〜12個) + 任意の p(注記)。
+   2列のグリッドに左→右・上→下の順で流れる。 */
+
+section.cheatsheet ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.7em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 48px;
+  align-content: start;
+}
+
+section.cheatsheet ul > li::marker {
+  content: none;
+}
+
+section.cheatsheet ul > li {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.6em 0.1em;
+  margin: 0;
+  font-size: 0.74em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.cheatsheet ul > li code {
+  flex-shrink: 0;
+  font-size: 0.95em;
+  color: var(--sf-text);
+}
+
+section.cheatsheet > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
 }
