@@ -10,7 +10,7 @@
 - **人が直接触りたいときは**、同じMarkdownをブラウザの編集WebUIでそのまま開ける。スライド上のテキストをクリックしてその場で書き換えられる
 
 <p>
-  <img src="examples/assets/screenshots/agent-first-glance.png" width="900" alt="slide-forgeの仕組みを表す図。左にAIエージェント(丸顔アイコン)と人間(人型アイコン)の会話が交互に並び、矢印の先に見出し・下線・箇条書きを持つ完成したスライドが重なって並ぶ">
+  <img src="examples/assets/screenshots/agent-first-glance.png" width="900" alt="重なり合ったスライド風のカードと、チェックマークのアイコンが並ぶイラスト。生成したスライドの品質確認が完了したイメージを表す">
 </p>
 
 ## エージェントから使う
