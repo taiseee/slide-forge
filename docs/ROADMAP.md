@@ -23,10 +23,10 @@ AIエージェントが「内容を考えること」だけに集中すれば、
     正確な座標が要る図は従来どおり作図画像を貼る
 - [x] lecture スキン(輪講・勉強会向け、モスグリーン系。quiz/answer/code-focus/misconception/cheatsheet)
 - [x] ヘッダー・フッター(機密区分・所属・コピーライト)、kpi の前年差・目標差表示
-- [x] デザイン基盤の文書化(`docs/DESIGN.md`: トークン・タイポグラフィ・グラフパレット・禁止事項)
+- [x] デザイン基盤の文書化(`skill/references/design.md`: トークン・タイポグラフィ・グラフパレット・禁止事項)
 - [x] グラフ・分岐フロー・複雑な構成図は「作図した画像を貼る」を標準手順としてスキルに明文化
 - [x] v2: business スキン(`kpi`、`examples/demo-business.md` で検証済み)
-- [x] 品質検証ループ: `check-overflow.mjs`(Puppeteer機械チェック)+ PNG目視
+- [x] 品質検証ループ: `skill/scripts/check-overflow.mjs`(Puppeteer機械チェック)+ PNG目視
 - [x] エージェントスキル(`skill/SKILL.md` + `references/layouts.md`)
 - [x] デザイン方針: エディトリアル・ミニマル(Canva のモノトーン系ビジネステンプレートを参考)。
   ```
@@ -76,5 +76,5 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 4. 検証ループ(ビルド → check-overflow → PNG目視)を回してから commit
 5. `skill/SKILL.md` のカタログ表と `skill/references/layouts.md` にエントリを追加
 6. スキルを再登録する(スキルはコピー方式のため)
-7. WebUI のピッカーにも反映する: `webui/lib/samples.mjs` にプレビュー用サンプル、
-   `webui/src/layout-groups.js` の該当グループにクラス名を追加(漏れると「その他」タブに出る)
+7. WebUI のピッカーにも反映する: `skill/webui/lib/samples.mjs` にプレビュー用サンプル、
+   `skill/webui/src/layout-groups.js` の当該グループにクラス名を追加(漏れると「その他」タブに出る)

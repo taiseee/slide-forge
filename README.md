@@ -15,44 +15,49 @@
 
 ## エージェントから使う
 
-[skills](https://skills.sh/) 経由でスキルとして登録するのが最も簡単。
+[skills](https://skills.sh/) 経由でスキルとして登録するのが最も簡単。`skill/` 配下に
+テーマCSS・検証スクリプト・編集WebUIを全部同梱しているので、**このコマンド1つだけで**
+CLIやWebUIも含めて動く(リポジトリ本体を別途 clone する必要はない)。
 
 ```bash
 npx skills add taiseee/slide-forge
 ```
 
 これで `skill/SKILL.md` が Claude Code 等のエージェントに登録され、「スライド作って」の一言から
-レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認が自動で回るようになる。
+レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認が自動で回るようになる。エージェントは
+初回だけ `npm install --prefix <スキルの絶対パス>` を実行してから使う(SKILL.md にその手順も書いてある)。
 
-CLI や WebUI での検証・編集も行いたい場合はリポジトリ本体を clone する。
+リポジトリ本体を clone して開発・検証したい場合:
 
 ```bash
 git clone https://github.com/taiseee/slide-forge.git
-cd slide-forge
+cd slide-forge/skill
 npm install
 ```
 
-エージェントが書き出したMarkdownは、そのまま下記のCLIやWebUIでも検証・編集できる。
+エージェントが書き出したMarkdownは、そのまま下記のCLIやWebUIでも検証・編集できる(`skill/` の中で実行する)。
 
 ```bash
+cd skill
+
 # ビルド
-npx marp --theme-set theme/ --html --allow-local-files examples/demo-research.md -o build/demo.html
+npx marp --theme-set theme/ --html --allow-local-files ../examples/demo-research.md -o ../build/demo.html
 
 # はみ出しチェック
-node scripts/check-overflow.mjs build/demo.html
+node scripts/check-overflow.mjs ../build/demo.html
 
 # PNG化(目視確認用)
-npx marp --theme-set theme/ --html --allow-local-files --images png examples/demo-research.md -o build/png/demo.png
+npx marp --theme-set theme/ --html --allow-local-files --images png ../examples/demo-research.md -o ../build/png/demo.png
 ```
 
 ## 人が直接編集する: WebUI
 
-`npm run webui -- <file.md>` で立ち上がるローカルエディタは、パワポやCanvaのような感覚でMarpスライドを編集できる。エージェントが下書きしたデッキを人が仕上げる、という使い方にも向いている。
+`npm run webui -- <file.md>` で立ち上がるローカルエディタは、パワーポイントやCanvaのような感覚でMarpスライドを編集できる。エージェントが下書きしたデッキを人が仕上げる、という使い方にも向いている(エージェント自身が起動してURLを提示することもできる)。
 
 ```bash
-cd slide-forge
+cd slide-forge/skill
 npm install
-npm run webui -- examples/demo-research.md
+npm run webui -- ../examples/demo-research.md
 # → http://127.0.0.1:5757 が開く
 ```
 
@@ -98,7 +103,7 @@ npm run webui -- examples/demo-research.md
 | lecture | `quiz` `answer` `code-focus` `misconception` `cheatsheet` `code-compare` |
 
 各レイアウトの詳しい使い方とMarkdownサンプルは [skill/references/layouts.md](skill/references/layouts.md)、
-色・タイポグラフィ・グラフパレット等のデザイン基盤は [docs/DESIGN.md](docs/DESIGN.md) にまとまっている。
+色・タイポグラフィ・グラフパレット等のデザイン基盤は [skill/references/design.md](skill/references/design.md) にまとまっている。
 
 ## 設計思想
 
@@ -110,27 +115,32 @@ npm run webui -- examples/demo-research.md
 
 ## 構成
 
+`skill/` 一本だけで自己完結している(`npx skills add` ではこの中だけがエージェントにコピーされる)。
+リポジトリルートの `examples/` `docs/ROADMAP.md` は slide-forge 自体を開発・拡張するときのもの(スキル単体には含まれない)。
+
 ```
-theme/
-  core.css        # 全レイアウトクラス(構造のみ、色はCSS変数)
-  research.css    # 研究発表スキン(配色 + experiment/math/hypothesis)
-  business.css    # ビジネススキン(配色 + kpi/plans/forces 等)
-  lecture.css     # 輪講・勉強会スキン(配色 + quiz/answer/cheatsheet 等)
-scripts/
-  check-overflow.mjs  # スライドのはみ出しを機械検出
 skill/
   SKILL.md            # エージェントスキル(ワークフロー+カタログ索引)
-  references/layouts.md  # レイアウト別の完全サンプル
-webui/
-  server.mjs          # 編集WebUIのローカルサーバ(marp-coreレンダリング+保存API)
-  src/                # Canva風エディタ(Vite + React)
+  package.json        # このスキル単体で npm install できる npm パッケージ
+  references/
+    layouts.md        # レイアウト別の完全サンプル
+    design.md         # デザイン基盤(トークン・書式ルール)
+  theme/
+    core.css          # 全レイアウトクラス(構造のみ、色はCSS変数)
+    research.css      # 研究発表スキン(配色 + experiment/math/hypothesis)
+    business.css      # ビジネススキン(配色 + kpi/plans/forces 等)
+    lecture.css       # 輪講・勉強会スキン(配色 + quiz/answer/cheatsheet 等)
+  scripts/
+    check-overflow.mjs  # スライドのはみ出しを機械検出
+  webui/
+    server.mjs        # 編集WebUIのローカルサーバ(marp-coreレンダリング+保存API)
+    src/              # Canva風エディタ(Vite + React)
 examples/
   demo-research.md    # 研究スキンのカタログ兼検証デッキ
   demo-business.md    # ビジネススキンのカタログ兼検証デッキ
   demo-lecture.md     # 輪講・勉強会スキンのデモ(Git内部構造の勉強会デッキ)
 docs/
-  ROADMAP.md          # 目指す姿・現状・TODO
-  DESIGN.md           # デザイン基盤(トークン・書式ルール)
+  ROADMAP.md          # 目指す姿・現状・TODO(リポジトリを担う人向け)
 ```
 
 ## キーボードショートカット(編集WebUI)

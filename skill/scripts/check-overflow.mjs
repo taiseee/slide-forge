@@ -9,9 +9,10 @@
  *       const issues = await checkOverflow('slides.html')  // [] なら問題なし
  */
 
-import path from 'node:path';
-import { pathToFileURL, fileURLToPath } from 'node:url';
-import puppeteer from 'puppeteer';
+import path from "node:path";
+import { realpathSync } from "node:fs";
+import { pathToFileURL, fileURLToPath } from "node:url";
+import puppeteer from "puppeteer";
 
 export async function checkOverflow(file) {
   const browser = await puppeteer.launch();
@@ -19,7 +20,7 @@ export async function checkOverflow(file) {
     const page = await browser.newPage();
     await page.setViewport({ width: 1600, height: 1000 });
     await page.goto(pathToFileURL(path.resolve(file)).href, {
-      waitUntil: 'networkidle0',
+      waitUntil: "networkidle0",
       timeout: 30000,
     });
 
@@ -27,11 +28,15 @@ export async function checkOverflow(file) {
       const TOL = 3; // px 許容誤差
       const results = [];
       // Marp CLI 出力ではスライドは svg[data-marpit-svg] > foreignObject > section
-      let targets = [...document.querySelectorAll('svg[data-marpit-svg] > foreignObject > section')];
+      let targets = [
+        ...document.querySelectorAll(
+          "svg[data-marpit-svg] > foreignObject > section",
+        ),
+      ];
       if (targets.length === 0) {
         // フォールバック: 最外殻の section のみ対象
-        targets = [...document.querySelectorAll('section')].filter(
-          (s) => !s.parentElement?.closest('section'),
+        targets = [...document.querySelectorAll("section")].filter(
+          (s) => !s.parentElement?.closest("section"),
         );
       }
 
@@ -49,27 +54,35 @@ export async function checkOverflow(file) {
         const rect = s.getBoundingClientRect();
         const scale = rect.width / s.clientWidth || 1;
         const tol = TOL * scale;
-        for (const el of s.querySelectorAll('*')) {
+        for (const el of s.querySelectorAll("*")) {
           // 不可視要素(KaTeX の MathML 部など、クリップされた補助要素)は対象外
-          if (el.closest('.katex-mathml') !== null) continue;
-          if (typeof el.checkVisibility === 'function' && !el.checkVisibility()) continue;
+          if (el.closest(".katex-mathml") !== null) continue;
+          if (typeof el.checkVisibility === "function" && !el.checkVisibility())
+            continue;
           const r = el.getBoundingClientRect();
           if (r.width === 0 && r.height === 0) continue;
           const out = [];
-          if (r.top < rect.top - tol) out.push('上');
-          if (r.bottom > rect.bottom + tol) out.push('下');
-          if (r.left < rect.left - tol) out.push('左');
-          if (r.right > rect.right + tol) out.push('右');
+          if (r.top < rect.top - tol) out.push("上");
+          if (r.bottom > rect.bottom + tol) out.push("下");
+          if (r.left < rect.left - tol) out.push("左");
+          if (r.right > rect.right + tol) out.push("右");
           if (out.length > 0) {
             const tag = el.tagName.toLowerCase();
-            const cls = el.className && typeof el.className === 'string' ? `.${el.className.split(' ')[0]}` : '';
-            problems.push(`要素 <${tag}${cls}> が枠外(${out.join('/')})`);
+            const cls =
+              el.className && typeof el.className === "string"
+                ? `.${el.className.split(" ")[0]}`
+                : "";
+            problems.push(`要素 <${tag}${cls}> が枠外(${out.join("/")})`);
             break; // スライドごとに最初の1件で十分
           }
         }
 
         if (problems.length > 0) {
-          results.push({ slide: slideNo, class: s.className || '(none)', problems });
+          results.push({
+            slide: slideNo,
+            class: s.className || "(none)",
+            problems,
+          });
         }
       });
       return results;
@@ -79,22 +92,35 @@ export async function checkOverflow(file) {
   }
 }
 
-const isCli =
-  process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+// realpath で比較する(macOS の /tmp → /private/tmp のような symlink 経由実行でも
+// CLI判定が false にならないようにする)
+const isCli = (() => {
+  if (!process.argv[1]) return false;
+  try {
+    return (
+      realpathSync(process.argv[1]) ===
+      realpathSync(fileURLToPath(import.meta.url))
+    );
+  } catch {
+    return false;
+  }
+})();
 
 if (isCli) {
   const file = process.argv[2];
   if (!file) {
-    console.error('usage: node scripts/check-overflow.mjs <slides.html>');
+    console.error("usage: node scripts/check-overflow.mjs <slides.html>");
     process.exit(2);
   }
   const issues = await checkOverflow(file);
   if (issues.length === 0) {
-    console.log('OK: 全スライドではみ出しなし');
+    console.log("OK: 全スライドではみ出しなし");
   } else {
     console.log(`NG: ${issues.length} 枚のスライドではみ出しを検出`);
     for (const it of issues) {
-      console.log(`  slide ${it.slide} [${it.class}]: ${it.problems.join(', ')}`);
+      console.log(
+        `  slide ${it.slide} [${it.class}]: ${it.problems.join(", ")}`,
+      );
     }
     process.exitCode = 1;
   }

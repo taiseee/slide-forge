@@ -1,7 +1,8 @@
 # レイアウトカタログ(完全サンプル)
 
 各レイアウトの「そのまま使える」Markdownサンプル。実レンダリング例は
-`~/projects/slide-forge/examples/demo-research.md` をビルドすると確認できる。
+slide-forgeリポジトリ本体(単体スキルインストールには含まれない)の
+`examples/demo-research.md` をビルドすると確認できる。
 
 ## title — 表紙
 
