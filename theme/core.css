@@ -19,7 +19,8 @@
  *   roadmap / layers / annotated / matrix-3 / cards / scorecard / transition /
  *   changelog / contact / definition / references / venn-3 / sidebar /
  *   callout(+ success / warning / error) / photo-grid / benchmark /
- *   tree / radial / positioning / objectives / image-cards / status
+ *   tree / radial / positioning / objectives / image-cards / status /
+ *   chain / glossary / kanban / io / quotes
  * デッキ単位のオプション: 進捗バー(--sf-progress、末尾の progress 節を参照)
  */
 
@@ -3345,4 +3346,317 @@ section.status > p {
   font-size: 0.78em;
   letter-spacing: 0.06em;
   margin-top: 1em;
+}
+
+/* ---------- chain: 矢羽根チェーン(バリューチェーン・サプライチェーン・パイプライン) ----------
+   構造: h1 + ol(各 li が「**工程名** 説明」、4〜7項目)+ 任意の p(注記)。
+   最終工程が濃色で強調される。箱と矢印で2〜4項目なら flow。 */
+
+section.chain ol {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.4em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 5px;
+}
+
+section.chain ol > li::marker {
+  content: none;
+}
+
+section.chain ol > li {
+  background: var(--sf-panel);
+  /* 矢羽根: 右端が凸、左端が凹 */
+  clip-path: polygon(
+    0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%,
+    0 100%, 22px 50%
+  );
+  padding: 1.15em 1.5em 1.15em 1.8em;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.64em;
+  line-height: 1.55;
+  color: var(--sf-muted);
+}
+
+section.chain ol > li:first-child {
+  /* 先頭は左端をまっすぐに */
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 50%, calc(100% - 22px) 100%, 0 100%);
+  padding-left: 1.3em;
+}
+
+section.chain ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-size: 1.15em;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.3em;
+}
+
+section.chain ol > li:last-child {
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+}
+
+section.chain ol > li:last-child strong {
+  color: var(--sf-ink-text);
+}
+
+section.chain > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1.2em;
+}
+
+/* ---------- glossary: 用語定義の一覧(前提知識・用語集) ----------
+   構造: h1 + ul(各 li が「**用語** 定義文」、3〜6語)+ 任意の p(注記)。
+   1語を主役に据えるなら definition、ラベル+短い値の対なら spec。
+   定義文にインライン code 等が混ざっても崩れないよう、
+   grid ではなくぶら下げインデントで組む。 */
+
+section.glossary ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5em;
+}
+
+section.glossary ul > li::marker {
+  content: none;
+}
+
+section.glossary ul > li {
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.65em 0.2em 0.65em 11.2em;
+  margin: 0;
+  font-size: 0.88em;
+  line-height: 1.7;
+  color: var(--sf-muted);
+}
+
+section.glossary ul > li strong {
+  display: inline-block;
+  width: 10.2em;
+  margin-left: -11em;
+  vertical-align: top;
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+section.glossary > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- kanban: 状態別の3列ボード(未着手・対応中・完了) ----------
+   構造: h1 + h2(列名)×2〜4、各 h2 の直後に ul(項目がカードになる)。
+   1項目ずつ状態チップを付けて一覧するなら status。 */
+
+section.kanban {
+  display: block;
+  columns: 2;
+  column-gap: 44px;
+  column-fill: auto;
+}
+
+section.kanban:has(h2:nth-of-type(3)) {
+  columns: 3;
+}
+
+section.kanban:has(h2:nth-of-type(4)) {
+  columns: 4;
+}
+
+section.kanban h1 {
+  column-span: all;
+}
+
+section.kanban h2 {
+  break-after: avoid;
+  border-top: 3px solid var(--sf-accent);
+  padding: 0.5em 0.2em 0;
+  margin: 0.4em 0 0.6em;
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--sf-muted);
+}
+
+section.kanban h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.kanban ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+section.kanban ul > li::marker {
+  content: none;
+}
+
+section.kanban ul > li {
+  break-inside: avoid;
+  background: var(--sf-panel);
+  padding: 0.65em 0.95em;
+  margin: 0 0 12px;
+  font-size: 0.74em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.kanban ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- io: 入力・処理・出力(中央の処理が強調される3列) ----------
+   構造: h1 + h2×3(入力・処理・出力の列名)、各 h2 の直後に ul。
+   列間に → が入り、中央列の見出しが濃色になる。
+   工程を順に流すだけなら flow、多工程の連結は chain。 */
+
+section.io {
+  /* Marp 内部スタイル(flex)に勝つため !important が必要 */
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto 1fr;
+  column-gap: 64px;
+  align-content: start;
+}
+
+section.io h1 {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+section.io h2 {
+  grid-row: 2;
+  position: relative;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.4em 0.8em;
+  margin: 0.6em 0 0.6em;
+  font-size: 0.88em;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+section.io h2:nth-of-type(1) { grid-column: 1; }
+section.io h2:nth-of-type(2) { grid-column: 2; }
+section.io h2:nth-of-type(3) { grid-column: 3; }
+
+section.io h2:nth-of-type(2) {
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+}
+
+section.io h2:nth-of-type(n + 2)::before {
+  content: '→';
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  text-align: center;
+  background: none;
+  color: var(--sf-muted);
+  font-size: 1.15em;
+}
+
+section.io ul {
+  grid-row: 3;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8em;
+  line-height: 1.7;
+  color: var(--sf-muted);
+}
+
+section.io ul:nth-of-type(1) { grid-column: 1; }
+section.io ul:nth-of-type(2) { grid-column: 2; }
+section.io ul:nth-of-type(3) { grid-column: 3; }
+
+section.io ul > li::marker {
+  content: none;
+}
+
+section.io ul > li {
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.55em 0.2em;
+  margin: 0;
+}
+
+section.io ul > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- quotes: 複数の引用カード(顧客の声・フィードバック) ----------
+   構造: h1 + blockquote×2〜3(空行で区切る。各末尾の「*— 出典*」が
+   出典行になる)。1つの引用を全面に据えるなら quote、
+   事例1件を深掘りするなら case-study(business)。 */
+
+section.quotes {
+  /* Marp 内部スタイル(flex)に勝つため !important が必要 */
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 32px;
+  align-content: start;
+}
+
+section.quotes:has(blockquote:nth-of-type(3)) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+section.quotes h1 {
+  grid-column: 1 / -1;
+}
+
+section.quotes blockquote {
+  grid-row: 2;
+  position: relative;
+  background: var(--sf-panel);
+  border: none;
+  margin: 0.8em 0 0;
+  padding: 2.1em 1.3em 1.2em;
+  font-size: 0.82em;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: var(--sf-text);
+}
+
+section.quotes blockquote::before {
+  content: '\201C';
+  position: absolute;
+  top: 0.05em;
+  left: 0.35em;
+  font-family: Georgia, serif;
+  font-size: 2.8em;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--sf-accent);
+}
+
+section.quotes blockquote em {
+  display: block;
+  margin-top: 0.9em;
+  font-style: normal;
+  font-size: 0.85em;
+  letter-spacing: 0.08em;
+  color: var(--sf-muted);
 }

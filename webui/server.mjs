@@ -17,14 +17,13 @@
  */
 
 import express from 'express';
-import { readFile, writeFile, mkdir, access, readdir } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, access, readdir, stat } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { Marp } from '@marp-team/marp-core';
 import { parseDeck, serializeDeck, slideClass } from './lib/deck.mjs';
-import { buildSampleDeck, sampleBody } from './lib/samples.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -64,7 +63,34 @@ async function createMarp() {
   return marp;
 }
 
-const marpPromise = createMarp();
+// テーマCSS・カタログ・サンプルの最大mtime。サーバ起動中の
+// レイアウト追加(theme/*.css・SKILL.md・samples.mjs の更新)を検知して
+// marp インスタンスとプレビューキャッシュを作り直すためのバージョン値。
+const SAMPLES_PATH = path.join(ROOT, 'webui', 'lib', 'samples.mjs');
+async function assetVersion() {
+  const files = [path.join(ROOT, 'skill', 'SKILL.md'), SAMPLES_PATH];
+  for (const f of (await readdir(path.join(ROOT, 'theme'))).filter((x) => x.endsWith('.css'))) {
+    files.push(path.join(ROOT, 'theme', f));
+  }
+  const stats = await Promise.all(files.map((f) => stat(f)));
+  return String(Math.max(...stats.map((s) => s.mtimeMs)));
+}
+
+let marpCache = null; // { ver, marp }
+async function getMarp() {
+  const ver = await assetVersion();
+  if (!marpCache || marpCache.ver !== ver) {
+    marpCache = { ver, marp: await createMarp() };
+    previewCache.clear();
+  }
+  return marpCache.marp;
+}
+
+// samples.mjs は ESM キャッシュを避けるためバージョン付きで動的 import する
+async function loadSamples() {
+  const ver = marpCache?.ver ?? (await assetVersion());
+  return import(`${pathToFileURL(SAMPLES_PATH)}?v=${ver}`);
+}
 
 // ---------- API ----------
 
@@ -108,7 +134,7 @@ app.post('/api/render', async (req, res) => {
   try {
     const { markdown } = req.body;
     if (typeof markdown !== 'string') throw new Error('markdown must be a string');
-    const marp = await marpPromise;
+    const marp = await getMarp();
     const { html, css } = marp.render(markdown, { htmlAsArray: true });
     res.json({ css, slides: html });
   } catch (e) {
@@ -169,10 +195,12 @@ const previewCache = new Map(); // theme → { css, items }
 app.get('/api/layout-previews', async (req, res) => {
   try {
     const theme = /^[\w-]+$/.test(String(req.query.theme)) ? String(req.query.theme) : 'research';
+    // getMarp がテーマ・カタログ・サンプルの更新を検知したら previewCache も破棄される
+    const marp = await getMarp();
     if (!previewCache.has(theme)) {
       const layouts = await readLayoutCatalog();
       const classes = layouts.map((l) => l.cls);
-      const marp = await marpPromise;
+      const { buildSampleDeck, sampleBody } = await loadSamples();
       const { html, css } = marp.render(buildSampleDeck(theme, classes), { htmlAsArray: true });
       previewCache.set(theme, {
         css,

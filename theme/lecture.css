@@ -3,7 +3,7 @@
  * slide-forge lecture skin — エンジニアの輪講・社内勉強会・チュートリアル向け。
  * 配色: モスグリーン/セージ系のエディトリアル・ミニマル。
  *
- * 追加レイアウトクラス: quiz / answer / code-focus / misconception / cheatsheet
+ * 追加レイアウトクラス: quiz / answer / code-focus / misconception / cheatsheet / code-compare
  * (objectives は汎用のため core に定義)
  */
 
@@ -300,4 +300,70 @@ section.cheatsheet > p {
   font-size: 0.78em;
   letter-spacing: 0.06em;
   margin-top: 1em;
+}
+
+/* ---------- code-compare: 良い例・悪い例のコード対比 ----------
+   構造: h1 + h2(悪い例)+ pre + h2(良い例)+ pre。左が ✗、右が ○。
+   各 pre の後に任意の p(補足1行)。文章の対比は misconception。
+   記号色(✗/○)は DESIGN.md の状態色に従う。 */
+
+section.code-compare {
+  display: block;
+  columns: 2;
+  column-gap: 48px;
+  column-fill: auto;
+}
+
+section.code-compare h1 {
+  column-span: all;
+}
+
+section.code-compare h2 {
+  break-after: avoid;
+  position: relative;
+  padding-left: 1.6em;
+  margin: 0.6em 0 0.5em;
+  font-size: 0.88em;
+  letter-spacing: 0.12em;
+}
+
+section.code-compare h2::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+}
+
+section.code-compare h2:nth-of-type(1)::before {
+  content: '✗';
+  color: #9c5450;
+}
+
+section.code-compare h2:nth-of-type(2)::before {
+  content: '○';
+  color: #5e7a5e;
+}
+
+section.code-compare h2:not(:first-of-type) {
+  break-before: column;
+}
+
+section.code-compare pre {
+  margin: 0;
+  font-size: 0.62em;
+}
+
+section.code-compare pre:nth-of-type(1) {
+  border-left: 3px solid #9c5450;
+}
+
+section.code-compare pre:nth-of-type(2) {
+  border-left: 3px solid #5e7a5e;
+}
+
+section.code-compare p {
+  font-size: 0.76em;
+  color: var(--sf-muted);
+  letter-spacing: 0.04em;
+  margin: 0.6em 0 0;
 }

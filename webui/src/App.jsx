@@ -164,6 +164,11 @@ export default function App() {
 
   // レイアウトピッカーのプレビュー(テーマごとにサーバ側キャッシュあり)
   const theme = useMemo(() => frontmatter.match(/^theme:\s*(\S+)/m)?.[1] ?? 'research', [frontmatter]);
+  // スキン専用クラスは、そのスキン以外では CSS が無く崩れるためピッカーに出さない
+  const usableLayouts = useMemo(
+    () => layouts.filter((l) => !l.skin || l.skin === theme),
+    [layouts, theme],
+  );
   useEffect(() => {
     let cancelled = false;
     fetch(`/api/layout-previews?theme=${encodeURIComponent(theme)}`)
@@ -807,7 +812,7 @@ export default function App() {
         <aside className="sidebar" style={{ width: sidebarWidth }}>
           <div className="sidebar-actions">
             <LayoutPicker
-              layouts={layouts}
+              layouts={usableLayouts}
               previews={previews}
               label="＋ 追加"
               splitAction={addSlide}
@@ -855,7 +860,7 @@ export default function App() {
         <section className="stage">
           <div className="stage-toolbar">
             <span className="toolbar-label">レイアウト</span>
-            <LayoutPicker layouts={layouts} previews={previews} current={curCls} onSelect={changeCls} />
+            <LayoutPicker layouts={usableLayouts} previews={previews} current={curCls} onSelect={changeCls} />
             <span className="hint">
               {layouts.find((l) => l.cls === curCls)?.desc || 'テキストをクリックすると直接編集できます'}
             </span>

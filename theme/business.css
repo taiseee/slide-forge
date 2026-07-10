@@ -4,7 +4,7 @@
  * 配色: 温かみのあるグレージュ/ブラウン系のエディトリアル・ミニマル。
  *
  * 追加レイアウトクラス: kpi / plans / persona / tam-sam-som / tam-sam-som-circle /
- * case-study / journey / forces / bmc / impact / okr
+ * case-study / journey / forces / bmc / impact / okr / actions / swot
  */
 
 @import 'slide-forge-core';
@@ -827,4 +827,156 @@ section.okr ol > li em {
   font-weight: 300;
   line-height: 1.2;
   color: var(--sf-accent-strong);
+}
+
+/* ---------- actions: アクションプラン(タスク・担当・期限) ----------
+   構造: h1 + ol(各 li が「**タスク** 説明 *担当* *期限*」、3〜6行)
+   + 任意の p(注記)。1つ目の em が担当チップ、2つ目の em が期限になる。
+   担当・期限が要らない進捗一覧なら status。 */
+
+section.actions ol {
+  counter-reset: act;
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5em;
+}
+
+section.actions ol > li::marker {
+  content: none;
+}
+
+section.actions ol > li {
+  counter-increment: act;
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.7em 0.2em;
+  margin: 0;
+  font-size: 0.88em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.actions ol > li::before {
+  content: counter(act, decimal-leading-zero);
+  flex-shrink: 0;
+  font-family: var(--sf-numeral-font);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--sf-accent);
+}
+
+section.actions ol > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+section.actions ol > li em {
+  font-style: normal;
+  flex-shrink: 0;
+}
+
+section.actions ol > li em:nth-of-type(1) {
+  /* 担当チップ */
+  margin-left: auto;
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  padding: 0.12em 0.9em;
+  font-size: 0.78em;
+  letter-spacing: 0.14em;
+}
+
+section.actions ol > li em:nth-of-type(2) {
+  /* 期限 */
+  width: 4.6em;
+  text-align: right;
+  font-family: var(--sf-numeral-font);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sf-accent-strong);
+}
+
+section.actions > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- swot: SWOT分析(S/W/O/T の頭文字付き4象限) ----------
+   構造: h1 + ul(li 4つ、順序固定: 強み → 弱み → 機会 → 脅威。
+   各 li は「**ラベル** 説明文」)+ 任意の p(注記)。
+   S/W/O/T の頭文字が自動付与され、好影響(S・O)がパネル、
+   悪影響(W・T)がヘアライン枠で対比される。汎用の4象限は matrix。 */
+
+section.swot ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.9em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+section.swot ul > li::marker {
+  content: none;
+}
+
+section.swot ul > li {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.95em 1.2em 0.95em 3.8em;
+  font-size: 0.78em;
+  line-height: 1.7;
+  color: var(--sf-muted);
+}
+
+section.swot ul > li::before {
+  position: absolute;
+  left: 0.6em;
+  top: 0.4em;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.9em;
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+section.swot ul > li:nth-child(1)::before { content: 'S'; }
+section.swot ul > li:nth-child(2)::before { content: 'W'; }
+section.swot ul > li:nth-child(3)::before { content: 'O'; }
+section.swot ul > li:nth-child(4)::before { content: 'T'; }
+
+/* 好影響(強み・機会)= パネル、悪影響(弱み・脅威)= ヘアライン枠 */
+section.swot ul > li:nth-child(odd) {
+  background: var(--sf-panel);
+}
+
+section.swot ul > li:nth-child(odd)::before {
+  color: var(--sf-accent-strong);
+}
+
+section.swot ul > li:nth-child(even) {
+  border: 1px solid var(--sf-line);
+}
+
+section.swot ul > li:nth-child(even)::before {
+  color: var(--sf-muted);
+}
+
+section.swot ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25em;
+}
+
+section.swot > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
 }

@@ -10,7 +10,7 @@ export const LAYOUT_GROUPS = [
   },
   {
     name: '本文',
-    classes: ['content', 'content-lead', 'two-column', 'sidebar', 'columns', 'cards', 'spec', 'faq', 'checklist', 'quote', 'code', 'math', 'definition', 'callout'],
+    classes: ['content', 'content-lead', 'two-column', 'sidebar', 'columns', 'cards', 'spec', 'faq', 'checklist', 'quote', 'quotes', 'code', 'math', 'definition', 'glossary', 'callout'],
   },
   {
     name: '画像',
@@ -18,19 +18,19 @@ export const LAYOUT_GROUPS = [
   },
   {
     name: '比較・分類',
-    classes: ['comparison', 'comparison-3', 'pros-cons', 'transition', 'table', 'benchmark', 'matrix', 'matrix-3', 'venn', 'venn-3', 'positioning', 'ranking', 'plans', 'scorecard', 'forces', 'bmc'],
+    classes: ['comparison', 'comparison-3', 'pros-cons', 'transition', 'table', 'benchmark', 'matrix', 'matrix-3', 'swot', 'venn', 'venn-3', 'positioning', 'ranking', 'plans', 'scorecard', 'forces', 'bmc'],
   },
   {
     name: 'プロセス・構造',
-    classes: ['steps', 'steps-v', 'flow', 'cycle', 'timeline', 'timeline-h', 'gantt', 'roadmap', 'funnel', 'pyramid', 'layers', 'org', 'tree', 'radial', 'journey', 'changelog'],
+    classes: ['steps', 'steps-v', 'flow', 'chain', 'io', 'cycle', 'timeline', 'timeline-h', 'gantt', 'roadmap', 'kanban', 'funnel', 'pyramid', 'layers', 'org', 'tree', 'radial', 'journey', 'changelog'],
   },
   {
     name: '数値・結果',
-    classes: ['stat', 'kpi', 'impact', 'okr', 'status', 'experiment', 'hypothesis', 'tam-sam-som', 'tam-sam-som-circle', 'case-study', 'contact'],
+    classes: ['stat', 'kpi', 'impact', 'okr', 'status', 'actions', 'experiment', 'hypothesis', 'confusion-matrix', 'tam-sam-som', 'tam-sam-som-circle', 'case-study', 'contact'],
   },
   {
     name: '教育',
-    classes: ['quiz', 'answer', 'code-focus', 'misconception', 'cheatsheet'],
+    classes: ['quiz', 'answer', 'code-focus', 'misconception', 'cheatsheet', 'code-compare'],
   },
 ];
 

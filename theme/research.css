@@ -3,7 +3,7 @@
  * slide-forge research skin — 研究発表(ゼミ・学会・進捗報告)向け。
  * 配色: グレー/墨色系のモノトーン・ミニマル。
  *
- * 追加レイアウトクラス: experiment / math / hypothesis
+ * 追加レイアウトクラス: experiment / math / hypothesis / confusion-matrix
  * (definition / references は汎用のため core に定義)
  */
 
@@ -135,4 +135,56 @@ section.hypothesis > p {
   font-size: 0.8em;
   letter-spacing: 0.06em;
   margin-top: 1em;
+}
+
+/* ---------- confusion-matrix: 混同行列(対角セルが強調される) ----------
+   構造: h1 + table(ヘッダー行=予測クラス、1列目=実際のクラス)
+   + 任意の blockquote(注記)。2×2〜4×4 を想定し、対角セル
+   (1行目2列目、2行目3列目…)が正解セルとして強調される。 */
+
+section.confusion-matrix table {
+  margin: 1em auto 0.5em;
+  font-size: 0.9em;
+}
+
+section.confusion-matrix th,
+section.confusion-matrix td {
+  padding: 0.7em 1.6em;
+  text-align: center;
+}
+
+section.confusion-matrix td {
+  font-family: var(--sf-numeral-font);
+  font-size: 1.25em;
+  font-weight: 300;
+  color: var(--sf-muted);
+}
+
+section.confusion-matrix td:first-child {
+  /* 行ラベル(実際のクラス) */
+  font-family: var(--sf-body-font);
+  font-size: 1em;
+  font-weight: 600;
+  color: var(--sf-text);
+  text-align: left;
+}
+
+/* 対角セル(正解)を強調 */
+section.confusion-matrix tbody tr:nth-child(1) td:nth-child(2),
+section.confusion-matrix tbody tr:nth-child(2) td:nth-child(3),
+section.confusion-matrix tbody tr:nth-child(3) td:nth-child(4),
+section.confusion-matrix tbody tr:nth-child(4) td:nth-child(5) {
+  background: var(--sf-panel);
+  color: var(--sf-accent-strong);
+  font-weight: 400;
+}
+
+section.confusion-matrix blockquote {
+  font-size: 0.74em;
+  color: var(--sf-muted);
+  background: none;
+  border-left: 2px solid var(--sf-line);
+  padding: 0.3em 1em;
+  margin: 0.9em auto 0;
+  width: fit-content;
 }

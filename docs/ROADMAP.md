@@ -12,11 +12,13 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 ## 現状(2026-07 v2)
 
 - [x] テーマ基盤: `core.css`(構造)+ スキンの分離構成
-- [x] コアレイアウト69種 + research 3種 + business 11種 + lecture 5種(全88種、3デモデッキで検証済み)
+- [x] コアレイアウト74種 + research 4種 + business 13種 + lecture 6種(全97種、3デモデッキで検証済み)
   - 2026-07 追加: venn-3 / sidebar / callout(info・success・warning・error)/ photo-grid /
     benchmark / tree / radial / positioning / objectives / image-cards / status(core)、
     forces / bmc / impact / okr(business)、
     hypothesis(research)、cheatsheet(lecture)
+  - 2026-07 追加(第2弾): chain / glossary / kanban / io / quotes(core)、
+    actions / swot(business)、confusion-matrix(research)、code-compare(lecture)
   - tree / radial / positioning は「模式図」クラス(構造の表現専用)。データ比例のグラフ・
     正確な座標が要る図は従来どおり作図画像を貼る
 - [x] lecture スキン(輪講・勉強会向け、モスグリーン系。quiz/answer/code-focus/misconception/cheatsheet)
