@@ -4,38 +4,19 @@ theme: research
 size: 16:9
 paginate: true
 math: katex
+title: 局所特徴を考慮した画像生成の自動評価
 ---
 
-<!-- _class: timeline-photo -->
+<!-- _class: title -->
 <!-- _paginate: false -->
 
-# slide-forge デモ: 研究発表テンプレート
+# 局所特徴を考慮した画像生成の自動評価
 
 研究スキンのレイアウトカタログ兼検証デッキ
 
 発表者名
 
 2026年7月8日 · 研究室ゼミ
-
----
-
-<!-- _class: timeline-photo -->
-
-# 歩み
-
-1. ![](/__ph.svg) **2025** 出来事の説明
-2. ![](/__ph.svg) **2026 上期** 出来事の説明
-3. ![](/__ph.svg) **2026 下期** 出来事の説明
-
----
-
-<!-- _class: collage -->
-
-# 活動スナップ
-
-![](/__ph.svg) ![](/__ph.svg) ![](/__ph.svg) ![](/__ph.svg) ![](/__ph.svg) ![](/__ph.svg)
-
-キャプションを一言
 
 ---
 
@@ -299,6 +280,26 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 ![](assets/placeholder-portrait.svg) ![](assets/placeholder-portrait.svg) ![](assets/placeholder-portrait.svg) ![](assets/placeholder-portrait.svg)
 
 代表的な 4 プロンプトの生成結果(人物ドメイン)
+
+---
+
+<!-- _class: timeline-photo -->
+
+# 研究の歩み
+
+1. ![](assets/placeholder-figure.svg) **2025** 局所スコアのプロトタイプを実装
+2. ![](assets/placeholder-chart.svg) **2026 上期** 3データセットで相関評価を実施
+3. ![](assets/placeholder-portrait.svg) **2026 下期** 閾値較正の自動化と論文化
+
+---
+
+<!-- _class: collage -->
+
+# 定性評価のスナップショット
+
+![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg) ![](assets/placeholder-portrait.svg) ![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg) ![](assets/placeholder-portrait.svg)
+
+手指・文字・背景テクスチャの代表例(詳細は次ページ)
 
 ---
 
