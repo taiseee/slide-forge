@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Hiragino Kaku Gothic ProN, Helvetica Neue, sans-serif">
+  <!-- research スキンのグラフパレット: 主系列 #566173 / 強調 #343c48 / 補助 #9aa3af #c7ccd4 -->
+  <g stroke="#eef0f3" stroke-width="1">
+    <line x1="90" y1="370" x2="930" y2="370"/>
+    <line x1="90" y1="260" x2="930" y2="260"/>
+    <line x1="90" y1="150" x2="930" y2="150"/>
+    <line x1="90" y1="40" x2="930" y2="40"/>
+  </g>
+  <line x1="90" y1="480" x2="930" y2="480" stroke="#c7ccd4" stroke-width="1.5"/>
+  <g fill="#878d96" font-size="20" text-anchor="end">
+    <text x="78" y="487">0.0</text>
+    <text x="78" y="377">0.2</text>
+    <text x="78" y="267">0.4</text>
+    <text x="78" y="157">0.6</text>
+    <text x="78" y="47">0.8</text>
+  </g>
+  <rect x="145" y="216" width="110" height="264" fill="#c7ccd4"/>
+  <rect x="335" y="178" width="110" height="302" fill="#9aa3af"/>
+  <rect x="525" y="145" width="110" height="335" fill="#566173"/>
+  <rect x="715" y="84" width="110" height="396" fill="#343c48"/>
+  <g fill="#343c48" font-size="24" font-weight="500" text-anchor="middle">
+    <text x="200" y="204">0.48</text>
+    <text x="390" y="166">0.55</text>
+    <text x="580" y="133">0.61</text>
+    <text x="770" y="72" font-weight="600">0.72</text>
+  </g>
+  <g fill="#878d96" font-size="21" text-anchor="middle">
+    <text x="200" y="514">CLIPScore</text>
+    <text x="390" y="514">PickScore</text>
+    <text x="580" y="514">ImageReward</text>
+    <text x="770" y="514" fill="#343c48" font-weight="600">提案手法</text>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 540" font-family="Hiragino Kaku Gothic ProN, Helvetica Neue, sans-serif">
+  <!-- business スキンのグラフパレット: 主系列 #8a7a63 / 強調 #55483a / 補助 #d9d2c3 -->
+  <g stroke="#f1ece2" stroke-width="1">
+    <line x1="100" y1="333" x2="970" y2="333"/>
+    <line x1="100" y1="187" x2="970" y2="187"/>
+    <line x1="100" y1="40" x2="970" y2="40"/>
+  </g>
+  <line x1="100" y1="480" x2="970" y2="480" stroke="#d9d2c3" stroke-width="1.5"/>
+  <g fill="#98907f" font-size="20" text-anchor="end">
+    <text x="88" y="487">0</text>
+    <text x="88" y="340">300</text>
+    <text x="88" y="194">600</text>
+    <text x="88" y="47">900</text>
+  </g>
+  <text x="30" y="27" fill="#98907f" font-size="19">国内市場規模(億円)</text>
+  <rect x="130" y="324" width="120" height="156" fill="#8a7a63"/>
+  <rect x="310" y="280" width="120" height="200" fill="#8a7a63"/>
+  <rect x="490" y="226" width="120" height="254" fill="#8a7a63"/>
+  <rect x="670" y="157" width="120" height="323" fill="#d9d2c3"/>
+  <rect x="850" y="70" width="120" height="410" fill="#d9d2c3"/>
+  <g fill="#55483a" font-size="23" font-weight="500" text-anchor="middle">
+    <text x="190" y="312">320</text>
+    <text x="370" y="268">410</text>
+    <text x="550" y="214">520</text>
+    <text x="730" y="145">660</text>
+    <text x="910" y="58">840</text>
+  </g>
+  <g fill="#98907f" font-size="21" text-anchor="middle">
+    <text x="190" y="514">2023</text>
+    <text x="370" y="514">2024</text>
+    <text x="550" y="514">2025</text>
+    <text x="730" y="514">2026</text>
+    <text x="910" y="514">2027</text>
+  </g>
+  <!-- 凡例 -->
+  <g font-size="20">
+    <rect x="700" y="12" width="24" height="24" fill="#8a7a63"/>
+    <text x="734" y="31" fill="#55483a">実績</text>
+    <rect x="820" y="12" width="24" height="24" fill="#d9d2c3"/>
+    <text x="854" y="31" fill="#98907f">予測</text>
+  </g>
+</svg>

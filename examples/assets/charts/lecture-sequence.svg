@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 560" font-family="Hiragino Kaku Gothic ProN, Helvetica Neue, sans-serif">
+  <!-- lecture スキンの作図パレット: 主系列 #5c7360 / 強調 #3b4c40 / 補助 #9aab9c / パネル #edf1ea -->
+  <defs>
+    <marker id="sq" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3b4c40"/>
+    </marker>
+    <marker id="sq-m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9aab9c"/>
+    </marker>
+  </defs>
+  <!-- ライフライン -->
+  <g stroke="#ccd6cc" stroke-width="1.5" stroke-dasharray="6 6">
+    <line x1="180" y1="86" x2="180" y2="530"/>
+    <line x1="550" y1="86" x2="550" y2="530"/>
+    <line x1="920" y1="86" x2="920" y2="530"/>
+  </g>
+  <!-- 参加者 -->
+  <g>
+    <rect x="80" y="30" width="200" height="54" fill="#edf1ea"/>
+    <text x="180" y="65" fill="#2f342f" font-size="23" text-anchor="middle">開発者</text>
+    <rect x="428" y="30" width="244" height="54" fill="#edf1ea"/>
+    <text x="550" y="65" fill="#2f342f" font-size="23" text-anchor="middle">ローカルリポジトリ</text>
+    <rect x="820" y="30" width="200" height="54" fill="#edf1ea"/>
+    <text x="920" y="65" fill="#2f342f" font-size="23" text-anchor="middle">リモート(origin)</text>
+  </g>
+  <!-- メッセージ -->
+  <line x1="180" y1="150" x2="542" y2="150" stroke="#3b4c40" stroke-width="2" marker-end="url(#sq)"/>
+  <text x="361" y="140" fill="#2f342f" font-size="21" text-anchor="middle">git commit</text>
+  <line x1="550" y1="210" x2="188" y2="210" stroke="#9aab9c" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#sq-m)"/>
+  <text x="369" y="200" fill="#8a9088" font-size="20" text-anchor="middle">オブジェクト生成・ref 更新</text>
+  <line x1="180" y1="285" x2="542" y2="285" stroke="#3b4c40" stroke-width="2" marker-end="url(#sq)"/>
+  <text x="361" y="275" fill="#2f342f" font-size="21" text-anchor="middle">git push origin main</text>
+  <line x1="550" y1="345" x2="912" y2="345" stroke="#3b4c40" stroke-width="2" marker-end="url(#sq)"/>
+  <text x="731" y="335" fill="#2f342f" font-size="21" text-anchor="middle">オブジェクト転送+ref 更新依頼</text>
+  <line x1="920" y1="410" x2="558" y2="410" stroke="#9aab9c" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#sq-m)"/>
+  <text x="739" y="400" fill="#8a9088" font-size="20" text-anchor="middle">受理(fast-forward)</text>
+  <line x1="550" y1="475" x2="188" y2="475" stroke="#9aab9c" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#sq-m)"/>
+  <text x="369" y="465" fill="#8a9088" font-size="20" text-anchor="middle">push 完了</text>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Hiragino Kaku Gothic ProN, Helvetica Neue, sans-serif">
+  <!-- research スキンのグラフパレット: 強調 #343c48 / 補助 #9aa3af -->
+  <g stroke="#eef0f3" stroke-width="1">
+    <line x1="100" y1="370" x2="930" y2="370"/>
+    <line x1="100" y1="260" x2="930" y2="260"/>
+    <line x1="100" y1="150" x2="930" y2="150"/>
+    <line x1="100" y1="40" x2="930" y2="40"/>
+  </g>
+  <line x1="100" y1="480" x2="930" y2="480" stroke="#c7ccd4" stroke-width="1.5"/>
+  <g fill="#878d96" font-size="20" text-anchor="end">
+    <text x="88" y="487">0.4</text>
+    <text x="88" y="377">0.5</text>
+    <text x="88" y="267">0.6</text>
+    <text x="88" y="157">0.7</text>
+    <text x="88" y="47">0.8</text>
+  </g>
+  <g fill="#878d96" font-size="20" text-anchor="middle">
+    <text x="140" y="512">8</text>
+    <text x="330" y="512">16</text>
+    <text x="520" y="512">32</text>
+    <text x="710" y="512">64</text>
+    <text x="900" y="512">128</text>
+  </g>
+  <text x="930" y="536" fill="#878d96" font-size="19" text-anchor="end">パッチサイズ(px)</text>
+  <!-- ベースライン(大域スコア、一定) -->
+  <line x1="140" y1="315" x2="900" y2="315" stroke="#9aa3af" stroke-width="2.5" stroke-dasharray="8 7"/>
+  <!-- 提案手法 -->
+  <polyline points="140,282 330,194 520,128 710,161 900,227" fill="none" stroke="#343c48" stroke-width="3"/>
+  <g fill="#343c48">
+    <circle cx="140" cy="282" r="6"/>
+    <circle cx="330" cy="194" r="6"/>
+    <circle cx="520" cy="128" r="7.5"/>
+    <circle cx="710" cy="161" r="6"/>
+    <circle cx="900" cy="227" r="6"/>
+  </g>
+  <text x="520" y="100" fill="#343c48" font-size="22" font-weight="600" text-anchor="middle">0.72</text>
+  <!-- 凡例 -->
+  <g font-size="20">
+    <line x1="620" y1="425" x2="668" y2="425" stroke="#343c48" stroke-width="3"/>
+    <circle cx="644" cy="425" r="5.5" fill="#343c48"/>
+    <text x="680" y="432" fill="#343c48">提案(局所スコア)</text>
+    <line x1="620" y1="462" x2="668" y2="462" stroke="#9aa3af" stroke-width="2.5" stroke-dasharray="8 7"/>
+    <text x="680" y="469" fill="#878d96">ベースライン(大域スコア)</text>
+  </g>
+</svg>
