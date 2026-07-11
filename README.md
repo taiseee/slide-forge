@@ -40,6 +40,10 @@ npm install
 ```bash
 cd skill
 
+# 新規デッキの雛形(タイムスタンプ付きディレクトリ)
+node scripts/init.mjs --topic midterm_report --title "中間発表" --theme research
+# → docs/slides/YYYY-MM-DD_HHmmss_midterm_report/
+
 # ビルド
 npx marp --theme-set theme/ --html --allow-local-files ../examples/demo-research.md -o ../build/demo.html
 

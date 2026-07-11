@@ -33,6 +33,44 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 
 ## ワークフロー
 
+### 0. デッキディレクトリを初期化する(推奨)
+
+タイムスタンプ付きの作業ディレクトリを切るときは、同梱の `scripts/init.mjs` を使う
+(cpa-gpua の `init-deck.mjs` と同じ契約。タイムゾーンは Asia/Tokyo 固定)。
+
+```bash
+# 標準出力に作成したディレクトリの絶対パスが出る
+DECK=$(node "$FORGE/scripts/init.mjs" --topic midterm_report --title "中間発表" --theme research)
+# → <cwd>/docs/slides/YYYY-MM-DD_HHmmss_midterm_report/
+```
+
+| オプション | 必須 | 説明 |
+|---|---|---|
+| `--topic` | はい | `snake_case` のトピック名(ディレクトリ名の一部) |
+| `--title` | いいえ | デッキタイトル(省略時は topic) |
+| `--theme` | いいえ | `research` / `business` / `lecture` / `soft`(省略時 `research`) |
+| `--root` | いいえ | 親ディレクトリ(省略時 `docs/slides`) |
+| `--created-at` | いいえ | `YYYY-MM-DD_HHmmss`(再現用。省略時は現在の Asia/Tokyo) |
+| `--source-commit` | いいえ | ソースの git commit(省略時はゼロ埋め) |
+
+作成される構成:
+
+```
+<deck>/
+  README.md        # タイトルとマニフェストへの案内
+  slides.md        # 唯一のコンテンツソース(表紙1枚つき)
+  manifest.json    # 作成日時・theme・検証状態などの provenance
+  assets/          # 画像・図
+  data/            # 派生データ
+  scripts/         # デッキ固有の再生成スクリプト
+  sources/         # ソーススナップショット
+  tooling/         # 使用ツールのスナップショット(任意)
+  validation/      # overflow結果・目視記録(PNGは通常コミットしない)
+```
+
+以降のビルド・検証はこの `slides.md` を対象にする。既存の単一ファイルで足りる場合は
+この手順を飛ばしてよい。
+
 ### 1. スキン(テーマ)を選ぶ
 
 - `research` — 研究発表(ゼミ・学会・進捗報告)。グレー/墨色系

@@ -7,6 +7,7 @@
   "scripts": {
     "build": "marp --theme-set theme/ --html",
     "check": "node scripts/check-overflow.mjs",
+    "init": "node scripts/init.mjs",
     "preview": "marp --theme-set theme/ --html --server .",
     "webui": "vite build --config webui/vite.config.mjs && node webui/server.mjs"
   },
