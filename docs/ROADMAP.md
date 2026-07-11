@@ -12,7 +12,7 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 ## 現状(2026-07 v2)
 
 - [x] テーマ基盤: `core.css`(構造)+ スキンの分離構成
-- [x] コアレイアウト82種 + research 5種 + business 15種 + lecture 6種(全108種、4デモデッキで検証済み)
+- [x] コアレイアウト86種 + research 5種 + business 15種 + lecture 6種(全112種、4デモデッキで検証済み)
   - 2026-07 追加: venn-3 / sidebar / callout(info・success・warning・error)/ photo-grid /
     benchmark / tree / radial / positioning / objectives / image-cards / status(core)、
     forces / bmc / impact / okr(business)、
@@ -24,6 +24,9 @@ AIエージェントが「内容を考えること」だけに集中すれば、
     あわせて demo-lecture.md の frontmatter が `theme: research` になっていた既存バグを修正
     (lecture スキンのクラスが全て無効化され code-compare がはみ出していた)
   - 2026-07 追加(第4弾): timeline-photo(画像つき横タイムライン)/ collage(画像コラージュ)(core)
+  - 2026-07 追加(第5弾): steps-photo(画像つき横ステップ)/ quote-photo(顔写真つき引用)/
+    phone(スマホ枠モックアップ)/ app-intro(アプリ・サービス紹介、`pc` 修飾でPC枠)(core)。
+    cards は li 先頭の画像をアイコン表示する拡張を追加
   - tree / radial / positioning は「模式図」クラス(構造の表現専用)。データ比例のグラフ・
     正確な座標が要る図は従来どおり作図画像を貼る
 - [x] lecture スキン(輪講・勉強会向け、モスグリーン系。quiz/answer/code-focus/misconception/cheatsheet)

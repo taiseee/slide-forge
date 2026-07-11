@@ -156,12 +156,19 @@ section.image-full p:has(> img) img,
 section.annotated p:has(> img) img,
 section.persona p:has(> img) img,
 section.timeline-photo ol > li img,
-section.collage p:has(> img) img {
+section.collage p:has(> img) img,
+section.steps-photo ol > li img {
   border-radius: var(--sf-radius);
 }
 
-/* ブラウザ窓枠(browser)は枠ごと丸め、上部バーは枠内にクリップする */
-section.browser p:has(> img) {
+/* steps-photo の番号ラベルは画像の角丸に合わせて左上を丸める */
+section.steps-photo ol > li::before {
+  border-radius: var(--sf-radius) 0 var(--sf-radius-s) 0;
+}
+
+/* ブラウザ窓枠(browser / app-intro pc)は枠ごと丸め、上部バーは枠内にクリップする */
+section.browser p:has(> img),
+section.app-intro.pc > p:has(> img) {
   border-radius: var(--sf-radius);
   overflow: hidden;
 }

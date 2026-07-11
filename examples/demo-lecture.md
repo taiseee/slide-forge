@@ -244,6 +244,16 @@ $ git cat-file -p 5d6e7f8a      # ③
 
 ---
 
+<!-- _class: steps-photo -->
+
+# 手元で試す準備
+
+1. ![](assets/charts/lecture-sequence.svg) **リポジトリ作成** `git init demo` で空のリポジトリを作る
+2. ![](assets/screenshots/webui-editor.png) **コミット作成** ファイルを追加して `git commit` する
+3. ![](assets/charts/lecture-sequence.svg) **中身を覗く** `.git/objects` を `cat-file` で辿る
+
+---
+
 <!-- _class: quiz -->
 
 # 演習

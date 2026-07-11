@@ -4024,3 +4024,332 @@ section.collage > p:not(:has(> img)) {
   letter-spacing: 0.08em;
   margin: 0.5em 0 0;
 }
+
+/* ---------- steps-photo: 画像つき横ステップ(手順・チュートリアル) ----------
+   構造: h1 + ol(各 li が「![](画像) **手順名** 説明」、2〜4項目)+ 任意の p(注記)。
+   番号ラベルが画像の左上に重なる。画像なしの手順は steps / steps-v。 */
+
+section.steps-photo ol {
+  counter-reset: stepsp;
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.2em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 40px;
+}
+
+section.steps-photo ol > li::marker {
+  content: none;
+}
+
+section.steps-photo ol > li {
+  counter-increment: stepsp;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.steps-photo ol > li::before {
+  /* 番号ラベル(画像の左上に重ねる) */
+  content: counter(stepsp, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 0.18em 0.8em;
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+  font-family: var(--sf-numeral-font);
+  font-weight: 500;
+  font-size: 1.05em;
+  letter-spacing: 0.14em;
+}
+
+section.steps-photo ol > li img {
+  display: block;
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+  margin-bottom: 0.9em;
+}
+
+section.steps-photo ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 1.1em;
+  margin-bottom: 0.3em;
+}
+
+section.steps-photo > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- quote-photo: 顔写真つき引用(顧客の声・推薦コメント) ----------
+   構造: h1 + 顔写真1枚(単独の段落)+ blockquote(引用)+ p(名前・肩書き)。
+   写真は円形に切り抜かれる。写真なしの引用は quote、複数の声は quotes。 */
+
+section.quote-photo {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  column-gap: 56px;
+  align-content: start;
+}
+
+section.quote-photo h1 {
+  grid-column: 1 / -1;
+}
+
+section.quote-photo p:has(> img) {
+  grid-column: 1;
+  grid-row: 2 / span 3;
+  margin: 1em 0 0;
+}
+
+section.quote-photo p:has(> img) img {
+  width: 220px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+section.quote-photo blockquote {
+  grid-column: 2;
+  grid-row: 2;
+  border: none;
+  background: none;
+  margin: 1em 0 0;
+  padding: 0;
+  font-size: 1.2em;
+  line-height: 2;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--sf-text);
+}
+
+section.quote-photo > p:not(:has(> img)) {
+  grid-column: 2;
+  grid-row: 3;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.1em;
+  margin: 1.2em 0 0;
+}
+
+/* cards のアイコン対応: li の先頭に画像を書くと、アクセントバーの代わりに
+   アイコン(44px・contain)が表示される。例:「- ![](icon.svg) **機能名** 説明」 */
+
+section.cards ul > li:has(> img)::before {
+  display: none;
+}
+
+section.cards ul > li > img {
+  display: block;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  margin-bottom: 0.8em;
+}
+
+/* ---------- phone: スマホ画面のモックアップ(browser のスマホ版) ----------
+   構造: h1 + 縦長スクリーンショット1枚(単独の段落)+ 任意の p(注釈1行)。
+   画像がスマホ風の枠(ダークベゼル+ノッチ)に収まる。PC画面は browser。
+   テキストと組み合わせてアプリを紹介するなら app-intro。 */
+
+section.phone p:has(> img) {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0.5em auto 0.2em;
+  box-sizing: border-box;
+  aspect-ratio: 236 / 480;
+  max-height: 460px;
+  background: #26262b;
+  border-radius: 40px;
+  padding: 11px;
+}
+
+section.phone p:has(> img)::after {
+  /* ノッチ */
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 38%;
+  height: 20px;
+  background: #26262b;
+  border-radius: 0 0 12px 12px;
+}
+
+section.phone p:has(> img) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+section.phone > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.3em 0 0;
+}
+
+/* ---------- app-intro: アプリ・サービス紹介(テキスト+デバイスモックアップ) ----------
+   構造: h1 + p(キャッチコピー。h2 の直前に置く)+ h2(サービス名)+
+   p(説明文)+ 任意の ul(特徴 2〜3個)+ 縦長スクリーンショット1枚(単独の段落)。
+   スクリーンショットが右側のスマホ枠に入る。`app-intro pc` でPC(ブラウザ)枠に切替
+   (この場合は横長スクリーンショットを使う)。画面だけ大きく見せるなら phone / browser。 */
+
+section.app-intro {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  grid-template-rows: auto auto auto auto 1fr;
+  column-gap: 80px;
+}
+
+section.app-intro h1 {
+  grid-column: 1 / -1;
+}
+
+section.app-intro > p:has(> img) {
+  grid-column: 2;
+  grid-row: 2 / span 4;
+  align-self: center;
+  justify-self: center;
+  position: relative;
+  box-sizing: border-box;
+  width: 226px;
+  height: 460px;
+  margin: 0.5em 0 0;
+  background: #26262b;
+  border-radius: 40px;
+  padding: 11px;
+}
+
+section.app-intro > p:has(> img)::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 86px;
+  height: 20px;
+  background: #26262b;
+  border-radius: 0 0 12px 12px;
+}
+
+section.app-intro > p:has(> img) img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+section.app-intro > p:has(+ h2) {
+  /* キャッチコピー(h2 の直前の段落) */
+  grid-column: 1;
+  grid-row: 2;
+  color: var(--sf-accent-strong);
+  font-size: 0.88em;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  margin: 1.2em 0 0;
+}
+
+section.app-intro h2 {
+  /* サービス名 */
+  grid-column: 1;
+  grid-row: 3;
+  font-family: var(--sf-numeral-font);
+  font-size: 2.6em;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: var(--sf-accent-strong);
+  border: none;
+  margin: 0.15em 0 0;
+}
+
+section.app-intro > p:not(:has(> img)):not(:has(+ h2)) {
+  /* 説明文 */
+  grid-column: 1;
+  grid-row: 4;
+  font-size: 0.92em;
+  line-height: 1.9;
+  margin: 1.1em 0 0;
+}
+
+section.app-intro ul {
+  grid-column: 1;
+  grid-row: 5;
+  align-self: start;
+  margin: 0.9em 0 0;
+  font-size: 0.82em;
+  color: var(--sf-muted);
+}
+
+/* PC(ブラウザ枠)版: `app-intro pc`。横長スクリーンショットを使う */
+
+section.app-intro.pc {
+  grid-template-columns: 1fr 560px;
+  column-gap: 64px;
+}
+
+section.app-intro.pc h2 {
+  /* PC版はテキスト列が狭いためサービス名を少し抑える */
+  font-size: 2.1em;
+}
+
+section.app-intro.pc > p:has(> img) {
+  width: 560px;
+  height: auto;
+  aspect-ratio: 16 / 11;
+  max-height: 420px;
+  background: var(--sf-bg);
+  border: 1px solid var(--sf-line);
+  border-radius: 0;
+  padding: 36px 10px 10px;
+}
+
+section.app-intro.pc > p:has(> img)::after {
+  /* ウィンドウ操作のドット3つ(browser と同じ) */
+  content: '';
+  top: 14px;
+  left: 20px;
+  transform: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sf-muted);
+  box-shadow: 16px 0 0 var(--sf-muted), 32px 0 0 var(--sf-muted);
+  opacity: 0.5;
+}
+
+section.app-intro.pc > p:has(> img)::before {
+  /* 上部バー */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: var(--sf-panel);
+  border-bottom: 1px solid var(--sf-line);
+}
+
+section.app-intro.pc > p:has(> img) img {
+  border-radius: 0;
+  object-fit: cover;
+}

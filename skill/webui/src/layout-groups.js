@@ -56,6 +56,9 @@ export const LAYOUT_GROUPS = [
       "annotated",
       "browser",
       "zoom",
+      "phone",
+      "app-intro",
+      "quote-photo",
       "gallery",
       "photo-grid",
       "collage",
@@ -95,6 +98,7 @@ export const LAYOUT_GROUPS = [
     classes: [
       "steps",
       "steps-v",
+      "steps-photo",
       "flow",
       "chain",
       "io",
