@@ -4367,10 +4367,15 @@ section.stat-ring {
 }
 
 section.stat-ring h1 {
-  order: 2;
+  /* 数値。リング中心(スライド中心)からの固定オフセットに絶対配置し、
+     ラベルの行数に依らずリングと同心を保つ */
+  position: absolute;
+  left: 50%;
+  top: calc(50% - 30px);
+  transform: translateX(-50%);
   border: none;
   padding: 0;
-  margin: 0.05em 0 0;
+  margin: 0;
   font-family: var(--sf-numeral-font);
   font-size: 4.1em;
   font-weight: 200;
@@ -4384,11 +4389,13 @@ section.stat-ring h1::after {
 }
 
 section.stat-ring h1::before {
-  /* リング(進捗は --sf-ring-value、上から時計回り) */
+  /* リング(進捗は --sf-ring-value、上から時計回り)。
+     h1 の水平中心=スライド中心、h1 の top はスライド中心-30px なので
+     top: 30px でリング中心がスライド中心に一致する */
   content: '';
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 30px;
   transform: translate(-50%, -50%);
   width: 450px;
   height: 450px;
@@ -4402,9 +4409,13 @@ section.stat-ring h1::before {
 }
 
 section.stat-ring > p:first-of-type {
-  /* リング内のラベル(数値の上) */
-  order: 1;
-  max-width: 320px;
+  /* リング内のラベル(数値の上)。下端をリング中心の上 45px に固定し、
+     行数が増えても上方向へ伸びる */
+  position: absolute;
+  left: 50%;
+  bottom: calc(50% + 45px);
+  transform: translateX(-50%);
+  width: 340px;
   margin: 0;
   font-size: 1.05em;
   font-weight: 600;
@@ -4487,17 +4498,6 @@ section.logic-tree > ul {
   gap: 18px;
 }
 
-section.logic-tree > ul::before {
-  /* 縦罫線(第1階層をまとめる) */
-  content: '';
-  position: absolute;
-  left: -28px;
-  top: 1.8em;
-  bottom: 1.8em;
-  width: 1px;
-  background: var(--sf-accent);
-}
-
 section.logic-tree > ul > li::marker,
 section.logic-tree > ul ul > li::marker {
   content: none;
@@ -4513,14 +4513,29 @@ section.logic-tree > ul > li {
   color: var(--sf-muted);
 }
 
+/* 接続点は各箱の1行目(ラベル行)の高さ 1.4em に固定する。
+   箱の高さが第2階層の行数で変わっても罫線がずれない */
+
 section.logic-tree > ul > li::before {
   /* 縦罫線から各項目への横罫線 */
   content: '';
   position: absolute;
   left: -28px;
-  top: 50%;
+  top: 1.4em;
   width: 28px;
   height: 1px;
+  background: var(--sf-accent);
+}
+
+section.logic-tree > ul > li:not(:last-child)::after {
+  /* 自分の接続点から次の項目の接続点までの縦罫線
+     (高さ = 自分の残り + gap 18px + 次の 1.4em = 100% + 18px) */
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 1.4em;
+  width: 1px;
+  height: calc(100% + 18px);
   background: var(--sf-accent);
 }
 
@@ -4589,6 +4604,9 @@ section.pyramid-tri ol > li::marker {
 }
 
 section.pyramid-tri ol > li {
+  /* 高さを 88px に固定し、隙間 12px と合わせて断面の斜辺計算を保つ
+     (説明が長く折り返しても段の高さがずれない) */
+  height: 88px;
   display: flex;
   align-items: center;
   gap: 48px;
@@ -4613,38 +4631,43 @@ section.pyramid-tri ol > li strong {
   margin-bottom: 0.15em;
 }
 
-/* 4段のときの断面(既定) */
+/* 断面の斜辺は「段の隙間(gap 12px)込みの全高」で計算する。
+   各段は高さ 88px、隙間 12px。斜辺が段をまたいで一直線になるよう、
+   各段の上辺・下辺の幅を頂点からの累積距離 y に比例させている
+   (half = 0.5 * y / H、H = n*88 + (n-1)*12)。 */
+
+/* 4段のとき(既定)。H = 4*88 + 3*12 = 388 */
 section.pyramid-tri ol > li:nth-child(1)::before {
-  clip-path: polygon(50% 0, 62.5% 100%, 37.5% 100%);
+  clip-path: polygon(50% 0, 61.34% 100%, 38.66% 100%);
   background: var(--sf-ink);
 }
 
 section.pyramid-tri ol > li:nth-child(2)::before {
-  clip-path: polygon(37.5% 0, 62.5% 0, 75% 100%, 25% 100%);
+  clip-path: polygon(37.11% 0, 62.89% 0, 74.23% 100%, 25.77% 100%);
   background: var(--sf-accent);
 }
 
 section.pyramid-tri ol > li:nth-child(3)::before {
-  clip-path: polygon(25% 0, 75% 0, 87.5% 100%, 12.5% 100%);
+  clip-path: polygon(24.23% 0, 75.77% 0, 87.11% 100%, 12.89% 100%);
   background: color-mix(in srgb, var(--sf-accent) 45%, var(--sf-bg));
 }
 
 section.pyramid-tri ol > li:nth-child(4)::before {
-  clip-path: polygon(12.5% 0, 87.5% 0, 100% 100%, 0 100%);
+  clip-path: polygon(11.34% 0, 88.66% 0, 100% 100%, 0 100%);
   background: var(--sf-panel);
 }
 
-/* 3段のときは三角形を3等分に組み直す */
+/* 3段のとき。H = 3*88 + 2*12 = 288 で組み直す */
 section.pyramid-tri ol:has(> li:nth-child(3):last-child) > li:nth-child(1)::before {
-  clip-path: polygon(50% 0, 66.7% 100%, 33.3% 100%);
+  clip-path: polygon(50% 0, 65.28% 100%, 34.72% 100%);
 }
 
 section.pyramid-tri ol:has(> li:nth-child(3):last-child) > li:nth-child(2)::before {
-  clip-path: polygon(33.3% 0, 66.7% 0, 83.3% 100%, 16.7% 100%);
+  clip-path: polygon(32.64% 0, 67.36% 0, 82.64% 100%, 17.36% 100%);
 }
 
 section.pyramid-tri ol:has(> li:nth-child(3):last-child) > li:nth-child(3)::before {
-  clip-path: polygon(16.7% 0, 83.3% 0, 100% 100%, 0 100%);
+  clip-path: polygon(15.28% 0, 84.72% 0, 100% 100%, 0 100%);
 }
 
 /* stat-ring の進捗値(p0〜p100)。`stat-ring p67` のように併用する */
