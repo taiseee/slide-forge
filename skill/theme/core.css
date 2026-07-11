@@ -4353,3 +4353,399 @@ section.app-intro.pc > p:has(> img) img {
   border-radius: 0;
   object-fit: cover;
 }
+
+/* ---------- stat-ring: 円形リング付きの数値ハイライト(stat の円環版) ----------
+   構造: h1(数値。例「# 67%」)+ p(リング内の上に出るラベル)+ 任意の p(注記。右下に出る)。
+   リングの進捗は修飾クラス p0〜p100 で指定する: `<!-- _class: stat-ring p67 -->`
+   (h1 の数値と揃える)。リングなしで数字だけ見せるなら stat。 */
+
+section.stat-ring {
+  position: relative;
+  justify-content: center !important;
+  align-items: center;
+  text-align: center;
+}
+
+section.stat-ring h1 {
+  order: 2;
+  border: none;
+  padding: 0;
+  margin: 0.05em 0 0;
+  font-family: var(--sf-numeral-font);
+  font-size: 4.1em;
+  font-weight: 200;
+  letter-spacing: 0.02em;
+  color: var(--sf-accent-strong);
+}
+
+section.stat-ring h1::after {
+  /* h1 標準のアクセントバーは出さない */
+  display: none;
+}
+
+section.stat-ring h1::before {
+  /* リング(進捗は --sf-ring-value、上から時計回り) */
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--sf-accent-strong) calc(var(--sf-ring-value, 75) * 1%),
+    var(--sf-line) 0
+  );
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 17px), #000 calc(100% - 16px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 17px), #000 calc(100% - 16px));
+}
+
+section.stat-ring > p:first-of-type {
+  /* リング内のラベル(数値の上) */
+  order: 1;
+  max-width: 320px;
+  margin: 0;
+  font-size: 1.05em;
+  font-weight: 600;
+  line-height: 1.9;
+  letter-spacing: 0.14em;
+  color: var(--sf-accent-strong);
+}
+
+section.stat-ring > p:last-of-type:not(:first-of-type) {
+  /* 注記(右下) */
+  position: absolute;
+  right: 84px;
+  bottom: 80px;
+  margin: 0;
+  max-width: 300px;
+  text-align: right;
+  font-size: 0.78em;
+  line-height: 1.9;
+  letter-spacing: 0.1em;
+  color: var(--sf-muted);
+}
+
+/* ---------- logic-tree: ロジックツリー(命題を右へ分解) ----------
+   構造: h1 + p(ルート命題。1つだけ)+ ul(第1階層 2〜4個。各 li は
+   「**ラベル** 説明」で、ネストした ul が第2階層になる)。
+   分類・ディレクトリ構造は tree(縦)、組織は org、原因の収束は causes。 */
+
+section.logic-tree {
+  display: grid;
+  grid-template-columns: 230px 56px 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+section.logic-tree h1 {
+  grid-column: 1 / -1;
+}
+
+section.logic-tree > p {
+  /* ルート命題 */
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  position: relative;
+  margin: 0;
+  padding: 1em 1.1em;
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+  text-align: center;
+  font-size: 0.92em;
+  line-height: 1.75;
+  letter-spacing: 0.06em;
+}
+
+section.logic-tree > p strong {
+  color: var(--sf-ink-text);
+}
+
+section.logic-tree > p::after {
+  /* ルートから縦罫線への接続 */
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  width: 28px;
+  height: 1px;
+  background: var(--sf-accent);
+}
+
+section.logic-tree > ul {
+  grid-column: 3;
+  grid-row: 2;
+  position: relative;
+  align-self: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+section.logic-tree > ul::before {
+  /* 縦罫線(第1階層をまとめる) */
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 1.8em;
+  bottom: 1.8em;
+  width: 1px;
+  background: var(--sf-accent);
+}
+
+section.logic-tree > ul > li::marker,
+section.logic-tree > ul ul > li::marker {
+  content: none;
+}
+
+section.logic-tree > ul > li {
+  position: relative;
+  margin: 0;
+  padding: 0.6em 1em 0.65em;
+  border: 1px solid var(--sf-line);
+  font-size: 0.78em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.logic-tree > ul > li::before {
+  /* 縦罫線から各項目への横罫線 */
+  content: '';
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  width: 28px;
+  height: 1px;
+  background: var(--sf-accent);
+}
+
+section.logic-tree > ul > li > strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-right: 0.5em;
+}
+
+section.logic-tree > ul ul {
+  /* 第2階層(ブラケット付きで箱の中に) */
+  list-style: none;
+  position: relative;
+  margin: 0.45em 0 0;
+  padding: 0 0 0 1.3em;
+}
+
+section.logic-tree > ul ul::before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.2em;
+  bottom: 0.75em;
+  width: 1px;
+  background: var(--sf-line);
+}
+
+section.logic-tree > ul ul > li {
+  position: relative;
+  margin: 0.15em 0;
+  font-size: 0.95em;
+}
+
+section.logic-tree > ul ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.1em;
+  top: 0.85em;
+  width: 0.75em;
+  height: 1px;
+  background: var(--sf-line);
+}
+
+section.logic-tree > ul ul strong {
+  color: var(--sf-text);
+  font-weight: 600;
+}
+
+/* ---------- pyramid-tri: 三角形のピラミッド図(3〜4段) ----------
+   構造: h1 + ol(各 li が「**ラベル** 説明」、3〜4個。上=頂点から順に)。
+   左に三角形の断面、右にラベルと説明が並ぶ。横帯で見せるなら pyramid、
+   絞り込みの流れは funnel。 */
+
+section.pyramid-tri ol {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+section.pyramid-tri ol > li::marker {
+  content: none;
+}
+
+section.pyramid-tri ol > li {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  margin: 0;
+  font-size: 0.82em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.pyramid-tri ol > li::before {
+  content: '';
+  flex: 0 0 500px;
+  height: 88px;
+}
+
+section.pyramid-tri ol > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 1.1em;
+  margin-bottom: 0.15em;
+}
+
+/* 4段のときの断面(既定) */
+section.pyramid-tri ol > li:nth-child(1)::before {
+  clip-path: polygon(50% 0, 62.5% 100%, 37.5% 100%);
+  background: var(--sf-ink);
+}
+
+section.pyramid-tri ol > li:nth-child(2)::before {
+  clip-path: polygon(37.5% 0, 62.5% 0, 75% 100%, 25% 100%);
+  background: var(--sf-accent);
+}
+
+section.pyramid-tri ol > li:nth-child(3)::before {
+  clip-path: polygon(25% 0, 75% 0, 87.5% 100%, 12.5% 100%);
+  background: color-mix(in srgb, var(--sf-accent) 45%, var(--sf-bg));
+}
+
+section.pyramid-tri ol > li:nth-child(4)::before {
+  clip-path: polygon(12.5% 0, 87.5% 0, 100% 100%, 0 100%);
+  background: var(--sf-panel);
+}
+
+/* 3段のときは三角形を3等分に組み直す */
+section.pyramid-tri ol:has(> li:nth-child(3):last-child) > li:nth-child(1)::before {
+  clip-path: polygon(50% 0, 66.7% 100%, 33.3% 100%);
+}
+
+section.pyramid-tri ol:has(> li:nth-child(3):last-child) > li:nth-child(2)::before {
+  clip-path: polygon(33.3% 0, 66.7% 0, 83.3% 100%, 16.7% 100%);
+}
+
+section.pyramid-tri ol:has(> li:nth-child(3):last-child) > li:nth-child(3)::before {
+  clip-path: polygon(16.7% 0, 83.3% 0, 100% 100%, 0 100%);
+}
+
+/* stat-ring の進捗値(p0〜p100)。`stat-ring p67` のように併用する */
+section.stat-ring.p0 { --sf-ring-value: 0; }
+section.stat-ring.p1 { --sf-ring-value: 1; }
+section.stat-ring.p2 { --sf-ring-value: 2; }
+section.stat-ring.p3 { --sf-ring-value: 3; }
+section.stat-ring.p4 { --sf-ring-value: 4; }
+section.stat-ring.p5 { --sf-ring-value: 5; }
+section.stat-ring.p6 { --sf-ring-value: 6; }
+section.stat-ring.p7 { --sf-ring-value: 7; }
+section.stat-ring.p8 { --sf-ring-value: 8; }
+section.stat-ring.p9 { --sf-ring-value: 9; }
+section.stat-ring.p10 { --sf-ring-value: 10; }
+section.stat-ring.p11 { --sf-ring-value: 11; }
+section.stat-ring.p12 { --sf-ring-value: 12; }
+section.stat-ring.p13 { --sf-ring-value: 13; }
+section.stat-ring.p14 { --sf-ring-value: 14; }
+section.stat-ring.p15 { --sf-ring-value: 15; }
+section.stat-ring.p16 { --sf-ring-value: 16; }
+section.stat-ring.p17 { --sf-ring-value: 17; }
+section.stat-ring.p18 { --sf-ring-value: 18; }
+section.stat-ring.p19 { --sf-ring-value: 19; }
+section.stat-ring.p20 { --sf-ring-value: 20; }
+section.stat-ring.p21 { --sf-ring-value: 21; }
+section.stat-ring.p22 { --sf-ring-value: 22; }
+section.stat-ring.p23 { --sf-ring-value: 23; }
+section.stat-ring.p24 { --sf-ring-value: 24; }
+section.stat-ring.p25 { --sf-ring-value: 25; }
+section.stat-ring.p26 { --sf-ring-value: 26; }
+section.stat-ring.p27 { --sf-ring-value: 27; }
+section.stat-ring.p28 { --sf-ring-value: 28; }
+section.stat-ring.p29 { --sf-ring-value: 29; }
+section.stat-ring.p30 { --sf-ring-value: 30; }
+section.stat-ring.p31 { --sf-ring-value: 31; }
+section.stat-ring.p32 { --sf-ring-value: 32; }
+section.stat-ring.p33 { --sf-ring-value: 33; }
+section.stat-ring.p34 { --sf-ring-value: 34; }
+section.stat-ring.p35 { --sf-ring-value: 35; }
+section.stat-ring.p36 { --sf-ring-value: 36; }
+section.stat-ring.p37 { --sf-ring-value: 37; }
+section.stat-ring.p38 { --sf-ring-value: 38; }
+section.stat-ring.p39 { --sf-ring-value: 39; }
+section.stat-ring.p40 { --sf-ring-value: 40; }
+section.stat-ring.p41 { --sf-ring-value: 41; }
+section.stat-ring.p42 { --sf-ring-value: 42; }
+section.stat-ring.p43 { --sf-ring-value: 43; }
+section.stat-ring.p44 { --sf-ring-value: 44; }
+section.stat-ring.p45 { --sf-ring-value: 45; }
+section.stat-ring.p46 { --sf-ring-value: 46; }
+section.stat-ring.p47 { --sf-ring-value: 47; }
+section.stat-ring.p48 { --sf-ring-value: 48; }
+section.stat-ring.p49 { --sf-ring-value: 49; }
+section.stat-ring.p50 { --sf-ring-value: 50; }
+section.stat-ring.p51 { --sf-ring-value: 51; }
+section.stat-ring.p52 { --sf-ring-value: 52; }
+section.stat-ring.p53 { --sf-ring-value: 53; }
+section.stat-ring.p54 { --sf-ring-value: 54; }
+section.stat-ring.p55 { --sf-ring-value: 55; }
+section.stat-ring.p56 { --sf-ring-value: 56; }
+section.stat-ring.p57 { --sf-ring-value: 57; }
+section.stat-ring.p58 { --sf-ring-value: 58; }
+section.stat-ring.p59 { --sf-ring-value: 59; }
+section.stat-ring.p60 { --sf-ring-value: 60; }
+section.stat-ring.p61 { --sf-ring-value: 61; }
+section.stat-ring.p62 { --sf-ring-value: 62; }
+section.stat-ring.p63 { --sf-ring-value: 63; }
+section.stat-ring.p64 { --sf-ring-value: 64; }
+section.stat-ring.p65 { --sf-ring-value: 65; }
+section.stat-ring.p66 { --sf-ring-value: 66; }
+section.stat-ring.p67 { --sf-ring-value: 67; }
+section.stat-ring.p68 { --sf-ring-value: 68; }
+section.stat-ring.p69 { --sf-ring-value: 69; }
+section.stat-ring.p70 { --sf-ring-value: 70; }
+section.stat-ring.p71 { --sf-ring-value: 71; }
+section.stat-ring.p72 { --sf-ring-value: 72; }
+section.stat-ring.p73 { --sf-ring-value: 73; }
+section.stat-ring.p74 { --sf-ring-value: 74; }
+section.stat-ring.p75 { --sf-ring-value: 75; }
+section.stat-ring.p76 { --sf-ring-value: 76; }
+section.stat-ring.p77 { --sf-ring-value: 77; }
+section.stat-ring.p78 { --sf-ring-value: 78; }
+section.stat-ring.p79 { --sf-ring-value: 79; }
+section.stat-ring.p80 { --sf-ring-value: 80; }
+section.stat-ring.p81 { --sf-ring-value: 81; }
+section.stat-ring.p82 { --sf-ring-value: 82; }
+section.stat-ring.p83 { --sf-ring-value: 83; }
+section.stat-ring.p84 { --sf-ring-value: 84; }
+section.stat-ring.p85 { --sf-ring-value: 85; }
+section.stat-ring.p86 { --sf-ring-value: 86; }
+section.stat-ring.p87 { --sf-ring-value: 87; }
+section.stat-ring.p88 { --sf-ring-value: 88; }
+section.stat-ring.p89 { --sf-ring-value: 89; }
+section.stat-ring.p90 { --sf-ring-value: 90; }
+section.stat-ring.p91 { --sf-ring-value: 91; }
+section.stat-ring.p92 { --sf-ring-value: 92; }
+section.stat-ring.p93 { --sf-ring-value: 93; }
+section.stat-ring.p94 { --sf-ring-value: 94; }
+section.stat-ring.p95 { --sf-ring-value: 95; }
+section.stat-ring.p96 { --sf-ring-value: 96; }
+section.stat-ring.p97 { --sf-ring-value: 97; }
+section.stat-ring.p98 { --sf-ring-value: 98; }
+section.stat-ring.p99 { --sf-ring-value: 99; }
+section.stat-ring.p100 { --sf-ring-value: 100; }

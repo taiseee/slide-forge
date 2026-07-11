@@ -111,6 +111,8 @@ export const LAYOUT_GROUPS = [
       "kanban",
       "funnel",
       "pyramid",
+      "pyramid-tri",
+      "logic-tree",
       "layers",
       "org",
       "tree",
@@ -124,6 +126,7 @@ export const LAYOUT_GROUPS = [
     name: "数値・結果",
     classes: [
       "stat",
+      "stat-ring",
       "kpi",
       "impact",
       "okr",

@@ -132,6 +132,9 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 | `quote-photo` | 顔写真つき引用(円形写真+引用+名前・肩書き。顧客の声・推薦コメント) |
 | `phone` | スマホ画面のモックアップ(縦長スクリーンショット1枚がスマホ枠に入る。browser のスマホ版) |
 | `app-intro` | アプリ・サービス紹介(左: キャッチコピー+h2=サービス名+説明+特徴 ul、右: スマホ枠のスクリーンショット。`app-intro pc` でPC枠) |
+| `stat-ring` | 円形リング付きの数値(h1=数値+p=リング内ラベル+任意p=右下注記。進捗は `stat-ring p67` のように p0〜p100 で指定) |
+| `logic-tree` | ロジックツリー(p=ルート命題 → ul=第1階層2〜4個、ネスト ul=第2階層。KPI・課題の分解) |
+| `pyramid-tri` | 三角形のピラミッド図(ol 3〜4個、上=頂点から。左に三角形の断面、右にラベルと説明) |
 | `experiment` | 実験結果(表+条件注記は blockquote)※research |
 | `math` | 数式中心(KaTeX ディスプレイ数式を拡大)※research |
 | `hypothesis` | 仮説の列挙(H1・H2…チップ付きの帯、2〜4個)※research |
@@ -239,6 +242,9 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 - 発言者の顔を見せる引用・推薦コメント → `quote-photo`(写真なしは `quote`、複数の声は `quotes`)
 - アプリ・サービスの紹介(スクリーンショット+説明) → `app-intro`(モバイルは素のまま、PC画面は `app-intro pc`)
 - スマホ画面だけを大きく見せる → `phone`(PC画面は `browser`)
+- 割合1つを円形リングで見せる → `stat-ring`(リングなしは `stat`、複数の数値は `kpi`)
+- KPI・課題・工数の分解(ロジックツリー・イシューツリー) → `logic-tree`(分類・ディレクトリ構造は `tree`、原因の収束は `causes`)
+- 階層を三角形で見せる → `pyramid-tri`(横帯で見せるなら `pyramid`)
 
 補足:
 - どのクラスでも Marp 標準の背景画像記法が使える。
