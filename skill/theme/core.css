@@ -3660,3 +3660,367 @@ section.quotes blockquote em {
   letter-spacing: 0.08em;
   color: var(--sf-muted);
 }
+
+/* ---------- browser: スクリーンショット・UIモックアップ(ブラウザ窓枠) ----------
+   構造: h1 + 画像1枚(単独の段落)+ 任意の p(注釈1行)。
+   画像がブラウザ風の窓枠(上部バー+ドット3つ)に収まる。スクリーンショット・
+   UIモックアップ・デバイスモックアップの提示に。枠なしで大きく見せるなら image-full。 */
+
+section.browser p:has(> img) {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+  margin: 0.6em 0 0.2em;
+  border: 1px solid var(--sf-line);
+  padding: 36px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sf-bg);
+}
+
+section.browser p:has(> img)::before {
+  /* 上部バー */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  background: var(--sf-panel);
+  border-bottom: 1px solid var(--sf-line);
+}
+
+section.browser p:has(> img)::after {
+  /* ウィンドウ操作のドット3つ */
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sf-muted);
+  box-shadow: 16px 0 0 var(--sf-muted), 32px 0 0 var(--sf-muted);
+  opacity: 0.5;
+}
+
+section.browser p:has(> img) img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+section.browser > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.3em 0 0;
+}
+
+/* ---------- zoom: 拡大部分付き画像(全体+拡大インセット) ----------
+   構造: h1 + 画像2枚を1つの段落に(1枚目=全体、2枚目=拡大部分)+ 任意の p(注釈)。
+   2枚目が右下にアクセント枠のインセットとして重なる。
+   拡大元の箇所には作図時に枠や番号を描いておくと対応が分かりやすい。 */
+
+section.zoom p:has(> img) {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0.2em 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.zoom p:has(> img) img:first-of-type {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+section.zoom p:has(> img) img:not(:first-of-type) {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 340px;
+  height: auto;
+  max-height: 46%;
+  object-fit: contain;
+  border: 2px solid var(--sf-accent);
+  background: var(--sf-bg);
+}
+
+section.zoom > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.3em 0 0;
+}
+
+/* ---------- draft / confidential / deprecated: 透かしスタンプ(修飾クラス) ----------
+   他のレイアウトと併用する: `<!-- _class: content draft -->` のように書く。
+   スライド中央に斜めの大きな薄文字が入る。仮置き・ドラフト・機密・廃止済みの明示に。
+   右上の小さな表示で足りるなら `_header: DRAFT` を使う。 */
+
+section.draft {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Ctext x='640' y='412' text-anchor='middle' font-family='Avenir Next, Helvetica, sans-serif' font-size='168' font-weight='600' letter-spacing='40' fill='%23848a92' fill-opacity='0.09' transform='rotate(-14 640 360)'%3EDRAFT%3C/text%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+section.confidential {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Ctext x='640' y='392' text-anchor='middle' font-family='Avenir Next, Helvetica, sans-serif' font-size='92' font-weight='600' letter-spacing='22' fill='%23848a92' fill-opacity='0.09' transform='rotate(-14 640 360)'%3ECONFIDENTIAL%3C/text%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+section.deprecated {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='720'%3E%3Ctext x='640' y='398' text-anchor='middle' font-family='Avenir Next, Helvetica, sans-serif' font-size='108' font-weight='600' letter-spacing='26' fill='%23848a92' fill-opacity='0.10' transform='rotate(-14 640 360)'%3EDEPRECATED%3C/text%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ---------- causes: 因果関係・原因分析(複数原因 → 1つの結果) ----------
+   構造: h1 + ul(原因 2〜4個、各 li は「**ラベル** 説明」)+ p(結果。最後に置く)。
+   原因の箱が左列に並び、矢印を挟んで右の濃色の結果箱に収束する(模式図)。
+   直列の流れは flow、中心からの放射は radial。正確な因果グラフが要るなら作図画像を貼る。 */
+
+section.causes {
+  display: grid;
+  grid-template-columns: 1fr 110px 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+section.causes h1 {
+  grid-column: 1 / -1;
+}
+
+section.causes ul {
+  grid-row: 2;
+  grid-column: 1;
+  align-self: center;
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0.6em 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+section.causes ul > li::marker {
+  content: none;
+}
+
+section.causes ul > li {
+  border: 1px solid var(--sf-line);
+  padding: 0.7em 1.1em;
+  margin: 0;
+  font-size: 0.78em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.causes ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.15em;
+}
+
+section.causes ul::after {
+  /* 収束の矢印 */
+  content: '→';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110px;
+  text-align: center;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.6em;
+  font-weight: 300;
+  color: var(--sf-accent);
+}
+
+section.causes > p {
+  grid-row: 2;
+  grid-column: 3;
+  align-self: center;
+  background: var(--sf-ink);
+  color: var(--sf-ink-text);
+  padding: 1.3em 1.4em;
+  margin: 0.6em 0 0;
+  font-size: 0.95em;
+  line-height: 1.8;
+  letter-spacing: 0.06em;
+  text-align: center;
+}
+
+section.causes > p strong {
+  color: var(--sf-ink-text);
+}
+
+/* ---------- timeline-photo: 画像つき横タイムライン(沿革・プロジェクトの歩み) ----------
+   構造: h1 + ol(各 li が「![](画像) **時期** 説明」、2〜4項目)+ 任意の p(注記)。
+   上端のレールとドットの下に、写真 → 時期 → 説明が縦に並ぶ。
+   画像なしの時系列は timeline(縦)/ timeline-h(横)。 */
+
+section.timeline-photo ol {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 1.3em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 40px;
+}
+
+section.timeline-photo ol > li::marker {
+  content: none;
+}
+
+section.timeline-photo ol > li {
+  position: relative;
+  padding: 1.6em 0.4em 0 0;
+  margin: 0;
+  font-size: 0.8em;
+  line-height: 1.65;
+  color: var(--sf-muted);
+}
+
+section.timeline-photo ol > li::before {
+  /* 横レール(項目ごとに自分の区間を描く) */
+  content: '';
+  position: absolute;
+  top: 4.5px;
+  left: 0;
+  right: -40px;
+  height: 1px;
+  background: var(--sf-line);
+}
+
+section.timeline-photo ol > li:last-child::before {
+  right: 0;
+}
+
+section.timeline-photo ol > li::after {
+  /* ドット */
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--sf-bg);
+  border: 2px solid var(--sf-accent-strong);
+}
+
+section.timeline-photo ol > li img {
+  display: block;
+  width: 100%;
+  height: 225px;
+  object-fit: cover;
+  margin-bottom: 0.9em;
+}
+
+section.timeline-photo ol > li strong {
+  display: block;
+  font-family: var(--sf-numeral-font);
+  color: var(--sf-accent-strong);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  font-size: 1.15em;
+  margin-bottom: 0.25em;
+}
+
+section.timeline-photo > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- collage: 画像コラージュ(複数枚を散らして紹介) ----------
+   構造: h1 + 画像3〜6枚を1つの段落に + 任意の p(注釈1行)。
+   位置・傾き・大きさはクラスが決める(定義済みスロット、書いた順に配置)。
+   3〜4枚はジグザグ、5〜6枚で四隅まで埋まる。整然と並べるなら gallery / photo-grid。 */
+
+section.collage p:has(> img) {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin: 0.4em 0 0;
+}
+
+section.collage p:has(> img) img {
+  position: absolute;
+  box-sizing: border-box;
+  object-fit: cover;
+  background: var(--sf-bg);
+  border: 1px solid var(--sf-line);
+  padding: 8px;
+}
+
+section.collage p:has(> img) img:nth-of-type(1) {
+  left: 2%;
+  top: 4%;
+  width: 330px;
+  height: 52%;
+  transform: rotate(-2.4deg);
+}
+
+section.collage p:has(> img) img:nth-of-type(2) {
+  left: 27%;
+  top: 42%;
+  width: 310px;
+  height: 50%;
+  transform: rotate(1.8deg);
+}
+
+section.collage p:has(> img) img:nth-of-type(3) {
+  left: 53%;
+  top: 0%;
+  width: 340px;
+  height: 54%;
+  transform: rotate(1.4deg);
+}
+
+section.collage p:has(> img) img:nth-of-type(4) {
+  left: 72%;
+  top: 44%;
+  width: 290px;
+  height: 48%;
+  transform: rotate(-2deg);
+}
+
+section.collage p:has(> img) img:nth-of-type(5) {
+  left: 5%;
+  top: 58%;
+  width: 260px;
+  height: 40%;
+  transform: rotate(2.2deg);
+}
+
+section.collage p:has(> img) img:nth-of-type(6) {
+  left: 79%;
+  top: 4%;
+  width: 230px;
+  height: 38%;
+  transform: rotate(2.6deg);
+}
+
+section.collage > p:not(:has(> img)) {
+  text-align: center;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  letter-spacing: 0.08em;
+  margin: 0.5em 0 0;
+}

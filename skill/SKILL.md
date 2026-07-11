@@ -38,6 +38,9 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 - `research` — 研究発表(ゼミ・学会・進捗報告)。グレー/墨色系
 - `business` — ビジネス(提案・報告・事業説明)。グレージュ/ブラウン系
 - `lecture` — エンジニアの輪講・社内勉強会・チュートリアル。モスグリーン系
+- `soft` — 丸みのある柔らかいデザイン。グレージュ×コーラル系。パネル・箱・チップ・画像が角丸になり、
+  引用の左罫線を持たない。research/business/lecture の専用クラスもすべて使える(全クラスの合併)。
+  カジュアルな発表・社内共有・オンボーディング向け(上3つはエディトリアル・ミニマル=角丸なし)
 
 ### 2. レイアウトを選ぶ
 
@@ -119,9 +122,16 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 | `kanban` | 状態別のボード(h2=列名×2〜4、ul がカード。未着手・対応中・完了) |
 | `io` | 入力・処理・出力(h2×3+各 ul。中央の処理が濃色で強調) |
 | `quotes` | 複数の引用カード(blockquote×2〜3。顧客の声・フィードバック) |
+| `browser` | スクリーンショット・UIモックアップ(画像がブラウザ風の窓枠に入る。h1+画像1枚+任意の注釈1行) |
+| `zoom` | 拡大部分付き画像(画像2枚を1つの段落に: 1枚目=全体、2枚目=右下の拡大インセット) |
+| `draft` / `confidential` / `deprecated` | 透かしスタンプ(修飾クラス。`content draft` のように既存レイアウトに重ねて使う。斜めの薄い大文字が入る) |
+| `causes` | 因果関係・原因分析(ul=原因2〜4個の箱 → 矢印 → p=濃色の結果箱に収束。模式図) |
+| `timeline-photo` | 画像つき横タイムライン(各 li が「![](画像) **時期** 説明」、2〜4項目。沿革・プロジェクトの歩み) |
+| `collage` | 画像コラージュ(画像3〜6枚を1つの段落に。定義済みスロットに散らして配置、少し傾く) |
 | `experiment` | 実験結果(表+条件注記は blockquote)※research |
 | `math` | 数式中心(KaTeX ディスプレイ数式を拡大)※research |
 | `hypothesis` | 仮説の列挙(H1・H2…チップ付きの帯、2〜4個)※research |
+| `rq` | Research Question(blockquote=メインの問い(RQラベル付き)または ol=複数の問い RQ1・RQ2…)※research |
 | `confusion-matrix` | 混同行列(表ベース、2×2〜4×4。対角セルが強調)※research |
 | `kpi` | 数値ハイライト(大きく軽い数字、最大4つ)※business |
 | `plans` | 料金プラン・パッケージ比較(2〜3列)※business |
@@ -136,6 +146,8 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 | `okr` | OKR(blockquote=Objective の帯 + ol=Key Results。末尾の em が進捗・実績値)※business |
 | `actions` | アクションプラン(「**タスク** 説明 *担当* *期限*」、3〜6行。番号自動付与)※business |
 | `swot` | SWOT分析(li 4つ、順序: 強み→弱み→機会→脅威。S/W/O/T自動付与)※business |
+| `pest` | PEST分析(li 4つ、順序: 政治→経済→社会→技術。P/E/S/T自動付与)※business |
+| `risks` | リスク分析(「**リスク名** 説明・対策 *高* *大*」。em 1つ目=発生確率、2つ目=影響度のチップ)※business |
 | `quiz` | 演習・クイズ(Qラベル+問題文+選択肢A〜D)※lecture |
 | `answer` | 解答・解説(Aラベル+答え+解説。quiz とペアで使う)※lecture |
 | `code-focus` | コードの注目点(コード左+丸数字注釈右。annotated のコード版)※lecture |
@@ -210,6 +222,15 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 - 入力・処理・出力の3段構成 → `io`(順に流すだけなら `flow`)
 - 複数の引用・顧客の声を並べる → `quotes`(1つを全面に据えるなら `quote`、事例1件の深掘りは `case-study`)
 - コードの良い例・悪い例の対比 → `code-compare`(lecture。文章の対比は `misconception`)
+- スクリーンショット・UIモックアップ・デバイスモックアップ → `browser`(枠なしで大きく見せるなら `image-full`)
+- 画像の一部を拡大して見せる → `zoom`(箇所の説明を並べるなら `annotated`)
+- 仮置き・ドラフト・社外秘・廃止済みの明示 → `draft` / `confidential` / `deprecated` を既存レイアウトに重ねる(右上の小さな表示で足りるなら `_header: DRAFT`)
+- 研究の問い(Research Question) → `rq`、その検証仮説 → `hypothesis`(research)
+- 外部環境の整理(PEST) → `pest`(business。内外両面を見るなら `swot`)
+- リスクの一覧と対策 → `risks`(business。確率×影響のマトリクスは `matrix-3`)
+- 原因分析・因果関係(複数原因→1つの結果) → `causes`(直列の流れは `flow`、中心放射は `radial`。複雑な因果グラフは作図画像)
+- 写真つきの沿革・歩み → `timeline-photo`(画像なしの時系列は `timeline` / `timeline-h`)
+- 複数の写真を散らして雰囲気で見せる → `collage`(整然と並べるなら `gallery` / `photo-grid`)
 
 補足:
 - どのクラスでも Marp 標準の背景画像記法が使える。

@@ -12,19 +12,31 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 ## 現状(2026-07 v2)
 
 - [x] テーマ基盤: `core.css`(構造)+ スキンの分離構成
-- [x] コアレイアウト74種 + research 4種 + business 13種 + lecture 6種(全97種、3デモデッキで検証済み)
+- [x] コアレイアウト82種 + research 5種 + business 15種 + lecture 6種(全108種、4デモデッキで検証済み)
   - 2026-07 追加: venn-3 / sidebar / callout(info・success・warning・error)/ photo-grid /
     benchmark / tree / radial / positioning / objectives / image-cards / status(core)、
     forces / bmc / impact / okr(business)、
     hypothesis(research)、cheatsheet(lecture)
   - 2026-07 追加(第2弾): chain / glossary / kanban / io / quotes(core)、
     actions / swot(business)、confusion-matrix(research)、code-compare(lecture)
+  - 2026-07 追加(第3弾): browser / zoom / causes / 透かし修飾クラス draft・confidential・deprecated(core)、
+    rq(research)、pest / risks(business)。
+    あわせて demo-lecture.md の frontmatter が `theme: research` になっていた既存バグを修正
+    (lecture スキンのクラスが全て無効化され code-compare がはみ出していた)
+  - 2026-07 追加(第4弾): timeline-photo(画像つき横タイムライン)/ collage(画像コラージュ)(core)
   - tree / radial / positioning は「模式図」クラス(構造の表現専用)。データ比例のグラフ・
     正確な座標が要る図は従来どおり作図画像を貼る
 - [x] lecture スキン(輪講・勉強会向け、モスグリーン系。quiz/answer/code-focus/misconception/cheatsheet)
+- [x] soft スキン(丸みのある柔らかいデザイン、グレージュ×コーラル。独自クラスは持たず、
+  research/business/lecture を @import して全クラスを使えるようにした上で、
+  配色トークン+角丸トークン(--sf-radius / --sf-radius-s / --sf-radius-pill)と適用リスト、
+  blockquote 左罫線の除去だけを持つ。`examples/demo-soft.md` で検証済み。
+  箱・チップ・画像を持つクラスを追加したら soft.css の適用リストにも追記すること)
 - [x] ヘッダー・フッター(機密区分・所属・コピーライト)、kpi の前年差・目標差表示
 - [x] デザイン基盤の文書化(`skill/references/design.md`: トークン・タイポグラフィ・グラフパレット・禁止事項)
 - [x] グラフ・分岐フロー・複雑な構成図は「作図した画像を貼る」を標準手順としてスキルに明文化
+- [x] 作図画像の実例を `examples/assets/charts/` に同梱(棒・折れ線=research、市場推移・承認フロー=business、
+  シーケンス図=lecture。各スキンのグラフパレット準拠。デモデッキに実例スライドあり)
 - [x] v2: business スキン(`kpi`、`examples/demo-business.md` で検証済み)
 - [x] 品質検証ループ: `skill/scripts/check-overflow.mjs`(Puppeteer機械チェック)+ PNG目視
 - [x] エージェントスキル(`skill/SKILL.md` + `references/layouts.md`)
@@ -72,6 +84,7 @@ AIエージェントが「内容を考えること」だけに集中すれば、
 
 1. まず既存クラスの組み合わせで表現できないか検討する(安易に増やさない)
 2. 追加する場合: 汎用なら `core.css`、用途特有ならスキンにクラスを定義
+   (箱・チップ・画像を持つクラスを core に足したら `soft.css` の角丸適用リストにも追記)
 3. `examples/demo-*.md` にサンプルスライドを1枚追加
 4. 検証ループ(ビルド → check-overflow → PNG目視)を回してから commit
 5. `skill/SKILL.md` のカタログ表と `skill/references/layouts.md` にエントリを追加

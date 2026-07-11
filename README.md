@@ -5,7 +5,7 @@
 
 - **エージェントに任せると**: `skill/SKILL.md` をスキルとして登録するだけで、「スライド作って」の一言から レイアウト選択 → 生成 → はみ出しチェック → PNG目視確認 が自動で回る
 - **エージェントが書くのは内容とレイアウト選択だけ**。`<!-- _class: title -->` のように1行加えるだけで、余白・配色・タイポグラフィは全部テーマ側が決める。毎回バラバラなデザインになったり、生HTMLで無理な組み方をしたりしない
-- **97種のレイアウトクラス**と**3つの配色スキン**(研究発表・ビジネス・輪講/勉強会)を最初から同梱。エージェントはその中から選ぶだけでいい
+- **108種のレイアウトクラス**と**4つの配色スキン**(研究発表・ビジネス・輪講/勉強会・ソフト)を最初から同梱。エージェントはその中から選ぶだけでいい
 - **崩れたスライドのまま出さない**。要素のはみ出しを機械チェックし、PNG化して目視確認するところまでが標準のワークフロー
 - **人が直接触りたいときは**、同じMarkdownをブラウザの編集WebUIでそのまま開ける。スライド上のテキストをクリックしてその場で書き換えられる
 
@@ -80,8 +80,9 @@ npm run webui -- ../examples/demo-research.md
 | `examples/demo-research.md` | ゼミ・学会発表向け(研究スキン) |
 | `examples/demo-business.md` | 提案・報告向け(ビジネススキン) |
 | `examples/demo-lecture.md` | 輪講・社内勉強会向け(輪講スキン) |
+| `examples/demo-soft.md` | カジュアルな発表・社内共有向け(ソフトスキン) |
 
-## 3つのデザインスキン
+## 4つのデザインスキン
 
 同じレイアウト構造のまま、配色だけを差し替えられる。用途に応じて `theme: research` / `business` / `lecture` を切り替えるだけ。
 
@@ -91,15 +92,20 @@ npm run webui -- ../examples/demo-research.md
 <td width="33%"><img src="examples/assets/screenshots/gallery-business.png" width="100%" alt="ビジネススキンのサンプルスライド(市場規模の同心円)"><br><sub><b>business</b> — グレージュ/ブラウン系。提案・報告向け</sub></td>
 <td width="33%"><img src="examples/assets/screenshots/gallery-lecture.png" width="100%" alt="輪講スキンのサンプルスライド(演習問題)"><br><sub><b>lecture</b> — モスグリーン系。輪講・勉強会向け</sub></td>
 </tr>
+<tr>
+<td width="33%"><img src="examples/assets/screenshots/gallery-soft.png" width="100%" alt="ソフトスキンのサンプルスライド(角丸の原因分析図)"><br><sub><b>soft</b> — グレージュ×コーラル・角丸。カジュアルな発表・社内共有向け</sub></td>
+<td width="33%"></td>
+<td width="33%"></td>
+</tr>
 </table>
 
-## レイアウトカタログ(97種)
+## レイアウトカタログ(108種)
 
 | 系統 | クラス |
 |---|---|
-| コア | `title` `title-visual` `agenda` `agenda-grid` `objectives` `divider` `content` `content-lead` `two-column` `sidebar` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `gallery` `photo-grid` `image-cards` `before-after` `logos` `profile` `team` `comparison` `comparison-3` `pros-cons` `transition` `table` `benchmark` `matrix` `matrix-3` `venn` `venn-3` `positioning` `ranking` `scorecard` `steps` `steps-v` `flow` `chain` `io` `cycle` `timeline` `timeline-h` `gantt` `roadmap` `kanban` `funnel` `pyramid` `layers` `org` `tree` `radial` `changelog` `stat` `status` `columns` `cards` `spec` `faq` `checklist` `quote` `quotes` `callout` `code` `lead` `exec-summary` `takeaway` `summary` `contact` `definition` `glossary` `references` `end` |
-| research | `experiment` `math` `hypothesis` `confusion-matrix` |
-| business | `kpi` `plans` `persona` `tam-sam-som` `tam-sam-som-circle` `case-study` `journey` `forces` `bmc` `impact` `okr` `actions` `swot` |
+| コア | `title` `title-visual` `agenda` `agenda-grid` `objectives` `divider` `content` `content-lead` `two-column` `sidebar` `image-right` `image-left` `image-top` `image-bottom` `image-full` `annotated` `gallery` `photo-grid` `image-cards` `before-after` `logos` `profile` `team` `comparison` `comparison-3` `pros-cons` `transition` `table` `benchmark` `matrix` `matrix-3` `venn` `venn-3` `positioning` `ranking` `scorecard` `steps` `steps-v` `flow` `chain` `io` `cycle` `timeline` `timeline-h` `gantt` `roadmap` `kanban` `funnel` `pyramid` `layers` `org` `tree` `radial` `changelog` `stat` `status` `columns` `cards` `spec` `faq` `checklist` `quote` `quotes` `callout` `code` `lead` `exec-summary` `takeaway` `summary` `contact` `definition` `glossary` `references` `end` `browser` `zoom` `causes` `timeline-photo` `collage` `draft` `confidential` `deprecated` |
+| research | `experiment` `math` `hypothesis` `confusion-matrix` `rq` |
+| business | `kpi` `plans` `persona` `tam-sam-som` `tam-sam-som-circle` `case-study` `journey` `forces` `bmc` `impact` `okr` `actions` `swot` `pest` `risks` |
 | lecture | `quiz` `answer` `code-focus` `misconception` `cheatsheet` `code-compare` |
 
 各レイアウトの詳しい使い方とMarkdownサンプルは [skill/references/layouts.md](skill/references/layouts.md)、
@@ -130,6 +136,7 @@ skill/
     research.css      # 研究発表スキン(配色 + experiment/math/hypothesis)
     business.css      # ビジネススキン(配色 + kpi/plans/forces 等)
     lecture.css       # 輪講・勉強会スキン(配色 + quiz/answer/cheatsheet 等)
+    soft.css          # ソフトスキン(グレージュ×コーラルの配色 + 角丸トークン。全クラスの合併)
   scripts/
     check-overflow.mjs  # スライドのはみ出しを機械検出
   webui/
@@ -139,6 +146,7 @@ examples/
   demo-research.md    # 研究スキンのカタログ兼検証デッキ
   demo-business.md    # ビジネススキンのカタログ兼検証デッキ
   demo-lecture.md     # 輪講・勉強会スキンのデモ(Git内部構造の勉強会デッキ)
+  demo-soft.md        # ソフトスキンのデモ(角丸デザインの紹介デッキ)
 docs/
   ROADMAP.md          # 目指す姿・現状・TODO(リポジトリを担う人向け)
 ```

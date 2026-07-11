@@ -188,3 +188,86 @@ section.confusion-matrix blockquote {
   margin: 0.9em auto 0;
   width: fit-content;
 }
+
+/* ---------- rq: Research Question(研究の問い) ----------
+   構造: h1 + blockquote(メインの問い1つ)または ol(複数の問い RQ1・RQ2…)
+   + 任意の p(注記)。仮説の列挙は hypothesis を使う。 */
+
+section.rq blockquote {
+  position: relative;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--sf-accent);
+  border-bottom: 1px solid var(--sf-line);
+  margin: 1.2em 0 0;
+  padding: 1.35em 1em 1.35em 4.8em;
+  font-size: 1.22em;
+  line-height: 1.8;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--sf-text);
+}
+
+section.rq blockquote::before {
+  content: 'RQ';
+  position: absolute;
+  left: 0.55em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sf-numeral-font);
+  font-size: 1.7em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--sf-accent);
+}
+
+section.rq ol {
+  counter-reset: rq;
+  list-style: none;
+  padding: 0;
+  margin-top: 1.1em;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+section.rq ol > li::marker {
+  content: none;
+}
+
+section.rq ol > li {
+  counter-increment: rq;
+  position: relative;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.6em 0.8em 0.6em 4.6em;
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.75;
+  color: var(--sf-text);
+}
+
+section.rq ol > li::before {
+  content: 'RQ' counter(rq);
+  position: absolute;
+  left: 0.4em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--sf-numeral-font);
+  font-size: 1.3em;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--sf-accent);
+}
+
+section.rq ol > li strong {
+  color: var(--sf-accent-strong);
+  letter-spacing: 0.08em;
+  margin-right: 0.6em;
+}
+
+section.rq > p {
+  color: var(--sf-muted);
+  font-size: 0.8em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}

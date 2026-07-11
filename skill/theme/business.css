@@ -980,3 +980,136 @@ section.swot > p {
   letter-spacing: 0.06em;
   margin-top: 1em;
 }
+
+/* ---------- pest: PEST分析(P/E/S/T の頭文字付き4象限) ----------
+   構造: h1 + ul(li 4つ、順序固定: 政治 → 経済 → 社会 → 技術。
+   各 li は「**ラベル** 説明文」)+ 任意の p(注記)。
+   P/E/S/T の頭文字が自動付与される。内的要因も見るなら swot、汎用の4象限は matrix。 */
+
+section.pest ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.9em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+section.pest ul > li::marker {
+  content: none;
+}
+
+section.pest ul > li {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0.95em 1.2em 0.95em 3.8em;
+  font-size: 0.78em;
+  line-height: 1.7;
+  color: var(--sf-muted);
+  border: 1px solid var(--sf-line);
+}
+
+section.pest ul > li::before {
+  position: absolute;
+  left: 0.6em;
+  top: 0.4em;
+  font-family: var(--sf-numeral-font);
+  font-size: 1.9em;
+  font-weight: 300;
+  letter-spacing: 0;
+  color: var(--sf-accent);
+}
+
+section.pest ul > li:nth-child(1)::before { content: 'P'; }
+section.pest ul > li:nth-child(2)::before { content: 'E'; }
+section.pest ul > li:nth-child(3)::before { content: 'S'; }
+section.pest ul > li:nth-child(4)::before { content: 'T'; }
+
+section.pest ul > li strong {
+  display: block;
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.25em;
+}
+
+section.pest > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}
+
+/* ---------- risks: リスク分析(発生確率・影響度チップ付きの一覧) ----------
+   構造: h1 + ul(各 li が「**リスク名** 説明・対策 *高* *大*」、3〜5項目)
+   + 任意の p(注記)。em の1つ目=発生確率、2つ目=影響度が右端のチップになる。
+   確率×影響のマトリクスで見せるなら matrix-3、状態チップ1つの一覧なら status。 */
+
+section.risks ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5em;
+}
+
+section.risks ul > li::marker {
+  content: none;
+}
+
+section.risks ul > li {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  border-bottom: 1px solid var(--sf-line);
+  padding: 0.7em 0.2em;
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.6;
+  color: var(--sf-muted);
+}
+
+section.risks ul > li strong {
+  color: var(--sf-text);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+section.risks ul > li em {
+  font-style: normal;
+  flex-shrink: 0;
+  padding: 0.12em 0.8em;
+  font-size: 0.76em;
+  letter-spacing: 0.12em;
+  color: var(--sf-accent-strong);
+}
+
+section.risks ul > li em::before {
+  font-size: 0.82em;
+  letter-spacing: 0.14em;
+  color: var(--sf-muted);
+  margin-right: 0.5em;
+}
+
+section.risks ul > li em:nth-of-type(1) {
+  margin-left: auto;
+  border: 1px solid var(--sf-line);
+}
+
+section.risks ul > li em:nth-of-type(1)::before {
+  content: '確率';
+}
+
+section.risks ul > li em:nth-of-type(2) {
+  background: var(--sf-panel);
+}
+
+section.risks ul > li em:nth-of-type(2)::before {
+  content: '影響';
+}
+
+section.risks > p {
+  color: var(--sf-muted);
+  font-size: 0.78em;
+  letter-spacing: 0.06em;
+  margin-top: 1em;
+}

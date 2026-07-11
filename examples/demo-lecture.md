@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: research
+theme: lecture
 size: 16:9
 paginate: true
 ---
@@ -201,6 +201,16 @@ $ git cat-file -p 5d6e7f8a      # ③
 
 ---
 
+<!-- _class: image-full -->
+
+# git push で起きていること
+
+![](assets/charts/lecture-sequence.svg)
+
+シーケンス図・状態遷移図は作図した画像を貼る(パレットはスキンに従う)
+
+---
+
 <!-- _class: misconception -->
 
 # よくある誤解: ブランチ
@@ -221,6 +231,16 @@ $ git cat-file -p 5d6e7f8a      # ③
 > 他人のコミットを誤って消すことがない。
 
 チーム開発では main / develop への force push をサーバ側で禁止しておくのが安全
+
+---
+
+<!-- _class: browser -->
+
+# GUIクライアントでの見え方
+
+![](assets/screenshots/webui-editor.png)
+
+同じ履歴でもツールによって表示は異なるが、実体は refs とオブジェクトだけ
 
 ---
 
