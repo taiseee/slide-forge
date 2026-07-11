@@ -1,0 +1,167 @@
+/* @theme soft */
+/*
+ * slide-forge soft skin — 丸みのある柔らかいデザイン。
+ * 配色: グレージュ(暖灰)×コーラルアクセント。
+ * パネル・箱・チップ・画像に角丸を付与し、blockquote の左罫線を持たない。
+ * 他スキンのエディトリアル・ミニマル(角丸なし)に対する「ソフト」な選択肢。
+ *
+ * research / business / lecture をすべて import しているため、
+ * 各スキン専用クラス(experiment / kpi / quiz 等)も soft でそのまま使える。
+ * このファイルが持つのは
+ *  1. カラートークンの上書き(import より後に書くので soft が勝つ)
+ *  2. 角丸トークン(--sf-radius / --sf-radius-s / --sf-radius-pill)と適用ルール
+ *  3. blockquote 左罫線の除去
+ * だけ。新しいレイアウトクラスを追加したら、箱・チップ・画像を持つ場合に限り
+ * 下の適用リストにも追記すること。
+ */
+
+@import 'research';
+@import 'business';
+@import 'lecture';
+
+:root {
+  --sf-bg: #fdfdfc;
+  --sf-text: #3a3735;
+  --sf-muted: #9b948c;
+  --sf-line: #eae6e1;
+  --sf-panel: #f3f0ec;
+  --sf-accent: #c4705c;
+  --sf-accent-strong: #8e4a3e;
+  --sf-ink: #514741;
+  --sf-ink-text: #faf6f3;
+  --sf-code-bg: #f4f1ed;
+  /* 角丸トークン */
+  --sf-radius: 14px;      /* パネル・箱・画像 */
+  --sf-radius-s: 8px;     /* 小さめの箱・コード・表のセル */
+  --sf-radius-pill: 999px; /* チップ・中心ノード */
+}
+
+/* ---------- blockquote の左罫線を持たない ----------
+   角丸の面に左だけ太い線が付くと野暮ったくなるため、soft では罫線を外して
+   パネル面(角丸)だけで引用・注記を表現する。 */
+
+blockquote,
+section.quote blockquote,
+section.exec-summary blockquote,
+section.callout blockquote,
+section.experiment blockquote,
+section.confusion-matrix blockquote,
+section.case-study blockquote {
+  border-left: none;
+}
+
+section.definition blockquote {
+  /* ヘアライン枠は残し、左だけ太いアクセントは外して均一にする */
+  border-left: 1px solid var(--sf-line);
+}
+
+section.rq blockquote {
+  /* 上下の罫線ではなく角丸パネルで見せる */
+  border: none;
+  background: var(--sf-panel);
+}
+
+/* ---------- 角丸の適用 ----------
+   パネル・箱(背景 or 枠線を持つ面) */
+
+blockquote,
+section.sidebar > blockquote,
+section.callout blockquote,
+section.quotes blockquote,
+section.exec-summary blockquote,
+section.definition blockquote,
+section.comparison h2,
+section.comparison-3 h2,
+section.pros-cons h2,
+section.before-after h2,
+section.matrix h2,
+section.io h2,
+section.funnel ol > li,
+section.flow ol > li,
+section.pyramid ol > li,
+section.org ul > li,
+section.org h2,
+section.layers ol > li,
+section.matrix-3 table td,
+section.matrix-3 table th,
+section.transition h2:nth-of-type(2) ~ ul > li,
+section.radial ul > li,
+section.objectives ul > li,
+section.kanban ul > li,
+section.causes ul > li,
+section.causes > p,
+section.zoom p:has(> img) img:not(:first-of-type),
+section.hypothesis ol > li,
+section.plans h2,
+section.tam-sam-som ul > li,
+section.forces ul > li,
+section.bmc ul > li,
+section.swot ul > li,
+section.pest ul > li,
+section.misconception ul > li {
+  border-radius: var(--sf-radius);
+}
+
+/* 矢羽根チェーンは先頭の左端だけ丸める(右側は clip-path の矢印形状が優先) */
+section.chain ol > li:first-child {
+  border-radius: var(--sf-radius-s) 0 0 var(--sf-radius-s);
+}
+
+/* 小さめの箱・コード・表のセル */
+pre,
+section.confusion-matrix tbody td:not(:first-child) {
+  border-radius: var(--sf-radius-s);
+}
+
+code {
+  border-radius: 6px;
+}
+
+/* 表の強調列(benchmark)は帯の上下だけ丸める */
+section.benchmark thead th:nth-child(2) {
+  border-radius: var(--sf-radius-s) var(--sf-radius-s) 0 0;
+}
+
+section.benchmark tbody tr:last-child td:nth-child(2) {
+  border-radius: 0 0 var(--sf-radius-s) var(--sf-radius-s);
+}
+
+/* チップ・ピル */
+section.status ul > li em,
+section.risks ul > li em,
+section.actions ol > li em,
+section.impact ul > li em,
+section.journey ol > li em,
+section.okr ol > li em,
+section.kpi ul > li em,
+section.radial > p {
+  border-radius: var(--sf-radius-pill);
+}
+
+/* h1 下のアクセントバーも丸める */
+h1::after,
+section.divider h1::after {
+  border-radius: var(--sf-radius-pill);
+}
+
+/* 画像(写真・図)。円形表示(profile / team)は core のまま */
+section.gallery p:has(> img) img,
+section.photo-grid p:has(> img) img,
+section.image-cards ul > li img,
+section.image-right p:has(> img) img,
+section.image-left p:has(> img) img,
+section.image-top p:has(> img) img,
+section.image-bottom p:has(> img) img,
+section.image-full p:has(> img) img,
+section.annotated p:has(> img) img,
+section.persona p:has(> img) img,
+section.timeline-photo ol > li img,
+section.collage p:has(> img) img {
+  border-radius: var(--sf-radius);
+}
+
+/* ブラウザ窓枠(browser)は枠ごと丸め、上部バーは枠内にクリップする */
+section.browser p:has(> img) {
+  border-radius: var(--sf-radius);
+  overflow: hidden;
+}
