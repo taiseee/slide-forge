@@ -124,7 +124,9 @@ Puppeteer の Chromium ダウンロードが走るため、初回のみ数分か
 | `quotes` | 複数の引用カード(blockquote×2〜3。顧客の声・フィードバック) |
 | `browser` | スクリーンショット・UIモックアップ(画像がブラウザ風の窓枠に入る。h1+画像1枚+任意の注釈1行) |
 | `zoom` | 拡大部分付き画像(画像2枚を1つの段落に: 1枚目=全体、2枚目=右下の拡大インセット) |
-| `draft` / `confidential` / `deprecated` | 透かしスタンプ(修飾クラス。`content draft` のように既存レイアウトに重ねて使う。斜めの薄い大文字が入る) |
+| `draft` | 透かしスタンプ「DRAFT」(修飾クラス。`content draft` のように既存レイアウトに重ねる。斜めの薄い大文字が入る) |
+| `confidential` | 透かしスタンプ「CONFIDENTIAL」(修飾クラス。`content confidential` のように既存レイアウトに重ねる) |
+| `deprecated` | 透かしスタンプ「DEPRECATED」(修飾クラス。`content deprecated` のように既存レイアウトに重ねる) |
 | `causes` | 因果関係・原因分析(ul=原因2〜4個の箱 → 矢印 → p=濃色の結果箱に収束。模式図) |
 | `timeline-photo` | 画像つき横タイムライン(各 li が「![](画像) **時期** 説明」、2〜4項目。沿革・プロジェクトの歩み) |
 | `collage` | 画像コラージュ(画像3〜6枚を1つの段落に。定義済みスロットに散らして配置、少し傾く) |

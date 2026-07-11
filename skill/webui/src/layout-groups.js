@@ -17,6 +17,7 @@ export const LAYOUT_GROUPS = [
       "exec-summary",
       "takeaway",
       "summary",
+      "contact",
       "end",
       "references",
     ],
@@ -39,10 +40,6 @@ export const LAYOUT_GROUPS = [
       "math",
       "definition",
       "glossary",
-      "callout",
-      "draft",
-      "confidential",
-      "deprecated",
     ],
   },
   {
@@ -119,7 +116,6 @@ export const LAYOUT_GROUPS = [
       "radial",
       "causes",
       "journey",
-      "changelog",
     ],
   },
   {
@@ -130,7 +126,6 @@ export const LAYOUT_GROUPS = [
       "kpi",
       "impact",
       "okr",
-      "status",
       "actions",
       "risks",
       "experiment",
@@ -140,7 +135,17 @@ export const LAYOUT_GROUPS = [
       "tam-sam-som",
       "tam-sam-som-circle",
       "case-study",
-      "contact",
+    ],
+  },
+  {
+    name: "状態・例外",
+    classes: [
+      "callout",
+      "status",
+      "changelog",
+      "draft",
+      "confidential",
+      "deprecated",
     ],
   },
   {
