@@ -22,7 +22,6 @@ import { setLibraryAsset, setSlideCls, slideCls } from './asset-insertion.js';
 const NEW_SLIDE = '\n<!-- _class: content -->\n\n# 新しいスライド\n\n- 内容\n';
 
 const SIDEBAR_WIDTH_KEY = 'sf-sidebar-width';
-const MOTION_MODES = ['off', 'standard', 'rich'];
 const SIDEBAR_MIN = 160;
 const SIDEBAR_MAX = 480;
 const SIDEBAR_DEFAULT = 224;
@@ -156,12 +155,6 @@ export default function App() {
     () => frontmatter.match(/^sf_motion:\s*(\S+)/m)?.[1]?.replace(/["']/g, '') ?? 'standard',
     [frontmatter],
   );
-  const nextMotionMode = MOTION_MODES[(MOTION_MODES.indexOf(motionMode) + 1) % MOTION_MODES.length] ?? 'standard';
-  const motionLabels = {
-    off: 'なし',
-    standard: '標準',
-    rich: 'リッチ',
-  };
   // スキン専用クラスは、そのスキン以外では CSS が無く崩れるためピッカーに出さない
   const usableLayouts = useMemo(
     () => layouts.filter((l) => theme === 'soft' || !l.skin || l.skin === theme),
@@ -865,19 +858,6 @@ export default function App() {
             <option key={t} value={t}>{t}</option>
           ))}
         </select>
-        <button
-          type="button"
-          className={`motion-toggle motion-${motionMode}`}
-          data-mode={motionMode}
-          onClick={() => changeMotion(nextMotionMode)}
-          aria-label={`要素モーション: ${motionLabels[motionMode] ?? motionMode}。クリックで${motionLabels[nextMotionMode]}に変更`}
-          title={`要素モーション: ${motionLabels[motionMode] ?? motionMode} → クリックで${motionLabels[nextMotionMode]}。richは要素の段階表示と図表演出を有効化`}
-        >
-          <span className="motion-toggle-icon" aria-hidden="true">
-            {motionMode === 'off' ? '·' : motionMode === 'standard' ? '✦' : '✦✦'}
-          </span>
-          <span className="sr-only">{motionLabels[motionMode] ?? motionMode}</span>
-        </button>
         <button
           onClick={() => doExport('html')}
           disabled={!!exporting}
