@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="520" viewBox="0 0 960 520" role="img" aria-labelledby="title description">
+  <title id="title">主結果グラフのプレースホルダー</title>
+  <desc id="description">ベースラインと提案手法を3条件で比較する棒グラフの雛形</desc>
+  <rect width="960" height="520" fill="#ffffff"/>
+  <g stroke="#e3e5e9" stroke-width="2">
+    <path d="M120 70V420H900" fill="none" stroke="#878d96"/>
+    <path d="M120 330H900M120 240H900M120 150H900"/>
+  </g>
+  <g fill="#9aa3af">
+    <rect x="205" y="245" width="62" height="175"/>
+    <rect x="445" y="205" width="62" height="215"/>
+    <rect x="685" y="165" width="62" height="255"/>
+  </g>
+  <g fill="#343c48">
+    <rect x="275" y="190" width="62" height="230"/>
+    <rect x="515" y="145" width="62" height="275"/>
+    <rect x="755" y="105" width="62" height="315"/>
+  </g>
+  <g fill="#566173" font-family="Helvetica Neue, Arial, sans-serif" font-size="22" text-anchor="middle">
+    <text x="271" y="458">Condition A</text>
+    <text x="511" y="458">Condition B</text>
+    <text x="751" y="458">Condition C</text>
+  </g>
+  <g font-family="Helvetica Neue, Arial, sans-serif" font-size="20">
+    <rect x="635" y="25" width="24" height="16" fill="#9aa3af"/>
+    <text x="670" y="40" fill="#566173">Baseline</text>
+    <rect x="785" y="25" width="24" height="16" fill="#343c48"/>
+    <text x="820" y="40" fill="#343c48">Proposed</text>
+  </g>
+  <text x="28" y="260" fill="#878d96" font-family="Helvetica Neue, Arial, sans-serif" font-size="20" text-anchor="middle" transform="rotate(-90 28 260)">Metric (replace with actual data)</text>
+</svg>

@@ -1,0 +1,15 @@
+type: bar
+theme: research
+title: Main result
+x_label: Method
+y_label: Accuracy
+value_format: ".0%"
+data:
+  - { x: Baseline, y: 0.71 }
+  - { x: Augmented, y: 0.76 }
+  - { x: Proposed, y: 0.84 }
+highlight: Proposed
+annotations:
+  - { x: Proposed, y: 0.84, text: "+13 pt" }
+alt: A bar chart where the proposed method reaches 84 percent accuracy, above the 71 percent baseline.
+motion: highlight

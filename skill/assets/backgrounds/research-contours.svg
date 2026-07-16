@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Research contours background</title>
+  <desc id="desc">Fine gray contour loops around the corners with an open central field.</desc>
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <g fill="none" stroke="#737d8d" stroke-width="2" opacity="0.13">
+    <path d="M-80 180c160-185 390-190 520-45s70 325-95 390-350-15-405-165 15-130-20-180Z"/>
+    <path d="M-35 215c125-145 310-150 410-35s55 255-75 305-275-10-320-130 15-105-15-140Z"/>
+    <path d="M1210 735c-85-160-30-335 135-390s335 35 370 195-70 315-225 335-215-60-280-140Z"/>
+    <path d="M1260 720c-65-120-20-250 100-290s250 25 275 145-55 235-170 250-155-45-205-105Z"/>
+  </g>
+  <g fill="#566173" opacity="0.2"><circle cx="355" cy="135" r="8"/><circle cx="1345" cy="345" r="8"/></g>
+</svg>

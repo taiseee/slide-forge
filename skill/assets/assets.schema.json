@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/taiseee/slide-forge/blob/main/skill/assets/assets.schema.json",
+  "title": "slide-forge asset manifest",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "assets"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "generated_at": { "type": "string", "format": "date" },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "path",
+        "title",
+        "author",
+        "source_url",
+        "license",
+        "license_url",
+        "acquired_at",
+        "sha256",
+        "alt",
+        "tags",
+        "recommended_layouts",
+        "focal_point",
+        "dimensions"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "kind": { "enum": ["icon", "photo", "background"] },
+        "path": { "type": "string", "pattern": "^(icons|photos|backgrounds)/" },
+        "title": { "type": "string", "minLength": 1 },
+        "author": { "type": "string", "minLength": 1 },
+        "source_url": { "type": "string", "format": "uri" },
+        "license": { "type": "string", "minLength": 1 },
+        "license_url": { "type": "string", "format": "uri" },
+        "acquired_at": { "type": "string", "format": "date" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "alt": { "type": "string", "minLength": 1 },
+        "tags": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+        "recommended_layouts": { "type": "array", "items": { "type": "string" } },
+        "focal_point": {
+          "type": "object",
+          "required": ["x", "y"],
+          "properties": {
+            "x": { "type": "number", "minimum": 0, "maximum": 1 },
+            "y": { "type": "number", "minimum": 0, "maximum": 1 }
+          },
+          "additionalProperties": false
+        },
+        "dimensions": {
+          "type": "object",
+          "required": ["width", "height"],
+          "properties": {
+            "width": { "type": "integer", "minimum": 1 },
+            "height": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        },
+        "usage_notes": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

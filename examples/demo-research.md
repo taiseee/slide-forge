@@ -5,6 +5,8 @@ size: 16:9
 paginate: true
 math: katex
 title: 局所特徴を考慮した画像生成の自動評価
+transition: none
+sf_motion: rich
 ---
 
 <!-- _class: title -->
@@ -17,6 +19,26 @@ title: 局所特徴を考慮した画像生成の自動評価
 発表者名
 
 2026年7月8日 · 研究室ゼミ
+<!-- テストテスト -->
+
+---
+
+<!-- _class: chart-insight -->
+
+# 主結果: [最も重要な比較]
+
+![主要評価指標におけるベースラインと提案手法の比較](assets/starter/main-result-placeholder.svg)
+
+> **\[+0.0pt\]** \[結果から言えることを、比較条件とともに一文で\]
+
+- [複数データセット／条件での一貫性]
+- \[試行数、誤差、有意差、効果量\]
+
+<!--
+表の数値を読み上げず、RQへの答えと効果量を述べる。
+統計的有意差と実用上の差を区別する。
+プレースホルダーSVGは、実データから生成したグラフへ置き換える。
+-->
 
 ---
 
@@ -162,7 +184,20 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 **ポイント**: 既存のCLIP埋め込みを再利用し、追加学習を最小化
 
-![](assets/placeholder-figure.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg)
+
+---
+
+<!-- _class: qualitative-grid -->
+
+# 定性結果の比較
+
+| 手法 | 入力A | 入力B | 入力C |
+|---|---|---|---|
+| 既存手法 | ![既存手法A](assets/placeholder-figure.svg) | ![既存手法B](assets/placeholder-figure.svg) | ![既存手法C](assets/placeholder-figure.svg) |
+| **提案手法** | ![提案手法A](assets/placeholder-figure.svg) | ![提案手法B](assets/placeholder-figure.svg) | ![提案手法C](assets/placeholder-figure.svg) |
+
+> 提案手法は細部の構造と一貫性を維持した。
 
 ---
 
@@ -176,7 +211,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 これにより細部の品質劣化を明示的に評価できる
 
-![](assets/placeholder-figure.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg)
 
 ---
 
@@ -184,7 +219,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 評価スコアの分布
 
-![](assets/placeholder-chart.svg)
+![グラフのプレースホルダー](assets/placeholder-chart.svg)
 
 提案手法は人手評価との相関が単調に向上する
 
@@ -200,7 +235,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 **グラフは作図した画像を貼る**(スキンのグラフパレットに従う)
 
-![](assets/charts/research-bars.svg)
+![手法別の評価指標を比較する棒グラフ](assets/charts/research-bars.svg)
 
 ---
 
@@ -208,7 +243,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # パッチ粒度の感度分析
 
-![](assets/charts/research-line.svg)
+![パッチ粒度と評価指標の関係を示す折れ線グラフ](assets/charts/research-line.svg)
 
 相関は 32px で最大となり、粗すぎても細かすぎても低下する
 
@@ -222,7 +257,105 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 - 生成画像とプロンプトを入力とし、局所・大域スコアを統合して出力する
 - 点線部が本研究で追加した局所評価モジュール
 
-![](assets/placeholder-figure.svg)
+![A quiet gray grid with a highlighted diagonal relationship.](assets/slide-forge/background-research-grid-f4b377db39.svg)
+
+---
+
+<!-- _class: causes -->
+
+# 失敗例とエラー分析
+
+- **データ要因** \[不足・偏り・ノイズ\]
+- **モデル要因** \[表現・目的関数・容量\]
+- **評価要因** \[指標・アノテーション・閾値\]
+
+[観測された失敗パターン] が **[利用者・結論に与える影響]**
+
+<!--
+推測と実験で確認した原因を分ける。
+どの追加実験で原因を切り分けられるかを示す。
+-->
+
+---
+
+<!-- _class: flow -->
+
+# 提案手法の全体像
+
+1. **入力** [モデルが受け取る情報]
+2. **表現** [特徴抽出・前処理]
+3. **中核処理** [提案要素と既存要素の関係]
+4. **出力** [予測・生成物・スコア]
+
+[既存手法との差分を1行で]
+
+<!--
+最初は部品名よりデータの流れを説明する。
+複雑な構成は assets/method-overview.svg に置き換え、この順序と対応させる。
+-->
+
+---
+
+<!-- _class: comparison -->
+
+# 学習時と推論時
+
+## 学習時
+
+- **入力・教師** [入力と監督信号]
+- **最適化** [損失と学習されるパラメータ]
+- **追加コスト** [計算量・データ要件]
+
+## 推論時
+
+- **入出力** [実運用で使う情報と返す結果]
+- **固定部分** [更新しないモデル・資源]
+- **計算量** [速度・メモリ]
+
+<!--
+学習時だけ使う情報が推論時に漏れていないかを明示する。
+何を学習し、何を固定するのかを曖昧にしない。
+-->
+
+---
+
+<!-- _class: comparison -->
+
+# 学習時と推論時
+
+## 学習時
+
+- **入力・教師** [入力と監督信号]
+- **最適化** [損失と学習されるパラメータ]
+- **追加コスト** [計算量・データ要件]
+
+## 推論時
+
+- **入出力** [実運用で使う情報と返す結果]
+- **固定部分** [更新しないモデル・資源]
+- **計算量** [速度・メモリ]
+
+<!--
+学習時だけ使う情報が推論時に漏れていないかを明示する。
+何を学習し、何を固定するのかを曖昧にしない。
+-->
+
+---
+
+<!-- _class: status -->
+
+# 前回からの進捗
+
+- **完了** [得られた成果・確定した判断] *完了*
+- **進行中** [現在検証していること] *対応中*
+- **ブロッカー** [判断や支援が必要な点] *要相談*
+- **次回まで** [次の具体的な成果物] *未着手*
+
+更新日: [YYYY-MM-DD]
+
+<!--
+作業量ではなく、前回から増えた知識・証拠・判断を中心に説明する。
+-->
 
 ---
 
@@ -247,17 +380,36 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 ---
 
+<!-- _class: qualitative-grid -->
+
+# 定性結果: 成功例と差が出る条件
+
+| 入力・参照 | ベースライン | 提案手法 | 観察 |
+|---|---|---|---|
+| [例1の画像] | [出力画像] | **\[出力画像\]** | [改善点] |
+| [例2の画像] | [出力画像] | **[出力画像]** | [改善点] |
+| [例3の画像] | [出力画像] | **[出力画像]** | [残る失敗] |
+
+\[画像は同じ縮尺・切り出し・表示条件で比較\]
+
+<!--
+代表例だけでなく、境界例または失敗例を最低1件含める。
+画像を assets/ に置き、セルの [画像] を Markdown 画像へ置き換える。
+-->
+
+---
+
 <!-- _class: before-after -->
 
 # 評価の改善例
 
 ## ベースライン
 
-![](assets/placeholder-figure.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg)
 
 ## 提案手法
 
-![](assets/placeholder-chart.svg)
+![グラフのプレースホルダー](assets/placeholder-chart.svg)
 
 同一プロンプトに対するスコアの説明性が向上
 
@@ -267,7 +419,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 生成結果の比較
 
-![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg) ![グラフのプレースホルダー](assets/placeholder-chart.svg)
 
 左: ベースライン、右: 提案手法(細部の破綻が減少)
 
@@ -277,7 +429,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 生成サンプル一覧
 
-![](assets/placeholder-portrait.svg) ![](assets/placeholder-portrait.svg) ![](assets/placeholder-portrait.svg) ![](assets/placeholder-portrait.svg)
+![人物写真のプレースホルダー](assets/placeholder-portrait.svg) ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) ![人物写真のプレースホルダー](assets/placeholder-portrait.svg)
 
 代表的な 4 プロンプトの生成結果(人物ドメイン)
 
@@ -287,9 +439,9 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 研究の歩み
 
-1. ![](assets/placeholder-figure.svg) **2025** 局所スコアのプロトタイプを実装
-2. ![](assets/placeholder-chart.svg) **2026 上期** 3データセットで相関評価を実施
-3. ![](assets/placeholder-portrait.svg) **2026 下期** 閾値較正の自動化と論文化
+1. ![構成図のプレースホルダー](assets/placeholder-figure.svg) **2025** 局所スコアのプロトタイプを実装
+2. ![グラフのプレースホルダー](assets/placeholder-chart.svg) **2026 上期** 3データセットで相関評価を実施
+3. ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) **2026 下期** 閾値較正の自動化と論文化
 
 ---
 
@@ -297,7 +449,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 定性評価のスナップショット
 
-![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg) ![](assets/placeholder-portrait.svg) ![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg) ![](assets/placeholder-portrait.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg) ![グラフのプレースホルダー](assets/placeholder-chart.svg) ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) ![構成図のプレースホルダー](assets/placeholder-figure.svg) ![グラフのプレースホルダー](assets/placeholder-chart.svg) ![人物写真のプレースホルダー](assets/placeholder-portrait.svg)
 
 手指・文字・背景テクスチャの代表例(詳細は次ページ)
 
@@ -307,7 +459,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 定性結果の注目箇所
 
-![](assets/placeholder-figure.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg)
 
 1. **手指の構造** ベースラインで最も破綻しやすく、提案手法のスコア低下が人手評価と一致
 2. **文字領域** 局所スコアが劣化を検出、大域スコアでは見えない
@@ -319,7 +471,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 
 # 破綻領域の拡大確認
 
-![](assets/placeholder-figure.svg) ![](assets/placeholder-chart.svg)
+![構成図のプレースホルダー](assets/placeholder-figure.svg) ![グラフのプレースホルダー](assets/placeholder-chart.svg)
 
 右下: スコアが最も低下したパッチ周辺の拡大
 
@@ -348,7 +500,7 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 - **経歴** ◯◯大学 工学部卒(2025)
 - **連絡先** contact@example.com
 
-![](assets/placeholder-portrait.svg)
+![人物写真のプレースホルダー](assets/placeholder-portrait.svg)
 
 ---
 
@@ -572,6 +724,32 @@ Hessel et al., EMNLP 2021(意訳)
 
 ---
 
+<!-- _class: chart-insight -->
+
+# 主結果: 局所特徴により相関が8.4pt向上
+
+![3データセットにおける既存手法と提案手法の相関比較](assets/charts/research-bars.svg)
+
+> **+8.4pt** 低品質な局所領域を捉えることで、人手評価との一致度が向上した。
+
+- 3データセットで一貫して改善
+- エラーバーは3試行の標準偏差
+
+---
+
+<!-- _class: qualitative-grid -->
+
+# 定性結果: 局所破綻の可視化
+
+| 手法 | 手指領域 | 文字領域 | 背景領域 |
+|---|---|---|---|
+| 既存手法 | ![既存手法による手指領域](assets/placeholder-figure.svg) | ![既存手法による文字領域](assets/placeholder-chart.svg) | ![既存手法による背景領域](assets/placeholder-figure.svg) |
+| **提案手法** | ![提案手法による手指領域](assets/placeholder-chart.svg) | ![提案手法による文字領域](assets/placeholder-figure.svg) | ![提案手法による背景領域](assets/placeholder-chart.svg) |
+
+> 提案手法は、画像全体の印象を保ちながら局所破綻を強く検出する。
+
+---
+
 <!-- _class: summary -->
 
 # まとめ
@@ -667,6 +845,24 @@ Hessel et al., EMNLP 2021(意訳)
 
 - 閾値較正の自動化(検証セットで分位点を決定)
 - 3データセットでの再現性検証を追加
+
+---
+
+<!-- _class: content -->
+
+# 要素モーションの確認
+
+![sf:fade 研究結果を表示](assets/charts/research-bars.svg)
+
+- 1回目: グラフが表示される
+- 2回目: 説明が表示される
+- 3回目: 結論を確認する
+
+<!--
+rich motion の確認用スライド。
+発表モードで進むと要素が段階的に表示される。
+PDFでは最終状態で表示される。
+-->
 
 ---
 

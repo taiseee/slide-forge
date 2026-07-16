@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Business arc background</title>
+  <desc id="desc">Warm editorial arcs frame the lower-right corner while preserving clear text space.</desc>
+  <rect width="1600" height="900" fill="#fbfaf7"/>
+  <g fill="none" stroke="#8a7a63" opacity="0.16">
+    <circle cx="1450" cy="760" r="340" stroke-width="44"/>
+    <circle cx="1450" cy="760" r="245" stroke-width="3"/>
+    <circle cx="1450" cy="760" r="160" stroke-width="3"/>
+  </g>
+  <path d="M1010 120h420" stroke="#55483a" stroke-width="3" opacity="0.13"/>
+  <circle cx="1430" cy="120" r="9" fill="#55483a" opacity="0.25"/>
+</svg>

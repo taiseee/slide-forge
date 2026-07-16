@@ -1,0 +1,20 @@
+type: architecture
+theme: lecture
+title: Service architecture
+data:
+  direction: TB
+  groups:
+    - { id: client, label: Client, direction: LR }
+    - { id: service, label: Services, direction: LR }
+  nodes:
+    - { id: web, label: Web UI, group: client }
+    - { id: api, label: API, group: service }
+    - { id: worker, label: Worker, group: service }
+    - { id: store, label: Object store }
+  edges:
+    - { from: web, to: api }
+    - { from: api, to: worker, label: Job }
+    - { from: worker, to: store }
+highlight: worker
+alt: A layered service architecture where the web UI calls an API, which dispatches a worker that writes to object storage.
+motion: fade

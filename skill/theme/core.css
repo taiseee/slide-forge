@@ -20,7 +20,7 @@
  *   changelog / contact / definition / references / venn-3 / sidebar /
  *   callout(+ success / warning / error) / photo-grid / benchmark /
  *   tree / radial / positioning / objectives / image-cards / status /
- *   chain / glossary / kanban / io / quotes
+ *   chain / glossary / kanban / io / quotes / chart-insight / qualitative-grid
  * デッキ単位のオプション: 進捗バー(--sf-progress、末尾の progress 節を参照)
  */
 
@@ -4772,3 +4772,104 @@ section.stat-ring.p97 { --sf-ring-value: 97; }
 section.stat-ring.p98 { --sf-ring-value: 98; }
 section.stat-ring.p99 { --sf-ring-value: 99; }
 section.stat-ring.p100 { --sf-ring-value: 100; }
+
+/* ---------- chart-insight: グラフ＋結論＋解釈 ----------
+   構造: h1 + 画像1枚 + blockquote(結論) + ul(解釈2〜3点)。
+   グラフそのものは render-visual.mjs 等で作ったSVG/PNGを貼る。 */
+
+section.chart-insight {
+  display: grid;
+  grid-template-columns: minmax(0, 1.9fr) minmax(300px, 0.8fr);
+  grid-template-rows: auto auto 1fr;
+  column-gap: 42px;
+  row-gap: 18px;
+}
+
+section.chart-insight > h1 {
+  grid-column: 1 / -1;
+  margin-bottom: 0.2em;
+}
+
+section.chart-insight > p:has(> img) {
+  grid-column: 1;
+  grid-row: 2 / 4;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section.chart-insight > p:has(> img) img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 470px;
+  object-fit: contain;
+}
+
+section.chart-insight > blockquote {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0;
+  padding: 0.75em 0.9em;
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+
+section.chart-insight > ul {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: start;
+  margin: 0;
+  padding-left: 1.05em;
+  color: var(--sf-muted);
+  font-size: 0.82em;
+  line-height: 1.55;
+}
+
+/* ---------- qualitative-grid: 定性結果の行列比較 ----------
+   構造: h1 + table。1列目=手法名、以降=画像。任意で末尾にblockquote。 */
+
+section.qualitative-grid > h1 {
+  margin-bottom: 0.45em;
+}
+
+section.qualitative-grid > table {
+  width: 100%;
+  table-layout: fixed;
+  margin: 0;
+  font-size: 0.72em;
+  line-height: 1.35;
+}
+
+section.qualitative-grid > table th,
+section.qualitative-grid > table td {
+  padding: 7px 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+section.qualitative-grid > table th:first-child,
+section.qualitative-grid > table td:first-child {
+  width: 150px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--sf-accent-strong);
+}
+
+section.qualitative-grid > table img {
+  display: block;
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  background: var(--sf-panel);
+}
+
+section.qualitative-grid > blockquote {
+  margin: 0.55em 0 0;
+  padding: 0.45em 0.8em;
+  font-size: 0.7em;
+  line-height: 1.45;
+}

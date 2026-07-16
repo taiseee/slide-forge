@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "description": "slide-forge layout classes grouped by communication intent",
+  "themes": ["research", "business", "lecture", "soft"],
+  "groups": [
+    {
+      "id": "opening-closing",
+      "label_ja": "導入・締め",
+      "layouts": [
+        "title", "title-visual", "agenda", "agenda-grid", "objectives",
+        "divider", "lead", "exec-summary", "takeaway", "summary",
+        "contact", "end", "references"
+      ]
+    },
+    {
+      "id": "body",
+      "label_ja": "本文",
+      "layouts": [
+        "content", "content-lead", "two-column", "sidebar", "columns",
+        "cards", "spec", "faq", "checklist", "quote", "quotes", "code",
+        "math", "definition", "glossary"
+      ]
+    },
+    {
+      "id": "visual",
+      "label_ja": "画像",
+      "layouts": [
+        "image-right", "image-left", "image-top", "image-bottom", "image-full",
+        "annotated", "browser", "zoom", "phone", "app-intro", "quote-photo",
+        "gallery", "photo-grid", "collage", "image-cards", "before-after",
+        "qualitative-grid", "logos", "profile", "team", "persona"
+      ]
+    },
+    {
+      "id": "comparison-classification",
+      "label_ja": "比較・分類",
+      "layouts": [
+        "comparison", "comparison-3", "pros-cons", "transition", "table",
+        "benchmark", "matrix", "matrix-3", "swot", "pest", "venn", "venn-3",
+        "positioning", "ranking", "plans", "scorecard", "forces", "bmc"
+      ]
+    },
+    {
+      "id": "process-structure",
+      "label_ja": "プロセス・構造",
+      "layouts": [
+        "steps", "steps-v", "steps-photo", "flow", "chain", "io", "cycle",
+        "timeline", "timeline-h", "timeline-photo", "gantt", "roadmap", "kanban",
+        "funnel", "pyramid", "pyramid-tri", "logic-tree", "layers", "org", "tree",
+        "radial", "causes", "journey"
+      ]
+    },
+    {
+      "id": "metrics-results",
+      "label_ja": "数値・結果",
+      "layouts": [
+        "stat", "stat-ring", "kpi", "impact", "okr", "actions", "risks",
+        "experiment", "chart-insight", "hypothesis", "rq", "confusion-matrix", "tam-sam-som",
+        "tam-sam-som-circle", "case-study"
+      ]
+    },
+    {
+      "id": "state-exception",
+      "label_ja": "状態・例外",
+      "layouts": [
+        "callout", "status", "changelog", "draft", "confidential", "deprecated"
+      ]
+    },
+    {
+      "id": "education",
+      "label_ja": "教育",
+      "layouts": [
+        "quiz", "answer", "code-focus", "misconception", "cheatsheet", "code-compare"
+      ]
+    }
+  ],
+  "descriptions": {
+    "title": "表紙(タイトル・サブタイトル・発表者・日付)",
+    "agenda": "目次(番号付きリスト。項目を太字にすると「今ここ」として強調)",
+    "divider": "セクション区切り",
+    "content": "標準スライド(見出し+箇条書き/段落)",
+    "two-column": "本文を2段組(h1は全幅、内容は自動流し込み)",
+    "image-right": "本文左+画像右(画像は自動配置・contain)",
+    "image-left": "画像左+本文右",
+    "image-full": "図が主役(h1+全面画像+注釈1行)",
+    "comparison": "対比2列(h2が各列の見出し、列の切れ目を制御可)",
+    "table": "表が主役",
+    "takeaway": "メッセージ強調(1枚1メッセージ、濃色フラット面)",
+    "summary": "まとめ(ヘアライン区切りの要点)",
+    "end": "終了スライド",
+    "timeline": "縦タイムライン(時系列・マイルストーン)",
+    "timeline-h": "横タイムライン(2〜5項目のスケジュール)",
+    "steps": "横並びプロセス(手順・フロー、番号自動付与)",
+    "columns": "特徴の列並び(テキスト2〜4列)",
+    "spec": "ラベル+値の一覧(会社概要・仕様・条件)",
+    "faq": "Q&A(h2が質問、直後の段落が回答)",
+    "matrix": "2×2マトリクス(SWOT等。h2×4、順序: 左上→左下→右上→右下)",
+    "gallery": "画像の横並び比較(2〜3枚を1つの段落に)",
+    "stat": "数字1つを全面に(インパクト用)",
+    "profile": "人物紹介(円形写真+経歴リスト)",
+    "quote": "引用(顧客の声・先行研究の一文。大きな引用+出典)",
+    "code": "コード中心(コードブロック+注釈1行)",
+    "checklist": "チェックリスト(各項目に✓、要件・達成項目)",
+    "team": "複数人の紹介(円形写真の列並び、2〜4人)",
+    "lead": "導入メッセージ(明るい面・左寄せ。takeawayの明るい版)",
+    "funnel": "絞り込みの段階(3〜5段、最終段が強調)",
+    "flow": "矢印つき横フロー(プロセス・構成、2〜4項目)",
+    "agenda-grid": "目次の2列版(項目7個以上。番号は左→右の順)",
+    "pyramid": "階層構造(3〜4段、頂点が強調。ビジョン→施策等)",
+    "venn": "2円ベン図(li 3つ: 左・右・共通。共通は短く)",
+    "before-after": "ラベル付き画像比較(h2ラベル+画像×2)",
+    "logos": "ロゴ・実績の並び(グレースケール表示)",
+    "gantt": "簡易ガントチャート(表の1列目=タスク、期間セルにxでバー)",
+    "org": "体制図・組織図(h2=トップ、ul=配下2〜4ボックス、接続線つき)",
+    "title-visual": "写真・キービジュアル入り表紙(bg right:45%と併用)",
+    "exec-summary": "エグゼクティブサマリー(blockquote=結論+要点リスト)",
+    "content-lead": "タイトル+リード文+本文(最初の段落が強調される)",
+    "comparison-3": "対比3列(h2×3が各列の見出し)",
+    "pros-cons": "メリット・デメリット(1つ目のリストに○、2つ目に×)",
+    "steps-v": "縦方向ステップ(番号付き手順。実験手順にも)",
+    "cycle": "循環プロセス(3〜4項目の円環。PDCA等)",
+    "image-top": "上画像+下テキスト(h1直後に画像、本文が下)",
+    "image-bottom": "上テキスト+下画像(本文が上、画像が残り高さを使う)",
+    "ranking": "ランキング(大きな順位数字、3〜5位。1位が強調)",
+    "roadmap": "ロードマップ・フェーズ分割(h2×2〜4、PHASE番号自動付与+期間p)",
+    "layers": "レイヤー構造(全幅の帯を積む、3〜5段。アーキテクチャ層・成熟度モデル)",
+    "annotated": "注釈付き画像(画像左+丸数字チップの注釈リスト右)",
+    "matrix-3": "3×3マトリクス(表ベース。1行目=列軸、1列目=行軸)",
+    "cards": "カード配置(アイコン・機能一覧、4〜8項目。3列グリッド)",
+    "scorecard": "スコアカード(評価基準ごとの数値評価)",
+    "transition": "Before・After / As-Is・To-Beの文章版",
+    "changelog": "変更履歴・更新履歴(縦レール+ノード)",
+    "contact": "連絡先(締めの1枚。濃色面にラベル+値)",
+    "definition": "定義・定理(用語+ヘアライン枠の定義文+任意の例)",
+    "references": "参考文献(小さめフォント)",
+    "venn-3": "3円ベン図(li 4つ: 左上・右上・下・共通)",
+    "sidebar": "本文+補足サイドバー(最後のblockquoteが右の縦パネル)",
+    "callout": "状態付きメッセージボックス(success / warning / error対応)",
+    "photo-grid": "写真の2×2グリッド(3〜4枚)",
+    "image-cards": "画像カード(画像+タイトル+説明を2〜4枚)",
+    "qualitative-grid": "画像を行列で比較する定性結果(1列目=手法、以降=入力例)",
+    "benchmark": "競合比較・ベンチマーク表(2列目を強調)",
+    "tree": "ツリー(接続線つきの階層。ネスト2段まで)",
+    "radial": "中心+放射(中心ノードと周囲3〜6要素)",
+    "positioning": "2軸ポジショニングマップ",
+    "objectives": "発表目的・本日のゴール(番号付きの帯、2〜4項目)",
+    "status": "項目+状態チップの一覧(通常3〜5項目)",
+    "chain": "矢羽根チェーン(4〜7工程の連結)",
+    "glossary": "用語定義の一覧(3〜6語)",
+    "kanban": "状態別のボード(h2=列名×2〜4)",
+    "io": "入力・処理・出力の3段構成",
+    "quotes": "複数の引用カード(blockquote×2〜3)",
+    "browser": "スクリーンショットをブラウザ風の窓枠に表示",
+    "zoom": "全体画像+右下の拡大インセット",
+    "draft": "透かしスタンプDRAFTを重ねる修飾クラス",
+    "confidential": "透かしスタンプCONFIDENTIALを重ねる修飾クラス",
+    "deprecated": "透かしスタンプDEPRECATEDを重ねる修飾クラス",
+    "causes": "複数原因から1つの結果へ収束する因果図",
+    "timeline-photo": "画像つき横タイムライン(2〜4項目)",
+    "collage": "画像コラージュ(3〜6枚)",
+    "steps-photo": "画像つき横ステップ(2〜4項目)",
+    "quote-photo": "顔写真つき引用",
+    "phone": "縦長スクリーンショットをスマホ枠に表示",
+    "app-intro": "アプリ・サービス紹介(説明+スクリーンショット)",
+    "stat-ring": "円形リング付きの数値(p0〜p100で進捗指定)",
+    "logic-tree": "ルート命題から2階層へ分解するロジックツリー",
+    "pyramid-tri": "三角形のピラミッド図(3〜4段)",
+    "experiment": "実験結果(表+条件注記)",
+    "chart-insight": "グラフ左+結論と解釈右(画像+blockquote+箇条書き)",
+    "math": "数式中心(KaTeXディスプレイ数式を拡大)",
+    "hypothesis": "仮説の列挙(H1・H2チップ付き)",
+    "rq": "Research Question(メインの問いとサブの問い)",
+    "confusion-matrix": "混同行列(表ベース、対角セルを強調)",
+    "kpi": "数値ハイライト(最大4つ)",
+    "plans": "料金プラン・パッケージ比較(2〜3列)",
+    "persona": "ペルソナ(写真+ゴール・課題)",
+    "tam-sam-som": "市場規模(TAM・SAM・SOMの入れ子バー)",
+    "tam-sam-som-circle": "市場規模(TAM・SAM・SOMの同心円)",
+    "case-study": "導入事例(課題→効果+顧客の声)",
+    "journey": "カスタマージャーニー(3〜5段)",
+    "forces": "5 Forces・業界構造",
+    "bmc": "ビジネスモデルキャンバス",
+    "impact": "Before→Afterの数値ペア",
+    "okr": "Objective+Key Results",
+    "actions": "タスク・担当・期限のアクションプラン",
+    "swot": "SWOT分析",
+    "pest": "PEST分析",
+    "risks": "リスク・発生確率・影響度・対策",
+    "quiz": "演習・クイズ(問題+選択肢)",
+    "answer": "解答・解説",
+    "code-focus": "コード左+丸数字注釈右",
+    "misconception": "誤解→事実の対比",
+    "cheatsheet": "コマンド・構文の密な2列早見表",
+    "code-compare": "悪い例と良い例のコード対比"
+  },
+  "theme_only": {
+    "research": ["experiment", "math", "hypothesis", "rq", "confusion-matrix"],
+    "business": [
+      "kpi", "plans", "persona", "tam-sam-som", "tam-sam-som-circle",
+      "case-study", "journey", "forces", "bmc", "impact", "okr", "actions",
+      "swot", "pest", "risks"
+    ],
+    "lecture": [
+      "quiz", "answer", "code-focus", "misconception", "cheatsheet", "code-compare"
+    ]
+  },
+  "modifiers": [
+    {
+      "id": "callout-success",
+      "class": "callout success",
+      "base": "callout"
+    },
+    {
+      "id": "callout-warning",
+      "class": "callout warning",
+      "base": "callout"
+    },
+    {
+      "id": "callout-error",
+      "class": "callout error",
+      "base": "callout"
+    },
+    {
+      "id": "app-intro-pc",
+      "class": "app-intro pc",
+      "base": "app-intro"
+    },
+    {
+      "id": "stat-ring-progress",
+      "class_pattern": "stat-ring p{0..100}",
+      "base": "stat-ring"
+    }
+  ]
+}

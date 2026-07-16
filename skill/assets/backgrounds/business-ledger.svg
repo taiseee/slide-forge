@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Business ledger background</title>
+  <desc id="desc">Warm ledger rules and highlighted cells create a quiet planning motif.</desc>
+  <rect width="1600" height="900" fill="#fbfaf7"/>
+  <g stroke="#cfc5b7" stroke-width="2" opacity="0.34">
+    <path d="M980 180h500M980 285h500M980 390h500M980 495h500M980 600h500M980 705h500"/>
+    <path d="M1080 135v620M1260 135v620M1400 135v620"/>
+  </g>
+  <rect x="1080" y="390" width="180" height="105" fill="#8a7a63" opacity="0.11"/>
+  <rect x="1260" y="600" width="140" height="105" fill="#8e4a3e" opacity="0.09"/>
+</svg>

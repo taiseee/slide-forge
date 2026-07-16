@@ -1,0 +1,21 @@
+type: heatmap
+theme: research
+title: Error concentration by class
+x_label: Predicted
+y_label: Actual
+value_label: Count
+data:
+  - { x: A, y: A, value: 42 }
+  - { x: B, y: A, value: 5 }
+  - { x: C, y: A, value: 2 }
+  - { x: A, y: B, value: 4 }
+  - { x: B, y: B, value: 37 }
+  - { x: C, y: B, value: 8 }
+  - { x: A, y: C, value: 1 }
+  - { x: B, y: C, value: 6 }
+  - { x: C, y: C, value: 45 }
+highlight:
+  field: value
+  value: 45
+alt: A three-by-three heatmap with most samples on the diagonal and the strongest cell at actual C, predicted C.
+motion: fade

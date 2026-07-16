@@ -30,7 +30,7 @@ export async function checkOverflow(file) {
       // Marp CLI 出力ではスライドは svg[data-marpit-svg] > foreignObject > section
       let targets = [
         ...document.querySelectorAll(
-          "svg[data-marpit-svg] > foreignObject > section",
+          "svg[data-marpit-svg]:not([data-marpit-advanced-background]) > foreignObject > section",
         ),
       ];
       if (targets.length === 0) {

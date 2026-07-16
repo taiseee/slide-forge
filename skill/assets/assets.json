@@ -1,0 +1,2874 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-07-15",
+  "assets": [
+    {
+      "id": "icon-book-open",
+      "kind": "icon",
+      "path": "icons/book-open.svg",
+      "title": "Book open",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/book-open",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "fa06e844a3cb0bc0475f28cdd068124570e972351b74e51f33c5f13d2084046e",
+      "alt": "Open book icon.",
+      "tags": [
+        "paper",
+        "reading",
+        "references",
+        "lecture"
+      ],
+      "recommended_layouts": [
+        "references",
+        "objectives"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-brain-circuit",
+      "kind": "icon",
+      "path": "icons/brain-circuit.svg",
+      "title": "Brain circuit",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/brain-circuit",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "9af10668d12bc10e3378b082c66de90f26179465d0527c559fd168feb685730b",
+      "alt": "Brain with circuit paths icon.",
+      "tags": [
+        "ai",
+        "model",
+        "intelligence",
+        "method"
+      ],
+      "recommended_layouts": [
+        "radial",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-chart-line",
+      "kind": "icon",
+      "path": "icons/chart-line.svg",
+      "title": "Line chart",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/chart-line",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "72f3399acb292c76d981a84f61a28c130f221ad2f8e87ab9d4e06dab2b581a89",
+      "alt": "Increasing line chart icon.",
+      "tags": [
+        "chart",
+        "trend",
+        "result",
+        "growth"
+      ],
+      "recommended_layouts": [
+        "experiment",
+        "kpi"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-chart-bars",
+      "kind": "icon",
+      "path": "icons/chart-no-axes-column-increasing.svg",
+      "title": "Increasing bars",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/chart-no-axes-column-increasing",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "67f3ded4e8788df9f0fbba01f8231cbbd515dfaacae9f0e5fae0b312950c6059",
+      "alt": "Increasing vertical bars icon.",
+      "tags": [
+        "chart",
+        "metrics",
+        "result",
+        "growth"
+      ],
+      "recommended_layouts": [
+        "experiment",
+        "kpi"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-chart-scatter",
+      "kind": "icon",
+      "path": "icons/chart-scatter.svg",
+      "title": "Scatter chart",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/chart-scatter",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "a4745812625d49688baa3c15fdf6573c86c8dfdec4599b0b6fff71c198fb60c6",
+      "alt": "Scatter plot icon.",
+      "tags": [
+        "chart",
+        "correlation",
+        "distribution",
+        "analysis"
+      ],
+      "recommended_layouts": [
+        "experiment",
+        "matrix"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-check",
+      "kind": "icon",
+      "path": "icons/circle-check-big.svg",
+      "title": "Check",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/circle-check-big",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "bed1d295424a68785463fc4f8d0f56ba9e984e26062ea21c9a78ffb03b025510",
+      "alt": "Check mark in a circle icon.",
+      "tags": [
+        "success",
+        "valid",
+        "complete",
+        "positive"
+      ],
+      "recommended_layouts": [
+        "pros-cons",
+        "status"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-circle-x",
+      "kind": "icon",
+      "path": "icons/circle-x.svg",
+      "title": "Circle X",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/circle-x",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "ed81b3af6881ca93cd99b8c75e5a831bb030cda7df2f575eb5ff0c5b1b8c5294",
+      "alt": "X mark in a circle icon.",
+      "tags": [
+        "failure",
+        "invalid",
+        "negative",
+        "limitation"
+      ],
+      "recommended_layouts": [
+        "pros-cons",
+        "before-after"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-cpu",
+      "kind": "icon",
+      "path": "icons/cpu.svg",
+      "title": "CPU",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/cpu",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "0b3f30d7e5ca684ec8e13000a610396012a32d1e9864ea933e7607407a5028c3",
+      "alt": "Computer processor icon.",
+      "tags": [
+        "compute",
+        "hardware",
+        "model",
+        "system"
+      ],
+      "recommended_layouts": [
+        "architecture",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-database",
+      "kind": "icon",
+      "path": "icons/database.svg",
+      "title": "Database",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/database",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "4b47a5dfd9274280323cbc6558f735279fda9973db50a5c66c561fac0e0c2b19",
+      "alt": "Database cylinder icon.",
+      "tags": [
+        "data",
+        "dataset",
+        "storage",
+        "system"
+      ],
+      "recommended_layouts": [
+        "architecture",
+        "experiment"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-dna",
+      "kind": "icon",
+      "path": "icons/dna.svg",
+      "title": "DNA",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/dna",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "029234aec238002f0162af6b5ea48f64d34fd217eabf671ea66d76908d2cdc10",
+      "alt": "DNA double helix icon.",
+      "tags": [
+        "biology",
+        "science",
+        "genetics",
+        "research"
+      ],
+      "recommended_layouts": [
+        "image-cards",
+        "title"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-file-text",
+      "kind": "icon",
+      "path": "icons/file-text.svg",
+      "title": "Text file",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/file-text",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "bb1b55a331d0b96e51a7e70f7cc021343787ed06e84d38be4bd1de79751dc94d",
+      "alt": "Document with text lines icon.",
+      "tags": [
+        "paper",
+        "document",
+        "report",
+        "source"
+      ],
+      "recommended_layouts": [
+        "references",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-flask",
+      "kind": "icon",
+      "path": "icons/flask-conical.svg",
+      "title": "Conical flask",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/flask-conical",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "b598bb024eea2e42d25aba7b58449c0cfbc659439271d5de9120cc67f27d3ce4",
+      "alt": "Conical laboratory flask icon.",
+      "tags": [
+        "experiment",
+        "laboratory",
+        "science",
+        "method"
+      ],
+      "recommended_layouts": [
+        "experiment",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-gauge",
+      "kind": "icon",
+      "path": "icons/gauge.svg",
+      "title": "Gauge",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/gauge",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "6658fbab5efb85ebab90099ae4b291250b5eb896c61b2ddd9ed672a337dc5e05",
+      "alt": "Performance gauge icon.",
+      "tags": [
+        "speed",
+        "performance",
+        "metric",
+        "benchmark"
+      ],
+      "recommended_layouts": [
+        "kpi",
+        "benchmark"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-compare",
+      "kind": "icon",
+      "path": "icons/git-compare-arrows.svg",
+      "title": "Compare arrows",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/git-compare-arrows",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "40ff25331ef05f5595d56e1392974b80db095bb26d5f81a275cbbcaabc4f49cb",
+      "alt": "Two branching comparison arrows icon.",
+      "tags": [
+        "compare",
+        "difference",
+        "alternative",
+        "branch"
+      ],
+      "recommended_layouts": [
+        "comparison",
+        "before-after"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-image",
+      "kind": "icon",
+      "path": "icons/image.svg",
+      "title": "Image",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/image",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "c64a664998ad38182f6d2581886f9b8477208a00beccfae726accfa223d672ba",
+      "alt": "Landscape image icon.",
+      "tags": [
+        "photo",
+        "figure",
+        "visual",
+        "media"
+      ],
+      "recommended_layouts": [
+        "gallery",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-layers",
+      "kind": "icon",
+      "path": "icons/layers-3.svg",
+      "title": "Layers",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/layers-3",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "dfa22b2bba2a918a957bb88a1416333d52bd0e7b54e9ab3d5ed82774e79b9e16",
+      "alt": "Three stacked layers icon.",
+      "tags": [
+        "layers",
+        "architecture",
+        "stack",
+        "hierarchy"
+      ],
+      "recommended_layouts": [
+        "layers",
+        "architecture"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-lightbulb",
+      "kind": "icon",
+      "path": "icons/lightbulb.svg",
+      "title": "Lightbulb",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/lightbulb",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "e7599beac101994fda07db9281794e7f4a5f663e491ab63281e493cc526f0e7d",
+      "alt": "Lightbulb idea icon.",
+      "tags": [
+        "idea",
+        "insight",
+        "hypothesis",
+        "innovation"
+      ],
+      "recommended_layouts": [
+        "hypothesis",
+        "callout"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-microscope",
+      "kind": "icon",
+      "path": "icons/microscope.svg",
+      "title": "Microscope",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/microscope",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "bb56d1368e8c2e8c962ace509ce87b828f686249de96214efd54e8ece880860a",
+      "alt": "Laboratory microscope icon.",
+      "tags": [
+        "research",
+        "science",
+        "analysis",
+        "laboratory"
+      ],
+      "recommended_layouts": [
+        "experiment",
+        "title"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-network",
+      "kind": "icon",
+      "path": "icons/network.svg",
+      "title": "Network",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/network",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "d93814192ea3d8a6ae3550e66a65924eeba8ebac26d8909782c8fd77eedea6bc",
+      "alt": "Connected network nodes icon.",
+      "tags": [
+        "network",
+        "graph",
+        "architecture",
+        "relationship"
+      ],
+      "recommended_layouts": [
+        "radial",
+        "architecture"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-presentation",
+      "kind": "icon",
+      "path": "icons/presentation.svg",
+      "title": "Presentation",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/presentation",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "98bc09e8e56711f46fb18415c9ad08c493e38ad3aa00aa9670b3e7c7ad7b3383",
+      "alt": "Presentation screen icon.",
+      "tags": [
+        "slides",
+        "talk",
+        "lecture",
+        "conference"
+      ],
+      "recommended_layouts": [
+        "title",
+        "agenda"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-route",
+      "kind": "icon",
+      "path": "icons/route.svg",
+      "title": "Route",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/route",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "b3d0a289f3ebcb15c6eef70387ca44a415b446e5b8f6be18f07b55dfef0f94f7",
+      "alt": "Route with start and end points icon.",
+      "tags": [
+        "journey",
+        "process",
+        "roadmap",
+        "steps"
+      ],
+      "recommended_layouts": [
+        "journey",
+        "timeline"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-scale",
+      "kind": "icon",
+      "path": "icons/scale.svg",
+      "title": "Scale",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/scale",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "aa1eb035f80115ec590782286d3c533116ce62861e54be1711b822b149d498dc",
+      "alt": "Balance scale icon.",
+      "tags": [
+        "tradeoff",
+        "balance",
+        "compare",
+        "ethics"
+      ],
+      "recommended_layouts": [
+        "pros-cons",
+        "comparison"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-scan-search",
+      "kind": "icon",
+      "path": "icons/scan-search.svg",
+      "title": "Scan search",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/scan-search",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "19aa23a4119f35141eec2550b966d6d102496026027b868a70531360580c7574",
+      "alt": "Magnifying glass inside scan corners icon.",
+      "tags": [
+        "search",
+        "inspect",
+        "analysis",
+        "review"
+      ],
+      "recommended_layouts": [
+        "definition",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-sparkles",
+      "kind": "icon",
+      "path": "icons/sparkles.svg",
+      "title": "Sparkles",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/sparkles",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "f252cfbd7dac4741bb43aa3298054bd34156aaad58995f45fddb51c95942f42f",
+      "alt": "Three sparkle shapes icon.",
+      "tags": [
+        "new",
+        "contribution",
+        "highlight",
+        "ai"
+      ],
+      "recommended_layouts": [
+        "callout",
+        "impact"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-table",
+      "kind": "icon",
+      "path": "icons/table-2.svg",
+      "title": "Table",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/table-2",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "1317089c2090b5dce2a89b89bb8cb1a2474e7869e3906298d1c362edd2adba34",
+      "alt": "Rows and columns table icon.",
+      "tags": [
+        "table",
+        "dataset",
+        "comparison",
+        "result"
+      ],
+      "recommended_layouts": [
+        "experiment",
+        "benchmark"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-target",
+      "kind": "icon",
+      "path": "icons/target.svg",
+      "title": "Target",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/target",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "8945f62687c3ef09e966035dfcb0f3f93be9d40865b49d6da0904e3789e714da",
+      "alt": "Concentric target icon.",
+      "tags": [
+        "goal",
+        "objective",
+        "research-question",
+        "focus"
+      ],
+      "recommended_layouts": [
+        "objectives",
+        "rq"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-telescope",
+      "kind": "icon",
+      "path": "icons/telescope.svg",
+      "title": "Telescope",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/telescope",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "5c74752e5f681b59fd71b8d87ccd51bfd1ca8f18cb51b510cba6387d04c3f891",
+      "alt": "Telescope on a tripod icon.",
+      "tags": [
+        "discovery",
+        "future",
+        "vision",
+        "science"
+      ],
+      "recommended_layouts": [
+        "future",
+        "title"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-warning",
+      "kind": "icon",
+      "path": "icons/triangle-alert.svg",
+      "title": "Warning",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/triangle-alert",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "d36e1a6cc99e4b5f3ce7444f9f3bd1c3180373a13d185b6a473858d79e19cabd",
+      "alt": "Warning triangle icon.",
+      "tags": [
+        "warning",
+        "risk",
+        "limitation",
+        "attention"
+      ],
+      "recommended_layouts": [
+        "risks",
+        "callout"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-users",
+      "kind": "icon",
+      "path": "icons/users.svg",
+      "title": "Users",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/users",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "38c3296bb27b93750517c5ac149671715f0662a228a21b7d908f202365fb4ff5",
+      "alt": "Group of users icon.",
+      "tags": [
+        "people",
+        "team",
+        "participants",
+        "audience"
+      ],
+      "recommended_layouts": [
+        "team",
+        "persona"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-workflow",
+      "kind": "icon",
+      "path": "icons/workflow.svg",
+      "title": "Workflow",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/workflow",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-13",
+      "sha256": "fe3091108ceea4d3e98961388613c662b2c16bdb6d7175d90d69748ce867b0d2",
+      "alt": "Connected workflow steps icon.",
+      "tags": [
+        "workflow",
+        "pipeline",
+        "process",
+        "method"
+      ],
+      "recommended_layouts": [
+        "flow",
+        "chain"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-atom",
+      "kind": "icon",
+      "path": "icons/atom.svg",
+      "title": "Atom",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/atom",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "79e3b812063b089ca3519cc1ed01b68febb20796bd6929a0b91fd73516534036",
+      "alt": "Atom with orbiting paths icon.",
+      "tags": [
+        "science",
+        "physics",
+        "research",
+        "model"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "radial"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-badge-dollar-sign",
+      "kind": "icon",
+      "path": "icons/badge-dollar-sign.svg",
+      "title": "Dollar badge",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/badge-dollar-sign",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "387eea9c2deaecb87b014fbc69d155ed7917c7810804bd1bffc25ebeec374ae6",
+      "alt": "Dollar sign inside a badge icon.",
+      "tags": [
+        "pricing",
+        "revenue",
+        "sales",
+        "business"
+      ],
+      "recommended_layouts": [
+        "kpi",
+        "plans"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-beaker",
+      "kind": "icon",
+      "path": "icons/beaker.svg",
+      "title": "Beaker",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/beaker",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "8126dd62ecd893a6eacf8f499a07708d426999e2aa9e3ca74e23600b6952e2f3",
+      "alt": "Laboratory beaker icon.",
+      "tags": [
+        "experiment",
+        "laboratory",
+        "research",
+        "chemistry"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "experiment"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-binary",
+      "kind": "icon",
+      "path": "icons/binary.svg",
+      "title": "Binary",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/binary",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "d1b424ea4e09d27f14c0d820e6c0012170f0f2a5a325a73f279f6c626aec4baa",
+      "alt": "Binary digits icon.",
+      "tags": [
+        "data",
+        "software",
+        "digital",
+        "technology"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "code"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-bot",
+      "kind": "icon",
+      "path": "icons/bot.svg",
+      "title": "Bot",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/bot",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "a7bd3dedef163bfb38dd6d50bbe2a73388cc1d280f47deca50c64f6ba3614583",
+      "alt": "Friendly software bot icon.",
+      "tags": [
+        "ai",
+        "automation",
+        "assistant",
+        "product"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "app-intro"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-briefcase-business",
+      "kind": "icon",
+      "path": "icons/briefcase-business.svg",
+      "title": "Business briefcase",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/briefcase-business",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "a6ba13c1a7536bafa4f74a0117708a1dff9f6ed25c606d174cf893134d09d5f2",
+      "alt": "Business briefcase icon.",
+      "tags": [
+        "business",
+        "work",
+        "proposal",
+        "operations"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "exec-summary"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-building-2",
+      "kind": "icon",
+      "path": "icons/building-2.svg",
+      "title": "Office building",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/building-2",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "ccfd2087e718267ffac6bef0efc82b529cb98cfeb972d1ea82f9a1a13c469575",
+      "alt": "Multi-story office building icon.",
+      "tags": [
+        "company",
+        "enterprise",
+        "organization",
+        "business"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "spec"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-calendar-days",
+      "kind": "icon",
+      "path": "icons/calendar-days.svg",
+      "title": "Calendar",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/calendar-days",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "14cc70912806a5ac09f85a1e6c6db6a11af8c9e39d3d9613c605b94fe53c688f",
+      "alt": "Calendar with marked days icon.",
+      "tags": [
+        "schedule",
+        "date",
+        "plan",
+        "milestone"
+      ],
+      "recommended_layouts": [
+        "roadmap",
+        "timeline"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-chart-pie",
+      "kind": "icon",
+      "path": "icons/chart-pie.svg",
+      "title": "Pie chart",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/chart-pie",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "7eae47a68dd51633c423d9387e615dbd788b36df35331b072d5707738bb68337",
+      "alt": "Segmented pie chart icon.",
+      "tags": [
+        "chart",
+        "share",
+        "market",
+        "analysis"
+      ],
+      "recommended_layouts": [
+        "kpi",
+        "tam-sam-som"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-circle-dollar-sign",
+      "kind": "icon",
+      "path": "icons/circle-dollar-sign.svg",
+      "title": "Dollar circle",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/circle-dollar-sign",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "343c0460805f4caeae090b67b7a820bb77d045f5b1b744e73885c59c70b05487",
+      "alt": "Dollar sign inside a circle icon.",
+      "tags": [
+        "cost",
+        "price",
+        "revenue",
+        "finance"
+      ],
+      "recommended_layouts": [
+        "kpi",
+        "plans"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-clipboard-check",
+      "kind": "icon",
+      "path": "icons/clipboard-check.svg",
+      "title": "Checked clipboard",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/clipboard-check",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "c8125ca7dc6da93545fec6b323cbc82fafc218b1da68b676f6fa8373e7c35c97",
+      "alt": "Clipboard with a check mark icon.",
+      "tags": [
+        "checklist",
+        "quality",
+        "approval",
+        "requirements"
+      ],
+      "recommended_layouts": [
+        "checklist",
+        "actions"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-clock-3",
+      "kind": "icon",
+      "path": "icons/clock-3.svg",
+      "title": "Clock",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/clock-3",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "d4c2ff66029f929e117b9b7f6358a4f44d2cd886c318670a6846d9cbb021ad93",
+      "alt": "Clock showing three o’clock icon.",
+      "tags": [
+        "time",
+        "duration",
+        "deadline",
+        "latency"
+      ],
+      "recommended_layouts": [
+        "timeline",
+        "kpi"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-cloud",
+      "kind": "icon",
+      "path": "icons/cloud.svg",
+      "title": "Cloud",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/cloud",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "f732e580f653fc37e6d1171a5acf6cc36c5442415b88e864d1973fa6462fb12c",
+      "alt": "Cloud computing icon.",
+      "tags": [
+        "cloud",
+        "infrastructure",
+        "platform",
+        "service"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "layers"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-code-2",
+      "kind": "icon",
+      "path": "icons/code-2.svg",
+      "title": "Code brackets",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/code-2",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "848dd46cd644aeb3600a0ef137fb73e052d0a59ba3ffddd5987f41c5ebac6db3",
+      "alt": "Angle brackets for source code icon.",
+      "tags": [
+        "code",
+        "software",
+        "api",
+        "development"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "code"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-file-chart-column",
+      "kind": "icon",
+      "path": "icons/file-chart-column.svg",
+      "title": "Report chart",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/file-chart-column",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "15b98fd6d0c8479eddf8b4b354e4251c2e8aab4fb3392bd4b78aae866027ae25",
+      "alt": "Document with a column chart icon.",
+      "tags": [
+        "report",
+        "analytics",
+        "result",
+        "document"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "summary"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-graduation-cap",
+      "kind": "icon",
+      "path": "icons/graduation-cap.svg",
+      "title": "Graduation cap",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/graduation-cap",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "8a5bf70bfb2c9bac3a92046c22f0bccf5505523d4afe458cc6ddc23dc29c4e9f",
+      "alt": "Graduation cap icon.",
+      "tags": [
+        "education",
+        "learning",
+        "lecture",
+        "training"
+      ],
+      "recommended_layouts": [
+        "objectives",
+        "cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-handshake",
+      "kind": "icon",
+      "path": "icons/handshake.svg",
+      "title": "Handshake",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/handshake",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "16995be74f5c03348375044164e7944510e3409599d7344bfee6c9b9a460ac23",
+      "alt": "Handshake agreement icon.",
+      "tags": [
+        "partnership",
+        "agreement",
+        "sales",
+        "collaboration"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "bmc"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-landmark",
+      "kind": "icon",
+      "path": "icons/landmark.svg",
+      "title": "Institution",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/landmark",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "8ecd041d5ccedc5bfbbddadf62f7628f54d8be0146a1a01756aa56ae4c778c70",
+      "alt": "Classical institution building icon.",
+      "tags": [
+        "institution",
+        "policy",
+        "finance",
+        "governance"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "pest"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-library",
+      "kind": "icon",
+      "path": "icons/library.svg",
+      "title": "Library",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/library",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "8bc271fe62517a50c24f4dd8462b1c391f92702383cb870dc0dc1bc3d6bd8cd8",
+      "alt": "Library building icon.",
+      "tags": [
+        "knowledge",
+        "references",
+        "education",
+        "archive"
+      ],
+      "recommended_layouts": [
+        "references",
+        "cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-megaphone",
+      "kind": "icon",
+      "path": "icons/megaphone.svg",
+      "title": "Megaphone",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/megaphone",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "1985a3b0faef0f28b92a4863f665a02ef554de11dcd4bfcbbdca5d85bb73c7c6",
+      "alt": "Megaphone announcement icon.",
+      "tags": [
+        "marketing",
+        "announcement",
+        "communication",
+        "growth"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "go-to-market"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-message-square-text",
+      "kind": "icon",
+      "path": "icons/message-square-text.svg",
+      "title": "Message",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/message-square-text",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "90a455ad656280cd7897df76023fd2d28bde102947e062d2c4d117b029df92ca",
+      "alt": "Speech bubble with text lines icon.",
+      "tags": [
+        "feedback",
+        "conversation",
+        "support",
+        "interview"
+      ],
+      "recommended_layouts": [
+        "quote",
+        "faq"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-notebook-tabs",
+      "kind": "icon",
+      "path": "icons/notebook-tabs.svg",
+      "title": "Tabbed notebook",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/notebook-tabs",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "04480d38c3d3634ffea09cd689e3489c59200095ffd957c51bd3ab36715bbf22",
+      "alt": "Notebook with tab markers icon.",
+      "tags": [
+        "notes",
+        "documentation",
+        "planning",
+        "research"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "glossary"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-package",
+      "kind": "icon",
+      "path": "icons/package.svg",
+      "title": "Package",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/package",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "ca88ce12f20da602d8257deca48e46dbad17af8e159b7b3fb6c159d9c812bbdb",
+      "alt": "Shipping package icon.",
+      "tags": [
+        "product",
+        "delivery",
+        "bundle",
+        "offering"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "plans"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-rocket",
+      "kind": "icon",
+      "path": "icons/rocket.svg",
+      "title": "Rocket",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/rocket",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "7a6bd483c1bc79533648dba45427484a2efe776314e68994612897d5a966f967",
+      "alt": "Rocket launch icon.",
+      "tags": [
+        "launch",
+        "growth",
+        "startup",
+        "speed"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "roadmap"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-search",
+      "kind": "icon",
+      "path": "icons/search.svg",
+      "title": "Search",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/search",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "928a578d91fe334a388d4f4249c3a7bc16bf2cc00d96968ce14431c9f2db62a2",
+      "alt": "Magnifying glass icon.",
+      "tags": [
+        "search",
+        "discovery",
+        "analysis",
+        "research"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "steps"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-shield-check",
+      "kind": "icon",
+      "path": "icons/shield-check.svg",
+      "title": "Verified shield",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/shield-check",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "0f8480d5ceda5025dfd6919f1a0dcf9724a714f92d30b15ccfd5aebb6f785502",
+      "alt": "Shield with a check mark icon.",
+      "tags": [
+        "security",
+        "trust",
+        "compliance",
+        "quality"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "checklist"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-shopping-cart",
+      "kind": "icon",
+      "path": "icons/shopping-cart.svg",
+      "title": "Shopping cart",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/shopping-cart",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "93da9b02fc49848b04ba323f4c8e0dca9adab095cef5ac8b7d1add545b5f9f95",
+      "alt": "Shopping cart icon.",
+      "tags": [
+        "commerce",
+        "purchase",
+        "customer",
+        "sales"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "journey"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-sigma",
+      "kind": "icon",
+      "path": "icons/sigma.svg",
+      "title": "Sigma",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/sigma",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "5fccef30c59627573ce8244774425c94c6d547c8c9683b5dc7615e41d77258e7",
+      "alt": "Mathematical sigma symbol icon.",
+      "tags": [
+        "math",
+        "statistics",
+        "formula",
+        "analysis"
+      ],
+      "recommended_layouts": [
+        "math",
+        "cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-test-tube-diagonal",
+      "kind": "icon",
+      "path": "icons/test-tube-diagonal.svg",
+      "title": "Test tube",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/test-tube-diagonal",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "49eff69b528b9464072a4241a3daf4b43b12d3bd5c1883eaf082c4f409a60b21",
+      "alt": "Diagonal laboratory test tube icon.",
+      "tags": [
+        "experiment",
+        "test",
+        "laboratory",
+        "validation"
+      ],
+      "recommended_layouts": [
+        "cards",
+        "experiment"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-trending-up",
+      "kind": "icon",
+      "path": "icons/trending-up.svg",
+      "title": "Upward trend",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/trending-up",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "09491de73b56280b7e6f98b226a07bc6eb03573d0eb341855bf0243847f5aefd",
+      "alt": "Arrow following an upward trend icon.",
+      "tags": [
+        "growth",
+        "trend",
+        "performance",
+        "result"
+      ],
+      "recommended_layouts": [
+        "kpi",
+        "impact"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-user-round-check",
+      "kind": "icon",
+      "path": "icons/user-round-check.svg",
+      "title": "Verified user",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/user-round-check",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "fc7112ea7386d3a661c5ea5c72db9953deccbf5e3590573f2058eb057c55f09c",
+      "alt": "User profile with a check mark icon.",
+      "tags": [
+        "customer",
+        "adoption",
+        "identity",
+        "success"
+      ],
+      "recommended_layouts": [
+        "persona",
+        "case-study"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-users-round",
+      "kind": "icon",
+      "path": "icons/users-round.svg",
+      "title": "User group",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/users-round",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "80c785709618c44b74fde49cd854df03771e73bc85283a9e33681656496e0170",
+      "alt": "Group of people icon.",
+      "tags": [
+        "team",
+        "audience",
+        "community",
+        "customers"
+      ],
+      "recommended_layouts": [
+        "team",
+        "cards"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "icon-wallet-cards",
+      "kind": "icon",
+      "path": "icons/wallet-cards.svg",
+      "title": "Wallet cards",
+      "author": "Lucide Contributors",
+      "source_url": "https://lucide.dev/icons/wallet-cards",
+      "license": "ISC",
+      "license_url": "https://lucide.dev/license",
+      "acquired_at": "2026-07-15",
+      "sha256": "bb90683eb2b5d4d2d4b96206171cbdc2be08487fdf9d7cceb5f0f49f1c60e34f",
+      "alt": "Wallet with payment cards icon.",
+      "tags": [
+        "payment",
+        "pricing",
+        "finance",
+        "subscription"
+      ],
+      "recommended_layouts": [
+        "plans",
+        "kpi"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 24,
+        "height": 24
+      }
+    },
+    {
+      "id": "photo-data-center",
+      "kind": "photo",
+      "path": "photos/data-center.webp",
+      "title": "Computer server in a data center room",
+      "author": "panumas nikhomkhai",
+      "source_url": "https://www.pexels.com/photo/computer-server-in-data-center-room-17489163/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "2846766032af47ff87adc8e4edb834e55c056c9b7de7e47ccc4c6890b81e0509",
+      "alt": "A blue-lit server unit on the right with blurred blue copy space on the left.",
+      "tags": [
+        "server",
+        "technology",
+        "data-center",
+        "infrastructure",
+        "blue",
+        "copy-space"
+      ],
+      "recommended_layouts": [
+        "image-right",
+        "image-full",
+        "title"
+      ],
+      "focal_point": {
+        "x": 0.78,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Good left-side copy space. Do not imply that visible equipment brands endorse the presentation."
+    },
+    {
+      "id": "photo-geometric-architecture",
+      "kind": "photo",
+      "path": "photos/geometric-architecture.webp",
+      "title": "Monochrome modern building with geometric shadows",
+      "author": "Hardik Pandya",
+      "source_url": "https://www.pexels.com/photo/monochrome-modern-building-with-geometric-shadows-35126322/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "afba980d5f915a6b76222715821593201f525f54a2fe442ffc210f1f14873e26",
+      "alt": "A black-and-white modern facade with strong horizontal geometry and shadows.",
+      "tags": [
+        "architecture",
+        "monochrome",
+        "geometry",
+        "business",
+        "minimal"
+      ],
+      "recommended_layouts": [
+        "image-full",
+        "divider",
+        "quote"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.52
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Neutral architectural image suitable for a dark overlay or divider slide."
+    },
+    {
+      "id": "photo-laboratory-research",
+      "kind": "photo",
+      "path": "photos/laboratory-research.webp",
+      "title": "Scientist working with microscope",
+      "author": "Edward Jenner",
+      "source_url": "https://www.pexels.com/photo/scientist-working-with-microscope-4031415/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "91e63c73e3083c7b4bb1e786c2f3b55d358e26f619510ba9aaf654f5a6f310b4",
+      "alt": "A scientist in protective glasses and gloves examining a sample through a microscope.",
+      "tags": [
+        "laboratory",
+        "research",
+        "scientist",
+        "microscope",
+        "biology",
+        "copy-space"
+      ],
+      "recommended_layouts": [
+        "image-right",
+        "image-full",
+        "persona"
+      ],
+      "focal_point": {
+        "x": 0.69,
+        "y": 0.43
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable person: use only in a neutral research context; do not imply endorsement or portray the subject negatively."
+    },
+    {
+      "id": "photo-planning-notes",
+      "kind": "photo",
+      "path": "photos/planning-notes.webp",
+      "title": "Planning with sticky notes",
+      "author": "Walls.io",
+      "source_url": "https://www.pexels.com/photo/planning-with-use-of-sticky-notes-15543110/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "39d4be78c7458ec46e5456c8b1a4919879d3d099d12b174b85471586c2758e5e",
+      "alt": "Colorful sticky notes about values, teamwork, learning, and ideas arranged around white copy space.",
+      "tags": [
+        "planning",
+        "sticky-notes",
+        "workshop",
+        "teamwork",
+        "strategy",
+        "copy-space"
+      ],
+      "recommended_layouts": [
+        "image-left",
+        "image-full",
+        "actions"
+      ],
+      "focal_point": {
+        "x": 0.48,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "The handwritten words are part of the photograph; avoid using it where they conflict with the slide message."
+    },
+    {
+      "id": "photo-team-collaboration",
+      "kind": "photo",
+      "path": "photos/team-collaboration.webp",
+      "title": "Office team working together",
+      "author": "Thirdman",
+      "source_url": "https://www.pexels.com/photo/office-team-working-together-7652126/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "0617ff8c32539f2db57f47c24679383334da061fc273dfc936b0f769041dacf3",
+      "alt": "Four colleagues gather around a laptop in a bright office beside a large window.",
+      "tags": [
+        "teamwork",
+        "collaboration",
+        "office",
+        "meeting",
+        "laptop",
+        "business"
+      ],
+      "recommended_layouts": [
+        "image-right",
+        "image-full",
+        "image-cards"
+      ],
+      "focal_point": {
+        "x": 0.58,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable people: use in a neutral workplace context; do not imply endorsement, employment, or affiliation."
+    },
+    {
+      "id": "photo-classroom-learning",
+      "kind": "photo",
+      "path": "photos/classroom-learning.webp",
+      "title": "Students engaging in a college classroom",
+      "author": "Andy Barbour",
+      "source_url": "https://www.pexels.com/photo/students-sitting-inside-the-classroom-6683490/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "51a01c994a2f151a7551eaecab1cb6e8a96861355503e012fe0f66aacf75e62d",
+      "alt": "A diverse group of college students discuss papers in a bright classroom.",
+      "tags": [
+        "education",
+        "classroom",
+        "students",
+        "learning",
+        "discussion",
+        "university"
+      ],
+      "recommended_layouts": [
+        "image-right",
+        "image-full",
+        "objectives"
+      ],
+      "focal_point": {
+        "x": 0.55,
+        "y": 0.52
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable people: use in a neutral education context; do not claim a specific institution or imply endorsement."
+    },
+    {
+      "id": "photo-conference-speaker",
+      "kind": "photo",
+      "path": "photos/conference-speaker.webp",
+      "title": "Speaker presenting at a conference",
+      "author": "Matheus Bertelli",
+      "source_url": "https://www.pexels.com/photo/speaker-presenting-at-conference-with-audience-34774320/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "76bdb04961b37de879a3c52560cfedd7bbaa5b0495333633284574b8ee5f65cd",
+      "alt": "A speaker holds a microphone before an audience and a wall of portraits at an indoor conference.",
+      "tags": [
+        "conference",
+        "speaker",
+        "presentation",
+        "audience",
+        "seminar",
+        "event"
+      ],
+      "recommended_layouts": [
+        "image-left",
+        "quote-photo",
+        "image-full"
+      ],
+      "focal_point": {
+        "x": 0.4,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable people and portraits: use generically; do not state that the people attended or endorsed a particular event."
+    },
+    {
+      "id": "photo-renewable-energy",
+      "kind": "photo",
+      "path": "photos/renewable-energy.webp",
+      "title": "Wind turbines and solar panels in a desert",
+      "author": "Kindel Media",
+      "source_url": "https://www.pexels.com/photo/wind-turbines-during-daytime-9800101/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "5ed62e27bdca7ee46b10946d3da6310eb9d53e95bf18ed4631f7bc1143b5a7d6",
+      "alt": "Three wind turbines rise above solar arrays spread across a sunlit desert landscape.",
+      "tags": [
+        "sustainability",
+        "renewable-energy",
+        "wind",
+        "solar",
+        "climate",
+        "infrastructure"
+      ],
+      "recommended_layouts": [
+        "image-full",
+        "divider",
+        "title-visual"
+      ],
+      "focal_point": {
+        "x": 0.61,
+        "y": 0.52
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Useful as a broad sustainability or energy-transition visual; avoid attaching unverified performance claims to the pictured installation."
+    },
+    {
+      "id": "photo-factory-production",
+      "kind": "photo",
+      "path": "photos/factory-production.webp",
+      "title": "Workers operating machinery in a factory",
+      "author": "Mehmet Turgut Kirkgoz",
+      "source_url": "https://www.pexels.com/photo/people-working-on-a-factory-11765539/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "c371bb6b94502aae2131ceaa0d6c34fa3c810078e92dca952d5b4f49c7ccd3b5",
+      "alt": "Workers operate rows of white industrial machines on an organized production floor.",
+      "tags": [
+        "manufacturing",
+        "factory",
+        "production",
+        "machinery",
+        "industry",
+        "operations"
+      ],
+      "recommended_layouts": [
+        "image-full",
+        "image-left",
+        "annotated"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.53
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "People and equipment are visible: do not infer workplace conditions, location, performance, or brand endorsement from the image."
+    },
+    {
+      "id": "photo-healthcare-team",
+      "kind": "photo",
+      "path": "photos/healthcare-team.webp",
+      "title": "Medical practitioners having a discussion",
+      "author": "RDNE Stock project",
+      "source_url": "https://www.pexels.com/photo/medical-practitioners-having-a-discussion-6129646/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "b72d6e876fce0c0014bf3cae30be84dff417e219c913b21de9b71a9eba2c5a25",
+      "alt": "Doctors and nurses in scrubs talk together in a bright hospital corridor.",
+      "tags": [
+        "healthcare",
+        "medical",
+        "hospital",
+        "teamwork",
+        "doctors",
+        "nurses"
+      ],
+      "recommended_layouts": [
+        "image-left",
+        "image-full",
+        "persona"
+      ],
+      "focal_point": {
+        "x": 0.42,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable people: use only in a neutral healthcare context; do not imply a diagnosis, patient status, institution, or endorsement."
+    },
+    {
+      "id": "photo-fieldwork-drone",
+      "kind": "photo",
+      "path": "photos/fieldwork-drone.webp",
+      "title": "Farmers operating a drone in an agricultural field",
+      "author": "Magda Ehlers",
+      "source_url": "https://www.pexels.com/photo/farmers-operating-drone-in-agricultural-field-34182309/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "4ca736bef759f3290dd3a075ccb3a0f6086ff5474f56779db323c3fe2c88e195",
+      "alt": "Two agricultural workers prepare a large drone on a tilled field.",
+      "tags": [
+        "fieldwork",
+        "agriculture",
+        "drone",
+        "farming",
+        "technology",
+        "outdoors"
+      ],
+      "recommended_layouts": [
+        "image-right",
+        "image-full",
+        "case-study"
+      ],
+      "focal_point": {
+        "x": 0.52,
+        "y": 0.55
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable workers and equipment: keep the context generic and do not imply a specific product, operator, result, or endorsement."
+    },
+    {
+      "id": "photo-remote-work",
+      "kind": "photo",
+      "path": "photos/remote-work.webp",
+      "title": "Woman working remotely on a video call",
+      "author": "Ketut Subiyanto",
+      "source_url": "https://www.pexels.com/photo/woman-working-at-home-and-making-video-call-on-laptop-4474047/",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "acquired_at": "2026-07-13",
+      "sha256": "c60b5aaa80496a07806eb83166ccac1c0427bcea53566fb750261f890e0675d6",
+      "alt": "A smiling woman writes on a tablet beside a laptop while working from home.",
+      "tags": [
+        "remote-work",
+        "video-call",
+        "home-office",
+        "laptop",
+        "hybrid-work",
+        "communication"
+      ],
+      "recommended_layouts": [
+        "image-left",
+        "image-full",
+        "persona"
+      ],
+      "focal_point": {
+        "x": 0.67,
+        "y": 0.48
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "usage_notes": "Identifiable person: use in a neutral work context; do not imply employment, endorsement, or a specific communication platform."
+    },
+    {
+      "id": "background-research-grid",
+      "kind": "background",
+      "path": "backgrounds/research-grid.svg",
+      "title": "Research grid",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "f4b377db39ddaa206d63ace4b5fff40afafc86d1710c545f04f7334d12b19f3d",
+      "alt": "A quiet gray grid with a highlighted diagonal relationship.",
+      "tags": [
+        "research",
+        "grid",
+        "data",
+        "minimal"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.72,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-business-topography",
+      "kind": "background",
+      "path": "backgrounds/business-topography.svg",
+      "title": "Business topography",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "6788e23317eb7a162437f3f3fdd6f67da6f32e3e74432484012611e2a004dc75",
+      "alt": "Warm greige contour lines with an understated circular accent.",
+      "tags": [
+        "business",
+        "topography",
+        "editorial",
+        "warm"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.76,
+        "y": 0.62
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-lecture-network",
+      "kind": "background",
+      "path": "backgrounds/lecture-network.svg",
+      "title": "Lecture network",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "fd3a4c5eee934a07e5454ef40bad501d2a9674630b21eb9c3fc0844ff7ac033a",
+      "alt": "A pale sage network of connected learning concepts.",
+      "tags": [
+        "lecture",
+        "network",
+        "learning",
+        "sage"
+      ],
+      "recommended_layouts": [
+        "title",
+        "objectives"
+      ],
+      "focal_point": {
+        "x": 0.55,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-soft-waves",
+      "kind": "background",
+      "path": "backgrounds/soft-waves.svg",
+      "title": "Soft waves",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "f64ebc83c2d2129e04d8e13abd32008017ab13b677222b14728ba010c8023ee3",
+      "alt": "Gentle coral and greige waves with broad empty space for text.",
+      "tags": [
+        "soft",
+        "waves",
+        "coral",
+        "friendly"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.7,
+        "y": 0.7
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-research-nodes",
+      "kind": "background",
+      "path": "backgrounds/research-nodes.svg",
+      "title": "Research nodes",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "9a9b5283436977c9bb409becac75147e9a2243802e8ef12eda269bbefeb1ed13",
+      "alt": "A quiet scientific network concentrated along the right edge.",
+      "tags": [
+        "research",
+        "network",
+        "nodes",
+        "minimal"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.76,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-research-contours",
+      "kind": "background",
+      "path": "backgrounds/research-contours.svg",
+      "title": "Research contours",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "c8927873d72a6bcc6503078043cfce36c79537cfd0e30244b44750c6123508f0",
+      "alt": "Fine gray contour loops around the corners with an open central field.",
+      "tags": [
+        "research",
+        "contours",
+        "analysis",
+        "minimal"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-research-axis",
+      "kind": "background",
+      "path": "backgrounds/research-axis.svg",
+      "title": "Research axis",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "6fc86b0588782615f5b1287781ce17363a6fe30b5b6c6a3cf8746f533eba52d7",
+      "alt": "Minimal analytical axes and sparse observations along the lower-right edge.",
+      "tags": [
+        "research",
+        "axis",
+        "data",
+        "chart"
+      ],
+      "recommended_layouts": [
+        "title",
+        "chart-insight"
+      ],
+      "focal_point": {
+        "x": 0.78,
+        "y": 0.62
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-business-arc",
+      "kind": "background",
+      "path": "backgrounds/business-arc.svg",
+      "title": "Business arc",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "7f4b6dc45300108e427668fbf5b9eb6c0cf3ca1fc02af1cdb814be3457b55c4e",
+      "alt": "Warm editorial arcs framing the lower-right corner.",
+      "tags": [
+        "business",
+        "arc",
+        "editorial",
+        "warm"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.82,
+        "y": 0.72
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-business-columns",
+      "kind": "background",
+      "path": "backgrounds/business-columns.svg",
+      "title": "Business columns",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "6aed5c6c8abf9874c9ee45cd3cbdb0688884e590c7a1c9a6cfc5e97c28788062",
+      "alt": "A restrained progression of warm columns along the bottom-right edge.",
+      "tags": [
+        "business",
+        "growth",
+        "columns",
+        "metrics"
+      ],
+      "recommended_layouts": [
+        "title",
+        "kpi"
+      ],
+      "focal_point": {
+        "x": 0.8,
+        "y": 0.67
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-business-ledger",
+      "kind": "background",
+      "path": "backgrounds/business-ledger.svg",
+      "title": "Business ledger",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "567dac37f2d4e796cc812703283ee41787d2ec9f44595f5c6b5c3500752c68eb",
+      "alt": "Warm ledger rules and highlighted planning cells.",
+      "tags": [
+        "business",
+        "ledger",
+        "planning",
+        "finance"
+      ],
+      "recommended_layouts": [
+        "title",
+        "table"
+      ],
+      "focal_point": {
+        "x": 0.76,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-lecture-grid",
+      "kind": "background",
+      "path": "backgrounds/lecture-grid.svg",
+      "title": "Lecture grid",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "dd49f4290aef402810f8f619d603abfca6779bf427e0838d84126594503f5356",
+      "alt": "A pale sage notebook grid with a highlighted learning path.",
+      "tags": [
+        "lecture",
+        "grid",
+        "learning",
+        "sage"
+      ],
+      "recommended_layouts": [
+        "title",
+        "objectives"
+      ],
+      "focal_point": {
+        "x": 0.75,
+        "y": 0.52
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-lecture-path",
+      "kind": "background",
+      "path": "backgrounds/lecture-path.svg",
+      "title": "Lecture path",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "c5bc16e1989dd1e77578b76b4063f587d1d75167e8dae05a9422b941e4daa2c1",
+      "alt": "A calm sequence of sage milestones curving upward along the lower edge.",
+      "tags": [
+        "lecture",
+        "path",
+        "milestones",
+        "learning"
+      ],
+      "recommended_layouts": [
+        "title",
+        "roadmap"
+      ],
+      "focal_point": {
+        "x": 0.58,
+        "y": 0.66
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-lecture-brackets",
+      "kind": "background",
+      "path": "backgrounds/lecture-brackets.svg",
+      "title": "Lecture brackets",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "4ec1ddd8df04c430cfc79d8e5ddb2b64c42e1ed8401f02cdcd015f2bee20c76a",
+      "alt": "Large translucent code brackets with short sage rules.",
+      "tags": [
+        "lecture",
+        "code",
+        "technical",
+        "sage"
+      ],
+      "recommended_layouts": [
+        "title",
+        "code"
+      ],
+      "focal_point": {
+        "x": 0.78,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-soft-orbits",
+      "kind": "background",
+      "path": "backgrounds/soft-orbits.svg",
+      "title": "Soft orbits",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "3195d523b09a07b3a6362895414e5a342ec5a343994aff58c2115aa390124b1b",
+      "alt": "Gentle coral orbits floating around the right side.",
+      "tags": [
+        "soft",
+        "orbits",
+        "coral",
+        "friendly"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.78,
+        "y": 0.48
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-soft-petals",
+      "kind": "background",
+      "path": "backgrounds/soft-petals.svg",
+      "title": "Soft petals",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "cea2b5935b0297db608574661215e8dfdb767b0ef273647a29fc6f5d6825e4b8",
+      "alt": "Rounded greige and coral petals gathered in opposite corners.",
+      "tags": [
+        "soft",
+        "petals",
+        "organic",
+        "friendly"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    },
+    {
+      "id": "background-soft-sprinkles",
+      "kind": "background",
+      "path": "backgrounds/soft-sprinkles.svg",
+      "title": "Soft sprinkles",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-15",
+      "sha256": "0ed8281acb2fae9313e80e237abe298361080f88305b5c6997892dc5e1952dd5",
+      "alt": "Sparse rounded coral and greige marks framing the canvas.",
+      "tags": [
+        "soft",
+        "sprinkles",
+        "playful",
+        "friendly"
+      ],
+      "recommended_layouts": [
+        "title",
+        "objectives"
+      ],
+      "focal_point": {
+        "x": 0.5,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      }
+    }
+  ]
+}

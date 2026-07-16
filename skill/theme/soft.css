@@ -22,7 +22,7 @@
 :root {
   --sf-bg: #fdfdfc;
   --sf-text: #3a3735;
-  --sf-muted: #9b948c;
+  --sf-muted: #6c665f;
   --sf-line: #eae6e1;
   --sf-panel: #f3f0ec;
   --sf-accent: #c4705c;
@@ -101,6 +101,11 @@ section.bmc ul > li,
 section.swot ul > li,
 section.pest ul > li,
 section.misconception ul > li {
+  border-radius: var(--sf-radius);
+}
+
+section.chart-insight > blockquote,
+section.qualitative-grid > table img {
   border-radius: var(--sf-radius);
 }
 

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Lecture network background</title>
+  <desc id="desc">A pale sage network of connected learning concepts.</desc>
+  <rect width="1600" height="900" fill="#fbfcfa"/>
+  <g stroke="#5c7360" stroke-width="3" opacity="0.2">
+    <path d="M130 690L370 520 620 650 850 410 1120 540 1450 235M370 520L300 260M850 410L720 170M1120 540l180 210" fill="none"/>
+  </g>
+  <g fill="#edf1ea" stroke="#5c7360" stroke-width="3" opacity="0.55">
+    <circle cx="130" cy="690" r="24"/><circle cx="370" cy="520" r="32"/><circle cx="620" cy="650" r="22"/><circle cx="850" cy="410" r="42"/><circle cx="1120" cy="540" r="27"/><circle cx="1450" cy="235" r="25"/><circle cx="300" cy="260" r="20"/><circle cx="720" cy="170" r="24"/><circle cx="1300" cy="750" r="20"/>
+  </g>
+</svg>

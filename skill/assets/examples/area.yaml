@@ -1,0 +1,15 @@
+type: area
+theme: soft
+title: Requests processed over time
+x_label: Hour
+y_label: Requests
+data:
+  - { x: 9, y: 120 }
+  - { x: 10, y: 210 }
+  - { x: 11, y: 360 }
+  - { x: 12, y: 420 }
+  - { x: 13, y: 510 }
+annotations:
+  - { x: 12, text: Deployment }
+alt: An area chart showing processed requests increasing from 120 at 9 AM to 510 at 1 PM.
+motion: wipe

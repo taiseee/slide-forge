@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Research axis background</title>
+  <desc id="desc">Minimal analytical axes and sparse observations placed along the lower and right edges.</desc>
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <g stroke="#9aa2ae" stroke-width="2" opacity="0.2">
+    <path d="M980 730h500M1030 780V215"/>
+    <path d="M1080 730v12M1180 730v12M1280 730v12M1380 730v12M1030 630h-12M1030 530h-12M1030 430h-12M1030 330h-12"/>
+  </g>
+  <path d="M1080 655c120-25 135-110 245-145s105-145 205-215" fill="none" stroke="#566173" stroke-width="7" opacity="0.23"/>
+  <g fill="#343c48" opacity="0.3"><circle cx="1080" cy="655" r="11"/><circle cx="1325" cy="510" r="11"/><circle cx="1530" cy="295" r="11"/></g>
+</svg>

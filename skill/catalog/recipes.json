@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "description": "Deck recipes composed from catalog/templates.json. Copy paths are relative to the skill root and destinations to the generated deck.",
+  "recipes": [
+    {
+      "id": "research-progress",
+      "name_ja": "研究進捗報告",
+      "description_ja": "前回からの進展、現在の証拠、詰まり、次の判断を短く共有する。",
+      "audience": "研究室・共同研究者・指導教員",
+      "duration_minutes": 15,
+      "default_theme": "research",
+      "templates": [
+        "deck-title",
+        "progress-status",
+        "research-question",
+        "method-overview",
+        "experiment-setup",
+        "main-result",
+        "ablation",
+        "qualitative-results",
+        "error-analysis",
+        "next-steps",
+        "summary",
+        "end"
+      ],
+      "copy": []
+    },
+    {
+      "id": "paper-talk",
+      "name_ja": "論文紹介・輪講",
+      "description_ja": "論文の問題設定、位置づけ、手法、証拠、限界を批判的に説明する。",
+      "audience": "輪講・ジャーナルクラブ・研究室",
+      "duration_minutes": 25,
+      "default_theme": "research",
+      "templates": [
+        "deck-title",
+        {
+          "id": "agenda",
+          "variables": {
+            "agenda_1": "問題設定とResearch Gap",
+            "agenda_2": "提案手法",
+            "agenda_3": "実験結果",
+            "agenda_4": "考察・限界"
+          }
+        },
+        "problem-gap",
+        "related-work",
+        "research-question",
+        "contributions",
+        "method-overview",
+        "train-vs-inference",
+        "experiment-setup",
+        "dataset-metrics",
+        "main-result",
+        "ablation",
+        "qualitative-results",
+        "error-analysis",
+        "limitations",
+        "reproducibility",
+        "summary",
+        "references",
+        "end"
+      ],
+      "copy": []
+    },
+    {
+      "id": "conference-talk",
+      "name_ja": "学会発表",
+      "description_ja": "短時間で研究の問い、独自性、主要な証拠、結論を伝える。",
+      "audience": "学会・ワークショップ・研究発表会",
+      "duration_minutes": 12,
+      "default_theme": "research",
+      "templates": [
+        "deck-title",
+        "problem-gap",
+        "research-question",
+        "contributions",
+        "method-overview",
+        "train-vs-inference",
+        "dataset-metrics",
+        "main-result",
+        "ablation",
+        "qualitative-results",
+        "limitations",
+        "takeaway",
+        "end"
+      ],
+      "copy": []
+    },
+    {
+      "id": "business-proposal",
+      "name_ja": "事業提案・営業提案",
+      "description_ja": "顧客課題、提供価値、市場性、実行計画、期待効果を一つの意思決定ストーリーにする。",
+      "audience": "顧客・経営会議・事業責任者・投資判断者",
+      "duration_minutes": 20,
+      "default_theme": "business",
+      "templates": [
+        "deck-title",
+        {
+          "id": "agenda",
+          "variables": {
+            "agenda_1": "顧客課題と提供価値",
+            "agenda_2": "市場と競争優位",
+            "agenda_3": "事業モデルと実行計画",
+            "agenda_4": "効果・条件・次の判断"
+          }
+        },
+        "business-problem",
+        "customer-persona",
+        "value-proposition",
+        "solution-overview",
+        "market-opportunity",
+        "competitive-landscape",
+        "business-model",
+        "go-to-market",
+        "business-kpis",
+        "customer-impact",
+        "pricing-plans",
+        "risks-mitigation",
+        "action-plan",
+        "takeaway",
+        "end"
+      ],
+      "copy": []
+    },
+    {
+      "id": "executive-review",
+      "name_ja": "経営報告・事業レビュー",
+      "description_ja": "結論、主要KPI、進捗、リスク、判断事項、次の行動を短時間で共有する。",
+      "audience": "経営会議・事業責任者・プロジェクトスポンサー",
+      "duration_minutes": 12,
+      "default_theme": "business",
+      "templates": [
+        "deck-title",
+        {
+          "id": "agenda",
+          "variables": {
+            "agenda_1": "結論と主要KPI",
+            "agenda_2": "顧客・事業インパクト",
+            "agenda_3": "進捗と主要リスク",
+            "agenda_4": "判断事項と次のアクション"
+          }
+        },
+        "executive-summary",
+        "business-kpis",
+        "customer-impact",
+        "business-status",
+        "risks-mitigation",
+        "action-plan",
+        "takeaway",
+        "end"
+      ],
+      "copy": []
+    }
+  ]
+}

@@ -43,7 +43,9 @@ export function checkSection(s) {
 export function checkRoots(roots) {
   const issues = [];
   roots.forEach((root, i) => {
-    const s = root?.querySelector('svg[data-marpit-svg] > foreignObject > section');
+    const s = root?.querySelector(
+      'svg[data-marpit-svg]:not([data-marpit-advanced-background]) > foreignObject > section',
+    );
     if (!s) return;
     const problems = checkSection(s);
     if (problems.length > 0) {

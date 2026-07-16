@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "description": "Reusable slide templates. Source paths are relative to the skill root.",
+  "templates": [
+    {
+      "id": "deck-title",
+      "kind": "structural",
+      "name_ja": "表紙",
+      "intent": "orient",
+      "layout": "title",
+      "picker": false,
+      "source": "templates/structural/deck-title.md",
+      "required_fields": ["subtitle", "presenter", "affiliation", "date"]
+    },
+    {
+      "id": "agenda",
+      "kind": "structural",
+      "name_ja": "発表の流れ",
+      "intent": "orient",
+      "layout": "agenda",
+      "picker": false,
+      "source": "templates/structural/agenda.md",
+      "required_fields": []
+    },
+    {
+      "id": "title-visual-starter",
+      "kind": "structural",
+      "name_ja": "写真付き表紙",
+      "intent": "orient",
+      "layout": "title-visual",
+      "source": "templates/structural/title-visual.md",
+      "required_fields": ["title", "subtitle", "presenter", "affiliation", "date"],
+      "asset_slots": ["cover-photo"],
+      "copy": [
+        {
+          "source": "assets/photos/geometric-architecture.webp",
+          "destination": "assets/starter/geometric-architecture.webp"
+        }
+      ]
+    },
+    {
+      "id": "takeaway",
+      "kind": "structural",
+      "name_ja": "一文の結論",
+      "intent": "conclude",
+      "layout": "takeaway",
+      "source": "templates/structural/takeaway.md",
+      "required_fields": ["takeaway", "evidence"]
+    },
+    {
+      "id": "summary",
+      "kind": "structural",
+      "name_ja": "まとめ",
+      "intent": "conclude",
+      "layout": "summary",
+      "source": "templates/structural/summary.md",
+      "required_fields": ["problem", "approach", "result", "next_step"]
+    },
+    {
+      "id": "references",
+      "kind": "structural",
+      "name_ja": "参考文献",
+      "intent": "cite",
+      "layout": "references",
+      "source": "templates/structural/references.md",
+      "required_fields": ["references"]
+    },
+    {
+      "id": "end",
+      "kind": "structural",
+      "name_ja": "終了",
+      "intent": "close",
+      "layout": "end",
+      "source": "templates/structural/end.md",
+      "required_fields": ["contact"]
+    },
+    {
+      "id": "problem-gap",
+      "kind": "research-semantic",
+      "name_ja": "問題設定とResearch Gap",
+      "intent": "show-problem",
+      "layout": "comparison",
+      "source": "templates/research/problem-gap.md",
+      "required_fields": ["current_state", "prior_limit", "research_gap"]
+    },
+    {
+      "id": "research-context",
+      "kind": "research-semantic",
+      "name_ja": "研究対象と背景",
+      "intent": "show-problem",
+      "layout": "image-right",
+      "source": "templates/research/research-context.md",
+      "required_fields": ["target", "importance", "observation"],
+      "asset_slots": ["context-photo"],
+      "copy": [
+        {
+          "source": "assets/photos/laboratory-research.webp",
+          "destination": "assets/starter/laboratory-research.webp"
+        }
+      ]
+    },
+    {
+      "id": "research-question",
+      "kind": "research-semantic",
+      "name_ja": "Research Question",
+      "intent": "state-question",
+      "layout": "rq",
+      "source": "templates/research/research-question.md",
+      "required_fields": ["main_question", "sub_questions", "verification"]
+    },
+    {
+      "id": "contributions",
+      "kind": "research-semantic",
+      "name_ja": "本研究の貢献",
+      "intent": "state-contribution",
+      "layout": "cards",
+      "source": "templates/research/contributions.md",
+      "required_fields": ["novelty", "evidence", "resource"],
+      "asset_slots": ["contribution-icons"],
+      "copy": [
+        {
+          "source": "assets/icons/flask-conical.svg",
+          "destination": "assets/starter/flask-conical.svg"
+        },
+        {
+          "source": "assets/icons/chart-line.svg",
+          "destination": "assets/starter/chart-line.svg"
+        },
+        {
+          "source": "assets/icons/file-text.svg",
+          "destination": "assets/starter/file-text.svg"
+        }
+      ]
+    },
+    {
+      "id": "related-work",
+      "kind": "research-semantic",
+      "name_ja": "関連研究の比較",
+      "intent": "compare",
+      "layout": "benchmark",
+      "source": "templates/research/related-work.md",
+      "required_fields": ["comparison_axes", "prior_work", "positioning"]
+    },
+    {
+      "id": "method-overview",
+      "kind": "research-semantic",
+      "name_ja": "手法全体像",
+      "intent": "explain-method",
+      "layout": "flow",
+      "source": "templates/research/method-overview.md",
+      "required_fields": ["input", "stages", "output"],
+      "asset_slots": ["method-overview"]
+    },
+    {
+      "id": "train-vs-inference",
+      "kind": "research-semantic",
+      "name_ja": "学習時と推論時",
+      "intent": "compare",
+      "layout": "comparison",
+      "source": "templates/research/train-vs-inference.md",
+      "required_fields": ["training_inputs", "loss", "trainable_parameters", "inference_inputs", "output"]
+    },
+    {
+      "id": "experiment-setup",
+      "kind": "research-semantic",
+      "name_ja": "実験設定",
+      "intent": "show-evidence",
+      "layout": "spec",
+      "source": "templates/research/experiment-setup.md",
+      "required_fields": ["task", "baselines", "protocol", "compute", "seed"]
+    },
+    {
+      "id": "dataset-metrics",
+      "kind": "research-semantic",
+      "name_ja": "データセットと評価指標",
+      "intent": "show-evidence",
+      "layout": "table",
+      "source": "templates/research/dataset-metrics.md",
+      "required_fields": ["datasets", "splits", "metrics"]
+    },
+    {
+      "id": "main-result",
+      "kind": "research-semantic",
+      "name_ja": "主結果と解釈",
+      "intent": "interpret-result",
+      "layout": "chart-insight",
+      "source": "templates/research/main-result.md",
+      "required_fields": ["baselines", "metrics", "result", "interpretation"],
+      "asset_slots": ["main-result-chart"],
+      "copy": [
+        {
+          "source": "templates/assets/main-result-placeholder.svg",
+          "destination": "assets/starter/main-result-placeholder.svg"
+        }
+      ]
+    },
+    {
+      "id": "ablation",
+      "kind": "research-semantic",
+      "name_ja": "アブレーション",
+      "intent": "interpret-result",
+      "layout": "experiment",
+      "source": "templates/research/ablation.md",
+      "required_fields": ["components", "metrics", "interpretation"]
+    },
+    {
+      "id": "qualitative-results",
+      "kind": "research-semantic",
+      "name_ja": "定性結果",
+      "intent": "compare",
+      "layout": "qualitative-grid",
+      "source": "templates/research/qualitative-results.md",
+      "required_fields": ["examples", "baselines", "observations"],
+      "asset_slots": ["qualitative-inputs", "qualitative-outputs"]
+    },
+    {
+      "id": "error-analysis",
+      "kind": "research-semantic",
+      "name_ja": "失敗例とエラー分析",
+      "intent": "explain-failure",
+      "layout": "causes",
+      "source": "templates/research/error-analysis.md",
+      "required_fields": ["failure_pattern", "causes", "impact", "mitigation"]
+    },
+    {
+      "id": "limitations",
+      "kind": "research-semantic",
+      "name_ja": "限界と今後の課題",
+      "intent": "state-limitation",
+      "layout": "comparison",
+      "source": "templates/research/limitations.md",
+      "required_fields": ["limitations", "scope", "next_steps"]
+    },
+    {
+      "id": "reproducibility",
+      "kind": "research-semantic",
+      "name_ja": "再現性情報",
+      "intent": "support-reproduction",
+      "layout": "checklist",
+      "source": "templates/research/reproducibility.md",
+      "required_fields": ["code", "data", "environment", "hyperparameters", "seeds"]
+    },
+    {
+      "id": "progress-status",
+      "kind": "research-support",
+      "name_ja": "進捗サマリー",
+      "intent": "report-status",
+      "layout": "status",
+      "source": "templates/research/progress-status.md",
+      "required_fields": ["completed", "in_progress", "blocked", "updated_at"]
+    },
+    {
+      "id": "next-steps",
+      "kind": "research-support",
+      "name_ja": "次のステップ",
+      "intent": "plan-next",
+      "layout": "roadmap",
+      "source": "templates/research/next-steps.md",
+      "required_fields": ["phases", "dates", "deliverables"]
+    },
+    {
+      "id": "business-problem",
+      "kind": "business-semantic",
+      "name_ja": "解くべき事業課題",
+      "intent": "show-problem",
+      "layout": "comparison",
+      "source": "templates/business/business-problem.md",
+      "required_fields": ["customer", "current_behavior", "loss", "target_state", "business_value"]
+    },
+    {
+      "id": "executive-summary",
+      "kind": "business-semantic",
+      "name_ja": "エグゼクティブサマリー",
+      "intent": "support-decision",
+      "layout": "exec-summary",
+      "source": "templates/business/executive-summary.md",
+      "required_fields": ["decision", "background", "proposal", "impact", "approval"]
+    },
+    {
+      "id": "customer-persona",
+      "kind": "business-semantic",
+      "name_ja": "顧客像",
+      "intent": "define-customer",
+      "layout": "persona",
+      "source": "templates/business/customer-persona.md",
+      "required_fields": ["segment", "goal", "pain", "selection_criteria"],
+      "asset_slots": ["customer-photo"],
+      "copy": [
+        {
+          "source": "assets/photos/remote-work.webp",
+          "destination": "assets/starter/business-customer.webp"
+        }
+      ]
+    },
+    {
+      "id": "value-proposition",
+      "kind": "business-semantic",
+      "name_ja": "提供価値",
+      "intent": "state-value",
+      "layout": "cards",
+      "source": "templates/business/value-proposition.md",
+      "required_fields": ["customer_outcome", "advantage", "feasibility"],
+      "asset_slots": ["value-icons"],
+      "copy": [
+        {
+          "source": "assets/icons/target.svg",
+          "destination": "assets/starter/business-target.svg"
+        },
+        {
+          "source": "assets/icons/chart-no-axes-column-increasing.svg",
+          "destination": "assets/starter/business-growth.svg"
+        },
+        {
+          "source": "assets/icons/workflow.svg",
+          "destination": "assets/starter/business-workflow.svg"
+        }
+      ]
+    },
+    {
+      "id": "solution-overview",
+      "kind": "business-semantic",
+      "name_ja": "ソリューション全体像",
+      "intent": "explain-solution",
+      "layout": "flow",
+      "source": "templates/business/solution-overview.md",
+      "required_fields": ["input", "process", "delivery", "feedback"]
+    },
+    {
+      "id": "market-opportunity",
+      "kind": "business-semantic",
+      "name_ja": "市場機会",
+      "intent": "size-market",
+      "layout": "tam-sam-som",
+      "source": "templates/business/market-opportunity.md",
+      "required_fields": ["tam", "sam", "som", "assumptions"]
+    },
+    {
+      "id": "competitive-landscape",
+      "kind": "business-semantic",
+      "name_ja": "競合・代替比較",
+      "intent": "compare",
+      "layout": "benchmark",
+      "source": "templates/business/competitive-landscape.md",
+      "required_fields": ["selection_axes", "competitors", "evidence"]
+    },
+    {
+      "id": "business-model",
+      "kind": "business-semantic",
+      "name_ja": "ビジネスモデル",
+      "intent": "explain-business-model",
+      "layout": "bmc",
+      "source": "templates/business/business-model.md",
+      "required_fields": ["segments", "value", "channels", "revenue", "costs"]
+    },
+    {
+      "id": "go-to-market",
+      "kind": "business-semantic",
+      "name_ja": "Go-to-Market",
+      "intent": "plan-growth",
+      "layout": "journey",
+      "source": "templates/business/go-to-market.md",
+      "required_fields": ["awareness", "evaluation", "adoption", "retention", "metrics"]
+    },
+    {
+      "id": "business-kpis",
+      "kind": "business-semantic",
+      "name_ja": "主要KPI",
+      "intent": "show-performance",
+      "layout": "kpi",
+      "source": "templates/business/business-kpis.md",
+      "required_fields": ["metrics", "period", "baseline"]
+    },
+    {
+      "id": "customer-impact",
+      "kind": "business-semantic",
+      "name_ja": "導入インパクト",
+      "intent": "show-impact",
+      "layout": "impact",
+      "source": "templates/business/customer-impact.md",
+      "required_fields": ["before", "after", "measurement_conditions"]
+    },
+    {
+      "id": "pricing-plans",
+      "kind": "business-semantic",
+      "name_ja": "提供プラン",
+      "intent": "explain-pricing",
+      "layout": "plans",
+      "source": "templates/business/pricing-plans.md",
+      "required_fields": ["segments", "prices", "scope", "terms"]
+    },
+    {
+      "id": "risks-mitigation",
+      "kind": "business-support",
+      "name_ja": "主要リスクと対策",
+      "intent": "manage-risk",
+      "layout": "risks",
+      "source": "templates/business/risks-mitigation.md",
+      "required_fields": ["risks", "probability", "impact", "mitigation", "owner"]
+    },
+    {
+      "id": "action-plan",
+      "kind": "business-support",
+      "name_ja": "次のアクション",
+      "intent": "plan-next",
+      "layout": "actions",
+      "source": "templates/business/action-plan.md",
+      "required_fields": ["tasks", "owners", "deadlines", "done_criteria"]
+    },
+    {
+      "id": "business-status",
+      "kind": "business-support",
+      "name_ja": "プロジェクト状況",
+      "intent": "report-status",
+      "layout": "status",
+      "source": "templates/business/business-status.md",
+      "required_fields": ["completed", "in_progress", "decision_needed", "next_deliverable", "updated_at"]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+type: line
+theme: lecture
+title: Validation accuracy by epoch
+x_label: Epoch
+y_label: Accuracy
+value_format: ".0%"
+zero: false
+data:
+  - { x: 1, y: 0.55, series: Baseline }
+  - { x: 2, y: 0.63, series: Baseline }
+  - { x: 3, y: 0.68, series: Baseline }
+  - { x: 1, y: 0.58, series: Proposed }
+  - { x: 2, y: 0.71, series: Proposed }
+  - { x: 3, y: 0.80, series: Proposed }
+highlight: Proposed
+annotations:
+  - { x: 3, y: 0.80, text: Best }
+alt: Two training curves; the proposed method rises to 80 percent validation accuracy by epoch three.
+motion: draw

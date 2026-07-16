@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {
+      "id": "background-business-topography",
+      "kind": "background",
+      "path": "backgrounds/business-topography.svg",
+      "title": "Business topography",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "6788e23317eb7a162437f3f3fdd6f67da6f32e3e74432484012611e2a004dc75",
+      "alt": "Warm greige contour lines with an understated circular accent.",
+      "tags": [
+        "business",
+        "topography",
+        "editorial",
+        "warm"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.76,
+        "y": 0.62
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "deck_path": "assets/slide-forge/background-business-topography-6788e23317.svg"
+    },
+    {
+      "id": "background-lecture-network",
+      "kind": "background",
+      "path": "backgrounds/lecture-network.svg",
+      "title": "Lecture network",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "fd3a4c5eee934a07e5454ef40bad501d2a9674630b21eb9c3fc0844ff7ac033a",
+      "alt": "A pale sage network of connected learning concepts.",
+      "tags": [
+        "lecture",
+        "network",
+        "learning",
+        "sage"
+      ],
+      "recommended_layouts": [
+        "title",
+        "objectives"
+      ],
+      "focal_point": {
+        "x": 0.55,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "deck_path": "assets/slide-forge/background-lecture-network-fd3a4c5eee.svg"
+    },
+    {
+      "id": "background-soft-waves",
+      "kind": "background",
+      "path": "backgrounds/soft-waves.svg",
+      "title": "Soft waves",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "f64ebc83c2d2129e04d8e13abd32008017ab13b677222b14728ba010c8023ee3",
+      "alt": "Gentle coral and greige waves with broad empty space for text.",
+      "tags": [
+        "soft",
+        "waves",
+        "coral",
+        "friendly"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.7,
+        "y": 0.7
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "deck_path": "assets/slide-forge/background-soft-waves-f64ebc83c2.svg"
+    },
+    {
+      "id": "background-research-grid",
+      "kind": "background",
+      "path": "backgrounds/research-grid.svg",
+      "title": "Research grid",
+      "author": "slide-forge Contributors",
+      "source_url": "https://github.com/taiseee/slide-forge",
+      "license": "MIT",
+      "license_url": "https://github.com/taiseee/slide-forge/blob/main/LICENSE",
+      "acquired_at": "2026-07-13",
+      "sha256": "f4b377db39ddaa206d63ace4b5fff40afafc86d1710c545f04f7334d12b19f3d",
+      "alt": "A quiet gray grid with a highlighted diagonal relationship.",
+      "tags": [
+        "research",
+        "grid",
+        "data",
+        "minimal"
+      ],
+      "recommended_layouts": [
+        "title",
+        "divider"
+      ],
+      "focal_point": {
+        "x": 0.72,
+        "y": 0.5
+      },
+      "dimensions": {
+        "width": 1600,
+        "height": 900
+      },
+      "deck_path": "assets/slide-forge/background-research-grid-f4b377db39.svg"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Business topography background</title>
+  <desc id="desc">Warm greige contour lines forming an understated editorial background.</desc>
+  <rect width="1600" height="900" fill="#fbfaf7"/>
+  <g fill="none" stroke="#8a7a63" opacity="0.18" stroke-width="3">
+    <path d="M-80 715c180-205 305-195 455-80s260 115 390-15 245-145 385-55 290 110 530-85"/>
+    <path d="M-70 765c185-205 315-190 465-75s260 115 390-15 245-145 385-55 290 110 520-85"/>
+    <path d="M-60 815c190-205 325-185 475-70s260 115 390-15 245-145 385-55 290 110 510-85"/>
+    <path d="M-150 150c210 130 350 115 475-25s280-145 410-30 265 130 400 5 270-140 520-25"/>
+    <path d="M-160 100c215 130 360 120 485-20s280-145 410-30 265 130 400 5 270-140 530-25"/>
+  </g>
+  <circle cx="1280" cy="690" r="190" fill="#f1ece2" opacity="0.72"/>
+</svg>

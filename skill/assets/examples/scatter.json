@@ -1,0 +1,17 @@
+{
+  "type": "scatter",
+  "theme": "business",
+  "title": "Cost and quality trade-off",
+  "x_label": "Cost per run",
+  "y_label": "Quality score",
+  "data": [
+    { "x": 10, "y": 62, "series": "Baseline", "samples": 30 },
+    { "x": 18, "y": 71, "series": "Baseline", "samples": 45 },
+    { "x": 14, "y": 80, "series": "Proposed", "samples": 55 }
+  ],
+  "size_field": "samples",
+  "highlight": "Proposed",
+  "annotations": [{ "x": 14, "y": 80, "text": "Best balance" }],
+  "alt": "A scatter plot showing the proposed option with the highest quality at a moderate cost.",
+  "motion": "fade"
+}

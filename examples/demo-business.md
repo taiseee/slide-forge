@@ -95,7 +95,7 @@ style: |
 
 # 利用イメージ
 
-![](assets/placeholder-chart.svg)
+![グラフのプレースホルダー](assets/placeholder-chart.svg)
 
 - 書き手はMarkdownで内容だけを書き、テンプレートが見た目を担保する
 - ビルドと検証は自動。人は内容のレビューに集中できる
@@ -224,9 +224,9 @@ style: |
 
 # プロジェクトの歩み
 
-1. ![](assets/placeholder-figure.svg) **2025** 社内有志がプロトタイプを開発。デザインの原型が固まる
-2. ![](assets/placeholder-chart.svg) **2026 上期** 営業部門でパイロット導入。作成時間を60%削減
-3. ![](assets/placeholder-portrait.svg) **2026 下期** 全社展開。テンプレート委員会が発足
+1. ![構成図のプレースホルダー](assets/placeholder-figure.svg) **2025** 社内有志がプロトタイプを開発。デザインの原型が固まる
+2. ![グラフのプレースホルダー](assets/placeholder-chart.svg) **2026 上期** 営業部門でパイロット導入。作成時間を60%削減
+3. ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) **2026 下期** 全社展開。テンプレート委員会が発足
 
 ---
 
@@ -278,7 +278,7 @@ style: |
 - **4スキン** を1クリックで切替
 - **自動検証** ではみ出しゼロを担保
 
-![](assets/placeholder-app.svg)
+![アプリ画面のプレースホルダー](assets/placeholder-app.svg)
 
 ---
 
@@ -467,7 +467,7 @@ style: |
 
 # 導入企業・パートナー
 
-![](assets/placeholder-logo.svg) ![](assets/placeholder-logo.svg) ![](assets/placeholder-logo.svg) ![](assets/placeholder-logo.svg) ![](assets/placeholder-logo.svg) ![](assets/placeholder-logo.svg)
+![ロゴのプレースホルダー](assets/placeholder-logo.svg) ![ロゴのプレースホルダー](assets/placeholder-logo.svg) ![ロゴのプレースホルダー](assets/placeholder-logo.svg) ![ロゴのプレースホルダー](assets/placeholder-logo.svg) ![ロゴのプレースホルダー](assets/placeholder-logo.svg) ![ロゴのプレースホルダー](assets/placeholder-logo.svg)
 
 社内3部門+協力会社3社で試験運用中
 
@@ -487,7 +487,7 @@ style: |
 
 # 推薦コメント
 
-![](assets/placeholder-portrait.svg)
+![人物写真のプレースホルダー](assets/placeholder-portrait.svg)
 
 > レイアウトを考えなくていいというのは、想像以上に大きな変化だった。資料作成が「デザイン作業」から「思考の整理」に変わった。
 
@@ -600,7 +600,7 @@ style: |
 
 # 発注までの承認フロー
 
-![](assets/charts/business-flow-approval.svg)
+![資料承認フローの分岐図](assets/charts/business-flow-approval.svg)
 
 分岐のある業務フロー・承認フローは作図した画像を貼る(パレットはスキンに従う)
 
@@ -650,9 +650,9 @@ style: |
 
 # 推進体制
 
-- ![](assets/placeholder-portrait.svg) **山田** プロジェクトリード。全体統括と経営層への報告
-- ![](assets/placeholder-portrait.svg) **佐藤** テンプレート設計。全社レイアウトの整備
-- ![](assets/placeholder-portrait.svg) **鈴木** 導入支援。パイロット部門の研修とサポート
+- ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) **山田** プロジェクトリード。全体統括と経営層への報告
+- ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) **佐藤** テンプレート設計。全社レイアウトの整備
+- ![人物写真のプレースホルダー](assets/placeholder-portrait.svg) **鈴木** 導入支援。パイロット部門の研修とサポート
 
 ---
 
@@ -690,12 +690,12 @@ style: |
 
 # サービスの特徴
 
-- ![](assets/placeholder-icon.svg) **テンプレート化** レイアウトクラスを選ぶだけで体裁が揃う
-- ![](assets/placeholder-icon.svg) **自動検証** はみ出し・崩れを機械チェックしてから納品
-- ![](assets/placeholder-icon.svg) **編集WebUI** 非エンジニアでもその場でテキストを直接編集
-- ![](assets/placeholder-icon.svg) **バージョン管理** MarkdownがソースなのでGitで差分管理できる
-- ![](assets/placeholder-icon.svg) **スキン切替** 研究発表・ビジネス提案を1クリックで切替
-- ![](assets/placeholder-icon.svg) **画像差し替え** ドラッグ&ドロップで即差し替え
+- ![機能アイコンのプレースホルダー](assets/placeholder-icon.svg) **テンプレート化** レイアウトクラスを選ぶだけで体裁が揃う
+- ![機能アイコンのプレースホルダー](assets/placeholder-icon.svg) **自動検証** はみ出し・崩れを機械チェックしてから納品
+- ![機能アイコンのプレースホルダー](assets/placeholder-icon.svg) **編集WebUI** 非エンジニアでもその場でテキストを直接編集
+- ![機能アイコンのプレースホルダー](assets/placeholder-icon.svg) **バージョン管理** MarkdownがソースなのでGitで差分管理できる
+- ![機能アイコンのプレースホルダー](assets/placeholder-icon.svg) **スキン切替** 研究発表・ビジネス提案を1クリックで切替
+- ![機能アイコンのプレースホルダー](assets/placeholder-icon.svg) **画像差し替え** ドラッグ&ドロップで即差し替え
 
 ---
 
@@ -713,7 +713,7 @@ style: |
 
 # ペルソナ: 佐藤さん(企画部・35歳)
 
-![](assets/placeholder-portrait.svg)
+![人物写真のプレースホルダー](assets/placeholder-portrait.svg)
 
 ## 佐藤さん — 企画部 マネージャー
 
@@ -734,7 +734,7 @@ style: |
 
 出典: ◯◯総研「資料作成支援市場調査 2026」
 
-![](assets/charts/business-market.svg)
+![市場規模の推移を示す棒グラフ](assets/charts/business-market.svg)
 
 ---
 

@@ -61,6 +61,7 @@ export const LAYOUT_GROUPS = [
       "collage",
       "image-cards",
       "before-after",
+      "qualitative-grid",
       "logos",
       "profile",
       "team",
@@ -135,6 +136,7 @@ export const LAYOUT_GROUPS = [
       "tam-sam-som",
       "tam-sam-som-circle",
       "case-study",
+      "chart-insight",
     ],
   },
   {
@@ -163,6 +165,16 @@ export const LAYOUT_GROUPS = [
 
 /** カタログ(cls配列)をグループに割り付ける。未分類は「その他」へ */
 export function groupLayouts(catalog) {
+  if (catalog.length > 0 && catalog.every((layout) => layout.groupLabel)) {
+    const byGroup = new Map();
+    for (const layout of catalog) {
+      if (!byGroup.has(layout.group)) {
+        byGroup.set(layout.group, { name: layout.groupLabel, items: [] });
+      }
+      byGroup.get(layout.group).items.push(layout);
+    }
+    return [...byGroup.values()];
+  }
   const known = new Set(LAYOUT_GROUPS.flatMap((g) => g.classes));
   const byCls = new Map(catalog.map((l) => [l.cls, l]));
   const groups = LAYOUT_GROUPS.map((g) => ({

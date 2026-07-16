@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Soft petals background</title>
+  <desc id="desc">Rounded greige and coral petals gather in opposite corners without crowding the center.</desc>
+  <rect width="1600" height="900" fill="#fdfdfc"/>
+  <g opacity="0.13">
+    <ellipse cx="1425" cy="140" rx="190" ry="82" fill="#c4705c" transform="rotate(24 1425 140)"/>
+    <ellipse cx="1510" cy="270" rx="165" ry="70" fill="#8e4a3e" transform="rotate(-38 1510 270)"/>
+    <ellipse cx="130" cy="790" rx="210" ry="88" fill="#8a7a63" transform="rotate(-18 130 790)"/>
+    <ellipse cx="270" cy="850" rx="150" ry="62" fill="#c4705c" transform="rotate(28 270 850)"/>
+  </g>
+</svg>

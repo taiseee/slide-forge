@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Soft waves background</title>
+  <desc id="desc">Gentle coral and greige waves with broad empty space for text.</desc>
+  <rect width="1600" height="900" fill="#fdfdfc"/>
+  <path d="M0 735c230-105 380-105 610-5s420 90 610-30 290-115 380-90v290H0z" fill="#f3f0ec"/>
+  <path d="M0 805c280-145 470-90 660 0s390 65 555-30 265-110 385-70v195H0z" fill="#c4705c" opacity="0.16"/>
+  <circle cx="1370" cy="170" r="115" fill="#c4705c" opacity="0.1"/>
+  <circle cx="1245" cy="215" r="48" fill="#8e4a3e" opacity="0.08"/>
+</svg>

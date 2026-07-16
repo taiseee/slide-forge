@@ -1,0 +1,17 @@
+type: sequence
+theme: soft
+title: Visual generation request
+data:
+  actors:
+    - { id: user, label: Presenter }
+    - { id: ui, label: Slide Forge }
+    - { id: renderer, label: SVG renderer }
+  messages:
+    - { from: user, to: ui, text: Select visual, kind: sync }
+    - { from: ui, to: renderer, text: Render spec, kind: async }
+    - { from: renderer, to: ui, text: Offline SVG, kind: return }
+    - { from: ui, to: user, text: Preview, kind: return }
+annotations:
+  - { target: renderer, text: No network request }
+alt: A sequence where a presenter asks Slide Forge to render a visual and receives an offline SVG preview.
+motion: draw

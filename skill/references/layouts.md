@@ -1834,6 +1834,40 @@ RQ1 は実験1・2、RQ2 は実験3 で検証する
 発生確率・影響度は 2026年6月のリスクアセスメントに基づく
 ```
 
+## chart-insight — グラフ＋結論＋解釈
+
+構造: h1 + 画像1枚 + blockquote(最重要の結論) + ul(解釈2〜3点)。グラフを大きく保ちながら、聴衆が読み取るべき結論を右側へ固定する。グラフだけなら `image-full`、表中心なら `experiment`。
+
+```markdown
+<!-- _class: chart-insight -->
+
+# 主結果: 提案手法が全条件で改善
+
+![評価指標の比較グラフ](assets/result.svg)
+
+> **+8.4pt** とくに低データ条件で改善幅が大きい。
+
+- 3データセットで一貫して向上
+- エラーバーは3試行の標準偏差
+```
+
+## qualitative-grid — 定性結果の行列比較
+
+構造: h1 + table(1列目=手法名、以降=比較画像、2〜3行×2〜4画像列) + 任意の blockquote。入力例を列、手法を行に揃えて、定性結果を同じ視線移動で比較する。
+
+```markdown
+<!-- _class: qualitative-grid -->
+
+# 定性結果の比較
+
+| 手法 | 入力A | 入力B | 入力C |
+|---|---|---|---|
+| 既存手法 | ![既存A](assets/base-a.webp) | ![既存B](assets/base-b.webp) | ![既存C](assets/base-c.webp) |
+| **提案手法** | ![提案A](assets/ours-a.webp) | ![提案B](assets/ours-b.webp) | ![提案C](assets/ours-c.webp) |
+
+> 提案手法は細部の構造と一貫性を維持した。
+```
+
 ## 進捗バー(デッキ単位のオプション)
 
 上端にページ進行のバーを出す。`_class` はグローバル class を置換するためクラスでは指定できず、frontmatter の style 1行でONにする。`_paginate: false` のスライド(表紙・終了)には出ない。

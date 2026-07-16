@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SlideCanvas from './SlideCanvas.jsx';
 import LayoutPicker from './LayoutPicker.jsx';
+import AssetPicker from './AssetPicker.jsx';
 import { serializeDeck } from '../lib/deck.mjs';
 import {
   inlineMarkdown,
@@ -14,30 +15,14 @@ import {
 } from './patch.js';
 import { extractNotes, setNotes } from './notes.js';
 import { checkRoots } from './overflow.js';
-
-const CLASS_RE = /<!--\s*_class:\s*([^>]*?)\s*-->/;
-const slideCls = (raw) => (raw.match(CLASS_RE)?.[1] ?? '').trim();
-
-// raw 内の _class 行だけを書き換える(他は一切触らない)
-const setSlideCls = (raw, cls) => {
-  if (CLASS_RE.test(raw)) {
-    if (cls) return raw.replace(CLASS_RE, `<!-- _class: ${cls} -->`);
-    const lines = raw.split('\n');
-    const i = lines.findIndex((l) => CLASS_RE.test(l));
-    lines.splice(i, 1);
-    return lines.join('\n');
-  }
-  if (!cls) return raw;
-  const lines = raw.split('\n');
-  let i = 0;
-  while (i < lines.length && lines[i].trim() === '') i += 1;
-  lines.splice(i, 0, `<!-- _class: ${cls} -->`, '');
-  return lines.join('\n');
-};
+import { analyzeDeckSource, estimateDeckMinutes } from '../../lib/quality.mjs';
+import { inspectRenderedSlides } from '../../lib/browser-quality.mjs';
+import { setLibraryAsset, setSlideCls, slideCls } from './asset-insertion.js';
 
 const NEW_SLIDE = '\n<!-- _class: content -->\n\n# 新しいスライド\n\n- 内容\n';
 
 const SIDEBAR_WIDTH_KEY = 'sf-sidebar-width';
+const MOTION_MODES = ['off', 'standard', 'rich'];
 const SIDEBAR_MIN = 160;
 const SIDEBAR_MAX = 480;
 const SIDEBAR_DEFAULT = 224;
@@ -60,6 +45,7 @@ export default function App() {
   const [sel, setSel] = useState(0);
   const [rendered, setRendered] = useState({ css: '', slides: [] });
   const [previews, setPreviews] = useState(null);
+  const [assets, setAssets] = useState([]);
   const [issues, setIssues] = useState([]);
   const [status, setStatus] = useState('loading');
   const [error, setError] = useState('');
@@ -133,6 +119,8 @@ export default function App() {
       setStatus('saved');
       setLayouts(await fetch('/api/layouts').then((r) => r.json()));
       setThemes(await fetch('/api/themes').then((r) => r.json()));
+      const assetResult = await fetch('/api/assets').then((r) => (r.ok ? r.json() : { assets: [] }));
+      setAssets(assetResult.assets ?? []);
     })().catch((e) => {
       setStatus('error');
       setError(String(e));
@@ -164,9 +152,19 @@ export default function App() {
 
   // レイアウトピッカーのプレビュー(テーマごとにサーバ側キャッシュあり)
   const theme = useMemo(() => frontmatter.match(/^theme:\s*(\S+)/m)?.[1] ?? 'research', [frontmatter]);
+  const motionMode = useMemo(
+    () => frontmatter.match(/^sf_motion:\s*(\S+)/m)?.[1]?.replace(/["']/g, '') ?? 'standard',
+    [frontmatter],
+  );
+  const nextMotionMode = MOTION_MODES[(MOTION_MODES.indexOf(motionMode) + 1) % MOTION_MODES.length] ?? 'standard';
+  const motionLabels = {
+    off: 'なし',
+    standard: '標準',
+    rich: 'リッチ',
+  };
   // スキン専用クラスは、そのスキン以外では CSS が無く崩れるためピッカーに出さない
   const usableLayouts = useMemo(
-    () => layouts.filter((l) => !l.skin || l.skin === theme),
+    () => layouts.filter((l) => theme === 'soft' || !l.skin || l.skin === theme),
     [layouts, theme],
   );
   useEffect(() => {
@@ -182,17 +180,46 @@ export default function App() {
     };
   }, [theme]);
 
-  // レンダリング反映後にクライアント側で overflow 検出
+  // レンダリング反映後に、修正必須のエラーだけをまとめて表示
   useEffect(() => {
-    const t = setTimeout(() => {
-      setIssues(checkRoots(thumbRoots.current.slice(0, rendered.slides.length)));
-    }, 150);
-    return () => clearTimeout(t);
-  }, [rendered]);
+    const roots = thumbRoots.current.slice(0, rendered.slides.length);
+    const evaluate = () => {
+      const overflow = checkRoots(roots).map((item) => ({
+        ...item,
+        severity: 'error',
+        code: 'overflow',
+        message: item.problems.join(', '),
+      }));
+      const source = slides ? analyzeDeckSource({ slides: slides.map((item) => item.raw) }) : [];
+      const renderedIssues = roots.flatMap((root, index) =>
+          root
+            ? inspectRenderedSlides(root).map((item) => ({ ...item, slide: index + 1 }))
+            : [],
+        );
+      setIssues(
+        [...overflow, ...source, ...renderedIssues].filter((item) => item.severity === 'error'),
+      );
+    };
+    const timer = setTimeout(evaluate, 150);
+    const pendingImages = roots.flatMap((root) =>
+      root ? [...root.querySelectorAll('img')].filter((image) => !image.complete) : [],
+    );
+    for (const image of pendingImages) {
+      image.addEventListener('load', evaluate);
+      image.addEventListener('error', evaluate);
+    }
+    return () => {
+      clearTimeout(timer);
+      for (const image of pendingImages) {
+        image.removeEventListener('load', evaluate);
+        image.removeEventListener('error', evaluate);
+      }
+    };
+  }, [rendered, slides]);
 
   // ---------- 保存 ----------
 
-  const save = useCallback(async () => {
+  const save = useCallback(async (throwOnError = false) => {
     clearTimeout(saveTimer.current);
     const { slides: s, frontmatter: fm } = stateRef.current;
     if (!s) return;
@@ -209,6 +236,7 @@ export default function App() {
     } catch (e) {
       setStatus('error');
       setError(String(e.message || e));
+      if (throwOnError) throw e;
     }
   }, []);
 
@@ -634,6 +662,27 @@ export default function App() {
     });
   };
 
+  const useLibraryAsset = async (asset) => {
+    try {
+      const copied = await fetch('/api/assets/use', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: asset.id }),
+      }).then((response) => response.json());
+      if (!copied.path) throw new Error(copied.error || 'asset copy failed');
+      update((prev) =>
+        prev.map((slide, index) =>
+          index === sel
+            ? { ...slide, raw: setLibraryAsset(slide.raw, copied.path, { ...asset, alt: copied.alt || asset.alt }) }
+            : slide,
+        ),
+      );
+    } catch (e) {
+      setStatus('error');
+      setError(String(e.message || e));
+    }
+  };
+
   const duplicateSlide = () =>
     update((prev) => {
       const next = [...prev];
@@ -677,18 +726,40 @@ export default function App() {
     markDirty();
   };
 
+  const changeMotion = (mode) => {
+    pushHistory();
+    setFrontmatter((fm) =>
+      /^sf_motion:/m.test(fm)
+        ? fm.replace(/^sf_motion:.*$/m, `sf_motion: ${mode}`)
+        : `${fm.trimEnd()}\nsf_motion: ${mode}`,
+    );
+    markDirty();
+  };
+
   const doExport = async (format) => {
+    // await 後の window.open はポップアップとして拒否されるため、クリック中に表示先を確保する。
+    const target = window.open('about:blank', '_blank');
+    if (!target) {
+      setStatus('error');
+      setError('書き出し先を開けませんでした。ブラウザでポップアップを許可してください。');
+      return;
+    }
+    target.document.title = 'slide-forge — 書き出し中';
+    target.document.body.textContent = '書き出し中…';
+    target.opener = null;
+
     setExporting(format);
     try {
-      await save(); // 保存済みの内容を書き出す
+      await save(true); // 保存に失敗した場合は古い内容を書き出さない
       const res = await fetch('/api/export', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ format }),
       }).then((r) => r.json());
       if (!res.path) throw new Error(res.error || 'export failed');
-      window.open(res.path, '_blank');
+      target.location.replace(res.path);
     } catch (e) {
+      target.close();
       setStatus('error');
       setError(String(e.message || e));
     } finally {
@@ -780,6 +851,9 @@ export default function App() {
         <span className="brand">slide-forge</span>
         <span className="filename">{file}</span>
         <span className={`status status-${status}`}>{statusLabel}</span>
+        <span className="duration" title="本文または発表者ノートから概算した発表時間">
+          約{estimateDeckMinutes(slides.map((item) => item.raw))}分
+        </span>
         {status === 'error' && <span className="errmsg">{error}</span>}
         <select
           className="theme-select"
@@ -791,15 +865,28 @@ export default function App() {
             <option key={t} value={t}>{t}</option>
           ))}
         </select>
-        <button onClick={() => doExport('pdf')} disabled={!!exporting} title="PDFを書き出して開く">
-          {exporting === 'pdf' ? '書き出し中…' : 'PDF'}
+        <button
+          type="button"
+          className={`motion-toggle motion-${motionMode}`}
+          data-mode={motionMode}
+          onClick={() => changeMotion(nextMotionMode)}
+          aria-label={`要素モーション: ${motionLabels[motionMode] ?? motionMode}。クリックで${motionLabels[nextMotionMode]}に変更`}
+          title={`要素モーション: ${motionLabels[motionMode] ?? motionMode} → クリックで${motionLabels[nextMotionMode]}。richは要素の段階表示と図表演出を有効化`}
+        >
+          <span className="motion-toggle-icon" aria-hidden="true">
+            {motionMode === 'off' ? '·' : motionMode === 'standard' ? '✦' : '✦✦'}
+          </span>
+          <span className="sr-only">{motionLabels[motionMode] ?? motionMode}</span>
         </button>
         <button
           onClick={() => doExport('html')}
           disabled={!!exporting}
           title="発表用HTMLを書き出して開く(Pキーで発表者ビュー)"
         >
-          {exporting === 'html' ? '書き出し中…' : '発表'}
+          {exporting === 'html' ? '準備中…' : '発表'}
+        </button>
+        <button onClick={() => doExport('pdf')} disabled={!!exporting} title="PDFを書き出して開く">
+          {exporting === 'pdf' ? '書き出し中…' : 'PDF'}
         </button>
         <button onClick={undo} title="元に戻す (⌘Z)">↩</button>
         <button onClick={redo} title="やり直す (⇧⌘Z)">↪</button>
@@ -861,6 +948,7 @@ export default function App() {
           <div className="stage-toolbar">
             <span className="toolbar-label">レイアウト</span>
             <LayoutPicker layouts={usableLayouts} previews={previews} current={curCls} onSelect={changeCls} />
+            <AssetPicker assets={assets} onSelect={useLibraryAsset} />
             <span className="hint">
               {layouts.find((l) => l.cls === curCls)?.desc || 'テキストをクリックすると直接編集できます'}
             </span>
@@ -901,10 +989,14 @@ export default function App() {
           </div>
           {issues.length > 0 && (
             <div className="issues">
-              <div className="issues-title">はみ出し検出: {issues.length} 枚</div>
-              {issues.map((it) => (
-                <button key={it.slide} className="issue" onClick={() => selectSlide(it.slide - 1)}>
-                  slide {it.slide} [{it.class}] — {it.problems.join(', ')}
+              <div className="issues-title">修正が必要な箇所: {issues.length}</div>
+              {issues.map((it, issueIndex) => (
+                <button
+                  key={`${it.slide}-${it.code}-${issueIndex}`}
+                  className={`issue issue-${it.severity}`}
+                  onClick={() => selectSlide(it.slide - 1)}
+                >
+                  {it.severity.toUpperCase()} — slide {it.slide} [{it.code}] — {it.message}
                 </button>
               ))}
             </div>

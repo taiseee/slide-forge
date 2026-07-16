@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Lecture grid background</title>
+  <desc id="desc">A pale sage notebook grid with a highlighted learning path on the right.</desc>
+  <rect width="1600" height="900" fill="#fbfcfa"/>
+  <defs><pattern id="dots" width="44" height="44" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="2" fill="#5c7360" opacity="0.14"/></pattern></defs>
+  <rect x="900" width="700" height="900" fill="url(#dots)"/>
+  <path d="M1010 690l150-145 145 70 185-235" fill="none" stroke="#5c7360" stroke-width="7" opacity="0.2"/>
+  <g fill="#5c7360" opacity="0.28"><circle cx="1010" cy="690" r="11"/><circle cx="1160" cy="545" r="11"/><circle cx="1305" cy="615" r="11"/><circle cx="1490" cy="380" r="11"/></g>
+</svg>

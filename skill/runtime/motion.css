@@ -1,0 +1,70 @@
+/* Rich HTML motion. This file is inlined by scripts/export.mjs. */
+
+@keyframes sf-slide-entry-fade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sf-slide-entry-wipe {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes sf-slide-entry-highlight {
+  0% { opacity: .55; filter: saturate(.35); }
+  55% { opacity: 1; filter: saturate(1.35) brightness(1.06); }
+  100% { opacity: 1; filter: none; }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  svg.bespoke-marp-slide.sf-motion-enter
+    section:not([data-marpit-advanced-background="background"]):not([data-marpit-advanced-background="pseudo"])
+    > :where(h1, h2, h3, p, ul, ol, blockquote, table, pre, figure):not(:has([data-sf-motion])) {
+    animation: sf-slide-entry-fade 460ms cubic-bezier(.2, .75, .25, 1) both;
+  }
+
+  svg.bespoke-marp-slide.sf-motion-enter section > :where(*):nth-child(2) { animation-delay: 50ms; }
+  svg.bespoke-marp-slide.sf-motion-enter section > :where(*):nth-child(3) { animation-delay: 100ms; }
+  svg.bespoke-marp-slide.sf-motion-enter section > :where(*):nth-child(4) { animation-delay: 150ms; }
+  svg.bespoke-marp-slide.sf-motion-enter section > :where(*):nth-child(5) { animation-delay: 200ms; }
+  svg.bespoke-marp-slide.sf-motion-enter section > :where(*):nth-child(n + 6) { animation-delay: 250ms; }
+
+  svg.bespoke-marp-slide.sf-motion-enter [data-sf-motion="fade"] {
+    animation: sf-slide-entry-fade 520ms cubic-bezier(.2, .75, .25, 1) 100ms both;
+  }
+
+  svg.bespoke-marp-slide.sf-motion-enter [data-sf-motion="wipe"],
+  svg.bespoke-marp-slide.sf-motion-enter [data-sf-motion="draw"]:not([data-sf-svg="true"]) {
+    animation: sf-slide-entry-wipe 700ms cubic-bezier(.2, .75, .25, 1) 100ms both;
+  }
+
+  svg.bespoke-marp-slide.sf-motion-enter [data-sf-motion="highlight"]:not([data-sf-svg="true"]) {
+    animation: sf-slide-entry-highlight 760ms cubic-bezier(.2, .75, .25, 1) 100ms both;
+  }
+}
+
+@media print {
+  [data-sf-motion],
+  svg.bespoke-marp-slide.sf-motion-enter section > * {
+    animation: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  [data-bespoke-marp-fragment="inactive"] {
+    visibility: visible !important;
+  }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+  [data-sf-motion],
+  svg.bespoke-marp-slide.sf-motion-enter section > * {
+    animation: none !important;
+    clip-path: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

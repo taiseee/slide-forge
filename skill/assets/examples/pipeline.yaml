@@ -1,0 +1,18 @@
+type: pipeline
+theme: research
+title: Training pipeline
+data:
+  nodes:
+    - { id: input, label: Raw data }
+    - { id: encode, label: Encoder }
+    - { id: align, label: Alignment loss }
+    - { id: evaluate, label: Evaluation }
+  edges:
+    - { from: input, to: encode }
+    - { from: encode, to: align, label: Embeddings }
+    - { from: align, to: evaluate }
+highlight: align
+annotations:
+  - { target: align, text: Only this block is new }
+alt: A four-stage training pipeline from raw data through an encoder and alignment loss to evaluation.
+motion: fade

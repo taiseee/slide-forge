@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Research grid background</title>
+  <desc id="desc">A quiet gray scientific grid with a highlighted diagonal relationship.</desc>
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <g stroke="#e3e5e9" stroke-width="1" opacity="0.8">
+    <path d="M100 0v900M200 0v900M300 0v900M400 0v900M500 0v900M600 0v900M700 0v900M800 0v900M900 0v900M1000 0v900M1100 0v900M1200 0v900M1300 0v900M1400 0v900M1500 0v900"/>
+    <path d="M0 100h1600M0 200h1600M0 300h1600M0 400h1600M0 500h1600M0 600h1600M0 700h1600M0 800h1600"/>
+  </g>
+  <path d="M180 720C460 650 610 475 805 460s330-155 615-305" fill="none" stroke="#566173" stroke-width="8" opacity="0.26"/>
+  <g fill="#343c48" opacity="0.38">
+    <circle cx="180" cy="720" r="13"/><circle cx="805" cy="460" r="13"/><circle cx="1420" cy="155" r="13"/>
+  </g>
+</svg>

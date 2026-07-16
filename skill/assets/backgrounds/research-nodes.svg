@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Research nodes background</title>
+  <desc id="desc">A quiet scientific network concentrated along the right edge, leaving a broad text area.</desc>
+  <rect width="1600" height="900" fill="#ffffff"/>
+  <g fill="none" stroke="#566173" stroke-width="2" opacity="0.16">
+    <path d="M1040 150l180 120 190-80 125 155-170 145 105 180-205 85-155-125-185 70"/>
+    <path d="M1220 270l145 220M1410 190l-45 300M1110 630l255-140M1265 755l100-265"/>
+  </g>
+  <g fill="#343c48" opacity="0.28">
+    <circle cx="1040" cy="150" r="10"/><circle cx="1220" cy="270" r="14"/><circle cx="1410" cy="190" r="9"/>
+    <circle cx="1535" cy="345" r="12"/><circle cx="1365" cy="490" r="17"/><circle cx="1470" cy="670" r="10"/>
+    <circle cx="1265" cy="755" r="13"/><circle cx="1110" cy="630" r="9"/><circle cx="925" cy="700" r="8"/>
+  </g>
+</svg>

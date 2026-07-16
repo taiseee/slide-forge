@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Business columns background</title>
+  <desc id="desc">A restrained progression of warm vertical columns along the bottom-right edge.</desc>
+  <rect width="1600" height="900" fill="#fbfaf7"/>
+  <g fill="#8a7a63" opacity="0.12">
+    <rect x="1040" y="650" width="90" height="150"/><rect x="1160" y="565" width="90" height="235"/>
+    <rect x="1280" y="450" width="90" height="350"/><rect x="1400" y="310" width="90" height="490"/>
+  </g>
+  <path d="M990 800h550" stroke="#55483a" stroke-width="3" opacity="0.18"/>
+  <path d="M1085 625l120-85 120-115 120-140" fill="none" stroke="#8e4a3e" stroke-width="6" opacity="0.18"/>
+</svg>

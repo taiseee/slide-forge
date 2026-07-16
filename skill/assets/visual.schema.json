@@ -1,0 +1,253 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/taiseee/slide-forge/blob/main/skill/assets/visual.schema.json",
+  "title": "slide-forge visual specification",
+  "type": "object",
+  "required": ["type", "data", "alt"],
+  "properties": {
+    "type": {
+      "enum": ["bar", "line", "scatter", "area", "heatmap", "pipeline", "architecture", "sequence"]
+    },
+    "data": {
+      "oneOf": [
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "x": { "type": ["string", "number", "boolean"] },
+              "y": { "type": ["string", "number", "boolean"] },
+              "value": { "type": "number" },
+              "series": { "type": ["string", "number", "boolean"] }
+            },
+            "required": ["x", "y"],
+            "additionalProperties": true
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "direction": { "enum": ["LR", "RL", "TB", "BT"] },
+            "nodes": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/node" },
+              "minItems": 1
+            },
+            "edges": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/edge" }
+            },
+            "groups": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/group" }
+            },
+            "actors": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/actor" },
+              "minItems": 2
+            },
+            "messages": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/message" },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "theme": {
+      "enum": ["research", "business", "lecture", "soft"],
+      "default": "research"
+    },
+    "title": { "type": "string" },
+    "alt": { "type": "string", "minLength": 1 },
+    "motion": {
+      "enum": ["off", "fade", "wipe", "draw", "highlight"],
+      "default": "off"
+    },
+    "highlight": {
+      "oneOf": [
+        { "type": ["string", "number", "boolean"] },
+        {
+          "type": "array",
+          "items": { "type": ["string", "number", "boolean"] },
+          "minItems": 1
+        },
+        {
+          "type": "object",
+          "required": ["field"],
+          "properties": {
+            "field": { "type": "string" },
+            "value": { "type": ["string", "number", "boolean"] },
+            "values": {
+              "type": "array",
+              "items": { "type": ["string", "number", "boolean"] },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "annotations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/annotation" }
+    },
+    "x_label": { "type": "string" },
+    "y_label": { "type": "string" },
+    "value_label": { "type": "string" },
+    "value_format": { "type": "string" },
+    "size_field": { "type": "string" },
+    "zero": { "type": "boolean", "default": true },
+    "width": { "type": "integer", "minimum": 320, "maximum": 2400, "default": 1100 },
+    "height": { "type": "integer", "minimum": 180, "maximum": 1600, "default": 560 }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "enum": ["bar", "line", "area"] } } },
+      "then": {
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["x", "y"],
+              "properties": {
+                "x": { "type": ["string", "number", "boolean"] },
+                "y": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "scatter" } } },
+      "then": {
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["x", "y"],
+              "properties": {
+                "x": { "type": "number" },
+                "y": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "heatmap" } } },
+      "then": {
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["x", "y", "value"],
+              "properties": {
+                "x": { "type": ["string", "number", "boolean"] },
+                "y": { "type": ["string", "number", "boolean"] },
+                "value": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "enum": ["pipeline", "architecture"] } } },
+      "then": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "required": ["nodes", "edges"],
+            "propertyNames": { "enum": ["direction", "nodes", "edges", "groups"] }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "sequence" } } },
+      "then": {
+        "properties": {
+          "data": {
+            "type": "object",
+            "required": ["actors", "messages"],
+            "propertyNames": { "enum": ["actors", "messages"] }
+          }
+        }
+      }
+    }
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "group": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "label": { "type": "string" },
+        "kind": { "enum": ["solid", "dashed", "open"] }
+      },
+      "additionalProperties": false
+    },
+    "group": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" },
+        "direction": { "enum": ["LR", "RL", "TB", "BT"] }
+      },
+      "additionalProperties": false
+    },
+    "actor": {
+      "type": "object",
+      "required": ["id", "label"],
+      "properties": {
+        "id": { "type": "string" },
+        "label": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "message": {
+      "type": "object",
+      "required": ["from", "to", "text"],
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" },
+        "text": { "type": "string" },
+        "kind": { "enum": ["sync", "async", "return", "error"] }
+      },
+      "additionalProperties": false
+    },
+    "annotation": {
+      "type": "object",
+      "required": ["text"],
+      "properties": {
+        "text": { "type": "string" },
+        "x": { "type": ["string", "number", "boolean"] },
+        "y": { "type": ["string", "number", "boolean"] },
+        "target": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  }
+}
